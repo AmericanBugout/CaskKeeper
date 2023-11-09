@@ -47,7 +47,7 @@ struct ContentView: View {
             .listStyle(.plain)
             .listRowSpacing(10)
             .navigationTitle("Collection")
-            .popover(isPresented: $isSheetViewShowing) {
+            .fullScreenCover(isPresented: $isSheetViewShowing) {
                 AddWhiskeyView()
             }
             .toolbar {

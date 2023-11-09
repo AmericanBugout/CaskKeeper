@@ -106,13 +106,13 @@ struct AddWhiskeyView: View {
                         
                     }
                 }
-                .popover(isPresented: $isCameraShowing) {
+                .fullScreenCover(isPresented: $isCameraShowing) {
                     ZStack {
                         ImagePickerRepresentable(selectedImage: nonOptionalImageBinding)
                             .ignoresSafeArea()
                     }
                 }
-                .popover(isPresented: $isPhotoLibraryShowing) {
+                .fullScreenCover(isPresented: $isPhotoLibraryShowing) {
                     ZStack {
                         PHPickerRepresentable(selectedImage: nonOptionalImageBinding)
                             .ignoresSafeArea()

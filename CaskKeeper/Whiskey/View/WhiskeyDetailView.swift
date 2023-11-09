@@ -75,7 +75,7 @@ struct WhiskeyDetailView: View {
                     
                 }
                 .listRowSeparator(.hidden)
-                .popover(isPresented: $isPhotoLibraryShowing, content: {
+                .fullScreenCover(isPresented: $isPhotoLibraryShowing, content: {
                     ZStack {
                         PHPickerRepresentable(selectedImage: nonOptionalImageBinding)
                             .ignoresSafeArea()
