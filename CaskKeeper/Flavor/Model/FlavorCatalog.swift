@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
-import Observation
 
-@Observable
-class FlavorCatalog {
+class FlavorCatalog: ObservableObject {
     
-    var searchString: String = ""
-    var selectedFlavors: Set<Flavor> = Set<Flavor>()
-    var flavors: [Flavor] = []
+    @Published var searchString: String = ""
+    @Published var selectedFlavors: Set<Flavor> = Set<Flavor>()
+    @Published var flavors: [Flavor] = []
     
     var filteredFlavors: [Flavor] {
         if searchString.isEmpty {

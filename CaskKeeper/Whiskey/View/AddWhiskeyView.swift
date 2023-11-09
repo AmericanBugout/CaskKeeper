@@ -57,7 +57,7 @@ struct AddWhiskeyView: View {
                 
                 Section {
                     TextField("Proof", text: $proof)
-                        .onChange(of: proof) { oldValue, newValue in
+                        .onChange(of: proof) { newValue in
                             handleProofInput(newValue: newValue)
                         }
                     Picker("Age", selection: $age) {

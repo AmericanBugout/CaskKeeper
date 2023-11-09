@@ -6,10 +6,8 @@
 //
 
 import SwiftUI
-import Observation
 
-@Observable
-class Whiskey: Hashable, Codable, Identifiable, Equatable {
+struct Whiskey: Hashable, Codable, Identifiable, Equatable {
     var id: UUID
     var label: String
     var bottle: String
@@ -70,7 +68,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         hasher.combine(id)
     }
         
-    func updateImage(_ image: UIImage) {
+    mutating func updateImage(_ image: UIImage) {
         self.imageData = image.jpegData(compressionQuality: 0.3)
     }
     

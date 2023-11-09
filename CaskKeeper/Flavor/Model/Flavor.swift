@@ -5,12 +5,10 @@
 //  Created by Jon Oryhan on 11/4/23.
 //
 
-import Foundation
-import Observation
+import SwiftUI
 
-@Observable
-class Flavor: Identifiable, Hashable, Comparable, Codable {
-    
+
+struct Flavor: Identifiable, Hashable, Comparable, Codable {
     var id: UUID
     var name: String
     
@@ -30,5 +28,4 @@ class Flavor: Identifiable, Hashable, Comparable, Codable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
 }

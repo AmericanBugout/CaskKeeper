@@ -11,7 +11,7 @@ struct AddWhiskeyNote: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
     
-    @State private var flavorCatalog = FlavorCatalog()
+    @StateObject private var flavorCatalog = FlavorCatalog()
     @State private var textEditor: String = ""
 
     let whiskey: Whiskey

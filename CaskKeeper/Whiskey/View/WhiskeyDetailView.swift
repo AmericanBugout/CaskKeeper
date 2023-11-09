@@ -81,15 +81,15 @@ struct WhiskeyDetailView: View {
                             .ignoresSafeArea()
                     }
                 })
-                .onChange(of: image, { oldValue, newValue in
+                .onChange(of: image) { newValue in
                     if let newImage = newValue {
                         if let imageData = newImage.jpegData(compressionQuality: 0.3) {
                             whiskeyLibrary.updateImage(for: whiskey, with: imageData)
                         }
                     }
-                })
+                }
                 
-                Section(isExpanded: $isDetailSectionExpanded) {
+                Section {
                     Group {
                         WhiskeyDetailRowView(title: "Label", detail: whiskey.label)
                         WhiskeyDetailRowView(title: "Bottle", detail: whiskey.bottle)
@@ -124,9 +124,8 @@ struct WhiskeyDetailView: View {
                 }
                 .listRowInsets(.init(top: 2, leading: 5, bottom: 10, trailing: 10))
                 .listRowSeparator(.hidden)
-                .listSectionSpacing(0)
                 
-                Section(isExpanded: $isTastingSectionExpanded) {
+                Section {
                     if whiskey.tastingNotes.isEmpty {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)

@@ -35,9 +35,9 @@ struct WhiskeyEditView: View {
                 
                 WhiskeyEditTextField(text: $whiskey.batch, placeholder: "Batch #")
                 WhiskeyEditTextField(text: $whiskeyProofString, placeholder: "Proof")
-                    .onChange(of: whiskeyProofString) { oldValue, newValue in
-                        handleProofInput(newValue: newValue)
-                    }
+                    .onChange(of: whiskeyProofString, perform: { value in
+                        handleProofInput(newValue: value)
+                    })
                 
                 DatePicker("Purchased Date", selection: $whiskey.purchasedDate, displayedComponents: .date)
                 

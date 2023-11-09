@@ -6,12 +6,11 @@
 //
 
 import UIKit
-import Observation
+import SwiftUI
 
-@Observable
-class WhiskeyLibrary {
+class WhiskeyLibrary: ObservableObject {
     
-    var collection: [Whiskey] = [] {
+    @Published var collection: [Whiskey] = [] {
         didSet {
             save()
         }
@@ -62,7 +61,7 @@ class WhiskeyLibrary {
     
     func deleteTasting(whiskey: Whiskey, indexSet: IndexSet) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
-            let updateWhiskey = collection[index]
+            var updateWhiskey = collection[index]
             updateWhiskey.tastingNotes.remove(atOffsets: indexSet)
             collection[index] = updateWhiskey
         }
