@@ -11,14 +11,14 @@ import Observation
 @Observable
 class Flavor: Identifiable, Hashable, Comparable, Codable {
     
-    let id: UUID
+    var id: UUID
     var name: String
     
     init(id: UUID = UUID(), name: String) {
         self.id = id
         self.name = name
     }
-    
+        
     static func == (lhs: Flavor, rhs: Flavor) -> Bool {
         lhs.id == rhs.id && lhs.name == rhs.name
     }

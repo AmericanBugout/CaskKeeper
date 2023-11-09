@@ -72,11 +72,9 @@ struct AddWhiskeyNote: View {
                         }
                     }
                     .padding(.horizontal)
-                    
                 }
-                
-                
             }
+            
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {

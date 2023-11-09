@@ -119,6 +119,7 @@ struct AddWhiskeyView: View {
                     }
                 }
             }
+            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .toolbar{
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
