@@ -47,7 +47,7 @@ struct ContentView: View {
             .listStyle(.plain)
             .listRowSpacing(10)
             .navigationTitle("Collection")
-            .fullScreenCover(isPresented: $isSheetViewShowing) {
+            .sheet(isPresented: $isSheetViewShowing) {
                 AddWhiskeyView()
             }
             .toolbar {

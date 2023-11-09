@@ -75,7 +75,7 @@ struct WhiskeyDetailView: View {
                     
                 }
                 .listRowSeparator(.hidden)
-                .fullScreenCover(isPresented: $isPhotoLibraryShowing, content: {
+                .sheet(isPresented: $isPhotoLibraryShowing, content: {
                     ZStack {
                         PHPickerRepresentable(selectedImage: nonOptionalImageBinding)
                             .ignoresSafeArea()
@@ -207,7 +207,7 @@ struct WhiskeyDetailView: View {
                     .sheet(isPresented: $isEditing) {
                         WhiskeyEditView(whiskey: $whiskey)
                     }
-                    .fullScreenCover(isPresented: $isAddTasteViewShowing) {
+                    .sheet(isPresented: $isAddTasteViewShowing) {
                         AddWhiskeyNote(whiskey: whiskey)
                     }
                     
