@@ -8,12 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */; };
-		B3208FE92AFC9A2A004FED4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FE82AFC9A2A004FED4B /* ContentView.swift */; };
 		B3208FEB2AFC9A2C004FED4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */; };
 		B3208FEE2AFC9A2C004FED4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FED2AFC9A2C004FED4B /* Preview Assets.xcassets */; };
 		B3208FF82AFC9A2C004FED4B /* CaskKeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FF72AFC9A2C004FED4B /* CaskKeeperTests.swift */; };
 		B32090022AFC9A2C004FED4B /* CaskKeeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090012AFC9A2C004FED4B /* CaskKeeperUITests.swift */; };
 		B32090042AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090032AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift */; };
+		B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090132AFC9B66004FED4B /* EnvironmentValues+Ext.swift */; };
+		B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090192AFC9BAB004FED4B /* Flavor.swift */; };
+		B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320901A2AFC9BAB004FED4B /* FlavorCatalog.swift */; };
+		B320901F2AFC9BAB004FED4B /* FlavorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320901C2AFC9BAB004FED4B /* FlavorSelectionView.swift */; };
+		B32090272AFC9BBB004FED4B /* AsapCondensed-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090212AFC9BBA004FED4B /* AsapCondensed-Light.ttf */; };
+		B32090282AFC9BBB004FED4B /* AsapCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090222AFC9BBA004FED4B /* AsapCondensed-SemiBold.ttf */; };
+		B32090292AFC9BBB004FED4B /* AsapCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090232AFC9BBA004FED4B /* AsapCondensed-Regular.ttf */; };
+		B320902A2AFC9BBB004FED4B /* AsapCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090242AFC9BBA004FED4B /* AsapCondensed-Italic.ttf */; };
+		B320902B2AFC9BBB004FED4B /* AsapCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090252AFC9BBA004FED4B /* AsapCondensed-Medium.ttf */; };
+		B320902C2AFC9BBB004FED4B /* AsapCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090262AFC9BBA004FED4B /* AsapCondensed-Bold.ttf */; };
+		B320902F2AFC9BC7004FED4B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320902E2AFC9BC7004FED4B /* DataManager.swift */; };
+		B32090462AFC9BCE004FED4B /* ImagePickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */; };
+		B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */; };
+		B32090482AFC9BCE004FED4B /* WhiskeyLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090352AFC9BCE004FED4B /* WhiskeyLibrary.swift */; };
+		B32090492AFC9BCE004FED4B /* Age.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090362AFC9BCE004FED4B /* Age.swift */; };
+		B320904A2AFC9BCE004FED4B /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090372AFC9BCE004FED4B /* Style.swift */; };
+		B320904B2AFC9BCE004FED4B /* Whiskey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090382AFC9BCE004FED4B /* Whiskey.swift */; };
+		B320904C2AFC9BCE004FED4B /* Origin.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090392AFC9BCE004FED4B /* Origin.swift */; };
+		B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903B2AFC9BCE004FED4B /* WhiskeyEditView.swift */; };
+		B320904E2AFC9BCE004FED4B /* AddWhiskeyNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903C2AFC9BCE004FED4B /* AddWhiskeyNote.swift */; };
+		B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903D2AFC9BCE004FED4B /* WhiskeyDetailView.swift */; };
+		B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903E2AFC9BCE004FED4B /* WhiskeyEditTextField.swift */; };
+		B32090512AFC9BCE004FED4B /* WhiskeyRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */; };
+		B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090402AFC9BCE004FED4B /* TasteRowView.swift */; };
+		B32090532AFC9BCE004FED4B /* AddWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090412AFC9BCE004FED4B /* AddWhiskeyView.swift */; };
+		B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090422AFC9BCE004FED4B /* ContentView.swift */; };
+		B32090552AFC9BCE004FED4B /* WhiskeyDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090432AFC9BCE004FED4B /* WhiskeyDetailRowView.swift */; };
+		B32090562AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090442AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift */; };
+		B32090572AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090452AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +64,6 @@
 /* Begin PBXFileReference section */
 		B3208FE32AFC9A2A004FED4B /* CaskKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaskKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperApp.swift; sourceTree = "<group>"; };
-		B3208FE82AFC9A2A004FED4B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3208FED2AFC9A2C004FED4B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B3208FF32AFC9A2C004FED4B /* CaskKeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaskKeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +71,36 @@
 		B3208FFD2AFC9A2C004FED4B /* CaskKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaskKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32090012AFC9A2C004FED4B /* CaskKeeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperUITests.swift; sourceTree = "<group>"; };
 		B32090032AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B32090132AFC9B66004FED4B /* EnvironmentValues+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Ext.swift"; sourceTree = "<group>"; };
+		B32090192AFC9BAB004FED4B /* Flavor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flavor.swift; sourceTree = "<group>"; };
+		B320901A2AFC9BAB004FED4B /* FlavorCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlavorCatalog.swift; sourceTree = "<group>"; };
+		B320901C2AFC9BAB004FED4B /* FlavorSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlavorSelectionView.swift; sourceTree = "<group>"; };
+		B32090212AFC9BBA004FED4B /* AsapCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Light.ttf"; sourceTree = "<group>"; };
+		B32090222AFC9BBA004FED4B /* AsapCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-SemiBold.ttf"; sourceTree = "<group>"; };
+		B32090232AFC9BBA004FED4B /* AsapCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		B32090242AFC9BBA004FED4B /* AsapCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Italic.ttf"; sourceTree = "<group>"; };
+		B32090252AFC9BBA004FED4B /* AsapCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Medium.ttf"; sourceTree = "<group>"; };
+		B32090262AFC9BBA004FED4B /* AsapCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		B320902E2AFC9BC7004FED4B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerRepresentable.swift; sourceTree = "<group>"; };
+		B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHPickerRepresentable.swift; sourceTree = "<group>"; };
+		B32090352AFC9BCE004FED4B /* WhiskeyLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyLibrary.swift; sourceTree = "<group>"; };
+		B32090362AFC9BCE004FED4B /* Age.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Age.swift; sourceTree = "<group>"; };
+		B32090372AFC9BCE004FED4B /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		B32090382AFC9BCE004FED4B /* Whiskey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Whiskey.swift; sourceTree = "<group>"; };
+		B32090392AFC9BCE004FED4B /* Origin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Origin.swift; sourceTree = "<group>"; };
+		B320903B2AFC9BCE004FED4B /* WhiskeyEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyEditView.swift; sourceTree = "<group>"; };
+		B320903C2AFC9BCE004FED4B /* AddWhiskeyNote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWhiskeyNote.swift; sourceTree = "<group>"; };
+		B320903D2AFC9BCE004FED4B /* WhiskeyDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailView.swift; sourceTree = "<group>"; };
+		B320903E2AFC9BCE004FED4B /* WhiskeyEditTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyEditTextField.swift; sourceTree = "<group>"; };
+		B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyRowView.swift; sourceTree = "<group>"; };
+		B32090402AFC9BCE004FED4B /* TasteRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasteRowView.swift; sourceTree = "<group>"; };
+		B32090412AFC9BCE004FED4B /* AddWhiskeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWhiskeyView.swift; sourceTree = "<group>"; };
+		B32090422AFC9BCE004FED4B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B32090432AFC9BCE004FED4B /* WhiskeyDetailRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowView.swift; sourceTree = "<group>"; };
+		B32090442AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyTasteDetailView.swift; sourceTree = "<group>"; };
+		B32090452AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowViewToggle.swift; sourceTree = "<group>"; };
+		B32090582AFC9D4F004FED4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +151,14 @@
 		B3208FE52AFC9A2A004FED4B /* CaskKeeper */ = {
 			isa = PBXGroup;
 			children = (
+				B32090582AFC9D4F004FED4B /* Info.plist */,
 				B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */,
-				B3208FE82AFC9A2A004FED4B /* ContentView.swift */,
 				B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */,
+				B32090122AFC9B3B004FED4B /* Extensions */,
+				B32090172AFC9BAB004FED4B /* Flavor */,
+				B32090202AFC9BBA004FED4B /* Font */,
+				B320902D2AFC9BC7004FED4B /* Utility */,
+				B32090302AFC9BCE004FED4B /* Whiskey */,
 				B3208FEC2AFC9A2C004FED4B /* Preview Content */,
 			);
 			path = CaskKeeper;
@@ -125,6 +187,110 @@
 				B32090032AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift */,
 			);
 			path = CaskKeeperUITests;
+			sourceTree = "<group>";
+		};
+		B32090122AFC9B3B004FED4B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B32090132AFC9B66004FED4B /* EnvironmentValues+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B32090172AFC9BAB004FED4B /* Flavor */ = {
+			isa = PBXGroup;
+			children = (
+				B32090182AFC9BAB004FED4B /* Model */,
+				B320901B2AFC9BAB004FED4B /* View */,
+			);
+			path = Flavor;
+			sourceTree = "<group>";
+		};
+		B32090182AFC9BAB004FED4B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B32090192AFC9BAB004FED4B /* Flavor.swift */,
+				B320901A2AFC9BAB004FED4B /* FlavorCatalog.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B320901B2AFC9BAB004FED4B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B320901C2AFC9BAB004FED4B /* FlavorSelectionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B32090202AFC9BBA004FED4B /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				B32090212AFC9BBA004FED4B /* AsapCondensed-Light.ttf */,
+				B32090222AFC9BBA004FED4B /* AsapCondensed-SemiBold.ttf */,
+				B32090232AFC9BBA004FED4B /* AsapCondensed-Regular.ttf */,
+				B32090242AFC9BBA004FED4B /* AsapCondensed-Italic.ttf */,
+				B32090252AFC9BBA004FED4B /* AsapCondensed-Medium.ttf */,
+				B32090262AFC9BBA004FED4B /* AsapCondensed-Bold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		B320902D2AFC9BC7004FED4B /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				B320902E2AFC9BC7004FED4B /* DataManager.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		B32090302AFC9BCE004FED4B /* Whiskey */ = {
+			isa = PBXGroup;
+			children = (
+				B32090312AFC9BCE004FED4B /* UIKit */,
+				B32090342AFC9BCE004FED4B /* Model */,
+				B320903A2AFC9BCE004FED4B /* View */,
+			);
+			path = Whiskey;
+			sourceTree = "<group>";
+		};
+		B32090312AFC9BCE004FED4B /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */,
+				B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		B32090342AFC9BCE004FED4B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B32090352AFC9BCE004FED4B /* WhiskeyLibrary.swift */,
+				B32090362AFC9BCE004FED4B /* Age.swift */,
+				B32090372AFC9BCE004FED4B /* Style.swift */,
+				B32090382AFC9BCE004FED4B /* Whiskey.swift */,
+				B32090392AFC9BCE004FED4B /* Origin.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B320903A2AFC9BCE004FED4B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B320903B2AFC9BCE004FED4B /* WhiskeyEditView.swift */,
+				B320903C2AFC9BCE004FED4B /* AddWhiskeyNote.swift */,
+				B320903D2AFC9BCE004FED4B /* WhiskeyDetailView.swift */,
+				B320903E2AFC9BCE004FED4B /* WhiskeyEditTextField.swift */,
+				B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */,
+				B32090402AFC9BCE004FED4B /* TasteRowView.swift */,
+				B32090412AFC9BCE004FED4B /* AddWhiskeyView.swift */,
+				B32090422AFC9BCE004FED4B /* ContentView.swift */,
+				B32090432AFC9BCE004FED4B /* WhiskeyDetailRowView.swift */,
+				B32090442AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift */,
+				B32090452AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +397,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B320902C2AFC9BBB004FED4B /* AsapCondensed-Bold.ttf in Resources */,
 				B3208FEE2AFC9A2C004FED4B /* Preview Assets.xcassets in Resources */,
+				B320902B2AFC9BBB004FED4B /* AsapCondensed-Medium.ttf in Resources */,
+				B32090272AFC9BBB004FED4B /* AsapCondensed-Light.ttf in Resources */,
+				B32090282AFC9BBB004FED4B /* AsapCondensed-SemiBold.ttf in Resources */,
+				B320902A2AFC9BBB004FED4B /* AsapCondensed-Italic.ttf in Resources */,
+				B32090292AFC9BBB004FED4B /* AsapCondensed-Regular.ttf in Resources */,
 				B3208FEB2AFC9A2C004FED4B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,8 +429,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3208FE92AFC9A2A004FED4B /* ContentView.swift in Sources */,
+				B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */,
+				B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */,
+				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
+				B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */,
+				B320904E2AFC9BCE004FED4B /* AddWhiskeyNote.swift in Sources */,
+				B32090482AFC9BCE004FED4B /* WhiskeyLibrary.swift in Sources */,
+				B320902F2AFC9BC7004FED4B /* DataManager.swift in Sources */,
+				B32090572AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift in Sources */,
+				B32090552AFC9BCE004FED4B /* WhiskeyDetailRowView.swift in Sources */,
+				B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */,
+				B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */,
 				B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */,
+				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
+				B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */,
+				B320904A2AFC9BCE004FED4B /* Style.swift in Sources */,
+				B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */,
+				B32090492AFC9BCE004FED4B /* Age.swift in Sources */,
+				B320904B2AFC9BCE004FED4B /* Whiskey.swift in Sources */,
+				B32090562AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift in Sources */,
+				B32090462AFC9BCE004FED4B /* ImagePickerRepresentable.swift in Sources */,
+				B32090512AFC9BCE004FED4B /* WhiskeyRowView.swift in Sources */,
+				B320901F2AFC9BAB004FED4B /* FlavorSelectionView.swift in Sources */,
+				B320904C2AFC9BCE004FED4B /* Origin.swift in Sources */,
+				B32090532AFC9BCE004FED4B /* AddWhiskeyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,11 +619,16 @@
 				DEVELOPMENT_TEAM = 7FA5W5825F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CaskKeeper/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -454,11 +653,16 @@
 				DEVELOPMENT_TEAM = 7FA5W5825F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CaskKeeper/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
