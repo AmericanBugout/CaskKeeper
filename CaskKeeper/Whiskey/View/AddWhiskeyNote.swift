@@ -73,6 +73,17 @@ struct AddWhiskeyNote: View {
                     }
                     .padding(.horizontal)
                 }
+                
+                
+                Section {
+                    
+                } header: {
+                    Text("Rating")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading).padding(.leading)
+                        .foregroundColor(.gray)
+                }
+                .padding(flavorCatalog.selectedFlavors.isEmpty ? .top : .bottom)
             }
             
             .toolbar {
