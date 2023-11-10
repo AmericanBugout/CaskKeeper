@@ -36,7 +36,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return nil
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle
@@ -46,19 +46,22 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.style = style
         self.origin = origin
         self.age = age
+        self.tastingNotes = tastingNotes
     }
     
     struct Taste: Hashable, Codable, Identifiable, Equatable {
         var id: UUID
         var customNotes: String?
         var date: Date
-        var notes: [Flavor]
+        var notes: [Flavor] = []
+        var score: Int = 0
         
-        init(id: UUID = UUID(), date: Date, customNotes: String?, notes: [Flavor] = []) {
+        init(id: UUID = UUID(), date: Date, customNotes: String?, notes: [Flavor] = [], score: Int = 0) {
             self.id = id
             self.customNotes = customNotes
             self.date = date
             self.notes = notes
+            self.score = score
         }
     }
 

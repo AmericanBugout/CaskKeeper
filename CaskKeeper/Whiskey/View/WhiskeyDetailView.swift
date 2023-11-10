@@ -68,7 +68,6 @@ struct WhiskeyDetailView: View {
                         Text(whiskey.bottle)
                             .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
                             .lineLimit(1)
-                        
                     }
                     .frame(maxWidth: .infinity)
                     Spacer()
@@ -150,13 +149,7 @@ struct WhiskeyDetailView: View {
                                     EmptyView()
                                 }
                                 .opacity(0)
-                                VStack(alignment: .leading) {
-                                    Text(taste.date, style: .date)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
-                                    TasteRowView(taste: taste)
-                                }
-                                .padding(.vertical)
+                                TasteRowView(taste: taste)
                             }
                             .listRowBackground(Color.clear)
                         }

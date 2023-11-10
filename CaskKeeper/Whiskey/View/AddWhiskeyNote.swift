@@ -13,6 +13,7 @@ struct AddWhiskeyNote: View {
     
     @State private var flavorCatalog = FlavorCatalog()
     @State private var textEditor: String = ""
+    @State private var score: Int = 50
 
     let whiskey: Whiskey
         
@@ -73,12 +74,50 @@ struct AddWhiskeyNote: View {
                     }
                     .padding(.horizontal)
                 }
+                
+                Section {
+                    VStack {
+                        
+                        ZStack {
+                            Circle()
+                                .strokeBorder(Color.accentColor, lineWidth: 4)
+                                .background(Circle().fill(Color.lead))
+                                .frame(width: 125, height: 125)
+                                .shadow(color: .gray, radius: 10)
+                            Text("\(score)")
+                                .font(.custom("AsapCondensed-Bold", size: 68))
+                                .foregroundColor(.accentColor)
+                        }
+                        .frame(width: 125, height: 125)
+                        
+                        Slider(value: Binding(get: {
+                            Double(score)
+                        }, set: {
+                            score = Int($0.rounded())
+                        }),
+                        in: 1...100)
+                        .padding(.top, 10)
+                    }
+                    .background(content: {
+                        
+                    })
+                    .padding(.horizontal)
+                } header: {
+                    Text("Taste Rating")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                        .padding(flavorCatalog.selectedFlavors.isEmpty ? .top : .bottom)
+
+                }
+
             }
             
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        var taste = Whiskey.Taste(date: Date(), customNotes: textEditor)
+                        var taste = Whiskey.Taste(date: Date(), customNotes: textEditor, score: score)
                         taste.notes.append(contentsOf: flavorCatalog.selectedFlavors)
                         whiskeyLibrary.addWhiskeyTasting(for: whiskey, tasting: taste)
                         dismiss()

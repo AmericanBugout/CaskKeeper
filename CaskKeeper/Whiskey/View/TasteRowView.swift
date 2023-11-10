@@ -19,6 +19,26 @@ struct TasteRowView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            HStack {
+                Text(taste.date, style: .date)
+                    .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+                Spacer()
+                ZStack {
+                    Circle()
+                        .strokeBorder(Color.accentColor, lineWidth: 4)
+                        .background(Circle().fill(Color.lead))
+                        .frame(width: 45, height: 45)
+                        .shadow(color: .gray, radius: 10)
+                    Text("\(taste.score)")
+                        .font(.custom("AsapCondensed-Bold", size: 24))
+                        .foregroundColor(.accentColor)
+                }
+                .offset(y: 5)
+                .frame(width: 45, height: 45)
+                .padding(.trailing)
+            }
+            .padding(.bottom)
+           
             Text(taste.customNotes ?? "No notes entered.")
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 .foregroundStyle(.gray)
@@ -46,5 +66,5 @@ struct TasteRowView: View {
 }
 
 #Preview {
-    TasteRowView(taste: Whiskey.Taste(date: Date(), customNotes: "Lots of caramel. A smooth drinker. Hot."))
+    TasteRowView(taste: Whiskey.Taste(date: Date(), customNotes: "Lots of caramel. A smooth drinker. Hot.", notes: [Flavor(name: "Oak"), Flavor(name: "Vanilla"), Flavor(name: "Burnt Toast")], score: 88))
 }
