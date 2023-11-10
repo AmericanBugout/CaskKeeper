@@ -620,8 +620,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CaskKeeper/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.  The camera will be used in order to apply an image to your whiskey.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.  CaskKeeper will use the photo to apply to your whiskey collection. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -654,8 +654,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CaskKeeper/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.  The camera will be used in order to apply an image to your whiskey.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.  CaskKeeper will use the photo to apply to your whiskey collection. ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
