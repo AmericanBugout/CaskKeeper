@@ -22,10 +22,10 @@ class WhiskeyLibrary {
     init(isForTesting: Bool = false) {
         if isForTesting {
             collection = [
-                Whiskey(label: "Pikesville", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "pikes") ?? UIImage(), proof: 110.0, style: .rye, origin: .us, age: .six),
-                Whiskey(label: "Sagamore", bottle: "8 Year Reserver", purchasedDate: .now, image: UIImage(named: "sagamore") ?? UIImage(), proof: 111.2, style: .rye, origin: .us, age: .eight),
-                Whiskey(label: "Knob Creek", bottle: "Straight Bourbon", purchasedDate: .now, image: UIImage(named: "kc12") ?? UIImage() , proof: 131.2, style: .bourbon, origin: .us, age: .twelve),
-                Whiskey(label: "Jefferson Reserve", bottle: "Jefferson Reserve", purchasedDate: .now, image: UIImage(named: "jeffersons") ?? UIImage(), proof: 111.3, style: .bourbon, origin: .us, age: .six)
+                Whiskey(label: "Hammered", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "whiskey1") ?? UIImage(), proof: 110.0, style: .bourbon, origin: .us, age: .eight),
+                Whiskey(label: "Big Tower Whiskey", bottle: "8 Year Reserve", purchasedDate: .now, image: UIImage(named: "whiskey2") ?? UIImage(), proof: 111.2, style: .rye, origin: .us, age: .eight),
+                Whiskey(label: "Rattle Creek", bottle: "Straight Bourbon", purchasedDate: .now, image: UIImage(named: "whiskey3") ?? UIImage() , proof: 131.2, style: .bourbon, origin: .us, age: .twelve),
+                Whiskey(label: "Small Reserve", bottle: "Single Barrel", purchasedDate: .now, image: UIImage(named: "whiskey4") ?? UIImage(), proof: 111.3, style: .bourbon, origin: .us, age: .six)
             ]
         } else {
             collection = load()

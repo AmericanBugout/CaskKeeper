@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct CaskKeeperApp: App {
+    @State private var whiskeyLibrary = WhiskeyLibrary(isForTesting: false)
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.whiskeyLibrary, whiskeyLibrary)
         }
     }
 }
