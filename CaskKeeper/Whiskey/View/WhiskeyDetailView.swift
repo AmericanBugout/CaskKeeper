@@ -68,6 +68,7 @@ struct WhiskeyDetailView: View {
                         Text(whiskey.bottle)
                             .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
                             .lineLimit(1)
+                        Text("\(whiskey.avgScore)")
                     }
                     .frame(maxWidth: .infinity)
                     Spacer()

@@ -45,14 +45,15 @@ struct WhiskeyRowView: View {
             }
             
             Spacer()
+            
+            Gauge(value: whiskey.avgScore, in: 0...100) {
+                Text(String(format: "%.1f", whiskey.avgScore))
+            }
+            .frame(width: 75)
         }
     }
 }
 
 #Preview {
-    WhiskeyRowView(whiskey: Whiskey(label: "Pikeville", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "pikes") ?? UIImage(), proof: 110.0, style: .rye, origin: .us, age: .six))
-}
-
-#Preview {
-    WhiskeyRowView(whiskey: Whiskey(label: "Pikeville", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(), proof: 110.0, style: .rye, origin: .us, age: .six))
+    WhiskeyRowView(whiskey: WhiskeyLibrary(isForTesting: true).collection.first!)
 }

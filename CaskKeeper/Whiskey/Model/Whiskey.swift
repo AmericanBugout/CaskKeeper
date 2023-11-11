@@ -36,6 +36,11 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return nil
     }
     
+    var avgScore: Double {
+        let totalScore = tastingNotes.reduce(0, {$0 + $1.score})
+        return !tastingNotes.isEmpty ? Double(totalScore) / Double(tastingNotes.count) : 0.0
+    }
+    
     init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label

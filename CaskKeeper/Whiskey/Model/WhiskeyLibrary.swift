@@ -31,6 +31,8 @@ class WhiskeyLibrary {
             collection = load()
         }
     }
+    
+    /* CRUD Operations */
    
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
@@ -67,6 +69,8 @@ class WhiskeyLibrary {
             collection[index] = updateWhiskey
         }
     }
+    
+    /* Save and load whiskey */
     
     func save() {
         do {
