@@ -14,6 +14,7 @@ struct AddWhiskeyNote: View {
     @State private var flavorCatalog = FlavorCatalog()
     @State private var textEditor: String = ""
     @State private var score: Int = 50
+    @State private var isAlertShowing: Bool = false
 
     let whiskey: Whiskey
         
@@ -117,13 +118,19 @@ struct AddWhiskeyNote: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        var taste = Whiskey.Taste(date: Date(), customNotes: textEditor, score: score)
-                        taste.notes.append(contentsOf: flavorCatalog.selectedFlavors)
-                        whiskeyLibrary.addWhiskeyTasting(for: whiskey, tasting: taste)
-                        dismiss()
+                        withAnimation(Animation.smooth) {
+                            if !textEditor.isEmpty {
+                                var taste = Whiskey.Taste(date: Date(), customNotes: textEditor, score: score)
+                                taste.notes.append(contentsOf: flavorCatalog.selectedFlavors)
+                                whiskeyLibrary.addWhiskeyTasting(for: whiskey, tasting: taste)
+                                dismiss()
+                            } else {
+                                isAlertShowing = true
+                            }
+                        }
                     }
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-
+                    .alert("Custom notes cannot be empty", isPresented: $isAlertShowing) {}
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {

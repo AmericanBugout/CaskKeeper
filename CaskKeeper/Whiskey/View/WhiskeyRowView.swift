@@ -46,11 +46,16 @@ struct WhiskeyRowView: View {
             
             Spacer()
             
-            Gauge(value: whiskey.avgScore, in: 0...100) {
-                Text(String(format: "%.1f", whiskey.avgScore))
+            if whiskey.avgScore == 0.0 {
+                Text("")
+            } else {
+                Gauge(value: whiskey.avgScore, in: 0...100) {
+                    Text(String(format: "%.1f", whiskey.avgScore))
+                }
+                .gaugeStyle(ScoreGaugeStyle())
+                .frame(width: 75)
             }
-            .gaugeStyle(ScoreGaugeStyle())
-            .frame(width: 75)
+            
         }
     }
 }

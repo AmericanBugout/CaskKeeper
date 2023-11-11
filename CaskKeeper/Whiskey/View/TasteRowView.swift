@@ -22,20 +22,20 @@ struct TasteRowView: View {
             HStack {
                 Text(taste.date, style: .date)
                     .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
-                Spacer()
+                Spacer() 
                 ZStack {
                     Circle()
                         .strokeBorder(Color.accentColor, lineWidth: 4)
                         .background(Circle().fill(Color.lead))
-                        .frame(width: 45, height: 45)
-                        .shadow(color: .gray, radius: 10)
+                        .frame(width: 50, height: 50)
+                        .shadow(color: .indigo, radius: 5)
                     Text("\(taste.score)")
-                        .font(.custom("AsapCondensed-Bold", size: 24))
+                        .font(.custom("AsapCondensed-Bold", size: 18))
                         .foregroundColor(.accentColor)
                 }
-                .offset(y: 5)
-                .frame(width: 45, height: 45)
-                .padding(.trailing)
+                .frame(width: 50, height: 50)
+                .padding(.top)
+                .padding(.trailing, 7)
             }
             .padding(.bottom)
            
@@ -55,11 +55,13 @@ struct TasteRowView: View {
                             .frame(maxWidth: .infinity)
                             .background(Color.lead)
                             .cornerRadius(8)
+                            .shadow(color: .indigo, radius: 5, x: 0, y: -3)
                     }
                     .frame(maxWidth: .infinity)
                 }
             }
             .padding(.top, 5)
+            .padding(.horizontal, 1)
         }
         .padding(.top, 4)
     }
