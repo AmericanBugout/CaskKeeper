@@ -49,6 +49,7 @@ struct WhiskeyRowView: View {
             Gauge(value: whiskey.avgScore, in: 0...100) {
                 Text(String(format: "%.1f", whiskey.avgScore))
             }
+            .gaugeStyle(ScoreGaugeStyle())
             .frame(width: 75)
         }
     }

@@ -36,23 +36,41 @@ struct WhiskeyDetailView: View {
                     Button {
                         isPhotoLibraryShowing = true
                     } label: {
-                        if whiskey.image == nil {
-                            Image("noimageuploaded")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                                .frame(width: 75, height: 75)
-                                .shadow(radius: 4)
-                        } else {
-                            whiskey.image?
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                                .frame(width: 75, height: 75)
-                                .shadow(color: .black, radius: 1)
-                                .padding(.leading, -10)
+                        VStack {
+                            if whiskey.image == nil {
+                                Image("noimageuploaded")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .frame(width: 75, height: 75)
+                                    .shadow(radius: 4)
+                            } else {
+                                whiskey.image?
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .frame(width: 75, height: 75)
+                                    .shadow(color: .black, radius: 1)
+                                    .padding(.leading, -10)
+                            }
+                            ZStack {
+                                Circle()
+                                    .strokeBorder(Color.lead, lineWidth: 4)
+                                    .background(Circle().fill(Color.lead))
+                                    .frame(width: 55, height: 55)
+                                    .shadow(color: .gray, radius: 1)
+                                VStack {
+                                    Text(String(format: "%.1f", whiskey.avgScore))
+                                        .font(.custom("AsapCondensed-Bold", size: 26))
+                                        .foregroundColor(.accentColor)
+                                    Text("Avg Score")
+                                        .font(.custom("AsapCondensed-Regular", size: 14))
+                                }
+                            }
+                            .frame(width: 45, height: 35)
+                            .padding(.leading, -10)
+                            .padding(.top)
                         }
-                        
                     }
                     .frame(width: 75, height: 75, alignment: .leading)
                     .buttonStyle(PlainButtonStyle())
@@ -68,7 +86,7 @@ struct WhiskeyDetailView: View {
                         Text(whiskey.bottle)
                             .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
                             .lineLimit(1)
-                        Text("\(whiskey.avgScore)")
+                        
                     }
                     .frame(maxWidth: .infinity)
                     Spacer()

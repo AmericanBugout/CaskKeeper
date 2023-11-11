@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct CaskKeeperApp: App {
-    @State private var whiskeyLibrary = WhiskeyLibrary(isForTesting: true)
+    @State private var whiskeyLibrary = WhiskeyLibrary(isForTesting: false)
     
     var body: some Scene {
         WindowGroup {
