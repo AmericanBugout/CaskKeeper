@@ -43,7 +43,7 @@ struct WhiskeyRowView: View {
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                 
-                if whiskey.bottleFInished {
+                if whiskey.bottleFinished {
                     Text("Finished")
                         .font(.custom("AsapCondensed-Light", size: 12, relativeTo: .body))
                         .foregroundStyle(.red)

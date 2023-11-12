@@ -72,8 +72,16 @@ class WhiskeyLibrary {
     
     func updateWhiskeyToFinished(whiskey: Whiskey) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
-            collection[index].bottleFInished = true
+            collection[index].bottleFinished = true
             collection[index].opened = false
+            collection[index].consumedDate = Date()
+        }
+    }
+    
+    func updateOpenedDate(whiskey: Whiskey) {
+        if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
+            collection[index].dateOpened = Date()
+            collection[index].firstOpen = false
         }
     }
     

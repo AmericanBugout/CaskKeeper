@@ -125,7 +125,7 @@ struct AddWhiskeyNote: View {
                                 isBottleFinished.toggle()
                             }
                         } label: {
-                            Image(systemName: isBottleFinished ? "checkmark.circle.fill" : "checkmark.circle")
+                            Image(systemName: isBottleFinished ? "checkmark.circle.fill" : "circle")
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .foregroundStyle(isBottleFinished ? Color.green : .gray)

@@ -122,7 +122,14 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
                         WhiskeyDetailRowViewToggle(title: "Opened", isEnabled: whiskey.opened)
-                        WhiskeyDetailRowViewToggle(title: "6 Months Opened", isEnabled: whiskey.isOpenedFor6Months)
+                        if let openedDate = whiskey.dateOpened {
+                            WhiskeyDetailRowView(title: "Opened Date", detail: openedDate.formatted(date: .abbreviated, time: .omitted))
+                        }
+                        
+                        if let consumedDate = whiskey.consumedDate {
+                            WhiskeyDetailRowView(title: "Consumed Date", detail: consumedDate.formatted(date: .abbreviated, time: .omitted))
+                        }
+                        WhiskeyDetailRowView(title: "Opened For", detail: whiskey.openedFor)
                         WhiskeyDetailRowViewToggle(title: "Buy Again", isEnabled: whiskey.wouldBuyAgain)
                         WhiskeyDetailRowView(title: "Location Purchased", detail: whiskey.locationPurchased)
                             .foregroundStyle(whiskey.locationPurchased.isEmpty ? Color.secondary : Color.primary)

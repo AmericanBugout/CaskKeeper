@@ -54,9 +54,29 @@ struct WhiskeyEditView: View {
                 }
                 
                 Toggle("Opened", isOn: $whiskey.opened)
-                Toggle("Open for 6 months", isOn: $whiskey.isOpenedFor6Months)
                 Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)
                 WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
+                
+                HStack(alignment: .center) {
+                    Text("Is Bottle Finished?")
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+
+                    Spacer()
+                    Button {
+                        withAnimation(Animation.smooth) {
+                            whiskey.bottleFinished.toggle()
+                        }
+                    } label: {
+                        Image(systemName: whiskey.bottleFinished ? "checkmark.circle.fill" : "circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 35)
+                            .foregroundStyle(whiskey.bottleFinished ? Color.green : .gray)
+
+
+                    }
+                }
+                .padding(.vertical, 4)
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .navigationTitle(whiskey.label)
@@ -65,10 +85,15 @@ struct WhiskeyEditView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
+                        if whiskey.opened && whiskey.firstOpen {
+                            whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
+                        }
+                        if whiskey.bottleFinished {
+                            whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
+                        }
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
