@@ -21,10 +21,13 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var origin: Origin
     var age: Age
     var opened: Bool = false
+    var firstOpen: Bool = true
+    var dateOpened: Date?
+    var consumedDate: Date?
     var wouldBuyAgain: Bool = false
     var isOpenedFor6Months: Bool = false
     var locationPurchased: String = ""
-    var bottleFInished: Bool = false
+    var bottleFinished: Bool = false
     var tastingNotes: [Taste] = []
     
     var image: Image? {
@@ -39,6 +42,37 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var avgScore: Double {
         let totalScore = tastingNotes.reduce(0, {$0 + $1.score})
         return !tastingNotes.isEmpty ? Double(totalScore) / Double(tastingNotes.count) : 0.0
+    }
+    
+    var openedFor: String {
+        if bottleFinished {
+            guard let dateOpened = dateOpened, let consumedDate = consumedDate else {
+                return "N/A"
+            }
+            let calendar = Calendar.current
+            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: consumedDate)
+            if let day = dateDifference.day {
+                return "\(day) \(day == 1 ? "day" : "days")"
+            } else {
+                return "0 days"
+            }
+            
+        } else {
+            guard let dateOpened = dateOpened else {
+                return "N/A"
+            }
+            let today = Date()
+            let calendar = Calendar.current
+            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: today)
+            
+            if let day = dateDifference.day {
+              let dayString = "\(day) \(day == 1 ? "day" : "days")"
+              return dayString
+            } else {
+                return "0 days"
+            }
+        }
+        
     }
     
     init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age, tastingNotes: [Taste] = []) {

@@ -11,7 +11,7 @@ import UIKit
 struct WhiskeyDetailView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
-
+    
     @State private var isEditing: Bool = false
     @State private var isPhotoLibraryShowing: Bool = false
     @State private var isDetailSectionExpanded: Bool = true
@@ -65,7 +65,7 @@ struct WhiskeyDetailView: View {
                                         Text(String(format: "%.1f", whiskey.avgScore))
                                             .font(.custom("AsapCondensed-Bold", size: 26))
                                             .foregroundColor(.accentColor)
-                                        Text("Avg Score")
+                                        Text("Overall")
                                             .font(.custom("AsapCondensed-Regular", size: 14))
                                     }
                                 }
@@ -122,7 +122,14 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
                         WhiskeyDetailRowViewToggle(title: "Opened", isEnabled: whiskey.opened)
-                        WhiskeyDetailRowViewToggle(title: "6 Months Opened", isEnabled: whiskey.isOpenedFor6Months)
+                        if let openedDate = whiskey.dateOpened {
+                            WhiskeyDetailRowView(title: "Opened Date", detail: openedDate.formatted(date: .abbreviated, time: .omitted))
+                        }
+                        
+                        if let consumedDate = whiskey.consumedDate {
+                            WhiskeyDetailRowView(title: "Consumed Date", detail: consumedDate.formatted(date: .abbreviated, time: .omitted))
+                        }
+                        WhiskeyDetailRowView(title: "Opened For", detail: whiskey.openedFor)
                         WhiskeyDetailRowViewToggle(title: "Buy Again", isEnabled: whiskey.wouldBuyAgain)
                         WhiskeyDetailRowView(title: "Location Purchased", detail: whiskey.locationPurchased)
                             .foregroundStyle(whiskey.locationPurchased.isEmpty ? Color.secondary : Color.primary)
@@ -166,7 +173,7 @@ struct WhiskeyDetailView: View {
                         Section {
                             ZStack {
                                 NavigationLink {
-                                   WhiskeyTasteDetailView(taste: taste)
+                                    WhiskeyTasteDetailView(taste: taste)
                                 } label: {
                                     EmptyView()
                                 }
@@ -179,7 +186,7 @@ struct WhiskeyDetailView: View {
                         .listRowSeparator(.hidden)
                     }
                     .onDelete { index in
-                      whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
+                        whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
                     }
                 } header: {
                     HStack(alignment: .bottom) {
@@ -200,6 +207,8 @@ struct WhiskeyDetailView: View {
                 }
                 .listRowInsets(.init(top: 0, leading: 5, bottom: 10, trailing: 10))
                 .listRowSeparator(.hidden)
+                
+                
             }
             .listStyle(.plain)
             .listRowSpacing(-10)
@@ -207,18 +216,21 @@ struct WhiskeyDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     HStack {
-                        Button {
-                            isAddTasteViewShowing.toggle()
-                        } label: {
-                            Image(systemName: "music.quarternote.3")
+                        if whiskey.opened && !whiskey.bottleFinished {
+                            Button {
+                                isAddTasteViewShowing.toggle()
+                            } label: {
+                                Image(systemName: "music.quarternote.3")
+                            }
                         }
-                        Button {
-                            isEditing.toggle()
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
+                        if !whiskey.bottleFinished {
+                            Button {
+                                isEditing.toggle()
+                            } label: {
+                                Image(systemName: "pencil.circle.fill")
+                            }
                         }
                     }
-                  
                     .sheet(isPresented: $isEditing) {
                         WhiskeyEditView(whiskey: $whiskey)
                     }

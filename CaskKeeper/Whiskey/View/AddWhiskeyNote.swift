@@ -15,6 +15,7 @@ struct AddWhiskeyNote: View {
     @State private var textEditor: String = ""
     @State private var score: Int = 50
     @State private var isAlertShowing: Bool = false
+    @State private var isBottleFinished: Bool = false
 
     let whiskey: Whiskey
         
@@ -112,25 +113,48 @@ struct AddWhiskeyNote: View {
                         .padding(flavorCatalog.selectedFlavors.isEmpty ? .top : .bottom)
 
                 }
+                
+                Section {
+                    HStack(alignment: .center) {
+                        Text("Is Bottle Finished?")
+                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
+                        Spacer()
+                        Button {
+                            withAnimation(Animation.smooth) {
+                                isBottleFinished.toggle()
+                            }
+                        } label: {
+                            Image(systemName: isBottleFinished ? "checkmark.circle.fill" : "circle")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundStyle(isBottleFinished ? Color.green : .gray)
+
+
+                        }
+                    }
+                } header: {
+                   
+                }
+                .padding(.top)
+                .padding(.horizontal)
 
             }
-            
+                        
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         withAnimation(Animation.smooth) {
-                            if !textEditor.isEmpty {
-                                var taste = Whiskey.Taste(date: Date(), customNotes: textEditor, score: score)
-                                taste.notes.append(contentsOf: flavorCatalog.selectedFlavors)
-                                whiskeyLibrary.addWhiskeyTasting(for: whiskey, tasting: taste)
-                                dismiss()
-                            } else {
-                                isAlertShowing = true
+                            var taste = Whiskey.Taste(date: Date(), customNotes: textEditor, score: score)
+                            taste.notes.append(contentsOf: flavorCatalog.selectedFlavors)
+                            whiskeyLibrary.addWhiskeyTasting(for: whiskey, tasting: taste)
+                            if isBottleFinished {
+                                whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
                             }
+                            dismiss()
                         }
                     }
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                    .alert("Custom notes cannot be empty", isPresented: $isAlertShowing) {}
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
