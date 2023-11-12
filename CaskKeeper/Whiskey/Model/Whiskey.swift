@@ -45,34 +45,47 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     var openedFor: String {
-        if bottleFinished {
-            guard let dateOpened = dateOpened, let consumedDate = consumedDate else {
-                return "N/A"
-            }
-            let calendar = Calendar.current
-            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: consumedDate)
-            if let day = dateDifference.day {
-                return "\(day) \(day == 1 ? "day" : "days")"
-            } else {
-                return "0 days"
-            }
-            
-        } else {
-            guard let dateOpened = dateOpened else {
-                return "N/A"
-            }
-            let today = Date()
-            let calendar = Calendar.current
-            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: today)
-            
-            if let day = dateDifference.day {
-              let dayString = "\(day) \(day == 1 ? "day" : "days")"
-              return dayString
-            } else {
-                return "0 days"
-            }
+        var dateString = ""
+        let calendar = Calendar.current
+              
+        guard let dateOpened = dateOpened else {
+           dateString = "Sealed"
+           return dateString
         }
         
+        if !bottleFinished {
+            let dateDifference = calendar.dateComponents([.day, .hour, .minute], from: dateOpened, to: .now)
+            
+            if let day = dateDifference.day {
+                dateString += "  \(day) \(day == 1 ? "day" : "days")"
+            }
+            
+            if let hour = dateDifference.hour {
+                dateString += ",  \(hour) \(hour == 1 ? "hour" : "hours")"
+            }
+            
+            if let minute = dateDifference.minute {
+                dateString += ",  \(minute) \(minute == 1 ? "minute" : "minutes")"
+                return dateString
+            }
+        } else {
+            guard let consumedDate = consumedDate else { return "Sealed" }
+            let dateDifference = calendar.dateComponents([.day, .hour, .minute], from: dateOpened, to: consumedDate)
+            
+            if let day = dateDifference.day {
+                dateString += "  \(day) \(day == 1 ? "day" : "days")"
+            }
+            
+            if let hour = dateDifference.hour {
+                dateString += ",  \(hour) \(hour == 1 ? "hour" : "hours")"
+            }
+            
+            if let minute = dateDifference.minute {
+                dateString += ",  \(minute) \(minute == 1 ? "minute" : "minutes")"
+                return dateString
+            }
+        }
+        return "Sealed"
     }
     
     init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
