@@ -55,33 +55,18 @@ struct WhiskeyEditView: View {
                 }
                 
                 Toggle("Opened", isOn: $whiskey.opened)
+                    .onChange(of: whiskey.opened) { oldValue, newValue in
+                        if oldValue == true {
+                            finishWhiskeyConfirmation.toggle()
+                        }
+                        
+                        if oldValue == false && whiskey.firstOpen {
+                            whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
+                        }
+                    }
                 Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)
                 WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
-                
-                HStack(alignment: .center) {
-                    Text("Is Bottle Finished?")
-                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-
-                    Spacer()
-                    Button {
-                        withAnimation(Animation.smooth) {
-                            if whiskey.opened {
-                                finishWhiskeyConfirmation.toggle()
-                            }
-                        }
-                    } label: {
-                        Image(systemName: whiskey.bottleFinished ? "checkmark.circle.fill" : "circle")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 35)
-                            .foregroundStyle(whiskey.bottleFinished ? Color.green : .gray)
-                    }
-                }
-                .padding(.vertical, 4)
-                .disabled(whiskey.opened ? false : true)
-                .opacity(whiskey.opened ? 1 : 0.3)
-                
-
+            
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .navigationTitle(whiskey.label)
@@ -90,9 +75,6 @@ struct WhiskeyEditView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
-                        if whiskey.opened && whiskey.firstOpen {
-                            whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
-                        }
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
