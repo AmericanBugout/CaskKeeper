@@ -11,7 +11,7 @@ import UIKit
 struct WhiskeyDetailView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
-
+    
     @State private var isEditing: Bool = false
     @State private var isPhotoLibraryShowing: Bool = false
     @State private var isDetailSectionExpanded: Bool = true
@@ -65,7 +65,7 @@ struct WhiskeyDetailView: View {
                                         Text(String(format: "%.1f", whiskey.avgScore))
                                             .font(.custom("AsapCondensed-Bold", size: 26))
                                             .foregroundColor(.accentColor)
-                                        Text("Avg Score")
+                                        Text("Overall")
                                             .font(.custom("AsapCondensed-Regular", size: 14))
                                     }
                                 }
@@ -166,7 +166,7 @@ struct WhiskeyDetailView: View {
                         Section {
                             ZStack {
                                 NavigationLink {
-                                   WhiskeyTasteDetailView(taste: taste)
+                                    WhiskeyTasteDetailView(taste: taste)
                                 } label: {
                                     EmptyView()
                                 }
@@ -179,7 +179,7 @@ struct WhiskeyDetailView: View {
                         .listRowSeparator(.hidden)
                     }
                     .onDelete { index in
-                      whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
+                        whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
                     }
                 } header: {
                     HStack(alignment: .bottom) {
@@ -200,6 +200,8 @@ struct WhiskeyDetailView: View {
                 }
                 .listRowInsets(.init(top: 0, leading: 5, bottom: 10, trailing: 10))
                 .listRowSeparator(.hidden)
+                
+                
             }
             .listStyle(.plain)
             .listRowSpacing(-10)
@@ -207,10 +209,12 @@ struct WhiskeyDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     HStack {
-                        Button {
-                            isAddTasteViewShowing.toggle()
-                        } label: {
-                            Image(systemName: "music.quarternote.3")
+                        if whiskey.opened {
+                            Button {
+                                isAddTasteViewShowing.toggle()
+                            } label: {
+                                Image(systemName: "music.quarternote.3")
+                            }
                         }
                         Button {
                             isEditing.toggle()
@@ -218,7 +222,7 @@ struct WhiskeyDetailView: View {
                             Image(systemName: "pencil.circle.fill")
                         }
                     }
-                  
+                    
                     .sheet(isPresented: $isEditing) {
                         WhiskeyEditView(whiskey: $whiskey)
                     }

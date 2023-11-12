@@ -70,6 +70,13 @@ class WhiskeyLibrary {
         }
     }
     
+    func updateWhiskeyToFinished(whiskey: Whiskey) {
+        if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
+            collection[index].bottleFInished = true
+            collection[index].opened = false
+        }
+    }
+    
     /* Save and load whiskey */
     
     func save() {
