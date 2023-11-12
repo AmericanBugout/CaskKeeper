@@ -216,20 +216,21 @@ struct WhiskeyDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     HStack {
-                        if whiskey.opened {
+                        if whiskey.opened && !whiskey.bottleFinished {
                             Button {
                                 isAddTasteViewShowing.toggle()
                             } label: {
                                 Image(systemName: "music.quarternote.3")
                             }
                         }
-                        Button {
-                            isEditing.toggle()
-                        } label: {
-                            Image(systemName: "pencil.circle.fill")
+                        if !whiskey.bottleFinished {
+                            Button {
+                                isEditing.toggle()
+                            } label: {
+                                Image(systemName: "pencil.circle.fill")
+                            }
                         }
                     }
-                    
                     .sheet(isPresented: $isEditing) {
                         WhiskeyEditView(whiskey: $whiskey)
                     }

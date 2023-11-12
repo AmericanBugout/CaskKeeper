@@ -12,6 +12,7 @@ struct WhiskeyEditView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
     @Binding var whiskey: Whiskey
+    @State private var finishWhiskeyConfirmation: Bool = false
     @State private var whiskeyProofString = ""
     
     let numberFormatter: NumberFormatter = {
@@ -64,7 +65,9 @@ struct WhiskeyEditView: View {
                     Spacer()
                     Button {
                         withAnimation(Animation.smooth) {
-                            whiskey.bottleFinished.toggle()
+                            if whiskey.opened {
+                                finishWhiskeyConfirmation.toggle()
+                            }
                         }
                     } label: {
                         Image(systemName: whiskey.bottleFinished ? "checkmark.circle.fill" : "circle")
@@ -72,11 +75,13 @@ struct WhiskeyEditView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 35)
                             .foregroundStyle(whiskey.bottleFinished ? Color.green : .gray)
-
-
                     }
                 }
                 .padding(.vertical, 4)
+                .disabled(whiskey.opened ? false : true)
+                .opacity(whiskey.opened ? 1 : 0.3)
+                
+
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .navigationTitle(whiskey.label)
@@ -88,12 +93,21 @@ struct WhiskeyEditView: View {
                         if whiskey.opened && whiskey.firstOpen {
                             whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
                         }
-                        if whiskey.bottleFinished {
-                            whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
-                        }
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                    .confirmationDialog("Finish Whiskey?", isPresented: $finishWhiskeyConfirmation) {
+                        Button(role: .destructive) {
+                            whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
+                            whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
+                            dismiss()
+                        } label: {
+                            Text("Finish Whiskey")
+                        }
+                    } message: {
+                        Text("This will finish the whiskey and you be unable to make changes. Are you sure?")
+                    }
+
                 }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
