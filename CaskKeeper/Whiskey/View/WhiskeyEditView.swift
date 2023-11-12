@@ -85,17 +85,26 @@ struct WhiskeyEditView: View {
     
     func handleProofInput(newValue: String) {
         // If the newValue is empty (e.g., the user deleted all input), then it's okay.
-        if newValue.isEmpty {
-            return
-        }
+            if newValue.isEmpty {
+                whiskeyProofString = newValue
+                whiskey.proof = 0 // Assign a default value or handle this scenario appropriately
+                return
+            }
 
-        // Check if the newValue is a valid decimal.
-        let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
+            // Check if the newValue is a valid decimal.
+            let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
 
-        // If not a valid decimal or exceeds limits, revert to the previous value.
-        if !isDecimal {
-            whiskeyProofString = String(newValue.dropLast())
-        }
+            // If not a valid decimal or exceeds limits, revert to the previous value.
+            if !isDecimal {
+                whiskeyProofString = String(newValue.dropLast())
+            } else {
+                // Here we assume that `whiskey.proof` is a Double.
+                // Use your number formatter to convert the valid string to a Double.
+                if let number = numberFormatter.number(from: newValue) {
+                    whiskey.proof = number.doubleValue
+                    whiskeyProofString = newValue
+                }
+            }
     }
 
 }
