@@ -83,7 +83,7 @@ struct WhiskeyDetailView: View {
                     
                     VStack(alignment: .center) {
                         Text(whiskey.label)
-                            .font(.custom("AsapCondensed-Bold", size: 72, relativeTo: .largeTitle))
+                            .font(.custom("AsapCondensed-Bold", size: 60, relativeTo: .largeTitle))
                             .lineLimit(1)
                         Text(whiskey.bottle)
                             .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
@@ -99,7 +99,7 @@ struct WhiskeyDetailView: View {
                                     .fill(.blue)
                                     .padding()
                             }
-                    
+                        
                         
                     }
                     .frame(maxWidth: .infinity)
@@ -216,20 +216,11 @@ struct WhiskeyDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     HStack(spacing: 20) {
-                        if whiskey.opened && !whiskey.bottleFinished {
+                        if whiskey.bottleState == .opened {
                             Button {
                                 isAddTasteViewShowing.toggle()
                             } label: {
                                 Image(systemName: "music.quarternote.3")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            }
-                        }
-                        if !whiskey.bottleFinished {
-                            Button {
-                                isEditing.toggle()
-                            } label: {
-                                Image(systemName: "pencil.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
                             }
@@ -243,10 +234,21 @@ struct WhiskeyDetailView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                   // NavigationStateView(state: whiskey.bottleState)
+                    if whiskey.bottleState != .finished {
+                        Menu {
+                            Button {
+                               isEditing = true
+                            } label: {
+                                Text("Edit Whiskey")
+                                Image(systemName: "pencil.line")
+                            }
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
                 }
-                
             }
+            
         }
     }
 }
