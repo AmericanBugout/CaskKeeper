@@ -42,14 +42,15 @@ struct WhiskeyDetailView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .clipShape(Circle())
-                                    .frame(width: 75, height: 75)
-                                    .shadow(radius: 4)
+                                    .frame(width: 115, height: 115)
+                                    .shadow(color: .black, radius: 1)
+                                    .padding(.leading, -10)
                             } else {
                                 whiskey.image?
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
                                     .clipShape(Circle())
-                                    .frame(width: 75, height: 75)
+                                    .frame(width: 115, height: 115)
                                     .shadow(color: .black, radius: 1)
                                     .padding(.leading, -10)
                             }
@@ -69,7 +70,7 @@ struct WhiskeyDetailView: View {
                                             .font(.custom("AsapCondensed-Regular", size: 14))
                                     }
                                 }
-                                .frame(width: 45, height: 35)
+                                .frame(width: 45, height: 45)
                                 .padding(.leading, -10)
                                 .padding(.bottom, 4)
                             }
@@ -84,14 +85,25 @@ struct WhiskeyDetailView: View {
                         Text(whiskey.label)
                             .font(.custom("AsapCondensed-Bold", size: 72, relativeTo: .largeTitle))
                             .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                            .bold()
                         Text(whiskey.bottle)
                             .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
                             .lineLimit(1)
+                            .padding(.bottom, 1)
+                        
+                        Text(whiskey.bottleState.currentState.uppercased())
+                            .padding(.horizontal)
+                            .foregroundStyle(whiskey.bottleState.color)
+                            .font(.custom("AsapCondensed-SemiBold", size: 28, relativeTo: .largeTitle))
+                            .background {
+                                Capsule()
+                                    .fill(.blue)
+                                    .padding()
+                            }
+                    
                         
                     }
                     .frame(maxWidth: .infinity)
+                    .padding(.leading, 15)
                     Spacer()
                     
                 }
@@ -203,39 +215,35 @@ struct WhiskeyDetailView: View {
             .navigationTitle("Whiskey Details")
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    ZStack {
-                        HStack(spacing: 20) {
-                            if whiskey.opened && !whiskey.bottleFinished {
-                                Button {
-                                    isAddTasteViewShowing.toggle()
-                                } label: {
-                                    Image(systemName: "music.quarternote.3")
-                                        .resizable()
-                                        .frame(width: 35, height: 35)
-                                }
-                            }
-                            if !whiskey.bottleFinished {
-                                Button {
-                                    isEditing.toggle()
-                                } label: {
-                                    Image(systemName: "pencil.circle.fill")
-                                        .resizable()
-                                        .frame(width: 35, height: 35)
-                                }
+                    HStack(spacing: 20) {
+                        if whiskey.opened && !whiskey.bottleFinished {
+                            Button {
+                                isAddTasteViewShowing.toggle()
+                            } label: {
+                                Image(systemName: "music.quarternote.3")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
                             }
                         }
-                        .sheet(isPresented: $isEditing) {
-                            WhiskeyEditView(whiskey: $whiskey)
-                        }
-                        .sheet(isPresented: $isAddTasteViewShowing) {
-                            AddWhiskeyNote(whiskey: whiskey)
+                        if !whiskey.bottleFinished {
+                            Button {
+                                isEditing.toggle()
+                            } label: {
+                                Image(systemName: "pencil.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
                         }
                     }
-                    .frame(width: 50, height: 50)
-                    .backgroundStyle(.regularMaterial)
+                    .sheet(isPresented: $isEditing) {
+                        WhiskeyEditView(whiskey: $whiskey)
+                    }
+                    .sheet(isPresented: $isAddTasteViewShowing) {
+                        AddWhiskeyNote(whiskey: whiskey)
+                    }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationStateView(state: whiskey.bottleState)
+                   // NavigationStateView(state: whiskey.bottleState)
                 }
                 
             }

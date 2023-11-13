@@ -57,7 +57,7 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
-                            .frame(width: 35, height: 35)
+                            .frame(width: 30, height: 30)
                     }
                 }
                 
