@@ -25,7 +25,6 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var dateOpened: Date?
     var consumedDate: Date?
     var wouldBuyAgain: Bool = false
-    var isOpenedFor6Months: Bool = false
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
     var tastingNotes: [Taste] = []

@@ -20,14 +20,35 @@ struct WhiskeyDetailRowViewToggle: View {
             Group {
                 if isEnabled {
                     Text("Yes")
-                        .foregroundColor(.green)
                 } else {
                     Text("No")
-                        .foregroundColor(.red)
                 }
             }
-            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
         }
+    }
+}
+
+struct WhiskeyDetailRowViewStateToggle: View {
+    
+    let title: String
+    let isEnabled: Bool
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+            Spacer()
+            Group {
+                if isEnabled {
+                    Text("Open")
+                        .foregroundColor(.green)
+                } else {
+                    Text("Sealed")
+                        .foregroundColor(.primary)
+                }
+            }
+            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))        }
     }
 }
 
