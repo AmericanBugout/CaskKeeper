@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing: Bool = false
+    @State private var importCSVView: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -51,6 +52,25 @@ struct ContentView: View {
                 AddWhiskeyView()
             }
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            Button {
+                                importCSVView = true
+                            } label: {
+                                Text("Import Whiskeys")
+                                Image(systemName: "square.and.arrow.down.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                        .sheet(isPresented: $importCSVView) {
+                            
+                        }
+                }
+    
+                
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         isSheetViewShowing = true
