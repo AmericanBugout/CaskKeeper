@@ -20,13 +20,11 @@ struct WhiskeyDetailRowViewToggle: View {
             Group {
                 if isEnabled {
                     Text("Yes")
-                        .foregroundColor(.green)
                 } else {
                     Text("No")
-                        .foregroundColor(.red)
                 }
             }
-            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
         }
     }
 }

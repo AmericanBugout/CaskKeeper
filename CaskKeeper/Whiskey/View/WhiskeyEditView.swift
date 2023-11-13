@@ -58,10 +58,12 @@ struct WhiskeyEditView: View {
                     .onChange(of: whiskey.opened) { oldValue, newValue in
                         if oldValue == true {
                             finishWhiskeyConfirmation.toggle()
+                            whiskey.bottleState = .finished
                         }
                         
                         if oldValue == false && whiskey.firstOpen {
                             whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
+                            whiskey.bottleState = .opened
                         }
                     }
                 Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)

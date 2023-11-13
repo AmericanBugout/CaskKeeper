@@ -8,6 +8,34 @@
 import SwiftUI
 import Observation
 
+enum BottleState: String, Codable {
+    case sealed
+    case opened
+    case finished
+    
+    var currentState: String {
+        switch self {
+        case .sealed:
+            return "Sealed"
+        case .opened:
+            return "Opened"
+        case .finished:
+            return "Finished"
+        }
+    }
+    
+    var color: Color {
+      switch self {
+      case .sealed:
+          return .gray
+      case .opened:
+          return .green
+      case .finished:
+          return .accentColor
+      }
+  }
+}
+
 @Observable
 class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var id: UUID
@@ -20,12 +48,12 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var style: Style
     var origin: Origin
     var age: Age
+    var bottleState: BottleState = .sealed
     var opened: Bool = false
     var firstOpen: Bool = true
     var dateOpened: Date?
     var consumedDate: Date?
     var wouldBuyAgain: Bool = false
-    var isOpenedFor6Months: Bool = false
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
     var tastingNotes: [Taste] = []
