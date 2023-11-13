@@ -23,7 +23,7 @@
 		B320902A2AFC9BBB004FED4B /* AsapCondensed-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090242AFC9BBA004FED4B /* AsapCondensed-Italic.ttf */; };
 		B320902B2AFC9BBB004FED4B /* AsapCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090252AFC9BBA004FED4B /* AsapCondensed-Medium.ttf */; };
 		B320902C2AFC9BBB004FED4B /* AsapCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B32090262AFC9BBA004FED4B /* AsapCondensed-Bold.ttf */; };
-		B320902F2AFC9BC7004FED4B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320902E2AFC9BC7004FED4B /* DataManager.swift */; };
+		B320902F2AFC9BC7004FED4B /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320902E2AFC9BC7004FED4B /* DataPersistenceManager.swift */; };
 		B32090462AFC9BCE004FED4B /* ImagePickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */; };
 		B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */; };
 		B32090482AFC9BCE004FED4B /* WhiskeyLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090352AFC9BCE004FED4B /* WhiskeyLibrary.swift */; };
@@ -83,7 +83,7 @@
 		B32090242AFC9BBA004FED4B /* AsapCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Italic.ttf"; sourceTree = "<group>"; };
 		B32090252AFC9BBA004FED4B /* AsapCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Medium.ttf"; sourceTree = "<group>"; };
 		B32090262AFC9BBA004FED4B /* AsapCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AsapCondensed-Bold.ttf"; sourceTree = "<group>"; };
-		B320902E2AFC9BC7004FED4B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B320902E2AFC9BC7004FED4B /* DataPersistenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerRepresentable.swift; sourceTree = "<group>"; };
 		B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PHPickerRepresentable.swift; sourceTree = "<group>"; };
 		B32090352AFC9BCE004FED4B /* WhiskeyLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyLibrary.swift; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		B320902D2AFC9BC7004FED4B /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				B320902E2AFC9BC7004FED4B /* DataManager.swift */,
+				B320902E2AFC9BC7004FED4B /* DataPersistenceManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -441,7 +441,7 @@
 				B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */,
 				B320904E2AFC9BCE004FED4B /* AddWhiskeyNote.swift in Sources */,
 				B32090482AFC9BCE004FED4B /* WhiskeyLibrary.swift in Sources */,
-				B320902F2AFC9BC7004FED4B /* DataManager.swift in Sources */,
+				B320902F2AFC9BC7004FED4B /* DataPersistenceManager.swift in Sources */,
 				B32090572AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift in Sources */,
 				B32090552AFC9BCE004FED4B /* WhiskeyDetailRowView.swift in Sources */,
 				B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */,

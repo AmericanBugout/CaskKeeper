@@ -5,21 +5,24 @@
 //  Created by Jon Oryhan on 10/21/23.
 //
 
-import UIKit
+import SwiftUI
 import Observation
 
 @Observable
 class WhiskeyLibrary {
+    var dataPersistenceManager: WhiskeyPersisting
     
     var collection: [Whiskey] = [] {
         didSet {
-            save()
+            dataPersistenceManager.save(collection: collection)
         }
     }
     
     var collectionCount: Int { return collection.count }
     
-    init(isForTesting: Bool = false) {
+    init(dataPersistence: WhiskeyPersisting = DataPersistenceManager.shared, isForTesting: Bool = false) {
+        dataPersistenceManager = dataPersistence
+        
         if isForTesting {
             collection = [
                 Whiskey(label: "Hammered", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "whiskey1") ?? UIImage(), proof: 110.0, style: .bourbon, origin: .us, age: .eight, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Intense Flavor. I would definately buy again.", notes: [Flavor(name: "Oak"), Flavor(name: "Cherry"), Flavor(name: "Burnt Toast")], score: 56), Whiskey.Taste(date: Date(), customNotes: "Cost a lot of money.  Will Need another taste to determine its worth", notes: [Flavor(name: "Oak"), Flavor(name: "Wood"), Flavor(name: "Burnt Toast")], score: 78)]),
@@ -28,8 +31,9 @@ class WhiskeyLibrary {
                 Whiskey(label: "Small Reserve", bottle: "Single Barrel", purchasedDate: .now, image: UIImage(named: "whiskey4") ?? UIImage(), proof: 111.3, style: .bourbon, origin: .us, age: .six, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Nothing special", notes: [Flavor(name: "Vanilla"), Flavor(name: "Caramel"), Flavor(name: "Wheat")], score: 77)])
             ]
         } else {
-            collection = load()
+            collection = dataPersistence.load()
         }
+        
     }
     
     /* CRUD Operations */
@@ -51,14 +55,14 @@ class WhiskeyLibrary {
     func updateImage(for whiskey: Whiskey, with imageData: Data?) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].imageData = imageData
-            save()
+            dataPersistenceManager.save(collection: collection)
         }
     }
     
     func addWhiskeyTasting(for whiskey: Whiskey, tasting: Whiskey.Taste) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].tastingNotes.append(tasting)
-            save()
+            dataPersistenceManager.save(collection: collection)
         }
     }
     
@@ -84,36 +88,6 @@ class WhiskeyLibrary {
             collection[index].dateOpened = Date()
             collection[index].bottleState = .opened
             collection[index].firstOpen = false
-        }
-    }
-    
-    /* Save and load whiskey */
-    
-    func save() {
-        do {
-            let encoder = JSONEncoder()
-            let data = try encoder.encode(collection)
-            if DataManager.save(data: data, filename: "whiskeyCollection") {
-                print("Data was saved.")
-            } else {
-                print("Unable to save data")
-            }
-        } catch {
-            print("Error saving data.")
-        }
-    }
-    
-    func load() -> [Whiskey] {
-        guard let data = DataManager.load(filename: "whiskeyCollection") else {
-            return []
-        }
-        
-        do {
-            let jsonDecoder = JSONDecoder()
-            return try jsonDecoder.decode([Whiskey].self, from: data)
-        } catch {
-            print("Unable to deoode Data: \(error.localizedDescription)")
-            return []
         }
     }
 }
