@@ -23,6 +23,17 @@ enum BottleState: String, Codable {
             return "Finished"
         }
     }
+    
+    var color: Color {
+      switch self {
+      case .sealed:
+          return .gray
+      case .opened:
+          return .green
+      case .finished:
+          return .accentColor
+      }
+  }
 }
 
 @Observable

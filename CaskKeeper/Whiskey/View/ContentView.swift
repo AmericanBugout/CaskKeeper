@@ -51,11 +51,13 @@ struct ContentView: View {
                 AddWhiskeyView()
             }
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItem(placement: .bottomBar) {
                     Button {
                         isSheetViewShowing = true
                     } label: {
                         Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(width: 35, height: 35)
                     }
                 }
                 

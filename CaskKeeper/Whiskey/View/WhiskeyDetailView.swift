@@ -121,7 +121,6 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Age", detail: whiskey.age.rawValue)
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
-                        WhiskeyDetailRowStateToggle(title: "Bottle State", state: whiskey.bottleState)
                         if let openedDate = whiskey.dateOpened {
                             WhiskeyDetailRowView(title: "Opened Date", detail: openedDate.formatted(date: .abbreviated, time: .omitted))
                         }
@@ -157,90 +156,86 @@ struct WhiskeyDetailView: View {
                 .listRowSeparator(.hidden)
                 .listSectionSpacing(0)
                 
-                Section(isExpanded: $isTastingSectionExpanded) {
-                    if whiskey.tastingNotes.isEmpty {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color.black)
-                                .border(Color.lead, width: 1)
-                                .frame(height: 50)
-                            Text("No Tastes")
-                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                                .foregroundStyle(.gray)
-                                .font(.callout)
-                            
-                        }
-                    }
-                    
-                    ForEach(whiskey.tastingNotes) { taste in
-                        Section {
-                            ZStack {
-                                NavigationLink {
-                                    WhiskeyTasteDetailView(taste: taste)
-                                } label: {
-                                    EmptyView()
+                if !whiskey.tastingNotes.isEmpty {
+                    Section(isExpanded: $isTastingSectionExpanded) {
+                        ForEach(whiskey.tastingNotes) { taste in
+                            Section {
+                                ZStack {
+                                    NavigationLink {
+                                        WhiskeyTasteDetailView(taste: taste)
+                                    } label: {
+                                        EmptyView()
+                                    }
+                                    .opacity(0)
+                                    TasteRowView(taste: taste)
                                 }
-                                .opacity(0)
-                                TasteRowView(taste: taste)
+                                .listRowBackground(Color.clear)
                             }
-                            .listRowBackground(Color.clear)
+                            .listRowInsets(.init(top: 10, leading: 5, bottom: 10, trailing: 10))
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowInsets(.init(top: 10, leading: 5, bottom: 10, trailing: 10))
-                        .listRowSeparator(.hidden)
-                    }
-                    .onDelete { index in
-                        whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
-                    }
-                } header: {
-                    HStack(alignment: .bottom) {
-                        Text("Whiskey Notes")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                        Spacer()
-                        Button {
-                            withAnimation(Animation.smooth) {
-                                isTastingSectionExpanded.toggle()
+                        .onDelete { index in
+                            whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: index)
+                        }
+                    } header: {
+                        HStack(alignment: .bottom) {
+                            Text("Whiskey Notes")
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            Spacer()
+                            Button {
+                                withAnimation(Animation.smooth) {
+                                    isTastingSectionExpanded.toggle()
+                                }
+                            } label:  {
+                                Image(systemName: "chevron.right")
                             }
-                        } label:  {
-                            Image(systemName: "chevron.right")
+                            .animation(.smooth(), value: isTastingSectionExpanded)
+                            .rotationEffect(isTastingSectionExpanded ? Angle(degrees: 90) : Angle(degrees: 0))
                         }
-                        .animation(.smooth(), value: isTastingSectionExpanded)
-                        .rotationEffect(isTastingSectionExpanded ? Angle(degrees: 90) : Angle(degrees: 0))
+                        .listRowBackground(Color.clear)
                     }
-                    .listRowBackground(Color.clear)
+                    .listRowInsets(.init(top: 0, leading: 5, bottom: 10, trailing: 10))
+                    .listRowSeparator(.hidden)
                 }
-                .listRowInsets(.init(top: 0, leading: 5, bottom: 10, trailing: 10))
-                .listRowSeparator(.hidden)
-                
-                
             }
             .listStyle(.plain)
             .listRowSpacing(-10)
             .navigationTitle("Whiskey Details")
             .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    HStack {
-                        if whiskey.opened && !whiskey.bottleFinished {
-                            Button {
-                                isAddTasteViewShowing.toggle()
-                            } label: {
-                                Image(systemName: "music.quarternote.3")
+                ToolbarItem(placement: .bottomBar) {
+                    ZStack {
+                        HStack(spacing: 20) {
+                            if whiskey.opened && !whiskey.bottleFinished {
+                                Button {
+                                    isAddTasteViewShowing.toggle()
+                                } label: {
+                                    Image(systemName: "music.quarternote.3")
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                }
+                            }
+                            if !whiskey.bottleFinished {
+                                Button {
+                                    isEditing.toggle()
+                                } label: {
+                                    Image(systemName: "pencil.circle.fill")
+                                        .resizable()
+                                        .frame(width: 35, height: 35)
+                                }
                             }
                         }
-                        if !whiskey.bottleFinished {
-                            Button {
-                                isEditing.toggle()
-                            } label: {
-                                Image(systemName: "pencil.circle.fill")
-                            }
+                        .sheet(isPresented: $isEditing) {
+                            WhiskeyEditView(whiskey: $whiskey)
+                        }
+                        .sheet(isPresented: $isAddTasteViewShowing) {
+                            AddWhiskeyNote(whiskey: whiskey)
                         }
                     }
-                    .sheet(isPresented: $isEditing) {
-                        WhiskeyEditView(whiskey: $whiskey)
-                    }
-                    .sheet(isPresented: $isAddTasteViewShowing) {
-                        AddWhiskeyNote(whiskey: whiskey)
-                    }
-                    
+                    .frame(width: 50, height: 50)
+                    .backgroundStyle(.regularMaterial)
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationStateView(state: whiskey.bottleState)
                 }
                 
             }
