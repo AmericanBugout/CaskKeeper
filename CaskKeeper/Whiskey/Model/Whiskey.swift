@@ -8,6 +8,23 @@
 import SwiftUI
 import Observation
 
+enum BottleState: String, Codable {
+    case sealed
+    case opened
+    case finished
+    
+    var currentState: String {
+        switch self {
+        case .sealed:
+            return "Sealed"
+        case .opened:
+            return "Opened"
+        case .finished:
+            return "Finished"
+        }
+    }
+}
+
 @Observable
 class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var id: UUID
@@ -20,6 +37,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var style: Style
     var origin: Origin
     var age: Age
+    var bottleState: BottleState = .sealed
     var opened: Bool = false
     var firstOpen: Bool = true
     var dateOpened: Date?

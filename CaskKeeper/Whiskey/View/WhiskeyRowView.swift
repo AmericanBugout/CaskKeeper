@@ -43,16 +43,20 @@ struct WhiskeyRowView: View {
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                 
-                if whiskey.bottleFinished {
+                switch whiskey.bottleState {
+                case .sealed:
+                    Text("Sealed")
+                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .foregroundStyle(.gray)
+                case .opened:
+                    Text("Opened")
+                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .foregroundStyle(.green)
+                case .finished:
                     Text("Finished")
-                        .font(.custom("AsapCondensed-Light", size: 12, relativeTo: .body))
-                        .foregroundStyle(.red)
-                } else {
-                    Text(whiskey.opened ? "Open" : "Sealed")
-                        .font(.custom("AsapCondensed-Light", size: 12, relativeTo: .body))
-                        .foregroundStyle(whiskey.opened ? .green : .gray)
+                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .foregroundStyle(.accent)
                 }
-                
             }
             
             Spacer()
