@@ -10,7 +10,7 @@ import UniformTypeIdentifiers
 
 struct DocumentPicker: UIViewControllerRepresentable {
     // This closure will be used to pass the Person array back to the SwiftUI view.
-    var onDocumentsPicked: ([SmallWhiskey]) -> Void
+    var onDocumentsPicked: ([Whiskey]) -> Void
 
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.commaSeparatedText], asCopy: true)
@@ -47,9 +47,9 @@ struct DocumentPicker: UIViewControllerRepresentable {
         }
     }
     
-    static func parseCSV(contents: String) -> [SmallWhiskey] {
+    static func parseCSV(contents: String) -> [Whiskey] {
         let rows = contents.components(separatedBy: "\n")
         let dataRows = rows.dropFirst() // Assuming first row is header
-        return dataRows.compactMap { SmallWhiskey(row: $0)}
+        return dataRows.compactMap { Whiskey(row: $0)}
     }
 }

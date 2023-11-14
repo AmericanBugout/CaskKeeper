@@ -81,13 +81,13 @@ struct ContentView: View {
                         Image(systemName: "gear")
                     }
                     .sheet(isPresented: $importCSVView) {
-                        DocumentPicker { smallbottles in
-                            self.trials = smallbottles
-                            
+                        DocumentPicker { whiskeys in
+                            withAnimation(Animation.smooth) {
+                                whiskeyLibrary.collection.append(contentsOf: whiskeys)
+                            }
                         }
                     }
                 }
-                
                 
                 ToolbarItem(placement: .bottomBar) {
                     Button {
