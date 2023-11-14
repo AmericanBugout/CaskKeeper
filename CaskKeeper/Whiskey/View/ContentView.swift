@@ -69,11 +69,11 @@ struct ContentView: View {
                     .sheet(isPresented: $importCSVView) {
                         DocumentPicker { whiskeys in
                             withAnimation(Animation.smooth(duration: 1)) {
-//                                for index in whiskeys.indices {
-//                                    if whiskeys[index].bottleState == .opened {
-//                                        whiskeys[index].firstOpen = false
-//                                    }
-//                                }
+                                for index in whiskeys.indices {
+                                    if whiskeys[index].bottleState == .opened {
+                                        whiskeys[index].firstOpen = false
+                                    }
+                                }
                                 whiskeyLibrary.collection.append(contentsOf: whiskeys)
                             }
                         }
