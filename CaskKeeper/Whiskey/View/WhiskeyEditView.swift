@@ -14,6 +14,7 @@ struct WhiskeyEditView: View {
     @Binding var whiskey: Whiskey
     @State private var finishWhiskeyConfirmation: Bool = false
     @State private var whiskeyProofString = ""
+    @State private var whiskeyAgeString = ""
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -43,11 +44,10 @@ struct WhiskeyEditView: View {
                 
                 DatePicker("Purchased Date", selection: $whiskey.purchasedDate, displayedComponents: .date)
                 
-                Picker("Age", selection: $whiskey.age) {
-                    ForEach(Age.allCases, id: \.self) { age in
-                        Text(age.rawValue)
+                WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Aged")
+                    .onChange(of: whiskeyAgeString) { oldValue, newValue in
+                        handleAgeInput(newValue: newValue)
                     }
-                }
                 
                 Picker("Origin", selection: $whiskey.origin) {
                     ForEach(Origin.allCases, id: \.self) { origin in
@@ -103,8 +103,13 @@ struct WhiskeyEditView: View {
             }
             .onAppear(perform: {
                 whiskeyProofString = String(whiskey.proof)
+                whiskeyAgeString = formatNumberString(whiskey.age)
             })
         }
+    }
+    
+    func formatNumberString(_ number: Double) -> String {
+        return number.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", number) : String(number)
     }
     
     func handleProofInput(newValue: String) {
@@ -128,6 +133,38 @@ struct WhiskeyEditView: View {
                     whiskey.proof = number.doubleValue
                     whiskeyProofString = newValue
                 }
+            }
+    }
+    
+    func handleAgeInput(newValue: String) {
+        if newValue.isEmpty {
+                whiskeyAgeString = newValue
+                whiskey.age = 0 // Assign a default value or handle this scenario appropriately
+                return
+            }
+
+            // Check if the newValue is a valid decimal.
+            let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
+
+            // If newValue is a valid decimal, proceed to check the range
+            if isDecimal {
+                if let ageValue = Double(newValue), (0...100).contains(ageValue) {
+                    // It's a valid decimal and within the range, so update the age
+                    whiskey.age = ageValue
+                    whiskeyAgeString = newValue
+                } else if let ageValue = Double(newValue) {
+                    // If it's a valid decimal but not within the range, revert to the previous value.
+                    // This will limit the value to be within the range of 0 to 100.
+                    let limitedValue = min(max(ageValue, 0), 100)
+                    whiskey.age = limitedValue
+                    whiskeyAgeString = String(limitedValue)
+                } else {
+                    // If the conversion to Double fails, revert to the last known good value.
+                    whiskeyAgeString = String(newValue.dropLast())
+                }
+            } else {
+                // If not a valid decimal, revert to the previous valid value.
+                whiskeyAgeString = String(newValue.dropLast())
             }
     }
 

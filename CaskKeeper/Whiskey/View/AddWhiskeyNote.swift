@@ -129,8 +129,6 @@ struct AddWhiskeyNote: View {
                                 .resizable()
                                 .frame(width: 40, height: 40)
                                 .foregroundStyle(isBottleFinished ? Color.green : .gray)
-
-
                         }
                     }
                 } header: {

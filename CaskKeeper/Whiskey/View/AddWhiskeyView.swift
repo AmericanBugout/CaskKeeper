@@ -19,8 +19,8 @@ struct AddWhiskeyView: View {
     @State private var style: Style = .bourbon
     @State private var purchaseDate: Date = .now
     @State private var proof: String = ""
+    @State private var age: String = ""
     @State private var origin: Origin = .us
-    @State private var age: Age = .six
     @State private var isCameraShowing: Bool = false
     @State private var isPhotoLibraryShowing: Bool = false
     @State private var image: UIImage?
@@ -60,11 +60,10 @@ struct AddWhiskeyView: View {
                         .onChange(of: proof) { oldValue, newValue in
                             handleProofInput(newValue: newValue)
                         }
-                    Picker("Age", selection: $age) {
-                        ForEach(Age.allCases, id: \.self) { age in
-                            Text(age.rawValue)
+                    TextField("Age", text: $age)
+                        .onChange(of: age) { oldValue, newValue in
+                            handleAgeInput(newValue: newValue)
                         }
-                    }
                     
                     Picker("Origin", selection: $origin) {
                         ForEach(Origin.allCases, id: \.self) { origin in
@@ -125,7 +124,8 @@ struct AddWhiskeyView: View {
                     Button("Save") {
                         withAnimation(Animation.easeInOut) {
                             guard let doubleProof = Double(proof) else { return }
-                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, style: style, origin: origin, age: age))
+                            guard let doubleAge = Double(age) else { return }
+                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge))
                             dismiss()
                         }
                     }
@@ -159,6 +159,23 @@ struct AddWhiskeyView: View {
         // If not a valid decimal or exceeds limits, revert to the previous value.
         if !isDecimal {
             proof = String(newValue.dropLast())
+        }
+    }
+    
+    func handleAgeInput(newValue: String) {
+        if newValue.isEmpty {
+            return
+        }
+        
+        // Check if the newValue is a valid decimal.
+        let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
+        
+        if let ageValue = Double(newValue), isDecimal && (0...100).contains(ageValue) {
+            // If it's a valid decimal and within the range, update the age
+            age = newValue
+        } else {
+            // If not a valid decimal or exceeds limits, revert to the previous value.
+            age = String(newValue.dropLast())
         }
     }
 }

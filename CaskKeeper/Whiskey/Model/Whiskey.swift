@@ -47,7 +47,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var proof: Double
     var style: Style
     var origin: Origin
-    var age: Age
+    var age: Double
     var finish: String = ""
     var bottleState: BottleState = .sealed
     var opened: Bool = false
@@ -58,7 +58,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
     var tastingNotes: [Taste] = []
-    
+        
     var image: Image? {
         if let data = imageData {
             if let newImage = UIImage(data: data) {
@@ -117,48 +117,48 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return "Sealed"
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, finish: String? = nil, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle
         self.purchasedDate = purchasedDate
         self.imageData = image?.jpegData(compressionQuality: 0.3)
         self.proof = proof
+        self.bottleState = bottleState
         self.style = style
         self.finish = finish ?? ""
         self.origin = origin
-        self.age = age
+        self.age = age ?? 0
         self.tastingNotes = tastingNotes
     }
+
+    convenience init?(row: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yyyy" // Adjust to match "6/15/2023" with no leading zeros
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POS
+
+        let columns = row.components(separatedBy: ",")
+        guard columns.count == 9 else { return nil }
+        
+        let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
+                
+        guard !trimmedColumns[0].isEmpty,
+              !trimmedColumns[1].isEmpty,
+              let style = Style(rawValue: trimmedColumns[2]),
+              let bottleState = BottleState(rawValue: trimmedColumns[3]),
+              let origin = Origin(rawValue: trimmedColumns[4])
+        else { return nil }
+        
+        guard let proof = Double(trimmedColumns[6]) else { return nil }
+        let age = Double(trimmedColumns[7])
+        
+        let finish = trimmedColumns[5].isEmpty ? "" : trimmedColumns[5]
+        
+        guard let purchasedDate = dateFormatter.date(from: trimmedColumns[8]) else { return nil }
+        
+        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, tastingNotes: [])
+    }
     
-    
-//    convenience init?(csvRow: String) {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "M/d/yyyy"
-//        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-//        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-//        
-//        let columns = csvRow.components(separatedBy: ",")
-//        guard columns.count >= 8 else { return nil }
-//        
-//        let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
-//        
-//        let id = UUID()
-//        
-//        guard let label = trimmedColumns[1].nonEmpty,
-//              let bottle = trimmedColumns[2].nonEmpty,
-//              let style = Style(rawValue: trimmedColumns[6]),
-//              let proof = Double(trimmedColumns[5]),
-//              let origin = Origin(rawValue: trimmedColumns[7]),
-//              let age = Age(rawValue: trimmedColumns[8]),
-//              let purchasedDate = dateFormatter.date(from: trimmedColumns[3]) else {
-//            return nil
-//        }
-//        
-//        self.init(id: id, label: label, bottle: bottle, purchasedDate: purchasedDate, proof: proof, style: style, origin: origin, age: age, tastingNotes: [])
-//
-//    }
-//    
     struct Taste: Hashable, Codable, Identifiable, Equatable {
         var id: UUID
         var customNotes: String?

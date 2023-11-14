@@ -128,9 +128,9 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Bottle", detail: whiskey.bottle)
                         WhiskeyDetailRowView(title: "Batch #", detail: whiskey.batch)
                             .foregroundStyle(whiskey.batch.isEmpty ? Color.secondary : Color.primary)
-                        WhiskeyDetailRowView(title: "Proof", detail: "\(whiskey.proof)")
+                        WhiskeyDetailRowProofView(title: "Proof", detail: whiskey.proof)
                         WhiskeyDetailRowView(title: "Purchase Date", detail: whiskey.purchasedDate.formatted(date: .abbreviated, time: .omitted))
-                        WhiskeyDetailRowView(title: "Age", detail: whiskey.age.rawValue)
+                        WhiskeyDetailRowAgeView(title: "Aged", detail: whiskey.age)
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
                         WhiskeyDetailRowView(title: "Finish", detail: whiskey.finish)
@@ -252,6 +252,11 @@ struct WhiskeyDetailView: View {
             
         }
     }
+    
+    func formattedAgeString(from age: Double) -> String {
+        return age.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", age) : String(age)
+    }
+
 }
 
 #Preview {
