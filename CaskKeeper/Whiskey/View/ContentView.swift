@@ -64,7 +64,7 @@ struct ContentView: View {
                                 .frame(width: 30, height: 30)
                         }
                     } label: {
-                        Image(systemName: "gear")
+                        Image(systemName: "menucard")
                     }
                     .sheet(isPresented: $importCSVView) {
                         DocumentPicker { whiskeys in
