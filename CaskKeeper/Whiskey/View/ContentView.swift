@@ -11,6 +11,7 @@ struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing: Bool = false
     @State private var importCSVView: Bool = false
+    @State private var trials: [SmallWhiskey] = []
 
     var body: some View {
         NavigationStack {
@@ -44,6 +45,20 @@ struct ContentView: View {
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                     }
                 }
+                
+                Section {
+                    ForEach(trials, id: \.self) { trial in
+                        VStack {
+                            Text(trial.label)
+                            Text(trial.bottle)
+                            Text(trial.style.rawValue)
+                            Text(trial.origin.rawValue)
+                            Text(trial.finish)
+                            Text("\(trial.proof)")
+                            Text(trial.bottleState.rawValue)
+                            
+                    }
+                }
             }
             .listStyle(.plain)
             .listRowSpacing(10)
@@ -66,7 +81,10 @@ struct ContentView: View {
                             Image(systemName: "gear")
                         }
                         .sheet(isPresented: $importCSVView) {
-                            
+                            DocumentPicker { smallbottles in
+                                self.trials = smallbottles
+                                
+                            }
                         }
                 }
     

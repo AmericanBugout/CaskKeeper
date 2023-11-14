@@ -133,6 +133,7 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Age", detail: whiskey.age.rawValue)
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
+                        WhiskeyDetailRowView(title: "Finish", detail: whiskey.finish)
                         if let openedDate = whiskey.dateOpened {
                             WhiskeyDetailRowView(title: "Opened Date", detail: openedDate.formatted(date: .abbreviated, time: .omitted))
                         }

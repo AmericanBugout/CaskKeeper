@@ -35,6 +35,7 @@ struct WhiskeyEditView: View {
                 }
                 
                 WhiskeyEditTextField(text: $whiskey.batch, placeholder: "Batch #")
+                WhiskeyEditTextField(text: $whiskey.finish, placeholder: "Finish")
                 WhiskeyEditTextField(text: $whiskeyProofString, placeholder: "Proof")
                     .onChange(of: whiskeyProofString) { oldValue, newValue in
                         handleProofInput(newValue: newValue)

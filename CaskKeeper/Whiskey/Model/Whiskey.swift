@@ -9,9 +9,9 @@ import SwiftUI
 import Observation
 
 enum BottleState: String, Codable {
-    case sealed
-    case opened
-    case finished
+    case sealed = "Sealed"
+    case opened = "Opened"
+    case finished = "Finished"
     
     var currentState: String {
         switch self {
@@ -48,6 +48,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var style: Style
     var origin: Origin
     var age: Age
+    var finish: String = ""
     var bottleState: BottleState = .sealed
     var opened: Bool = false
     var firstOpen: Bool = true
@@ -116,7 +117,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return "Sealed"
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, style: Style, finish: String? = nil, origin: Origin, age: Age, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle
@@ -124,11 +125,40 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.imageData = image?.jpegData(compressionQuality: 0.3)
         self.proof = proof
         self.style = style
+        self.finish = finish ?? ""
         self.origin = origin
         self.age = age
         self.tastingNotes = tastingNotes
     }
     
+    
+//    convenience init?(csvRow: String) {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "M/d/yyyy"
+//        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+//        
+//        let columns = csvRow.components(separatedBy: ",")
+//        guard columns.count >= 8 else { return nil }
+//        
+//        let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
+//        
+//        let id = UUID()
+//        
+//        guard let label = trimmedColumns[1].nonEmpty,
+//              let bottle = trimmedColumns[2].nonEmpty,
+//              let style = Style(rawValue: trimmedColumns[6]),
+//              let proof = Double(trimmedColumns[5]),
+//              let origin = Origin(rawValue: trimmedColumns[7]),
+//              let age = Age(rawValue: trimmedColumns[8]),
+//              let purchasedDate = dateFormatter.date(from: trimmedColumns[3]) else {
+//            return nil
+//        }
+//        
+//        self.init(id: id, label: label, bottle: bottle, purchasedDate: purchasedDate, proof: proof, style: style, origin: origin, age: age, tastingNotes: [])
+//
+//    }
+//    
     struct Taste: Hashable, Codable, Identifiable, Equatable {
         var id: UUID
         var customNotes: String?
@@ -159,3 +189,9 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     
 }
 
+
+extension String {
+    var nonEmpty: String? {
+        return self.isEmpty ? nil : self
+    }
+}
