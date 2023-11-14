@@ -72,6 +72,7 @@ struct ContentView: View {
                                 for index in whiskeys.indices {
                                     if whiskeys[index].bottleState == .opened {
                                         whiskeys[index].firstOpen = false
+                                        whiskeys[index].opened = true
                                     }
                                 }
                                 whiskeyLibrary.collection.append(contentsOf: whiskeys)
