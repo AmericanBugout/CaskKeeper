@@ -117,7 +117,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return "Sealed"
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, tastingNotes: [Taste] = []) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, dateOpened: Date? = nil,locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle
@@ -129,6 +129,8 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.finish = finish ?? ""
         self.origin = origin
         self.age = age ?? 0
+        self.dateOpened = dateOpened
+        self.locationPurchased = locationPurchased ?? ""
         self.tastingNotes = tastingNotes
     }
 
@@ -138,12 +140,14 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POS
 
         let columns = row.components(separatedBy: ",")
-        guard columns.count == 9 else { return nil }
+        print(columns.count)
+        guard columns.count == 11 else { return nil }
         
         let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
                 
-        guard !trimmedColumns[0].isEmpty,
-              !trimmedColumns[1].isEmpty,
+        guard !trimmedColumns[0].isEmpty, // Label
+              !trimmedColumns[1].isEmpty, // Bottle
+              !trimmedColumns[10].isEmpty, // Location Purchased
               let style = Style(rawValue: trimmedColumns[2]),
               let bottleState = BottleState(rawValue: trimmedColumns[3]),
               let origin = Origin(rawValue: trimmedColumns[4])
@@ -155,8 +159,11 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         let finish = trimmedColumns[5].isEmpty ? "" : trimmedColumns[5]
         
         guard let purchasedDate = dateFormatter.date(from: trimmedColumns[8]) else { return nil }
+        let dateOpened = dateFormatter.date(from: trimmedColumns[9])
+
         
-        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, tastingNotes: [])
+        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, tastingNotes: [])
+        
     }
     
     struct Taste: Hashable, Codable, Identifiable, Equatable {

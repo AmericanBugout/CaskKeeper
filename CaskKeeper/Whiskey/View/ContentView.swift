@@ -45,20 +45,6 @@ struct ContentView: View {
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                     }
                 }
-                
-                Section {
-                    ForEach(trials) { trial in
-                        VStack {
-                            Text(String(trials.count))
-                            Text(trial.label)
-                            Text(trial.bottle)
-                            Text("\(trial.age)")
-                            Text("\(trial.proof)")
-                            Text(trial.purchasedDate, style: .date)
-                        }
-                        
-                    }
-                }
             }
             .listStyle(.plain)
             .listRowSpacing(10)
@@ -82,7 +68,12 @@ struct ContentView: View {
                     }
                     .sheet(isPresented: $importCSVView) {
                         DocumentPicker { whiskeys in
-                            withAnimation(Animation.smooth) {
+                            withAnimation(Animation.smooth(duration: 1)) {
+//                                for index in whiskeys.indices {
+//                                    if whiskeys[index].bottleState == .opened {
+//                                        whiskeys[index].firstOpen = false
+//                                    }
+//                                }
                                 whiskeyLibrary.collection.append(contentsOf: whiskeys)
                             }
                         }
@@ -106,6 +97,10 @@ struct ContentView: View {
                         Text("\(whiskeyLibrary.collectionCount)")
                             .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
                             .bold()
+                        
+                        Button("Delete Whiskey") {
+                            whiskeyLibrary.collection.removeAll()
+                        }
                     }
                 }
             }

@@ -134,6 +134,7 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowView(title: "Origin", detail: whiskey.origin.rawValue)
                         WhiskeyDetailRowView(title: "Style", detail: whiskey.style.rawValue)
                         WhiskeyDetailRowView(title: "Finish", detail: whiskey.finish)
+                            .foregroundStyle(whiskey.batch.isEmpty ? Color.secondary : Color.primary)
                         if let openedDate = whiskey.dateOpened {
                             WhiskeyDetailRowView(title: "Opened Date", detail: openedDate.formatted(date: .abbreviated, time: .omitted))
                         }
