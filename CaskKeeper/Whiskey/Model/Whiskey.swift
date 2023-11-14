@@ -10,7 +10,7 @@ import Observation
 
 enum BottleState: String, Codable {
     case sealed = "Sealed"
-    case opened = "Opened"
+    case opened = "Open"
     case finished = "Finished"
     
     var currentState: String {
@@ -18,7 +18,7 @@ enum BottleState: String, Codable {
         case .sealed:
             return "Sealed"
         case .opened:
-            return "Opened"
+            return "Open"
         case .finished:
             return "Finished"
         }

@@ -12,7 +12,7 @@ struct ContentView: View {
     @State private var isSheetViewShowing: Bool = false
     @State private var importCSVView: Bool = false
     @State private var trials: [SmallWhiskey] = []
-
+    
     var body: some View {
         NavigationStack {
             List {
@@ -47,16 +47,16 @@ struct ContentView: View {
                 }
                 
                 Section {
-                    ForEach(trials, id: \.self) { trial in
+                    ForEach(trials) { trial in
                         VStack {
+                            Text(String(trials.count))
                             Text(trial.label)
                             Text(trial.bottle)
-                            Text(trial.style.rawValue)
-                            Text(trial.origin.rawValue)
-                            Text(trial.finish)
+                            Text("\(trial.age)")
                             Text("\(trial.proof)")
-                            Text(trial.bottleState.rawValue)
-                            
+                            Text(trial.purchasedDate, style: .date)
+                        }
+                        
                     }
                 }
             }
@@ -68,26 +68,26 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                        Menu {
-                            Button {
-                                importCSVView = true
-                            } label: {
-                                Text("Import Whiskeys")
-                                Image(systemName: "square.and.arrow.down.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            }
+                    Menu {
+                        Button {
+                            importCSVView = true
                         } label: {
-                            Image(systemName: "gear")
+                            Text("Import Whiskeys")
+                            Image(systemName: "square.and.arrow.down.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
                         }
-                        .sheet(isPresented: $importCSVView) {
-                            DocumentPicker { smallbottles in
-                                self.trials = smallbottles
-                                
-                            }
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                    .sheet(isPresented: $importCSVView) {
+                        DocumentPicker { smallbottles in
+                            self.trials = smallbottles
+                            
                         }
+                    }
                 }
-    
+                
                 
                 ToolbarItem(placement: .bottomBar) {
                     Button {
@@ -116,3 +116,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
