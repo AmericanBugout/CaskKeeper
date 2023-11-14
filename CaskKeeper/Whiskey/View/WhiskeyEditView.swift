@@ -73,14 +73,13 @@ struct WhiskeyEditView: View {
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .navigationTitle(whiskey.label)
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Done") {
                         dismiss()
                     }
-                    .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                    .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
                     .confirmationDialog("Finish Whiskey?", isPresented: $finishWhiskeyConfirmation) {
                         Button(role: .destructive) {
                             whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
@@ -92,13 +91,6 @@ struct WhiskeyEditView: View {
                     } message: {
                         Text("This will finish the whiskey and you be unable to make changes. Are you sure?")
                     }
-
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                    .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
                 }
             }
             .onAppear(perform: {

@@ -237,15 +237,13 @@ struct WhiskeyDetailView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     if whiskey.bottleState != .finished {
-                        Menu {
-                            Button {
-                               isEditing = true
-                            } label: {
-                                Text("Edit Whiskey")
-                                Image(systemName: "pencil.line")
-                            }
+                        Button {
+                           isEditing = true
                         } label: {
-                            Image(systemName: "gear")
+                            VStack {
+                                Image(systemName: "pencil")
+                            }
+                            
                         }
                     }
                 }

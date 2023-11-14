@@ -15,19 +15,6 @@ struct WhiskeyEditTextField: View {
     var body: some View {
         TextField(placeholder, text: $text, prompt: Text(placeholder))
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-            .overlay(alignment: .trailing) {
-                if !text.isEmpty {
-                    Button {
-                        withAnimation(Animation.default) {
-                            text = ""
-                        }
-                    } label: {
-                        Image(systemName: "x.circle.fill")
-                            .foregroundStyle(.red)
-                            .accessibilityLabel("Clear \(placeholder) text")
-                    }
-                }
-            }
     }
 }
 
