@@ -46,15 +46,15 @@ struct WhiskeyRowView: View {
                 switch whiskey.bottleState {
                 case .sealed:
                     Text("Sealed")
-                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
                         .foregroundStyle(.gray)
                 case .opened:
                     Text("Opened")
-                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
                         .foregroundStyle(.green)
                 case .finished:
                     Text("Finished")
-                        .font(.custom("AsapCondensed-SemiBold", size: 12, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
                         .foregroundStyle(.accent)
                 }
             }

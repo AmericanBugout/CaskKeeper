@@ -1,0 +1,34 @@
+{
+    "label": "String",
+    "bottle": "String",
+    "style": [
+        "Bourbon",
+        "Irish",
+        "Scotch",
+        "Rye",
+        "Japanese",
+        "Tennessee",
+        "Canadian"
+    ],
+    "bottleState": [
+        "Sealed",
+        "Open",
+        "Finished"
+    ],
+    "origin": [
+        "Scotland",
+        "United States",
+        "Ireland",
+        "Canada",
+        "Japan",
+        "India",
+        "Taiwan",
+        "England"
+    ],
+    "finish": "String",
+    "proof": "String",
+    "age": "String",
+    "purchasedDate": "mm/dd/yyyy",
+    "dateOpened": "mm/dd/yyyy",
+    "locationPurchased": "String"
+}

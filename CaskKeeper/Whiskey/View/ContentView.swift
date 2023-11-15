@@ -45,6 +45,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .specialNavBar()
             .listStyle(.plain)
             .listRowSpacing(10)
             .navigationTitle("Collection")
@@ -53,34 +54,9 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        NavigationLink(destination: ImportWhiskeyCSVView()) {
-                            Button {
-                                importCSVView = true
-                            } label: {
-                                Text("Import from CSV")
-                                Image(systemName: "square.and.arrow.down.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                            }
-
-                        }
-                    } label: {
+                    NavigationLink(destination: SettingsView()) {
                         Image(systemName: "menucard")
                     }
-//                    .sheet(isPresented: $importCSVView) {
-//                        DocumentPicker { whiskeys in
-//                            withAnimation(Animation.easeInOut(duration: 1)) {
-//                                for index in whiskeys.indices {
-//                                    if whiskeys[index].bottleState == .opened {
-//                                        whiskeys[index].firstOpen = false
-//                                        whiskeys[index].opened = true
-//                                    }
-//                                }
-//                                whiskeyLibrary.collection.append(contentsOf: whiskeys)
-//                            }
-//                        }
-//                    }
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
@@ -117,3 +93,22 @@ struct ContentView: View {
     ContentView()
 }
 
+struct SpecialNavBar: ViewModifier {
+
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "AsapCondensed-Bold", size: 42)!]
+    }
+
+    func body(content: Content) -> some View {
+        content
+    }
+
+}
+
+extension View {
+
+    func specialNavBar() -> some View {
+        self.modifier(SpecialNavBar())
+    }
+
+}

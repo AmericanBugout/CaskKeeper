@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B31D71382B05358900CA01E0 /* csvschema.json in Resources */ = {isa = PBXBuildFile; fileRef = B31D71372B05358900CA01E0 /* csvschema.json */; };
+		B31D713C2B0538FC00CA01E0 /* flavors.json in Resources */ = {isa = PBXBuildFile; fileRef = B31D713B2B0538FC00CA01E0 /* flavors.json */; };
+		B31D71402B053FED00CA01E0 /* CSVInfoValueRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D713F2B053FED00CA01E0 /* CSVInfoValueRow.swift */; };
+		B31D71422B05420900CA01E0 /* CSVStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D71412B05420900CA01E0 /* CSVStyleView.swift */; };
+		B31D71442B054CCC00CA01E0 /* CSVOriginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D71432B054CCC00CA01E0 /* CSVOriginView.swift */; };
+		B31D71462B05504800CA01E0 /* CSVBottleStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D71452B05504800CA01E0 /* CSVBottleStateView.swift */; };
+		B31D71482B0560D300CA01E0 /* CSVImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31D71472B0560D300CA01E0 /* CSVImportView.swift */; };
 		B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */; };
 		B3208FEB2AFC9A2C004FED4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */; };
 		B3208FEE2AFC9A2C004FED4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FED2AFC9A2C004FED4B /* Preview Assets.xcassets */; };
@@ -45,6 +52,7 @@
 		B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331B6352B02AF7B008DE573 /* DocumentPicker.swift */; };
 		B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */; };
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
+		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +74,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B31D71372B05358900CA01E0 /* csvschema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = csvschema.json; sourceTree = "<group>"; };
+		B31D713B2B0538FC00CA01E0 /* flavors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = flavors.json; sourceTree = "<group>"; };
+		B31D713F2B053FED00CA01E0 /* CSVInfoValueRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVInfoValueRow.swift; sourceTree = "<group>"; };
+		B31D71412B05420900CA01E0 /* CSVStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVStyleView.swift; sourceTree = "<group>"; };
+		B31D71432B054CCC00CA01E0 /* CSVOriginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVOriginView.swift; sourceTree = "<group>"; };
+		B31D71452B05504800CA01E0 /* CSVBottleStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVBottleStateView.swift; sourceTree = "<group>"; };
+		B31D71472B0560D300CA01E0 /* CSVImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVImportView.swift; sourceTree = "<group>"; };
 		B3208FE32AFC9A2A004FED4B /* CaskKeeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CaskKeeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperApp.swift; sourceTree = "<group>"; };
 		B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -108,6 +123,7 @@
 		B331B6352B02AF7B008DE573 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowStateToggle.swift; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
+		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreGaugeStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +181,7 @@
 				B32090122AFC9B3B004FED4B /* Extensions */,
 				B32090172AFC9BAB004FED4B /* Flavor */,
 				B32090202AFC9BBA004FED4B /* Font */,
+				B3B9B3502B0480DC00EE1A7F /* CSV */,
 				B320902D2AFC9BC7004FED4B /* Utility */,
 				B32090302AFC9BCE004FED4B /* Whiskey */,
 				B3208FEC2AFC9A2C004FED4B /* Preview Content */,
@@ -219,6 +236,7 @@
 			children = (
 				B32090192AFC9BAB004FED4B /* Flavor.swift */,
 				B320901A2AFC9BAB004FED4B /* FlavorCatalog.swift */,
+				B31D713B2B0538FC00CA01E0 /* flavors.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,7 +312,7 @@
 				B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */,
 				B32090402AFC9BCE004FED4B /* TasteRowView.swift */,
 				B32090422AFC9BCE004FED4B /* ContentView.swift */,
-				B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */,
+				B3B9B3532B04896F00EE1A7F /* SettingsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -327,6 +345,20 @@
 				B320903B2AFC9BCE004FED4B /* WhiskeyEditView.swift */,
 			);
 			path = EditViews;
+			sourceTree = "<group>";
+		};
+		B3B9B3502B0480DC00EE1A7F /* CSV */ = {
+			isa = PBXGroup;
+			children = (
+				B31D71412B05420900CA01E0 /* CSVStyleView.swift */,
+				B31D71452B05504800CA01E0 /* CSVBottleStateView.swift */,
+				B31D713F2B053FED00CA01E0 /* CSVInfoValueRow.swift */,
+				B31D71432B054CCC00CA01E0 /* CSVOriginView.swift */,
+				B31D71472B0560D300CA01E0 /* CSVImportView.swift */,
+				B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */,
+				B31D71372B05358900CA01E0 /* csvschema.json */,
+			);
+			path = CSV;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -435,11 +467,13 @@
 			files = (
 				B320902C2AFC9BBB004FED4B /* AsapCondensed-Bold.ttf in Resources */,
 				B3208FEE2AFC9A2C004FED4B /* Preview Assets.xcassets in Resources */,
+				B31D713C2B0538FC00CA01E0 /* flavors.json in Resources */,
 				B320902B2AFC9BBB004FED4B /* AsapCondensed-Medium.ttf in Resources */,
 				B32090272AFC9BBB004FED4B /* AsapCondensed-Light.ttf in Resources */,
 				B32090282AFC9BBB004FED4B /* AsapCondensed-SemiBold.ttf in Resources */,
 				B320902A2AFC9BBB004FED4B /* AsapCondensed-Italic.ttf in Resources */,
 				B32090292AFC9BBB004FED4B /* AsapCondensed-Regular.ttf in Resources */,
+				B31D71382B05358900CA01E0 /* csvschema.json in Resources */,
 				B3208FEB2AFC9A2C004FED4B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,6 +502,9 @@
 				B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */,
 				B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */,
 				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
+				B31D71442B054CCC00CA01E0 /* CSVOriginView.swift in Sources */,
+				B31D71422B05420900CA01E0 /* CSVStyleView.swift in Sources */,
+				B31D71402B053FED00CA01E0 /* CSVInfoValueRow.swift in Sources */,
 				B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */,
 				B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */,
 				B320904E2AFC9BCE004FED4B /* AddWhiskeyNote.swift in Sources */,
@@ -478,8 +515,10 @@
 				B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */,
 				B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */,
 				B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */,
+				B31D71482B0560D300CA01E0 /* CSVImportView.swift in Sources */,
 				B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */,
 				B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */,
+				B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */,
 				B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */,
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
 				B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */,
@@ -492,6 +531,7 @@
 				B32090512AFC9BCE004FED4B /* WhiskeyRowView.swift in Sources */,
 				B320901F2AFC9BAB004FED4B /* FlavorSelectionView.swift in Sources */,
 				B320904C2AFC9BCE004FED4B /* Origin.swift in Sources */,
+				B31D71462B05504800CA01E0 /* CSVBottleStateView.swift in Sources */,
 				B32090532AFC9BCE004FED4B /* AddWhiskeyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

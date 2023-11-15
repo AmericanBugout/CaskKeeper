@@ -140,7 +140,6 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POS
 
         let columns = row.components(separatedBy: ",")
-        print(columns.count)
         guard columns.count == 11 else { return nil }
         
         let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
