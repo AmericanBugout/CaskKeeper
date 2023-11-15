@@ -11,7 +11,6 @@ struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing: Bool = false
     @State private var importCSVView: Bool = false
-    @State private var trials: [SmallWhiskey] = []
     
     var body: some View {
         NavigationStack {
@@ -55,30 +54,33 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Button {
-                            importCSVView = true
-                        } label: {
-                            Text("Import Whiskeys")
-                            Image(systemName: "square.and.arrow.down.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
+                        NavigationLink(destination: ImportWhiskeyCSVView()) {
+                            Button {
+                                importCSVView = true
+                            } label: {
+                                Text("Import from CSV")
+                                Image(systemName: "square.and.arrow.down.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                            }
+
                         }
                     } label: {
                         Image(systemName: "menucard")
                     }
-                    .sheet(isPresented: $importCSVView) {
-                        DocumentPicker { whiskeys in
-                            withAnimation(Animation.smooth(duration: 1)) {
-                                for index in whiskeys.indices {
-                                    if whiskeys[index].bottleState == .opened {
-                                        whiskeys[index].firstOpen = false
-                                        whiskeys[index].opened = true
-                                    }
-                                }
-                                whiskeyLibrary.collection.append(contentsOf: whiskeys)
-                            }
-                        }
-                    }
+//                    .sheet(isPresented: $importCSVView) {
+//                        DocumentPicker { whiskeys in
+//                            withAnimation(Animation.easeInOut(duration: 1)) {
+//                                for index in whiskeys.indices {
+//                                    if whiskeys[index].bottleState == .opened {
+//                                        whiskeys[index].firstOpen = false
+//                                        whiskeys[index].opened = true
+//                                    }
+//                                }
+//                                whiskeyLibrary.collection.append(contentsOf: whiskeys)
+//                            }
+//                        }
+//                    }
                 }
                 
                 ToolbarItem(placement: .bottomBar) {
@@ -100,7 +102,9 @@ struct ContentView: View {
                             .bold()
                         
                         Button("Delete Whiskey") {
-                            whiskeyLibrary.collection.removeAll()
+                            withAnimation(Animation.easeIn(duration: 1)) {
+                                whiskeyLibrary.collection.removeAll()
+                            }
                         }
                     }
                 }

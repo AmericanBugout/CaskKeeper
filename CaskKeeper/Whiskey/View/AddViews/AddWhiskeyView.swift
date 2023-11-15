@@ -41,7 +41,7 @@ struct AddWhiskeyView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section {
                     TextField("Label", text: $label)
                     TextField("Bottle", text: $bottle)
@@ -53,6 +53,8 @@ struct AddWhiskeyView: View {
                     DatePicker("Purchased Date", selection: $purchaseDate, displayedComponents: .date)
                 } header: {
                     Text("Whiskey Details")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
                 }
                 
                 Section {
@@ -72,7 +74,9 @@ struct AddWhiskeyView: View {
                     }
                     
                 } header: {
-                    Text("Addiitonal Info")
+                    Text("Additional Info")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
                 }
                 
                 
@@ -90,6 +94,8 @@ struct AddWhiskeyView: View {
                 } header: {
                     HStack {
                         Text("Add Image")
+                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
                         Spacer()
                         Button(action: {
                             isCameraShowing = true

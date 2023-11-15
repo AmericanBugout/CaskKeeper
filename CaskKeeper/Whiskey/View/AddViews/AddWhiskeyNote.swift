@@ -42,7 +42,7 @@ struct AddWhiskeyNote: View {
                     
                 } header: {
                     Text("Custom Notes")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading).padding(.leading)
                         .foregroundColor(.gray)
                 }
@@ -63,7 +63,7 @@ struct AddWhiskeyNote: View {
                 } header: {
                     HStack {
                         Text("Selected Flavors")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                             .foregroundColor(.gray)
                         Spacer()
@@ -106,7 +106,7 @@ struct AddWhiskeyNote: View {
                     .padding(.horizontal)
                 } header: {
                     Text("Taste Rating")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                         .foregroundColor(.gray)
                         .padding(.horizontal)
