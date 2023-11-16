@@ -76,12 +76,6 @@ struct ContentView: View {
                         Text("\(whiskeyLibrary.collectionCount)")
                             .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
                             .bold()
-                        
-                        Button("Delete Whiskey") {
-                            withAnimation(Animation.easeIn(duration: 1)) {
-                                whiskeyLibrary.collection.removeAll()
-                            }
-                        }
                     }
                 }
             }

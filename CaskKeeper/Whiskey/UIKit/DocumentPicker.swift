@@ -8,9 +8,15 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
+enum DocumentPickerError: Error {
+    case couldNotHandleUrl
+    case failedToParseContents
+    // You can add more cases for different errors if needed
+}
+
 struct DocumentPicker: UIViewControllerRepresentable {
     // This closure will be used to pass the Person array back to the SwiftUI view.
-    var onDocumentsPicked: ([Whiskey]) -> Void
+    var onDocumentsPicked: (Result<[Whiskey], Error>) -> Void
 
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.commaSeparatedText], asCopy: true)
@@ -35,12 +41,15 @@ struct DocumentPicker: UIViewControllerRepresentable {
         }
         
         func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-            guard let url = urls.first else { return }
+            guard let url = urls.first else {
+                parent.onDocumentsPicked(.failure(DocumentPickerError.couldNotHandleUrl))
+                return
+            }
             
             do {
                 let contents = try String(contentsOf: url, encoding: .utf8)
                 let whiskeys = DocumentPicker.parseCSV(contents: contents)
-                parent.onDocumentsPicked(whiskeys)
+                parent.onDocumentsPicked(.success(whiskeys))
             } catch {
                 // Handle the error, possibly through a user alert
             }

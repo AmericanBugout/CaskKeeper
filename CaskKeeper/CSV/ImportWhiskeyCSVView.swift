@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ImportWhiskeyCSVView: View {
-    @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isCSVImportShowing: Bool = false
     
     private let headers: [String: String] = [
@@ -90,26 +89,24 @@ struct ImportWhiskeyCSVView: View {
                         
                         Group {
                             Text("For ")
-                            + Text("\(stylestate)").foregroundColor(Color.dg).bold()
+                            + Text("\(stylestate)").foregroundColor(Color.tangerine)
                             + Text(" and ")
-                            + Text("\(origin)").foregroundColor(Color.dg).bold()
+                            + Text("\(origin)").foregroundColor(Color.tangerine)
                             + Text(" use the below values")
                         }
                         .padding(.bottom)
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
 
-                       
                         CSVStyleView()
                         CSVBottleStateView()
                         CSVOriginView()
                         
                         Group {
                             Text("For ")
-                            + Text("\(purchased)").foregroundColor(Color.dg).bold()
+                            + Text("\(purchased)").foregroundColor(Color.tangerine)
                             + Text(" and ")
-                            + Text("\(opened)").foregroundColor(Color.dg).bold()
+                            + Text("\(opened)").foregroundColor(Color.tangerine)
                             + Text(" use below format")
-            
                         }
                         .padding(.vertical)
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
@@ -147,6 +144,7 @@ struct ImportWhiskeyCSVView: View {
                 .padding(.top, 30)
                 .padding(.bottom, 20)
                 .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
 
             }
             .listStyle(.plain)
