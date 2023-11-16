@@ -54,6 +54,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var firstOpen: Bool = true
     var dateOpened: Date?
     var consumedDate: Date?
+    var price: Double
     var wouldBuyAgain: Bool = false
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
@@ -117,7 +118,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return "Sealed"
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, dateOpened: Date? = nil,locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, tastingNotes: [Taste] = []) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, dateOpened: Date? = nil, locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, price: Double?, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle
@@ -129,6 +130,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.finish = finish ?? ""
         self.origin = origin
         self.age = age ?? 0
+        self.price = price ?? 0
         self.dateOpened = dateOpened
         self.locationPurchased = locationPurchased ?? ""
         self.tastingNotes = tastingNotes
@@ -140,7 +142,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POS
 
         let columns = row.components(separatedBy: ",")
-        guard columns.count == 11 else { return nil }
+        guard columns.count == 12 else { return nil }
         
         let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
                 
@@ -154,6 +156,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         
         guard let proof = Double(trimmedColumns[6]) else { return nil }
         let age = Double(trimmedColumns[7])
+        let price = Double(trimmedColumns[11])
         
         let finish = trimmedColumns[5].isEmpty ? "" : trimmedColumns[5]
         
@@ -161,7 +164,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         let dateOpened = dateFormatter.date(from: trimmedColumns[9])
 
         
-        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, tastingNotes: [])
+        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, price: price, tastingNotes: [])
         
     }
     

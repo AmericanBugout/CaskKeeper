@@ -20,10 +20,21 @@ struct AddWhiskeyView: View {
     @State private var purchaseDate: Date = .now
     @State private var proof: String = ""
     @State private var age: String = ""
+    @State private var price: String = ""
     @State private var origin: Origin = .us
     @State private var isCameraShowing: Bool = false
     @State private var isPhotoLibraryShowing: Bool = false
     @State private var image: UIImage?
+    
+    private enum Field {
+        case label
+        case bottle
+        case proof
+        case age
+        case price
+    }
+
+    @FocusState private var focusedField: Field?
         
     var nonOptionalImageBinding: Binding<UIImage> {
         Binding<UIImage>(
@@ -44,7 +55,13 @@ struct AddWhiskeyView: View {
             List {
                 Section {
                     TextField("Label", text: $label)
+                        .keyboardType(.alphabet)
+                        .focused($focusedField, equals: .label)
+
                     TextField("Bottle", text: $bottle)
+                        .keyboardType(.alphabet)
+                        .focused($focusedField, equals: .bottle)
+
                     Picker("Style", selection: $style) {
                         ForEach(Style.allCases, id: \.self) { style in
                             Text(style.rawValue)
@@ -59,14 +76,26 @@ struct AddWhiskeyView: View {
                 
                 Section {
                     TextField("Proof", text: $proof)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .proof)
                         .onChange(of: proof) { oldValue, newValue in
                             handleProofInput(newValue: newValue)
                         }
+
                     TextField("Age", text: $age)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .age)
                         .onChange(of: age) { oldValue, newValue in
                             handleAgeInput(newValue: newValue)
                         }
+
                     
+                    TextField("Price", text: $price)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .price)
+                        .onReceive(Just(price)) { newValue in
+                            handlePriceInput(newValue: newValue)
+                        }
                     Picker("Origin", selection: $origin) {
                         ForEach(Origin.allCases, id: \.self) { origin in
                             Text(origin.rawValue)
@@ -126,12 +155,20 @@ struct AddWhiskeyView: View {
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .toolbar{
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer() 
+                    Button("Done") {
+                        focusedField = nil // This clears the focus state
+                    }
+                    
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         withAnimation(Animation.easeInOut) {
                             guard let doubleProof = Double(proof) else { return }
                             guard let doubleAge = Double(age) else { return }
-                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge))
+                            guard let doublePrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) else { return }
+                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: doublePrice))
                             dismiss()
                         }
                     }
@@ -182,6 +219,32 @@ struct AddWhiskeyView: View {
         } else {
             // If not a valid decimal or exceeds limits, revert to the previous value.
             age = String(newValue.dropLast())
+        }
+    }
+    
+    func handlePriceInput(newValue: String) {
+        // Ensure the input starts with a dollar sign
+        guard newValue.first == "$" else {
+            price = "$"
+            return
+        }
+        
+        let numericPart = String(newValue.dropFirst()) // Drop the dollar sign to check the numeric part
+        
+        if numericPart.isEmpty {
+            price = "$" // Revert to just the dollar sign if input is cleared
+            return
+        }
+
+        // Check if the numeric part is a valid currency format
+        let isCurrencyFormat = numericPart.range(of: "^[0-9]*((\\.\\d{0,2})?)$", options: .regularExpression) != nil
+
+        if let _ = Double(numericPart), isCurrencyFormat {
+            // If it's a valid currency format, update the price
+            price = newValue
+        } else {
+            // If not a valid currency format, revert to the previous value
+            price = "$" + numericPart.dropLast()
         }
     }
 }
