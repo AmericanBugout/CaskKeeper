@@ -31,8 +31,9 @@ struct CSVImportView: View {
                             .offset(y: importWasSuccess ? 0 : -500)
                         HStack {
                             Text("Imported Whiskeys".uppercased())
-                                .font(.custom("AsapCondensed-Regular", size: 24, relativeTo: .body))
+                                .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
                                 .foregroundStyle(.gray)
+                                .opacity(importWasSuccess ? 1 : 0)
                             Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
                                 .opacity(importWasSuccess ? 1 : 0)
                                 .scaleEffect(importWasSuccess ? 1 : 0.9)
