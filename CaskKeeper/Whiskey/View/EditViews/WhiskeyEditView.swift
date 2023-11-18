@@ -16,6 +16,7 @@ struct WhiskeyEditView: View {
     @State private var whiskeyProofString = ""
     @State private var whiskeyAgeString = ""
     @State private var priceString = ""
+    @State private var dateOpened: Date = .now
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -68,6 +69,12 @@ struct WhiskeyEditView: View {
                             whiskey.bottleState = .opened
                         }
                     }
+                if whiskey.bottleState == .opened {
+                    DatePicker("Opened Date", selection: $dateOpened, displayedComponents: .date)
+                        .onChange(of: dateOpened) { old, new in
+                            whiskey.dateOpened = new
+                        }
+                }
                 
                 Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)
                 WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
@@ -105,6 +112,10 @@ struct WhiskeyEditView: View {
                 whiskeyProofString = String(whiskey.proof)
                 whiskeyAgeString = formatNumberString(whiskey.age)
                 setupPriceString()
+                
+                if let dateOpened = whiskey.dateOpened {
+                    self.dateOpened = dateOpened
+                }
             })
         }
     }
