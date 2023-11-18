@@ -40,7 +40,7 @@ struct ContentView: View {
                     if whiskeyLibrary.collection.isEmpty {
                         EmptyView()
                     } else {
-                        Text("Whiskey Collection")
+                        Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                     }
                 }
@@ -70,13 +70,29 @@ struct ContentView: View {
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
-                    HStack {
-                        Text("Total:")
-                            .font(.custom("AsapCondensed-Light", size: 20, relativeTo: .body))
-                        Text("\(whiskeyLibrary.collectionCount)")
-                            .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                            .bold()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Sealed:")
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            Text("\(whiskeyLibrary.sealedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .foregroundStyle(Color.gray)
+                                .bold()
+                            Text("Opened:")
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                                .foregroundStyle(Color.green)
+                            Text("\(whiskeyLibrary.openedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .bold()
+                            Text("Finished:")
+                                .foregroundStyle(Color.accentColor)
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            Text("\(whiskeyLibrary.finishedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .bold()
+                        }
                     }
+                   
                 }
             }
         }

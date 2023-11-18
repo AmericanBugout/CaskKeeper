@@ -20,6 +20,27 @@ class WhiskeyLibrary {
     
     var collectionCount: Int { return collection.count }
     
+    var sealedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .sealed
+        }.count
+    }
+    
+    var openedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .opened
+        }.count
+    }
+    
+    var finishedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .finished
+        }
+        .count
+    }
+    
+    
+    
     init(dataPersistence: WhiskeyPersisting = DataPersistenceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
         
