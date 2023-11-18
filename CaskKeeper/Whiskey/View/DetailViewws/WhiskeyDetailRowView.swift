@@ -44,6 +44,40 @@ struct WhiskeyDetailRowAgeView: View {
     }
 }
 
+struct WhiskeyDetailPriceView: View {
+    let title: String
+    let detail: Double
+    
+    var formattedPrice: String {
+        guard detail != 0 else { return "" }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale.current // You can set this to specific locale if needed
+        return formatter.string(from: NSNumber(value: detail)) ?? ""
+    }
+    
+    var titleColor: Color {
+        detail == 0 ? .gray : .primary // `.primary` is typically the default text color
+    }
+    
+    var body: some View {
+        HStack {
+            Text(title)
+                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .foregroundColor(titleColor)
+            
+            Spacer()
+            // Concatenate the formatted age string with the appropriate term "Year" or "Years"
+            Text(formattedPrice)
+                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .foregroundColor(detail == 0 ? .gray : .white)
+            
+            
+        }
+    }
+}
+
 struct WhiskeyDetailRowProofView: View {
     let title: String
     let detail: Double
@@ -57,7 +91,7 @@ struct WhiskeyDetailRowProofView: View {
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
         }
     }
-
+    
 }
 
 #Preview {

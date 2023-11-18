@@ -149,6 +149,7 @@ struct WhiskeyDetailView: View {
                         WhiskeyDetailRowViewToggle(title: "Buy Again", isEnabled: whiskey.wouldBuyAgain)
                         WhiskeyDetailRowView(title: "Location Purchased", detail: whiskey.locationPurchased)
                             .foregroundStyle(whiskey.locationPurchased.isEmpty ? Color.secondary : Color.primary)
+                        WhiskeyDetailPriceView(title: "Price", detail: whiskey.price ?? 0)
                     }
                 } header: {
                     HStack(alignment: .bottom) {
@@ -238,7 +239,7 @@ struct WhiskeyDetailView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     if whiskey.bottleState != .finished {
                         Button {
-                           isEditing = true
+                            isEditing = true
                         } label: {
                             VStack {
                                 Image(systemName: "pencil")
@@ -255,7 +256,7 @@ struct WhiskeyDetailView: View {
     func formattedAgeString(from age: Double) -> String {
         return age.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", age) : String(age)
     }
-
+    
 }
 
 #Preview {

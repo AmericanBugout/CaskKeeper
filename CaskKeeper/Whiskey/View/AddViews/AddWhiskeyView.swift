@@ -55,11 +55,9 @@ struct AddWhiskeyView: View {
             List {
                 Section {
                     TextField("Label", text: $label)
-                        .keyboardType(.alphabet)
                         .focused($focusedField, equals: .label)
 
                     TextField("Bottle", text: $bottle)
-                        .keyboardType(.alphabet)
                         .focused($focusedField, equals: .bottle)
 
                     Picker("Style", selection: $style) {
@@ -96,6 +94,7 @@ struct AddWhiskeyView: View {
                         .onReceive(Just(price)) { newValue in
                             handlePriceInput(newValue: newValue)
                         }
+                        .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .gray : .white)
                     Picker("Origin", selection: $origin) {
                         ForEach(Origin.allCases, id: \.self) { origin in
                             Text(origin.rawValue)
@@ -167,8 +166,9 @@ struct AddWhiskeyView: View {
                         withAnimation(Animation.easeInOut) {
                             guard let doubleProof = Double(proof) else { return }
                             guard let doubleAge = Double(age) else { return }
-                            guard let doublePrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) else { return }
-                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: doublePrice))
+                            let submissionPrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) ?? 0.0
+
+                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: submissionPrice))
                             dismiss()
                         }
                     }
@@ -223,30 +223,39 @@ struct AddWhiskeyView: View {
     }
     
     func handlePriceInput(newValue: String) {
-        // Ensure the input starts with a dollar sign
-        guard newValue.first == "$" else {
-            price = "$"
-            return
-        }
-        
-        let numericPart = String(newValue.dropFirst()) // Drop the dollar sign to check the numeric part
-        
-        if numericPart.isEmpty {
-            price = "$" // Revert to just the dollar sign if input is cleared
-            return
-        }
+        // If the input is empty, just set it to an empty string
+        if newValue.isEmpty {
+            price = ""
+        } else if newValue.first == "$" {
+            // Drop the dollar sign to check the numeric part
+            let numericPart = String(newValue.dropFirst())
 
-        // Check if the numeric part is a valid currency format
-        let isCurrencyFormat = numericPart.range(of: "^[0-9]*((\\.\\d{0,2})?)$", options: .regularExpression) != nil
-
-        if let _ = Double(numericPart), isCurrencyFormat {
-            // If it's a valid currency format, update the price
-            price = newValue
+            // Check if the numeric part is a valid currency format (whole number or up to two decimal places)
+            let currencyRegex = "^[0-9]+(\\.\\d{0,2})?$"
+            if let _ = Double(numericPart), numericPart.range(of: currencyRegex, options: .regularExpression) != nil {
+                // If it's a valid currency format, update the price
+                price = newValue
+            } else {
+                // If not a valid currency format, revert to the previous valid value
+                // This will prevent invalid characters or formats from being entered
+                if !numericPart.isEmpty {
+                    price = "$" + numericPart.dropLast()
+                }
+            }
         } else {
-            // If not a valid currency format, revert to the previous value
-            price = "$" + numericPart.dropLast()
+            // If the new value does not start with a dollar sign, check if it's a valid number
+            let wholeNumberRegex = "^[0-9]+$"
+            if newValue.range(of: wholeNumberRegex, options: .regularExpression) != nil {
+                // Directly use the whole number as the price
+                price = "$" + newValue
+            } else {
+                // If it's not a valid whole number, reset to the previous valid price or default to an empty string
+                price = price.isEmpty ? "" : price
+            }
         }
     }
+
+
 }
 
 #Preview {

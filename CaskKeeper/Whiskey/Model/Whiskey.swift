@@ -54,7 +54,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var firstOpen: Bool = true
     var dateOpened: Date?
     var consumedDate: Date?
-    var price: Double
+    var price: Double?
     var wouldBuyAgain: Bool = false
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
