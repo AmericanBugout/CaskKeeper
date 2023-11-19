@@ -42,7 +42,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var label: String
     var bottle: String
     var batch: String = ""
-    var purchasedDate: Date
+    var purchasedDate: Date?
     var imageData: Data?
     var proof: Double
     var style: Style
@@ -118,7 +118,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         return "Sealed"
     }
     
-    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date, dateOpened: Date? = nil, locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, price: Double?, tastingNotes: [Taste] = []) {
+    init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date?, dateOpened: Date? = nil, locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, price: Double?, tastingNotes: [Taste] = []) {
         self.id = id
         self.label = label
         self.bottle = bottle

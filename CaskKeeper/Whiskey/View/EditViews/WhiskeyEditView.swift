@@ -17,6 +17,7 @@ struct WhiskeyEditView: View {
     @State private var whiskeyAgeString = ""
     @State private var priceString = ""
     @State private var dateOpened: Date = .now
+    @State private var purchasedDate: Date = .now
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -44,7 +45,10 @@ struct WhiskeyEditView: View {
                         handleProofInput(newValue: newValue)
                     }
                 
-                DatePicker("Purchased Date", selection: $whiskey.purchasedDate, displayedComponents: .date)
+                DatePicker("Purchased Date", selection: $purchasedDate, displayedComponents: .date)
+                    .onChange(of: purchasedDate) { old, new in
+                        whiskey.purchasedDate = new
+                    }
                 
                 WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Aged")
                     .onChange(of: whiskeyAgeString) { oldValue, newValue in
@@ -115,6 +119,10 @@ struct WhiskeyEditView: View {
                 
                 if let dateOpened = whiskey.dateOpened {
                     self.dateOpened = dateOpened
+                }
+                
+                if let purchasedDate = whiskey.purchasedDate {
+                    self.purchasedDate = purchasedDate
                 }
             })
         }

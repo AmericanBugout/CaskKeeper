@@ -21,6 +21,7 @@ struct ImportWhiskeyCSVView: View {
         "Column 8": "purchasedDate",
         "Column 9": "dateOpened",
         "Column 10": "locationPurhased",
+        "Column 11": "price"
     ]
     
     private let stylestate = "style, bottleState"
@@ -72,6 +73,10 @@ struct ImportWhiskeyCSVView: View {
                     }
                     .frame(maxWidth: .infinity)
                     
+                    Text("finish, purchasedDate, dateOpened, locationPurchased and price are optional.")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    Text("The header column is necessary. If no value exists for that field, leave the value as a blank")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 } header: {
                     Text("Required Header Row Values")
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
@@ -89,9 +94,9 @@ struct ImportWhiskeyCSVView: View {
                         
                         Group {
                             Text("For ")
-                            + Text("\(stylestate)").foregroundColor(Color.tangerine)
+                            + Text("\(stylestate)").foregroundColor(Color.blue)
                             + Text(" and ")
-                            + Text("\(origin)").foregroundColor(Color.tangerine)
+                            + Text("\(origin)").foregroundColor(Color.blue)
                             + Text(" use the below values")
                         }
                         .padding(.bottom)
@@ -103,9 +108,9 @@ struct ImportWhiskeyCSVView: View {
                         
                         Group {
                             Text("For ")
-                            + Text("\(purchased)").foregroundColor(Color.tangerine)
+                            + Text("\(purchased)").foregroundColor(Color.blue)
                             + Text(" and ")
-                            + Text("\(opened)").foregroundColor(Color.tangerine)
+                            + Text("\(opened)").foregroundColor(Color.blue)
                             + Text(" use below format")
                         }
                         .padding(.vertical)
