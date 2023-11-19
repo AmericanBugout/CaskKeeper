@@ -17,7 +17,7 @@ struct CSVOriginView: View {
             Text("style")
                 .frame(width: 100, alignment: .leading)
                 .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.flexible())]) {

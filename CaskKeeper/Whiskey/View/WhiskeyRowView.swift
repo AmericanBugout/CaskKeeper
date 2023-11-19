@@ -51,11 +51,11 @@ struct WhiskeyRowView: View {
                 case .opened:
                     Text("Opened")
                         .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
-                        .foregroundStyle(.green)
+                        .foregroundStyle(Color.blueberry)
                 case .finished:
                     Text("Finished")
                         .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(Color.accentColor)
                 }
             }
             

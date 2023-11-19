@@ -80,7 +80,7 @@ struct ContentView: View {
                                 .bold()
                             Text("Opened:")
                                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.green)
+                                .foregroundStyle(Color.blueberry)
                             Text("\(whiskeyLibrary.openedCount)")
                                 .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
                                 .bold()

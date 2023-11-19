@@ -28,7 +28,7 @@ struct TasteRowView: View {
                         .strokeBorder(Color.accentColor, lineWidth: 4)
                         .background(Circle().fill(Color.lead))
                         .frame(width: 50, height: 50)
-                        .shadow(color: Color.cayanne, radius: 5)
+                        .shadow(color: Color.lead, radius: 5)
                     Text("\(taste.score)")
                         .font(.custom("AsapCondensed-Bold", size: 18))
                         .foregroundColor(.accentColor)

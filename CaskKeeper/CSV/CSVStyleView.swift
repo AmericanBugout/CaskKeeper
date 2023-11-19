@@ -16,7 +16,7 @@ struct CSVStyleView: View {
                 .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
 
                 .frame(width: 100, alignment: .leading)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHGrid(rows: [GridItem(.flexible())]) {

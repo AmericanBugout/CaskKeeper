@@ -12,7 +12,7 @@ struct CSVBottleStateView: View {
         HStack {
             Text("bottleState")
                 .frame(width: 100, alignment: .leading)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
                 .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
 
             Text("Sealed,    Open,    Finished")

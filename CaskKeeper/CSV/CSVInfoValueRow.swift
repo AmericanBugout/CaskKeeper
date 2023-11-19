@@ -15,7 +15,7 @@ struct CSVInfoValueRow: View {
         HStack {
             Text(header)
                 .frame(width: 100, alignment: .leading)
-                .foregroundStyle(.accent)
+                .foregroundStyle(Color.accentColor)
                 .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
             
             Text(value)

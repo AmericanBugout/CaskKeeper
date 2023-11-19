@@ -29,7 +29,7 @@ enum BottleState: String, Codable {
       case .sealed:
           return .gray
       case .opened:
-          return .green
+          return Color.blueberry
       case .finished:
           return .accentColor
       }
