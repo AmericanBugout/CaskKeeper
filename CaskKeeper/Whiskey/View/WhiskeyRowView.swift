@@ -38,6 +38,7 @@ struct WhiskeyRowView: View {
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .font(.headline)
+                    .foregroundStyle(Color.snow)
                 Text(whiskey.bottle)
                     .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                     .multilineTextAlignment(.center)
