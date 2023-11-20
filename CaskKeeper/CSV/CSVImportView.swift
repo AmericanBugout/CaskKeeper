@@ -61,6 +61,8 @@ struct CSVImportView: View {
                                 .foregroundStyle(Color.red)
                                 .padding(.top, 5)
                             
+                            
+                            
                             Text("Correct CSV and try and import again.")
                                 .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                                 .foregroundStyle(Color.gray)
@@ -111,6 +113,7 @@ struct CSVImportView: View {
                         self.error = error.localizedDescription
                         errorShowing = true
                         isImportViewShowing = false // Dismiss the full-screen cover
+                        importWasSuccess = false
                     }
                 }
             }

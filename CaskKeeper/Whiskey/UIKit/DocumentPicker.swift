@@ -124,17 +124,17 @@ struct DocumentPicker: UIViewControllerRepresentable {
             
             let styleValue = columns[2].trimmingCharacters(in: .whitespacesAndNewlines)
             guard Style(rawValue: styleValue) != nil else {
-                throw DocumentPickerError.invalidStyle(description: "Invalid style in row \(index + 2).")
+                throw DocumentPickerError.invalidStyle(description: "The style column should be \"Bourbon\", \"Rye\", \"Scotch\", \"Irish\", \"Tennessee\", \"Canadian\" or \"Japanese\" in row \(index + 2).")
             }
-            
+        
             let bottleStateValue = columns[3].trimmingCharacters(in: .whitespacesAndNewlines)
             guard BottleState(rawValue: bottleStateValue) != nil else {
-                throw DocumentPickerError.invalidStyle(description: "Invalid bottle state in row \(index + 2).")
+                throw DocumentPickerError.invalidStyle(description: "The bottleState column should be \"Sealed\", \"Open\", or \"Finished\" in row \(index + 2).")
             }
             
             let originValue = columns[4].trimmingCharacters(in: .whitespacesAndNewlines)
             guard Origin(rawValue: originValue) != nil else {
-                throw DocumentPickerError.invalidOrigin(description: "Invalid origin in row \(index + 2).")
+                throw DocumentPickerError.invalidOrigin(description: "The origin column should be \"United States\", \"Scotland\", \"Ireland\", \"Canada\", \"Japan\", or \"England\" in row \(index + 2).")
             }
             
             let proofValue = columns[6].trimmingCharacters(in: .whitespacesAndNewlines)
@@ -154,14 +154,14 @@ struct DocumentPicker: UIViewControllerRepresentable {
             let purchasedDate = columns[8].trimmingCharacters(in: .whitespacesAndNewlines)
             if !purchasedDate.isEmpty {
                 if dateFormatter.date(from: purchasedDate) == nil {
-                    throw DocumentPickerError.invalidData(description: "The purchaseDate in row \(index + 2) is not in the expected format 'MM/dd/yyyy'.")
+                    throw DocumentPickerError.invalidData(description: "The purchaseDate in row \(index + 2) is not in the expected format 'mm/dd/yyyy'.")
                 }
             }
             
             let dateOpened = columns[9].trimmingCharacters(in: .whitespacesAndNewlines)
             if !dateOpened.isEmpty {
                 if dateFormatter.date(from: dateOpened) == nil {
-                    throw DocumentPickerError.invalidDate(description: "The dateOpened in row \(index + 2) is not in the expected format 'MM/dd/yyyy'.")
+                    throw DocumentPickerError.invalidDate(description: "The dateOpened in row \(index + 2) is not in the expected format 'mm/dd/yyyy'.")
                 }
             }
             
@@ -173,10 +173,10 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 if let whiskey = Whiskey(row: updatedRow) {
                     whiskeys.append(whiskey)
                 } else {
-                    throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow mm/dd/yyyy.")
+                    throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow $132.00 or 132. No need for commas")
                 }
             } else {
-                throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow mm/dd/yyyy.")
+                throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow $132.00 or 132. No need for commas")
             }
         }
         return whiskeys
