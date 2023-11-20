@@ -15,6 +15,7 @@ struct CSVImportView: View {
     @State private var importWasSuccess: Bool = false
     @State private var errorShowing: Bool = false
     @State private var error: String?
+    @State private var retryCount: Int = 0
     
     var body: some View {
         ZStack {
@@ -71,7 +72,13 @@ struct CSVImportView: View {
                 
                 
                 Button {
-                    isImportViewShowing = true
+                    withAnimation(Animation.smooth(duration: 1)) {
+                        error = nil
+                        errorShowing = false
+                        importWasSuccess = false
+                        
+                        isImportViewShowing = true
+                    }
                 } label: {
                     HStack(alignment: .center) {
                         Text("Select CSV")
@@ -89,15 +96,6 @@ struct CSVImportView: View {
                 
             }
         }
-//        .alert(isPresented: $errorShowing) {
-//            Alert(
-//                title: Text("Something went wrong"),
-//                message: Text(error ?? "An unknown error occurred."), // Use the error message if available
-//                dismissButton: .default(Text("OK")) {
-//                    self.error = nil
-//                }
-//            )
-//        }
         .fullScreenCover(isPresented: $isImportViewShowing) {
             DocumentPicker { result in
                 switch result {
@@ -112,6 +110,7 @@ struct CSVImportView: View {
                     withAnimation(Animation.smooth(duration: 1)) {
                         self.error = error.localizedDescription
                         errorShowing = true
+                        isImportViewShowing = false // Dismiss the full-screen cover
                     }
                 }
             }
