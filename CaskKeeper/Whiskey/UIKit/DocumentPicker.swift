@@ -124,17 +124,17 @@ struct DocumentPicker: UIViewControllerRepresentable {
             
             let styleValue = columns[2].trimmingCharacters(in: .whitespacesAndNewlines)
             guard Style(rawValue: styleValue) != nil else {
-                throw DocumentPickerError.invalidStyle(description: "The style column should be \"Bourbon\", \"Rye\", \"Scotch\", \"Irish\", \"Tennessee\", \"Canadian\" or \"Japanese\" in row \(index + 2).")
+                throw DocumentPickerError.invalidStyle(description: "The style column should be \"Bourbon\", \"Rye\", \"Scotch\", \"Irish\", \"Tennessee\", \"Canadian\" or \"Japanese\" in row \(index + 2) in your csv.")
             }
         
             let bottleStateValue = columns[3].trimmingCharacters(in: .whitespacesAndNewlines)
             guard BottleState(rawValue: bottleStateValue) != nil else {
-                throw DocumentPickerError.invalidStyle(description: "The bottleState column should be \"Sealed\", \"Open\", or \"Finished\" in row \(index + 2).")
+                throw DocumentPickerError.invalidStyle(description: "The bottleState column should be \"Sealed\", \"Open\", or \"Finished\" in row \(index + 2) in your csv.")
             }
             
             let originValue = columns[4].trimmingCharacters(in: .whitespacesAndNewlines)
             guard Origin(rawValue: originValue) != nil else {
-                throw DocumentPickerError.invalidOrigin(description: "The origin column should be \"United States\", \"Scotland\", \"Ireland\", \"Canada\", \"Japan\", or \"England\" in row \(index + 2).")
+                throw DocumentPickerError.invalidOrigin(description: "The origin column should be \"United States\", \"Scotland\", \"Ireland\", \"Canada\", \"Japan\", or \"England\" in row \(index + 2) in your csv.")
             }
             
             let proofValue = columns[6].trimmingCharacters(in: .whitespacesAndNewlines)

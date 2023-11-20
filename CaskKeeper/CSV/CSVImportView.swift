@@ -44,6 +44,15 @@ struct CSVImportView: View {
                             }
                             .offset(x: importWasSuccess ? 0 : 10)
                         } else if error != nil {
+                            VStack {
+                                Text("Error")
+                                    .font(.custom("AsapCondensed-SemiBold", size: 32, relativeTo: .body))
+                                    .foregroundStyle(Color.red)
+                                    
+                            }
+                            .offset(y: error != nil ? 0 : 1000)
+                            .transition(AnyTransition(.slide))
+                            
                             HStack {
                                 Text("Imported Whiskeys".uppercased())
                                     .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
@@ -58,14 +67,6 @@ struct CSVImportView: View {
                             
                             Text(error ?? "Something went wrong")
                                 .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.red)
-                                .padding(.top, 5)
-                            
-                            
-                            
-                            Text("Correct CSV and try and import again.")
-                                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.gray)
                                 .padding(.top, 5)
                         }
                     }
