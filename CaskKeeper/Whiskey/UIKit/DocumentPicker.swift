@@ -8,10 +8,21 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-enum DocumentPickerError: Error {
+enum DocumentPickerError: Error, LocalizedError {
     case couldNotHandleUrl
     case failedToParseContents
-    // You can add more cases for different errors if needed
+    case invalidHeader
+    
+    var errorDescription: String? {
+        switch self {
+        case .couldNotHandleUrl:
+            return NSLocalizedString("Could not handle the URL.", comment: "")
+        case .failedToParseContents:
+            return NSLocalizedString("Failed to parse the CSV. Check that it's not empty", comment: "")
+        case .invalidHeader:
+            return NSLocalizedString("The document contains an invalid header.", comment: "")
+        }
+    }
 }
 
 struct DocumentPicker: UIViewControllerRepresentable {
@@ -48,17 +59,35 @@ struct DocumentPicker: UIViewControllerRepresentable {
             
             do {
                 let contents = try String(contentsOf: url, encoding: .utf8)
-                let whiskeys = DocumentPicker.parseCSV(contents: contents)
+                let whiskeys = try DocumentPicker.parseCSV(contents: contents)
                 parent.onDocumentsPicked(.success(whiskeys))
             } catch {
                 // Handle the error, possibly through a user alert
+                parent.onDocumentsPicked(.failure(error))
             }
         }
     }
     
-    static func parseCSV(contents: String) -> [Whiskey] {
+    static func parseCSV(contents: String) throws -> [Whiskey] {
         let rows = contents.components(separatedBy: "\n")
+        
+        /* Throw error is CSV is empty */
+        guard rows.count > 1 else {
+            throw DocumentPickerError.failedToParseContents
+        }
+        
+        /* Check for expected headers */
+        let headers = rows.first!.components(separatedBy: ",")
+        if !DocumentPicker.isValidHeader(headers: headers) {
+            throw DocumentPickerError.invalidHeader
+        }
+        
         let dataRows = rows.dropFirst() // Assuming first row is header
         return dataRows.compactMap { Whiskey(row: $0)}
+    }
+    
+    static func isValidHeader(headers: [String]) -> Bool {
+        let expectedHeaders = ["label", "bottle", "style", "bottleState", "origin", "finish", "proof", "age", "purchasedDate", "dateOpened", "locationPurchased", "price"]
+        return headers == expectedHeaders
     }
 }
