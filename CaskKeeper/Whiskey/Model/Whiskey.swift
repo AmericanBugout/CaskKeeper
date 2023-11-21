@@ -59,7 +59,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var locationPurchased: String = ""
     var bottleFinished: Bool = false
     var tastingNotes: [Taste] = []
-        
+    
     var image: Image? {
         if let data = imageData {
             if let newImage = UIImage(data: data) {
@@ -165,7 +165,6 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
 
         
         self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, price: price, tastingNotes: [])
-        
     }
     
     struct Taste: Hashable, Codable, Identifiable, Equatable {
@@ -195,9 +194,18 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     func updateImage(_ image: UIImage) {
         self.imageData = image.jpegData(compressionQuality: 0.3)
     }
-    
 }
 
+extension Whiskey {
+    var uniqueKey: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d/yyyy"
+        let purchasedDateString = purchasedDate.map { dateFormatter.string(from: $0)} ?? "N/A"
+        let priceString = price.map { String($0) } ?? "N/A"
+        
+        return "\(label)-\(bottle)-\(batch)-\(purchasedDateString)-\(proof)-\(style)-\(origin)-\(age)-\(priceString)"
+    }
+}
 
 extension String {
     var nonEmpty: String? {
