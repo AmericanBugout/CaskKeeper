@@ -54,8 +54,8 @@
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
 		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */; };
-		B3D2D9732B0C57320041DC7F /* WhiskeyExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D2D9722B0C57320041DC7F /* WhiskeyExporter.swift */; };
 		B3D2D9752B0C5A6F0041DC7F /* ExportWhiskeyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D2D9742B0C5A6F0041DC7F /* ExportWhiskeyCollectionView.swift */; };
+		B3D2D9772B0C69510041DC7F /* DocumentExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D2D9762B0C69510041DC7F /* DocumentExporter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,8 +127,8 @@
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
 		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreGaugeStyle.swift; sourceTree = "<group>"; };
-		B3D2D9722B0C57320041DC7F /* WhiskeyExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyExporter.swift; sourceTree = "<group>"; };
 		B3D2D9742B0C5A6F0041DC7F /* ExportWhiskeyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportWhiskeyCollectionView.swift; sourceTree = "<group>"; };
+		B3D2D9762B0C69510041DC7F /* DocumentExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentExporter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				B320902E2AFC9BC7004FED4B /* DataPersistenceManager.swift */,
-				B3D2D9722B0C57320041DC7F /* WhiskeyExporter.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -291,6 +290,7 @@
 				B32090322AFC9BCE004FED4B /* ImagePickerRepresentable.swift */,
 				B331B6352B02AF7B008DE573 /* DocumentPicker.swift */,
 				B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */,
+				B3D2D9762B0C69510041DC7F /* DocumentExporter.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -510,6 +510,7 @@
 				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
 				B31D71442B054CCC00CA01E0 /* CSVOriginView.swift in Sources */,
 				B31D71422B05420900CA01E0 /* CSVStyleView.swift in Sources */,
+				B3D2D9772B0C69510041DC7F /* DocumentExporter.swift in Sources */,
 				B31D71402B053FED00CA01E0 /* CSVInfoValueRow.swift in Sources */,
 				B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */,
 				B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */,
@@ -522,7 +523,6 @@
 				B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */,
 				B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */,
 				B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */,
-				B3D2D9732B0C57320041DC7F /* WhiskeyExporter.swift in Sources */,
 				B31D71482B0560D300CA01E0 /* CSVImportView.swift in Sources */,
 				B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */,
 				B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */,
@@ -708,6 +708,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CaskKeeper/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.  The camera will be used in order to apply an image to your whiskey. All your data stays local to your device.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.  CaskKeeper will use the photo to apply to your whiskey collection. All your data stays local to your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -742,6 +743,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CaskKeeper/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "CastKeeper needs access to use the camera.  The camera will be used in order to apply an image to your whiskey. All your data stays local to your device.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "CaskKeeper needs access to Photo Library to load photos.  CaskKeeper will use the photo to apply to your whiskey collection. All your data stays local to your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

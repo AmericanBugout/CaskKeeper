@@ -58,7 +58,7 @@ class WhiskeyLibrary {
     }
     
     /* CRUD Operations */
-   
+    
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
     }
@@ -110,5 +110,9 @@ class WhiskeyLibrary {
             collection[index].bottleState = .opened
             collection[index].firstOpen = false
         }
+    }
+    
+    func exportWhiskeyCollectionAsJSON(completion: @escaping (Result<URL, Error>) -> Void) {
+        DataPersistenceManager.shared.exportCollectionToJson(collection: collection, completion: completion)
     }
 }

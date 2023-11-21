@@ -10,6 +10,7 @@ import Foundation
 protocol WhiskeyPersisting {
     func save(collection: [Whiskey])
     func load() -> [Whiskey]
+    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void)
 }
 
 class DataPersistenceManager: WhiskeyPersisting {
@@ -48,6 +49,29 @@ class DataPersistenceManager: WhiskeyPersisting {
         } catch {
             print("Error loading data: \(error.localizedDescription)")
             return []
+        }
+    }
+    
+    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) {
+        DispatchQueue.global(qos: .background).async {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            
+            do {
+                let jsonData = try encoder.encode(collection)
+                let fileName = "WhiskeyCollection.json"
+                let fileURL = DataPersistenceManager.documentsDirectoryURL.appendingPathComponent(fileName)
+                
+                try jsonData.write(to: fileURL, options: .atomicWrite)
+                
+                DispatchQueue.main.async {
+                    completion(.success(fileURL))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+            }
         }
     }
 }
