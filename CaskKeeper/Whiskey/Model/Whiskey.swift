@@ -84,34 +84,18 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         }
         
         if !bottleFinished {
-            let dateDifference = calendar.dateComponents([.day, .hour, .minute], from: dateOpened, to: .now)
+            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: .now)
             
             if let day = dateDifference.day {
                 dateString += "  \(day) \(day == 1 ? "day" : "days")"
-            }
-            
-            if let hour = dateDifference.hour {
-                dateString += ",  \(hour) \(hour == 1 ? "hour" : "hours")"
-            }
-            
-            if let minute = dateDifference.minute {
-                dateString += ",  \(minute) \(minute == 1 ? "minute" : "minutes")"
                 return dateString
             }
         } else {
             guard let consumedDate = consumedDate else { return "Sealed" }
-            let dateDifference = calendar.dateComponents([.day, .hour, .minute], from: dateOpened, to: consumedDate)
+            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: consumedDate)
             
             if let day = dateDifference.day {
                 dateString += "  \(day) \(day == 1 ? "day" : "days")"
-            }
-            
-            if let hour = dateDifference.hour {
-                dateString += ",  \(hour) \(hour == 1 ? "hour" : "hours")"
-            }
-            
-            if let minute = dateDifference.minute {
-                dateString += ",  \(minute) \(minute == 1 ? "minute" : "minutes")"
                 return dateString
             }
         }

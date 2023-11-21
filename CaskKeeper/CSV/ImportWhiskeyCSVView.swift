@@ -45,6 +45,8 @@ struct ImportWhiskeyCSVView: View {
                 Section {
                     Text("CaskKeeper allows you to import a whiskey list from a csv file. Below are the following instructions for successfully loading a collection.")
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    Text("This is best used when importing your collection for the first time.  After you start adding notes, using the JSON import may be the best option.")
+                        .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
                 } header: {
                     Text("Instructions")
                         .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))

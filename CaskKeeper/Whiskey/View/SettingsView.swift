@@ -20,6 +20,10 @@ struct SettingsView: View {
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
 
                 }
+                NavigationLink(destination: ExportWhiskeyCollectionView()) {
+                    Label("Export to JSON", systemImage: "square.and.arrow.up")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                }
                 Button {
                     withAnimation(Animation.easeIn(duration: 1)) {
                         isDeleteWhiskeysAlertShowing = true
@@ -36,6 +40,8 @@ struct SettingsView: View {
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 .disabled(whiskeyLibrary.collection.isEmpty ? true : false)
                 .opacity(whiskeyLibrary.collection.isEmpty ? 0.3 : 1)
+                
+                
             } header: {
                 Text("Data")
                     .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
@@ -54,7 +60,7 @@ struct SettingsView: View {
                     whiskeyLibrary.collection.removeAll()
                     isCollectionDeleted = true
                 } label: {
-                    Text("Remove All")
+                    Text("Remove")
                 }
             } message: {
                 Text("This will remove all whiskeys in your collection. Are you sure?")
