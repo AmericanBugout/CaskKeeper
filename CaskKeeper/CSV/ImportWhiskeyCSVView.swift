@@ -116,9 +116,9 @@ struct ImportWhiskeyCSVView: View {
                         .padding(.vertical)
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
 
-                        CSVInfoValueRow(header: "purchasedDate", value: "\"mm\\dd\\yyyy\"")
+                        CSVInfoValueRow(header: "purchasedDate", value: "\"mm/dd/yyyy\"")
                             .padding(.vertical, 3)
-                        CSVInfoValueRow(header: "dateOpened", value: "\"mm\\dd\\yyyy\"")
+                        CSVInfoValueRow(header: "dateOpened", value: "\"mm/dd/yyyy\"")
                             .padding(.vertical, 3)
                     }
                 } header: {
