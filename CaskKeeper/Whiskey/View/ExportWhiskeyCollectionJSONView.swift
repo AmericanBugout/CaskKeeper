@@ -67,6 +67,20 @@ struct ExportWhiskeyCollectionJSONView: View {
                 .listRowSeparator(.hidden)
             }
             
+            if exportError != nil {
+                VStack {
+                    Text("Exported Unsuccessful")
+                        .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                        .foregroundStyle(Color.red)
+                    Image(systemName: "x.circle.fill")
+                        .resizable()
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(Color.red)
+                }
+                .frame(maxWidth: .infinity)
+                .listRowSeparator(.hidden)
+            }
+            
             VStack {
                 Text("Exported Successfully")
                     .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
@@ -87,7 +101,6 @@ struct ExportWhiskeyCollectionJSONView: View {
                     .animation(Animation.smooth(duration: 2), value: exportWasSuccessful)
             }
             .frame(maxWidth: .infinity)
-       //     .offset(x: 0, y: exportWasSuccessful ? 0 : -50)
             .listRowSeparator(.hidden)
 
             .sheet(isPresented: $showingingDocumentExporter) {
