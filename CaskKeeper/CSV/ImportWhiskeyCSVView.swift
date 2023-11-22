@@ -47,7 +47,7 @@ struct ImportWhiskeyCSVView: View {
                 Text("This is best used when importing your collection for the first time.  After you start adding notes, using the JSON import may be the best option.")
                     .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
             } header: {
-                Text("Instructions")
+                Text("Usage")
                     .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             }
             .listRowSeparator(.hidden)
@@ -145,7 +145,7 @@ struct ImportWhiskeyCSVView: View {
                 .foregroundStyle(Color.accentColor)
                 .padding(10)
                 .background(.regularMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 5))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             }
             .padding(.top, 30)
             .padding(.bottom, 20)

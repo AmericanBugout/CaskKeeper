@@ -118,5 +118,10 @@ struct CSVImportView: View {
 }
 
 #Preview {
-    CSVImportView()
+    NavigationStack {
+        CSVImportView()
+            .navigationTitle("Import")
+            .specialNavBar()
+
+    }
 }

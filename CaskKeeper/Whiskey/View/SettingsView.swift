@@ -16,7 +16,7 @@ struct SettingsView: View {
         Form {
             Section {
                 NavigationLink(destination: ExportWhiskeyCollectionJSONView()) {
-                    Label("Export to JSON", systemImage: "square.and.arrow.up")
+                    Label("Export to JSON", systemImage: "square.and.arrow.up.fill")
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 }
             } header: {
@@ -31,7 +31,7 @@ struct SettingsView: View {
 
                 }
                 NavigationLink(destination: ImportWhiskeyCollectionJSONView()) {
-                    Label("Import From Exported JSON", systemImage: "square.and.arrow.down.fill")
+                    Label("Import From Exported JSON", systemImage: "square.and.arrow.down.on.square.fill")
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 }
             } header: {
