@@ -152,13 +152,11 @@ struct ImportWhiskeyCSVView: View {
                 .padding(.bottom, 20)
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-
             }
             .listStyle(.plain)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .navigationTitle("Import Instructions")
         }
-        
     }
 }
 

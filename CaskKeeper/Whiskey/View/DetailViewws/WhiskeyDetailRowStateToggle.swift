@@ -35,7 +35,6 @@ struct WhiskeyDetailRowStateToggle: View {
             }
             .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))        }
     }
-    
 }
 
 #Preview {

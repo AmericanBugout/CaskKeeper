@@ -11,7 +11,6 @@ struct CSVOriginView: View {
     
     private let origin = ["United States", "Scotland", "Ireland", "Canada", "Japan", "India", "Taiwan", "England"]
 
-    
     var body: some View {
         HStack {
             Text("style")
@@ -27,7 +26,6 @@ struct CSVOriginView: View {
                         }
                     }
                 }
-                
             }
         }
         .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))

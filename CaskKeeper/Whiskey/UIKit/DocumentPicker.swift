@@ -45,7 +45,6 @@ enum DocumentPickerError: Error, LocalizedError {
             return description
         case .invalidPrice(description: let description):
             return description
-
         }
     }
 }
@@ -87,7 +86,6 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 let whiskeys = try DocumentPicker.parseCSV(contents: contents)
                 parent.onDocumentsPicked(.success(whiskeys))
             } catch {
-                // Handle the error, possibly through a user alert
                 parent.onDocumentsPicked(.failure(error as! DocumentPickerError))
             }
         }
@@ -180,8 +178,6 @@ struct DocumentPicker: UIViewControllerRepresentable {
             }
         }
         return whiskeys
-
-       // return dataRows.compactMap { Whiskey(row: $0)}
     }
     
     static func isValidHeader(headers: [String]) -> Bool {
@@ -190,18 +186,13 @@ struct DocumentPicker: UIViewControllerRepresentable {
     }
     
     static func isValidPrice(_ price: String) -> Bool {
-        // This regular expression allows optional leading $, followed by one or more digits,
-        // optionally followed by a period and exactly two digits.
         let pricePattern = "^\\$?\\d+(\\.\\d{2})?$"
 
-        // Create the regular expression object
         let priceRegex = try! NSRegularExpression(pattern: pricePattern, options: [])
 
-        // Check if the price matches the regular expression pattern
         let range = NSRange(location: 0, length: price.utf16.count)
         let match = priceRegex.firstMatch(in: price, options: [], range: range)
 
-        // If the match is found, the price is valid
         return match != nil
     }
 }

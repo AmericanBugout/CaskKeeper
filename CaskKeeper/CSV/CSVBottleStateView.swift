@@ -16,8 +16,8 @@ struct CSVBottleStateView: View {
                 .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
 
             Text("Sealed,    Open,    Finished")
-            Spacer()
             
+            Spacer()
         }
         .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
     }

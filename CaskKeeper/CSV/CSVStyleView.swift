@@ -26,7 +26,6 @@ struct CSVStyleView: View {
                         }
                     }
                 }
-                
             }
         }
         .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))

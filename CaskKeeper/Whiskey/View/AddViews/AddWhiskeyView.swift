@@ -104,9 +104,7 @@ struct AddWhiskeyView: View {
                 } header: {
                     Text("Additional Info")
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-
                 }
-                
                 
                 Section {
                     if let image = image {
@@ -136,7 +134,6 @@ struct AddWhiskeyView: View {
                         }, label: {
                             Image(systemName: "photo.fill")
                         })
-                        
                     }
                 }
                 .sheet(isPresented: $isCameraShowing) {
@@ -159,7 +156,6 @@ struct AddWhiskeyView: View {
                     Button("Done") {
                         focusedField = nil // This clears the focus state
                     }
-                    
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
@@ -174,7 +170,6 @@ struct AddWhiskeyView: View {
                     }
                     .disabled(label.isEmpty || bottle.isEmpty || proof.isEmpty)
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
@@ -182,24 +177,19 @@ struct AddWhiskeyView: View {
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
-
                 }
             }
             .navigationTitle("Add Bottle")
         }
-        
     }
     
     func handleProofInput(newValue: String) {
-        // If the newValue is empty (e.g., the user deleted all input), then it's okay.
         if newValue.isEmpty {
             return
         }
 
-        // Check if the newValue is a valid decimal.
         let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
 
-        // If not a valid decimal or exceeds limits, revert to the previous value.
         if !isDecimal {
             proof = String(newValue.dropLast())
         }
@@ -209,53 +199,39 @@ struct AddWhiskeyView: View {
         if newValue.isEmpty {
             return
         }
-        
-        // Check if the newValue is a valid decimal.
+
         let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
         
         if let ageValue = Double(newValue), isDecimal && (0...100).contains(ageValue) {
-            // If it's a valid decimal and within the range, update the age
             age = newValue
         } else {
-            // If not a valid decimal or exceeds limits, revert to the previous value.
             age = String(newValue.dropLast())
         }
     }
     
     func handlePriceInput(newValue: String) {
-        // If the input is empty, just set it to an empty string
         if newValue.isEmpty {
             price = ""
         } else if newValue.first == "$" {
-            // Drop the dollar sign to check the numeric part
             let numericPart = String(newValue.dropFirst())
 
-            // Check if the numeric part is a valid currency format (whole number or up to two decimal places)
             let currencyRegex = "^[0-9]+(\\.\\d{0,2})?$"
             if let _ = Double(numericPart), numericPart.range(of: currencyRegex, options: .regularExpression) != nil {
-                // If it's a valid currency format, update the price
                 price = newValue
             } else {
-                // If not a valid currency format, revert to the previous valid value
-                // This will prevent invalid characters or formats from being entered
                 if !numericPart.isEmpty {
                     price = "$" + numericPart.dropLast()
                 }
             }
         } else {
-            // If the new value does not start with a dollar sign, check if it's a valid number
             let wholeNumberRegex = "^[0-9]+$"
             if newValue.range(of: wholeNumberRegex, options: .regularExpression) != nil {
-                // Directly use the whole number as the price
                 price = "$" + newValue
             } else {
-                // If it's not a valid whole number, reset to the previous valid price or default to an empty string
                 price = price.isEmpty ? "" : price
             }
         }
     }
-
-
 }
 
 #Preview {

@@ -92,11 +92,6 @@ struct FlavorCell: View {
     }
 }
 
-
-
-
-//#Preview {
-//    var flavors: Set<Flavor> = [Flavor(name: "Cherry")]
-//    
-//    FlavorSelectionView(selectedFlavors: Binding.constant(flavors))
-//}
+#Preview {
+    FlavorSelectionView()
+}

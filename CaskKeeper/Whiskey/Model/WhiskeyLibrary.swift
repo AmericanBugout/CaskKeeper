@@ -39,8 +39,6 @@ class WhiskeyLibrary {
         .count
     }
     
-    
-    
     init(dataPersistence: WhiskeyPersisting = DataPersistenceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
         
@@ -54,11 +52,8 @@ class WhiskeyLibrary {
         } else {
             collection = dataPersistence.load()
         }
-        
     }
-    
-    /* CRUD Operations */
-    
+        
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
     }

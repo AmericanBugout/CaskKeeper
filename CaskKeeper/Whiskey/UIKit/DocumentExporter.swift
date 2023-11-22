@@ -47,7 +47,7 @@ struct DocumentExporter: UIViewControllerRepresentable {
         }
 
         func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-            // You can pass a custom error or result if needed when the user cancels
+
         }
     }
 }

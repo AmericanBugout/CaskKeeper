@@ -31,14 +31,13 @@ struct WhiskeyDetailRowAgeView: View {
             Text(title)
                 .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             Spacer()
-            // Concatenate the formatted age string with the appropriate term "Year" or "Years"
+
             Text("\(formattedAgeString(from: detail)) \(detail == 1 ? "Year" : "Years")")
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
         }
     }
     
     func formattedAgeString(from age: Double) -> String {
-        // Format the age to remove trailing ".0" for whole numbers
         let formattedString = age.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", age) : String(format: "%.1f", age)
         return formattedString
     }
@@ -68,12 +67,10 @@ struct WhiskeyDetailPriceView: View {
                 .foregroundColor(titleColor)
             
             Spacer()
-            // Concatenate the formatted age string with the appropriate term "Year" or "Years"
+            
             Text(formattedPrice)
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 .foregroundColor(detail == 0 ? .gray : .white)
-            
-            
         }
     }
 }

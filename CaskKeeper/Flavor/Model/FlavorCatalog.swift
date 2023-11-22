@@ -47,9 +47,6 @@ class FlavorCatalog {
            } else {
                selectedFlavors.insert(flavor)
            }
-           // Reset the search string if needed
            searchString = ""
        }
-       
-    
 }

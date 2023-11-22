@@ -73,13 +73,11 @@ struct CSVImportView: View {
                 }
                 .frame(height: 300)
                 
-                
                 Button {
                     withAnimation(Animation.smooth(duration: 1)) {
                         error = nil
                         errorShowing = false
                         importWasSuccess = false
-                        
                         isImportViewShowing = true
                     }
                 } label: {
@@ -89,14 +87,11 @@ struct CSVImportView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
-                        
                     }
                     .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                 }
                 
                 Spacer()
-                
-                
             }
         }
         .fullScreenCover(isPresented: $isImportViewShowing) {
@@ -107,7 +102,6 @@ struct CSVImportView: View {
                         self.whiskeysFromCSV = whiskeyFromCSV
                         importWasSuccess = true
                         whiskeyLibrary.collection.append(contentsOf: whiskeyFromCSV)
-                        
                     }
                 case .failure(let error):
                     withAnimation(Animation.smooth(duration: 1)) {

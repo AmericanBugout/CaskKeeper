@@ -59,7 +59,6 @@ struct AddWhiskeyNote: View {
                         }
                         .cornerRadius(10)
                     }
-                    
                 } header: {
                     HStack {
                         Text("Selected Flavors")
@@ -79,7 +78,6 @@ struct AddWhiskeyNote: View {
                 
                 Section {
                     VStack {
-                        
                         ZStack {
                             Circle()
                                 .strokeBorder(Color.accentColor, lineWidth: 4)
@@ -100,9 +98,6 @@ struct AddWhiskeyNote: View {
                         in: 1...100)
                         .padding(.top, 10)
                     }
-                    .background(content: {
-                        
-                    })
                     .padding(.horizontal)
                 } header: {
                     Text("Taste Rating")
@@ -136,7 +131,6 @@ struct AddWhiskeyNote: View {
                 }
                 .padding(.top)
                 .padding(.horizontal)
-
             }
                         
             .toolbar {
@@ -160,9 +154,7 @@ struct AddWhiskeyNote: View {
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
-
                 }
-                
             }
             .navigationTitle("Tasting Note")
         }
