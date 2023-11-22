@@ -13,7 +13,7 @@ import UIKit
 //    let message: String
 //}
 
-struct ExportWhiskeyCollectionView: View {
+struct ExportWhiskeyCollectionJSONView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     
     @State private var showingShareSheet = false
@@ -61,7 +61,7 @@ struct ExportWhiskeyCollectionView: View {
 }
 
 #Preview {
-    ExportWhiskeyCollectionView()
+    ExportWhiskeyCollectionJSONView()
 }
 
 
