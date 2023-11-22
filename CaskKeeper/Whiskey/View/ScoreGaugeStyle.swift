@@ -10,7 +10,6 @@ import SwiftUI
 struct ScoreGaugeStyle: GaugeStyle {
     
     var gradient = LinearGradient(colors: [.gray, .accentColor], startPoint: .trailing, endPoint: .leading)
-  //  var score: Double
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {

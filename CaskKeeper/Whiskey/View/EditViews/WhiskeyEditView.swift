@@ -125,7 +125,7 @@ struct WhiskeyEditView: View {
                     self.purchasedDate = purchasedDate
                 }
             })
-        }
+       }
     }
     
     func setupPriceString() {

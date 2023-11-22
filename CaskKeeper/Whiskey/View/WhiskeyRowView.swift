@@ -71,7 +71,6 @@ struct WhiskeyRowView: View {
                 .gaugeStyle(ScoreGaugeStyle())
                 .frame(width: 75)
             }
-            
         }
     }
 }
