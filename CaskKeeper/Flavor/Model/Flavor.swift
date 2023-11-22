@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct Flavor: Hashable, Comparable, Codable {
+struct Flavor: Hashable, Codable {
     
-   // var id: UUID
     var name: String
     
     init(name: String) {
@@ -37,9 +36,9 @@ struct Flavor: Hashable, Comparable, Codable {
         lhs.name == rhs.name
     }
     
-    static func < (lhs: Flavor, rhs: Flavor) -> Bool {
-        return lhs.name < rhs.name
-    }
+//    static func < (lhs: Flavor, rhs: Flavor) -> Bool {
+//        return lhs.name < rhs.name
+//    }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)

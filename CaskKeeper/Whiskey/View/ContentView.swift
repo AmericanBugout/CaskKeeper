@@ -115,10 +115,3 @@ struct SpecialNavBar: ViewModifier {
 
 }
 
-extension View {
-
-    func specialNavBar() -> some View {
-        self.modifier(SpecialNavBar())
-    }
-
-}
