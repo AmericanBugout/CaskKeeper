@@ -8,11 +8,6 @@
 import SwiftUI
 import UIKit
 
-//struct IdentifiableError: Identifiable, LocalizedError {
-//    let id = UUID()
-//    let message: String
-//}
-
 struct ExportWhiskeyCollectionJSONView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     
@@ -52,29 +47,11 @@ struct ExportWhiskeyCollectionJSONView: View {
                 } label: {
                     Text("OK")
                 }
-
             })
-            
         }
-        
     }
 }
 
 #Preview {
     ExportWhiskeyCollectionJSONView()
-}
-
-
-struct ShareSheet: UIViewControllerRepresentable {
-    var activityItems: [Any]
-    var applicationActivities: [UIActivity]? = []
-
-    func makeUIViewController(context: Context) -> UIActivityViewController {
-        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
-        return controller
-    }
-
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-        // No update needed
-    }
 }

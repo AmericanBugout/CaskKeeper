@@ -11,6 +11,7 @@ protocol WhiskeyPersisting {
     func save(collection: [Whiskey])
     func load() -> [Whiskey]
     func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void)
+    func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void )
 }
 
 class DataPersistenceManager: WhiskeyPersisting {
@@ -26,7 +27,7 @@ class DataPersistenceManager: WhiskeyPersisting {
     
     
     static var collectionsFileURL: URL {
-        return documentsDirectoryURL.appendingPathComponent("collection.plist")
+        return documentsDirectoryURL.appendingPathComponent("collections.plist")
     }
     
     
@@ -44,8 +45,11 @@ class DataPersistenceManager: WhiskeyPersisting {
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: DataPersistenceManager.collectionsFileURL)
+            print(String(data: data, encoding: .utf8) ?? "")
             let collection = try decoder.decode([Whiskey].self, from: data)
+            save(collection: collection)
             return collection
+    
         } catch {
             print("Error loading data: \(error.localizedDescription)")
             return []
@@ -54,16 +58,22 @@ class DataPersistenceManager: WhiskeyPersisting {
     
     func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "M/d/yyyy"
+              let encoder = JSONEncoder()
+//            encoder.dateEncodingStrategy = .custom({ date, encoder in
+//                let dateString = dateFormatter.string(from: date)
+//                print("Encoding date: \(dateString)")
+//                var container = encoder.singleValueContainer()
+//                try container.encode(dateString)
+//            })
+//            
             do {
+                
                 let jsonData = try encoder.encode(collection)
                 let fileName = "WhiskeyCollection.json"
                 let fileURL = DataPersistenceManager.documentsDirectoryURL.appendingPathComponent(fileName)
-                
                 try jsonData.write(to: fileURL, options: .atomicWrite)
-                
                 DispatchQueue.main.async {
                     completion(.success(fileURL))
                 }
@@ -72,6 +82,23 @@ class DataPersistenceManager: WhiskeyPersisting {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+    
+    func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void ) {
+        do {
+            let jsonWhiskeyData = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M/d/yyyy"
+            
+            if let whiskeyData = String(data: jsonWhiskeyData, encoding: .utf8) {
+                print(whiskeyData)
+            }
+            let collection = try decoder.decode([Whiskey].self, from: jsonWhiskeyData)
+            completion(.success(collection))
+        } catch {
+            completion(.failure(error))
         }
     }
 }

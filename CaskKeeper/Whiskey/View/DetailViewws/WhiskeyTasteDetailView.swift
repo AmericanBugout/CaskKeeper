@@ -33,7 +33,7 @@ struct WhiskeyTasteDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     LazyVStack(alignment: .leading) {
-                        ForEach(taste.notes) { flavor in
+                        ForEach(taste.notes, id: \.self) { flavor in
                             FlavorCell(flavor: flavor, isSelected: true)
                         }
                     }

@@ -113,6 +113,11 @@ class WhiskeyLibrary {
     }
     
     func exportWhiskeyCollectionAsJSON(completion: @escaping (Result<URL, Error>) -> Void) {
-        DataPersistenceManager.shared.exportCollectionToJson(collection: collection, completion: completion)
+        dataPersistenceManager.exportCollectionToJson(collection: collection, completion: completion)
     }
+    
+    func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void ) {
+        dataPersistenceManager.importWhiskeyCollectionFromJSON(fileURL: fileURL, completion: completion)
+    }
+    
 }

@@ -106,7 +106,7 @@ struct CSVImportView: View {
                     withAnimation(Animation.smooth(duration: 1)) {
                         self.whiskeysFromCSV = whiskeyFromCSV
                         importWasSuccess = true
-                        whiskeyLibrary.collection = whiskeysFromCSV
+                        whiskeyLibrary.collection.append(contentsOf: whiskeyFromCSV)
                         
                     }
                 case .failure(let error):

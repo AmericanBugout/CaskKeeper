@@ -45,7 +45,7 @@ struct TasteRowView: View {
                 .multilineTextAlignment(.leading)
                     
             LazyVGrid(columns: columns) {
-                ForEach(taste.notes) { note in
+                ForEach(taste.notes, id: \.self) { note in
                     HStack {
                         Text(note.name)
                             .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
