@@ -30,9 +30,11 @@ struct WhiskeyDetailRowAgeView: View {
         HStack {
             Text(title)
                 .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .foregroundColor(detail == 0 ? Color.gray : Color.primary)
+            
             Spacer()
-
-            Text("\(formattedAgeString(from: detail)) \(detail == 1 ? "Year" : "Years")")
+            
+            Text(detail == 0 ? "" : "\(formattedAgeString(from: detail)) \(detail == 1 ? "Year" : "Years")")
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
         }
     }
