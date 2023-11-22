@@ -129,14 +129,14 @@ struct ExportWhiskeyCollectionJSONView: View {
         }
         .listStyle(.plain)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle("Export to File")
+        .navigationTitle("Export Collection")
     }
 }
 
 #Preview {
     NavigationStack {
         ExportWhiskeyCollectionJSONView()
-            .navigationTitle("Export")
+            .navigationTitle("Export Collection")
             .specialNavBar()
     }
 }
