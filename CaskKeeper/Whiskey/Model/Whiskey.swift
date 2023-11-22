@@ -307,7 +307,3 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.imageData = image.jpegData(compressionQuality: 0.3)
     }
 }
-
-extension Whiskey {
-    
-}
