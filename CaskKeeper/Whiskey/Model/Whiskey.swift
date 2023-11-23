@@ -99,8 +99,10 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     
     var image: Image? {
         if let data = imageData {
-            if let newImage = UIImage(data: data) {
-                return Image(uiImage: newImage)
+            if let newImageData = UIImage(data: data)?.jpegData(compressionQuality: 0.3) {
+                if let newImage = UIImage(data: newImageData) {
+                    return Image(uiImage: newImage)
+                }
             }
         }
         return nil

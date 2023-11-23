@@ -15,13 +15,14 @@ struct ImportWhiskeyCollectionJSONView: View {
     @State private var errorFromImport: Error?
     @State private var importWasSuccess = false
     @State private var importedCollection: [Whiskey] = []
+    @State private var duplicateCount: Int?
     
     var body: some View {
         List {
             Section {
                 Text("You can import a JSON that you exported from CaskKeeper to bring back your whiskey collection.")
                     .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                Text("CaskKeeper will append to your existing collection.  It will not import whiskey's with duplicate ids.")
+                Text("CaskKeeper will append to your existing collection.  It will not import whiskey's with duplicate ids. Your images associated with your whiskey will not be imported.")
                     .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
             } header: {
                 Text("Usage")
@@ -66,18 +67,27 @@ struct ImportWhiskeyCollectionJSONView: View {
             }
             
             VStack {
-                HStack {
-                    Text("\(importedCollection.count)")
-                        .font(.custom("AsapCondensed-Bold", size: 22, relativeTo: .body))
-                    Text("Whiskeys found from import")
-                        .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                VStack {
+                    HStack {
+                        Text("\(importedCollection.count)")
+                            .font(.custom("AsapCondensed-Bold", size: 22, relativeTo: .body))
+                        Text("unique whiskeys found from import")
+                            .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                    }
+                    .foregroundStyle(importWasSuccess ? .green : .gray)
+                    .opacity(importWasSuccess ? 1 : 0)
+                    .scaleEffect(importWasSuccess ? 1 : 0.9)
+                    .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
+                    .offset(x: importWasSuccess ? 0 : 800, y: 0)
+                    .animation(Animation.easeInOut(duration: 1), value: importWasSuccess)
+                    
+                    if let duplicates = duplicateCount {
+                        Text("There were \(duplicates) duplicates in the import.")
+                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .foregroundStyle(.gray)
+                    }
                 }
-                .foregroundStyle(importWasSuccess ? .green : .gray)
-                .opacity(importWasSuccess ? 1 : 0)
-                .scaleEffect(importWasSuccess ? 1 : 0.9)
-                .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
-                .offset(x: importWasSuccess ? 0 : 800, y: 0)
-                .animation(Animation.easeInOut(duration: 1.5), value: importWasSuccess)
+                
                 
                 Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
                     .resizable()
@@ -87,6 +97,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                     .scaleEffect(importWasSuccess ? 1 : 0.9)
                     .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
                     .animation(Animation.smooth(duration: 2), value: importWasSuccess)
+                    .padding(.top, 4)
             }
             .frame(maxWidth: .infinity)
             .listRowSeparator(.hidden)
@@ -101,14 +112,16 @@ struct ImportWhiskeyCollectionJSONView: View {
                         }
                         whiskeyLibrary.importWhiskeyCollectionFromJSON(fileURL: selectedFile) { result in
                             switch result {
-                            case .success(let whiskeysFromJSON):
+                            case .success(let importedWhiskeys):
                                 DispatchQueue.main.async {
-                                    importedCollection = whiskeysFromJSON
-                                    importWasSuccess = true
+                                    self.importedCollection = whiskeyLibrary.importNewWhiskeys(importedWhiskeys: importedWhiskeys).newWhiskeys
+                                    self.duplicateCount = whiskeyLibrary.importNewWhiskeys(importedWhiskeys: importedWhiskeys).duplicateCount
+                                    self.importWasSuccess = true
+                                    whiskeyLibrary.collection.append(contentsOf: importedCollection)
                                 }
                             case .failure(let error):
-                                isErrorShowing = true
-                                errorFromImport = error
+                                self.isErrorShowing = true
+                                self.errorFromImport = error
                             }
                       }
                     }

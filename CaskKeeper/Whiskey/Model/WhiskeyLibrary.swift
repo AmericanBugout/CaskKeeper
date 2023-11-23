@@ -115,4 +115,14 @@ class WhiskeyLibrary {
         dataPersistenceManager.importWhiskeyCollectionFromJSON(fileURL: fileURL, completion: completion)
     }
     
+    func importNewWhiskeys(importedWhiskeys: [Whiskey]) -> (newWhiskeys: [Whiskey], duplicateCount: Int) {
+       let newWhiskeys = importedWhiskeys.filter { importedWhiskey in
+            !collection.contains { existingWhiskey in
+                existingWhiskey.id == importedWhiskey.id
+            }
+        }
+        let duplicateCount = importedWhiskeys.count - newWhiskeys.count
+        return (newWhiskeys, duplicateCount)
+    }
+    
 }

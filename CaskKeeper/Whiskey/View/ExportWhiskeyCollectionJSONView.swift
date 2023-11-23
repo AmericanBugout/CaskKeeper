@@ -69,7 +69,7 @@ struct ExportWhiskeyCollectionJSONView: View {
             
             if exportError != nil {
                 VStack {
-                    Text("Exported Unsuccessful")
+                    Text("Error on Export")
                         .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
                         .foregroundStyle(Color.red)
                     Image(systemName: "x.circle.fill")
@@ -82,14 +82,14 @@ struct ExportWhiskeyCollectionJSONView: View {
             }
             
             VStack {
-                Text("Exported Successfully")
+                Text("Export Successful")
                     .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
                     .foregroundStyle(exportWasSuccessful ? .green : .gray)
                     .opacity(exportWasSuccessful ? 1 : 0)
                     .scaleEffect(exportWasSuccessful ? 1 : 0.9)
                     .rotationEffect(exportWasSuccessful ? Angle(degrees: 0) : Angle(degrees: -10))
                     .offset(x: exportWasSuccessful ? 0 : 800, y: 0)
-                    .animation(Animation.easeInOut(duration: 1.5), value: exportWasSuccessful)
+                    .animation(Animation.easeInOut(duration: 1), value: exportWasSuccessful)
                 Image(systemName: exportWasSuccessful ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .frame(width: 30, height: 30)
