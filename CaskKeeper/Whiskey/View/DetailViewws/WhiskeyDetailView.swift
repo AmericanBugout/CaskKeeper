@@ -10,6 +10,7 @@ import UIKit
 
 struct WhiskeyDetailView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
+    @AppStorage("showImages") var showImages: Bool = true
     @Environment(\.dismiss) var dismiss
     
     @State private var isEditing: Bool = false
@@ -36,22 +37,24 @@ struct WhiskeyDetailView: View {
                     isPhotoLibraryShowing = true
                 } label: {
                     VStack {
-                        if whiskey.image == nil {
-                            Image("noimageuploaded")
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                                .frame(width: 115, height: 115)
-                                .shadow(color: .black, radius: 1)
-                                .padding(.leading, -10)
-                        } else {
-                            whiskey.image?
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .clipShape(Circle())
-                                .frame(width: 115, height: 115)
-                                .shadow(color: .black, radius: 1)
-                                .padding(.leading, -10)
+                        if showImages {
+                            if whiskey.image == nil {
+                                Image("noimageuploaded")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .frame(width: 115, height: 115)
+                                    .shadow(color: .black, radius: 1)
+                                    .padding(.leading, -10)
+                            } else {
+                                whiskey.image?
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipShape(Circle())
+                                    .frame(width: 115, height: 115)
+                                    .shadow(color: .black, radius: 1)
+                                    .padding(.leading, -10)
+                            }
                         }
                         
                         if whiskey.avgScore != 0.0 {
@@ -70,6 +73,7 @@ struct WhiskeyDetailView: View {
                                 }
                             }
                             .frame(width: 45, height: 45)
+                            .offset(x: showImages ? 0 : 40, y: showImages ? 0 : 20)
                             .padding(.leading, -10)
                             .padding(.bottom, 4)
                         }
@@ -84,22 +88,20 @@ struct WhiskeyDetailView: View {
                     Text(whiskey.label)
                         .font(.custom("AsapCondensed-Bold", size: 60, relativeTo: .largeTitle))
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .offset(x: showImages ? 0 : -40)
                     Text(whiskey.bottle)
                         .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
                         .lineLimit(1)
                         .padding(.bottom, 1)
-                    
+                        .offset(x: showImages ? 0 : -40)
                     Text(whiskey.bottleState.currentState.uppercased())
                         .padding(.horizontal)
                         .foregroundStyle(whiskey.bottleState.color)
                         .font(.custom("AsapCondensed-SemiBold", size: 28, relativeTo: .largeTitle))
-                        .background {
-                            Capsule()
-                                .fill(.blue)
-                                .padding()
-                        }
-                    
-                    
+                        .offset(x: showImages ? 0 : -40)
+
+
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.leading, 15)

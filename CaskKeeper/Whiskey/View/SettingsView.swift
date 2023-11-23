@@ -11,7 +11,8 @@ struct SettingsView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isDeleteWhiskeysAlertShowing: Bool = false
     @State private var isCollectionDeleted = false
-    
+    @AppStorage("showImages") var showImages: Bool = true
+
     var body: some View {
         Form {
             Section {
@@ -79,6 +80,14 @@ struct SettingsView: View {
             } message: {
                 Text("This will remove all whiskeys in your collection. Are you sure?")
             }
+            
+            Section {
+                Toggle("Show Images", isOn: $showImages)
+            } header: {
+                Text("Display")
+                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+            }
+
 
         }
         .navigationTitle("Settings")

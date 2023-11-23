@@ -8,28 +8,31 @@
 import SwiftUI
 
 struct WhiskeyRowView: View {
-    
+    @AppStorage("showImages") var showImages: Bool = true
     let whiskey: Whiskey
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             Group {
-                if whiskey.image == nil {
-                    Image("noimageuploaded")// Default shape
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipShape(Circle())
-                        .frame(width: 60, height: 60)
-                        .background(Circle().fill(.gray))
-                } else {
-                    if let image = whiskey.image {
-                        image
+                if showImages {
+                    if whiskey.image == nil {
+                        Image("noimageuploaded")// Default shape
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 60, height: 60)
                             .clipShape(Circle())
+                            .frame(width: 60, height: 60)
+                            .background(Circle().fill(.gray))
+                    } else {
+                        if let image = whiskey.image {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                        }
                     }
                 }
+                
             }
             
             VStack(alignment: .leading) {
@@ -59,6 +62,8 @@ struct WhiskeyRowView: View {
                         .foregroundStyle(Color.accentColor)
                 }
             }
+            .padding(showImages ? .init(top: 0, leading: 0, bottom: 0, trailing: 0) : .init(top: 0, leading: 10, bottom: 0, trailing: 0))
+
             
             Spacer()
             

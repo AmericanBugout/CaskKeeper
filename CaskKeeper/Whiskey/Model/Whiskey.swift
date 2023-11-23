@@ -130,47 +130,47 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.locationPurchased = locationPurchased ?? ""
         self.tastingNotes = tastingNotes
     }
-//    
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case label
-//        case bottle
-//        case batch
-//        case purchasedDate
-//        case proof
-//        case style
-//        case origin
-//        case age
-//        case finish
-//        case bottleState
-//        case opened
-//        case firstOpen
-//        case dateOpened
-//        case consumedDate
-//        case price
-//        case wouldBuyAgain
-//        case locationPurchased
-//        case bottleFinished
-//        case tastingNotes
-//    }
     
-//    func encode(to encoder: Encoder) throws {
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//        
-//        try container.encode(id, forKey: .id)
-//        try container.encode(label, forKey: .label)
-//        try container.encode(bottle, forKey: .bottle)
-//        try container.encode(batch, forKey: .batch)
-//        try container.encode(proof, forKey: .proof)
-//        try container.encode(style, forKey: .style)
-//        try container.encode(origin, forKey: .origin)
-//        try container.encode(age, forKey: .age)
-//        try container.encode(finish, forKey: .finish)
-//        try container.encode(bottleState, forKey: .bottleState)
-//        try container.encode(opened, forKey: .opened)
-//        try container.encode(firstOpen, forKey: .firstOpen)
+    enum CodingKeys: String, CodingKey {
+        case id
+        case label
+        case bottle
+        case batch
+    //    case purchasedDate
+        case proof
+        case style
+        case origin
+        case age
+        case finish
+        case bottleState
+        case opened
+        case firstOpen
+  //      case dateOpened
+   //     case consumedDate
+        case price
+        case wouldBuyAgain
+        case locationPurchased
+        case bottleFinished
+        case tastingNotes
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(id, forKey: .id)
+        try container.encode(label, forKey: .label)
+        try container.encode(bottle, forKey: .bottle)
+        try container.encode(batch, forKey: .batch)
+        try container.encode(proof, forKey: .proof)
+        try container.encode(style, forKey: .style)
+        try container.encode(origin, forKey: .origin)
+        try container.encode(age, forKey: .age)
+        try container.encode(finish, forKey: .finish)
+        try container.encode(bottleState, forKey: .bottleState)
+        try container.encode(opened, forKey: .opened)
+        try container.encode(firstOpen, forKey: .firstOpen)
 //        try container.encode(dateOpened, forKey: .dateOpened)
-//        
+        
 //        if let dateOpened = self.dateOpened {
 //            let dateFormatter = DateFormatter()
 //            dateFormatter.dateFormat = "M/d/yyyy"
@@ -179,7 +179,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
 //        } else {
 //            try container.encodeNil(forKey: .dateOpened)
 //        }
-        
+//        
 //        try container.encode(consumedDate, forKey: .consumedDate)
 
 //        if let consumedDate = self.consumedDate {
@@ -191,12 +191,12 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
 //            try container.encodeNil(forKey: .consumedDate)
 //        }
         
-//        try container.encode(price, forKey: .price)
-//        try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
-//        try container.encode(locationPurchased, forKey: .locationPurchased)
-//        try container.encode(bottleFinished, forKey: .bottleFinished)
-//        try container.encode(tastingNotes, forKey: .tastingNotes)
-//        try container.encode(purchasedDate, forKey: .purchasedDate)
+        try container.encode(price, forKey: .price)
+        try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
+        try container.encode(locationPurchased, forKey: .locationPurchased)
+        try container.encode(bottleFinished, forKey: .bottleFinished)
+        try container.encode(tastingNotes, forKey: .tastingNotes)
+ //       try container.encode(purchasedDate, forKey: .purchasedDate)
 
 //        if let purchasedDate = self.purchasedDate {
 //            let dateFormatter = DateFormatter()
@@ -207,31 +207,31 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
 //            try container.encodeNil(forKey: .purchasedDate) // Explicitly encode nil if there is no date
 //        }
 
-//    }
+    }
     
-//    required init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        id = try container.decode(UUID.self, forKey: .id)
-//        label = try container.decode(String.self, forKey: .label)
-//        bottle = try container.decode(String.self, forKey: .bottle)
-//        batch = try container.decode(String.self, forKey: .batch)
-//        purchasedDate = try container.decode(Date.self, forKey: .purchasedDate)
-//        proof = try container.decode(Double.self, forKey: .proof)
-//        style = try container.decode(Style.self, forKey: .style)
-//        origin = try container.decode(Origin.self, forKey: .origin)
-//        age = try container.decode(Double.self, forKey: .age)
-//        finish = try container.decode(String.self, forKey: .finish)
-//        bottleState = try container.decode(BottleState.self, forKey: .bottleState)
-//        opened = try container.decode(Bool.self, forKey: .opened)
-//        firstOpen = try container.decode(Bool.self, forKey: .firstOpen)
-//        dateOpened = try container.decode(Date.self, forKey: .dateOpened)
-//        consumedDate = try container.decode(Date.self, forKey: .consumedDate)
-//        price = try container.decode(Double.self, forKey: .price)
-//        wouldBuyAgain = try container.decode(Bool.self, forKey: .wouldBuyAgain)
-//        locationPurchased = try container.decode(String.self, forKey: .locationPurchased)
-//        bottleFinished = try container.decode(Bool.self, forKey: .bottleFinished)
-//        tastingNotes = try container.decode([Whiskey.Taste].self, forKey: .tastingNotes)
-//    }
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        label = try container.decode(String.self, forKey: .label)
+        bottle = try container.decode(String.self, forKey: .bottle)
+        batch = try container.decode(String.self, forKey: .batch)
+    //    purchasedDate = try container.decode(Date.self, forKey: .purchasedDate)
+        proof = try container.decode(Double.self, forKey: .proof)
+        style = try container.decode(Style.self, forKey: .style)
+        origin = try container.decode(Origin.self, forKey: .origin)
+        age = try container.decode(Double.self, forKey: .age)
+        finish = try container.decode(String.self, forKey: .finish)
+        bottleState = try container.decode(BottleState.self, forKey: .bottleState)
+        opened = try container.decode(Bool.self, forKey: .opened)
+        firstOpen = try container.decode(Bool.self, forKey: .firstOpen)
+   //     dateOpened = try container.decode(Date.self, forKey: .dateOpened)
+   //     consumedDate = try container.decode(Date.self, forKey: .consumedDate)
+        price = try container.decode(Double.self, forKey: .price)
+        wouldBuyAgain = try container.decode(Bool.self, forKey: .wouldBuyAgain)
+        locationPurchased = try container.decode(String.self, forKey: .locationPurchased)
+        bottleFinished = try container.decode(Bool.self, forKey: .bottleFinished)
+        tastingNotes = try container.decode([Whiskey.Taste].self, forKey: .tastingNotes)
+    }
 
     convenience init?(row: String) {
         let dateFormatter = DateFormatter()
