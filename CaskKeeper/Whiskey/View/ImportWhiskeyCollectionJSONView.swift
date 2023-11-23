@@ -57,6 +57,8 @@ struct ImportWhiskeyCollectionJSONView: View {
                     Text("Import was not successful")
                         .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
                         .foregroundStyle(Color.red)
+                    Text("Something went wrong.  Check that JSON is valid.")
+                    Text(errorFromImport?.localizedDescription ?? "")
                     Image(systemName: "x.circle.fill")
                         .resizable()
                         .frame(width: 30, height: 30)
@@ -64,6 +66,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .listRowSeparator(.hidden)
+                .animation(Animation.smooth(duration: 1), value: isErrorShowing)
             }
             
             VStack {
@@ -127,6 +130,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                     }
                 } catch {
                     isErrorShowing = true
+                    self.errorFromImport = error
                     print("Error: \(String(describing: errorFromImport?.localizedDescription))")
                 }
             }

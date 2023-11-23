@@ -173,34 +173,15 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         try container.encode(bottleState, forKey: .bottleState)
         try container.encode(opened, forKey: .opened)
         try container.encode(firstOpen, forKey: .firstOpen)
-        
-        if let dateOpened = self.dateOpened {
-            let dateString = Whiskey.dateFormatter.string(from: dateOpened)
-            try container.encode(dateString, forKey: .dateOpened)
-        } else {
-            try container.encodeNil(forKey: .dateOpened)
-        }
-        
-        if let consumedDate = self.consumedDate {
-            let dateString = Whiskey.dateFormatter.string(from: consumedDate)
-            try container.encode(dateString, forKey: .consumedDate)
-        } else {
-            try container.encodeNil(forKey: .consumedDate)
-        }
-        
+        try encodeDateIfPresent(date: self.dateOpened, to: &container, forKey: .dateOpened)
+        try encodeDateIfPresent(date: self.consumedDate, to: &container, forKey: .consumedDate)
         try container.encode(price, forKey: .price)
         try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
         try container.encode(locationPurchased, forKey: .locationPurchased)
         try container.encode(bottleFinished, forKey: .bottleFinished)
         try container.encode(tastingNotes, forKey: .tastingNotes)
         try container.encode(purchasedDate, forKey: .purchasedDate)
-        
-        if let purchasedDate = self.purchasedDate {
-            let dateString = Whiskey.dateFormatter.string(from: purchasedDate)
-            try container.encode(dateString, forKey: .purchasedDate)
-        } else {
-            try container.encodeNil(forKey: .purchasedDate) // Explicitly encode nil if there is no date
-        }
+        try encodeDateIfPresent(date: self.purchasedDate, to: &container, forKey: .purchasedDate)
     }
     
     required init(from decoder: Decoder) throws {
@@ -328,5 +309,14 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     
     func updateImage(_ image: UIImage) {
         self.imageData = image.jpegData(compressionQuality: 0.3)
+    }
+    
+    func encodeDateIfPresent(date: Date?, to container: inout KeyedEncodingContainer<Whiskey.CodingKeys>, forKey key: Whiskey.CodingKeys) throws {
+        if let date = date {
+            let dateString = Whiskey.dateFormatter.string(from: date)
+            try container.encode(dateString, forKey: key)
+        } else {
+            try container.encodeNil(forKey: key) // Explicitly encode nil if there is no date
+        }
     }
 }
