@@ -16,7 +16,7 @@ struct DocumentExporter: UIViewControllerRepresentable {
         let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("WhiskeyCollection.json")
         do {
             let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
+            encoder.outputFormatting = .withoutEscapingSlashes
             
             let jsonData = try encoder.encode(collection)
             try jsonData.write(to: tempURL, options: .atomic)

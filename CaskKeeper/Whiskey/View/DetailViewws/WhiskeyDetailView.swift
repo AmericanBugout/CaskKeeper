@@ -176,7 +176,7 @@ struct WhiskeyDetailView: View {
             
             if !whiskey.tastingNotes.isEmpty {
                 Section(isExpanded: $isTastingSectionExpanded) {
-                    ForEach(whiskey.tastingNotes) { taste in
+                    ForEach(whiskey.tastingNotes, id: \.self) { taste in
                         Section {
                             ZStack {
                                 NavigationLink {
