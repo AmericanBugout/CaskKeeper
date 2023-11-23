@@ -61,9 +61,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var tastingNotes: [Taste] = []
     
     var uniqueKey: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d/yyyy"
-        let purchasedDateString = purchasedDate.map { dateFormatter.string(from: $0)} ?? "N/A"
+        let purchasedDateString = purchasedDate.map { Whiskey.dateFormatter.string(from: $0)} ?? "N/A"
         let priceString = price.map { String($0) } ?? "N/A"
         
         return "\(label)-\(bottle)-\(batch)-\(purchasedDateString)-\(proof)-\(style)-\(origin)-\(age)-\(priceString)"
@@ -112,6 +110,13 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         let totalScore = tastingNotes.reduce(0, {$0 + $1.score})
         return !tastingNotes.isEmpty ? Double(totalScore) / Double(tastingNotes.count) : 0.0
     }
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d/yyyy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        return formatter
+    }()
     
     init(id: UUID = UUID(), label: String, bottle: String, purchasedDate: Date?, dateOpened: Date? = nil, locationPurchased: String? = nil, image: UIImage? = nil, proof: Double, bottleState: BottleState, style: Style, finish: String? = nil, origin: Origin, age: Double?, price: Double?, tastingNotes: [Taste] = []) {
         self.id = id
@@ -170,19 +175,14 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         try container.encode(firstOpen, forKey: .firstOpen)
         
         if let dateOpened = self.dateOpened {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
-            let dateString = dateFormatter.string(from: dateOpened)
+            let dateString = Whiskey.dateFormatter.string(from: dateOpened)
             try container.encode(dateString, forKey: .dateOpened)
         } else {
             try container.encodeNil(forKey: .dateOpened)
         }
         
-        
         if let consumedDate = self.consumedDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
-            let dateString = dateFormatter.string(from: consumedDate)
+            let dateString = Whiskey.dateFormatter.string(from: consumedDate)
             try container.encode(dateString, forKey: .consumedDate)
         } else {
             try container.encodeNil(forKey: .consumedDate)
@@ -196,9 +196,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         try container.encode(purchasedDate, forKey: .purchasedDate)
         
         if let purchasedDate = self.purchasedDate {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
-            let dateString = dateFormatter.string(from: purchasedDate)
+            let dateString = Whiskey.dateFormatter.string(from: purchasedDate)
             try container.encode(dateString, forKey: .purchasedDate)
         } else {
             try container.encodeNil(forKey: .purchasedDate) // Explicitly encode nil if there is no date
@@ -206,29 +204,24 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     required init(from decoder: Decoder) throws {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d/yyyy"
-        
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        func decodeDate(forKey key: CodingKeys) throws -> Date? {
+            guard let dateString = try container.decodeIfPresent(String.self, forKey: key) else {
+                return nil
+            }
+            if let date = Whiskey.dateFormatter.date(from: dateString) {
+                return date
+            } else {
+                throw DecodingError.dataCorruptedError(forKey: key, in: container, debugDescription: "Date string does not match format expected by formatter.")
+            }
+        }
+        
         id = try container.decode(UUID.self, forKey: .id)
         label = try container.decode(String.self, forKey: .label)
         bottle = try container.decode(String.self, forKey: .bottle)
         batch = try container.decode(String.self, forKey: .batch)
-        
-        if container.contains(.purchasedDate),
-           let dateString = try container.decodeIfPresent(String.self, forKey: .purchasedDate) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy" // Make sure this format matches your date string in JSON
-            if let date = dateFormatter.date(from: dateString) {
-                self.purchasedDate = date
-            } else {
-                throw DecodingError.dataCorruptedError(forKey: .purchasedDate, in: container, debugDescription: "Date string does not match format expected by formatter.")
-            }
-        } else {
-            self.purchasedDate = nil
-        }
-        
+        purchasedDate = try decodeDate(forKey: .purchasedDate)
         proof = try container.decode(Double.self, forKey: .proof)
         style = try container.decode(Style.self, forKey: .style)
         origin = try container.decode(Origin.self, forKey: .origin)
@@ -237,38 +230,8 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         bottleState = try container.decode(BottleState.self, forKey: .bottleState)
         opened = try container.decode(Bool.self, forKey: .opened)
         firstOpen = try container.decode(Bool.self, forKey: .firstOpen)
-        
-        if container.contains(.dateOpened),
-           let dateString = try container.decodeIfPresent(String.self, forKey: .dateOpened) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy" // Make sure this format matches your date string in JSON
-            if let date = dateFormatter.date(from: dateString) {
-                self.dateOpened = date
-            } else {
-                throw DecodingError.dataCorruptedError(forKey: .dateOpened,
-                                                       in: container,
-                                                       debugDescription: "Date string does not match format expected by formatter.")
-            }
-        } else {
-            // If the key is not present or the value is nil, set consumedDate to nil
-            self.dateOpened = nil
-        }
-        
-        if container.contains(.consumedDate),
-           let dateString = try container.decodeIfPresent(String.self, forKey: .consumedDate) {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
-            if let date = dateFormatter.date(from: dateString) {
-                self.consumedDate = date
-            } else {
-                throw DecodingError.dataCorruptedError(forKey: .consumedDate,
-                                                       in: container,
-                                                       debugDescription: "Date string does not match format expected by formatter.")
-            }
-        } else {
-            self.consumedDate = nil
-        }
-        
+        dateOpened = try decodeDate(forKey: .dateOpened)
+        consumedDate = try decodeDate(forKey: .consumedDate)
         price = try container.decode(Double.self, forKey: .price)
         wouldBuyAgain = try container.decode(Bool.self, forKey: .wouldBuyAgain)
         locationPurchased = try container.decode(String.self, forKey: .locationPurchased)
@@ -277,10 +240,6 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     convenience init?(row: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d/yyyy" // Adjust to match "6/15/2023" with no leading zeros
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POS
-        
         let columns = row.components(separatedBy: ",")
         guard columns.count == 12 else { return nil }
         
@@ -300,10 +259,9 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         
         let finish = trimmedColumns[5].isEmpty ? "" : trimmedColumns[5]
         
-        guard let purchasedDate = dateFormatter.date(from: trimmedColumns[8]) else { return nil }
-        let dateOpened = dateFormatter.date(from: trimmedColumns[9])
-        
-        
+        guard let purchasedDate = Whiskey.dateFormatter.date(from: trimmedColumns[8]) else { return nil }
+        let dateOpened = Whiskey.dateFormatter.date(from: trimmedColumns[9])
+
         self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, price: price, tastingNotes: [])
     }
     
@@ -332,12 +290,8 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(customNotes, forKey: .customNotes)
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
-            let dateString = dateFormatter.string(from: self.date)
+            let dateString = Whiskey.dateFormatter.string(from: self.date)
             try container.encode(dateString, forKey: .date)
-            
             try container.encode(notes, forKey: .notes)
             try container.encode(score, forKey: .score)
         }
@@ -347,10 +301,8 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
             let customNotes = try container.decodeIfPresent(String.self, forKey: .customNotes)
             
             let dateString = try container.decode(String.self, forKey: .date)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "M/d/yyyy"
             
-            if let date = dateFormatter.date(from: dateString) {
+            if let date = Whiskey.dateFormatter.date(from: dateString) {
                 self.date = date
             } else {
                 throw DecodingError.dataCorruptedError(forKey: .date, in: container, debugDescription: "Date string does not match format expected by formatter.")
