@@ -94,7 +94,7 @@ struct AddWhiskeyView: View {
                         .onReceive(Just(price)) { newValue in
                             handlePriceInput(newValue: newValue)
                         }
-                        .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .gray : .white)
+                        .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .aluminum : .white)
                     Picker("Origin", selection: $origin) {
                         ForEach(Origin.allCases, id: \.self) { origin in
                             Text(origin.rawValue)

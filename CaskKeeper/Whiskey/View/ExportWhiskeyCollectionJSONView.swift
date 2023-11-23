@@ -84,7 +84,7 @@ struct ExportWhiskeyCollectionJSONView: View {
             VStack {
                 Text("Export Successful")
                     .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
-                    .foregroundStyle(exportWasSuccessful ? .green : .gray)
+                    .foregroundStyle(exportWasSuccessful ? .green : .aluminum)
                     .opacity(exportWasSuccessful ? 1 : 0)
                     .scaleEffect(exportWasSuccessful ? 1 : 0.9)
                     .rotationEffect(exportWasSuccessful ? Angle(degrees: 0) : Angle(degrees: -10))
@@ -93,7 +93,7 @@ struct ExportWhiskeyCollectionJSONView: View {
                 Image(systemName: exportWasSuccessful ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .frame(width: 30, height: 30)
-                    .foregroundStyle(exportWasSuccessful ? .green : .gray)
+                    .foregroundStyle(exportWasSuccessful ? .green : .aluminum)
                     .opacity(exportWasSuccessful ? 1 : 0)
                     .scaleEffect(exportWasSuccessful ? 1 : 0.9)
                     .rotationEffect(exportWasSuccessful ? Angle(degrees: 0) : Angle(degrees: -10))

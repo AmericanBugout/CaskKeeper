@@ -27,9 +27,9 @@ enum BottleState: String, Codable {
     var color: Color {
         switch self {
         case .sealed:
-            return .gray
+            return .lead
         case .opened:
-            return Color.blueberry
+            return Color.systemGreen
         case .finished:
             return .accentColor
         }

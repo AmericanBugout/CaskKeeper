@@ -30,7 +30,7 @@ struct WhiskeyDetailRowAgeView: View {
         HStack {
             Text(title)
                 .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-                .foregroundColor(detail == 0 ? Color.gray : Color.primary)
+                .foregroundColor(detail == 0 ? Color.aluminum : Color.primary)
             
             Spacer()
             
@@ -59,7 +59,7 @@ struct WhiskeyDetailPriceView: View {
     }
     
     var titleColor: Color {
-        detail == 0 ? .gray : .primary // `.primary` is typically the default text color
+        detail == 0 ? .aluminum : .primary // `.primary` is typically the default text color
     }
     
     var body: some View {
@@ -72,7 +72,7 @@ struct WhiskeyDetailPriceView: View {
             
             Text(formattedPrice)
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                .foregroundColor(detail == 0 ? .gray : .white)
+                .foregroundColor(detail == 0 ? .aluminum : .white)
         }
     }
 }

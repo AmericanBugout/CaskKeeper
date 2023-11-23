@@ -41,7 +41,7 @@ struct TasteRowView: View {
            
             Text(taste.customNotes ?? "No notes entered.")
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                .foregroundStyle(.gray)
+                .foregroundStyle(.aluminum)
                 .multilineTextAlignment(.leading)
                     
             LazyVGrid(columns: columns) {

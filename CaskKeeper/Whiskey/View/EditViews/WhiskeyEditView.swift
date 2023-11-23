@@ -84,7 +84,7 @@ struct WhiskeyEditView: View {
                 WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
                 
                 WhiskeyEditTextField(text: $priceString, placeholder: "Price")
-                    .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .gray : .white)
+                    .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .white)
                     .onChange(of: priceString) { oldalue, newValue in
                         handlePriceInput(newValue: newValue)
                     }

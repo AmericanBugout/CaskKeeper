@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ScoreGaugeStyle: GaugeStyle {
     
-    var gradient = LinearGradient(colors: [.gray, .accentColor], startPoint: .trailing, endPoint: .leading)
+    var gradient = LinearGradient(colors: [.aluminum, .accentColor], startPoint: .trailing, endPoint: .leading)
     
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
@@ -29,7 +29,7 @@ struct ScoreGaugeStyle: GaugeStyle {
             VStack {
                 configuration.label
                     .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
-                    .foregroundColor(.gray)
+                    .foregroundColor(.aluminum)
                 Text("Avg Score")
                     .font(.custom("AsapCondensed-Regular", size: 10, relativeTo: .body))
 
@@ -39,8 +39,6 @@ struct ScoreGaugeStyle: GaugeStyle {
         }
         .frame(width: 60, height: 60)
     }
-    
-    
 }
 
 #Preview {

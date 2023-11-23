@@ -28,19 +28,19 @@ struct CSVImportView: View {
                                 .opacity(importWasSuccess ? 1 : 0)
                                 .scaleEffect(importWasSuccess ? 1 : 0.9)
                                 .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
-                                .foregroundStyle(importWasSuccess ? .green : .gray)
+                                .foregroundStyle(importWasSuccess ? .green : .aluminum)
                                 .transition(AnyTransition(.slide))
                                 .offset(y: importWasSuccess ? 0 : -500)
                             HStack {
                                 Text("Imported Whiskeys".uppercased())
                                     .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
-                                    .foregroundStyle(.gray)
+                                    .foregroundStyle(.aluminum)
                                     .opacity(importWasSuccess ? 1 : 0)
                                 Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
                                     .opacity(importWasSuccess ? 1 : 0)
                                     .scaleEffect(importWasSuccess ? 1 : 0.9)
                                     .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
-                                    .foregroundStyle(importWasSuccess ? .green : .gray)
+                                    .foregroundStyle(importWasSuccess ? .green : .aluminum)
                             }
                             .offset(x: importWasSuccess ? 0 : 10)
                         } else if error != nil {
@@ -56,7 +56,7 @@ struct CSVImportView: View {
                             HStack {
                                 Text("Imported Whiskeys".uppercased())
                                     .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
-                                    .foregroundStyle(Color.gray)
+                                    .foregroundStyle(Color.aluminum)
                                     
                                 Image(systemName: "x.circle.fill")
                                     .foregroundStyle(Color.red)

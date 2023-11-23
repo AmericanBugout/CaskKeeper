@@ -63,7 +63,7 @@ struct WhiskeyDetailView: View {
                                     .strokeBorder(Color.lead, lineWidth: 4)
                                     .background(Rectangle().fill(Color.lead))
                                     .frame(width: 55, height: 55)
-                                    .shadow(color: .gray, radius: 1)
+                                    .shadow(color: .aluminum, radius: 1)
                                 VStack {
                                     Text(String(format: "%.1f", whiskey.avgScore))
                                         .font(.custom("AsapCondensed-Bold", size: 26))
@@ -86,12 +86,12 @@ struct WhiskeyDetailView: View {
                 
                 VStack(alignment: .center) {
                     Text(whiskey.label)
-                        .font(.custom("AsapCondensed-Bold", size: 60, relativeTo: .largeTitle))
+                        .font(.custom("AsapCondensed-Bold", size: 52, relativeTo: .largeTitle))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                         .offset(x: showImages ? 0 : -40)
                     Text(whiskey.bottle)
-                        .font(.custom("AsapCondensed-SemiBold", size: 48, relativeTo: .largeTitle))
+                        .font(.custom("AsapCondensed-SemiBold", size: 42, relativeTo: .largeTitle))
                         .lineLimit(1)
                         .padding(.bottom, 1)
                         .offset(x: showImages ? 0 : -40)

@@ -21,7 +21,7 @@ struct WhiskeyRowView: View {
                             .aspectRatio(contentMode: .fill)
                             .clipShape(Circle())
                             .frame(width: 60, height: 60)
-                            .background(Circle().fill(.gray))
+                            .background(Circle().fill(.aluminum))
                     } else {
                         if let image = whiskey.image {
                             image
@@ -35,32 +35,39 @@ struct WhiskeyRowView: View {
                 
             }
             
-            VStack(alignment: .leading) {
-                Text(whiskey.label)
-                    .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .font(.headline)
-                    .foregroundStyle(Color.snow)
-                Text(whiskey.bottle)
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                
-                switch whiskey.bottleState {
-                case .sealed:
-                    Text("Sealed")
-                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
-                        .foregroundStyle(.gray)
-                case .opened:
-                    Text("Opened")
-                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
-                        .foregroundStyle(Color.blueberry)
-                case .finished:
-                    Text("Finished")
-                        .font(.custom("AsapCondensed-Bold", size: 14, relativeTo: .body))
+            HStack {
+                VStack(alignment: .leading, spacing: 4){
+                    Text(whiskey.label)
+                        .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .font(.headline)
+                        .foregroundStyle(Color.aluminum)
+                    Text(whiskey.bottle)
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
                         .foregroundStyle(Color.accentColor)
                 }
+                
+                Group {
+                    switch whiskey.bottleState {
+                    case .sealed:
+                        Text("Sealed".uppercased())
+                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                            .foregroundStyle(Color.lead)
+                    case .opened:
+                        Text("Open".uppercased())
+                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                            .foregroundStyle(Color.systemGreen)
+                    case .finished:
+                        Text("Finished".uppercased())
+                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                            .foregroundStyle(Color.accentColor)
+                    }
+                }
+                .padding()
+                
             }
             .padding(showImages ? .init(top: 0, leading: 0, bottom: 0, trailing: 0) : .init(top: 0, leading: 10, bottom: 0, trailing: 0))
 

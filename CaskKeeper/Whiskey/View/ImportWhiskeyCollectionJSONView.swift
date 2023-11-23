@@ -77,7 +77,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                         Text("unique whiskeys found from import")
                             .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
                     }
-                    .foregroundStyle(importWasSuccess ? .green : .gray)
+                    .foregroundStyle(importWasSuccess ? .green : .aluminum)
                     .opacity(importWasSuccess ? 1 : 0)
                     .scaleEffect(importWasSuccess ? 1 : 0.9)
                     .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
@@ -87,7 +87,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                     if let duplicates = duplicateCount {
                         Text("There were \(duplicates) duplicates in the import.")
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                            .foregroundStyle(.gray)
+                            .foregroundStyle(.aluminum)
                     }
                 }
                 
@@ -95,7 +95,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                 Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
                     .resizable()
                     .frame(width: 30, height: 30)
-                    .foregroundStyle(importWasSuccess ? .green : .gray)
+                    .foregroundStyle(importWasSuccess ? .green : .aluminum)
                     .opacity(importWasSuccess ? 1 : 0)
                     .scaleEffect(importWasSuccess ? 1 : 0.9)
                     .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))

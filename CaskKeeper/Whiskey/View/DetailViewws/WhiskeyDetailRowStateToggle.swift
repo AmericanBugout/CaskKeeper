@@ -21,7 +21,7 @@ struct WhiskeyDetailRowStateToggle: View {
                 switch state {
                 case .sealed:
                     Text("Sealed")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.aluminum)
                         .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 case .opened:
                     Text("Opened")

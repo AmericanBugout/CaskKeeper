@@ -66,7 +66,7 @@ struct FlavorSelectionView: View {
         Button(action: addFlavors) {
             Text("Add (\(flavorCatalog.selectedFlavors.count))")
                 .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                .foregroundColor(flavorCatalog.selectedFlavors.isEmpty ? .gray : Color.blueberry)
+                .foregroundColor(flavorCatalog.selectedFlavors.isEmpty ? .aluminum : Color.systemGreen)
         }
         .disabled(flavorCatalog.selectedFlavors.isEmpty)
     }
