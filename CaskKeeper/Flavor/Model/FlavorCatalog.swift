@@ -24,21 +24,22 @@ class FlavorCatalog {
     }
     
     init() {
-       flavors = loadFlavors(from: "flavors")
+       flavors = loadFlavors(from: "flavors", extension: "json")
     }
     
-    func loadFlavors(from filename: String) -> [Flavor] {
-        guard let dataAsset = NSDataAsset(name: filename) else {
-            fatalError("Failed to load asset \(filename)")
-        }
+    func loadFlavors(from resourceName: String, extension ext: String) -> [Flavor] {
+            guard let url = Bundle.main.url(forResource: resourceName, withExtension: ext) else {
+                fatalError("Failed to load \(resourceName).\(ext) from bundle")
+            }
 
-        do {
-            let flavorNames = try JSONDecoder().decode([String].self, from: dataAsset.data)
-            return flavorNames.map { Flavor(name: $0) }
-        } catch {
-            fatalError("Failed to decode \(filename) from asset catalog: \(error)")
+            do {
+                let data = try Data(contentsOf: url)
+                let flavorNames = try JSONDecoder().decode([String].self, from: data)
+                return flavorNames.map { Flavor(name: $0) }
+            } catch {
+                fatalError("Failed to decode \(resourceName).\(ext) from bundle: \(error)")
+            }
         }
-    }
     
     func toggleFlavor(_ flavor: Flavor) {
            if selectedFlavors.contains(flavor) {
@@ -46,9 +47,6 @@ class FlavorCatalog {
            } else {
                selectedFlavors.insert(flavor)
            }
-           // Reset the search string if needed
            searchString = ""
        }
-       
-    
 }

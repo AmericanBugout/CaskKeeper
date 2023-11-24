@@ -13,7 +13,5 @@ enum Origin: String, CaseIterable, Codable {
   case ireland = "Ireland"
   case canada = "Canada"
   case japan = "Japan"
-  case india = "India"
-  case taiwan = "Taiwan"
   case england = "England"
 }

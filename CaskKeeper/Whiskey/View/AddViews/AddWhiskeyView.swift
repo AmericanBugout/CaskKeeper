@@ -19,11 +19,22 @@ struct AddWhiskeyView: View {
     @State private var style: Style = .bourbon
     @State private var purchaseDate: Date = .now
     @State private var proof: String = ""
+    @State private var age: String = ""
+    @State private var price: String = ""
     @State private var origin: Origin = .us
-    @State private var age: Age = .six
     @State private var isCameraShowing: Bool = false
     @State private var isPhotoLibraryShowing: Bool = false
     @State private var image: UIImage?
+    
+    private enum Field {
+        case label
+        case bottle
+        case proof
+        case age
+        case price
+    }
+
+    @FocusState private var focusedField: Field?
         
     var nonOptionalImageBinding: Binding<UIImage> {
         Binding<UIImage>(
@@ -41,10 +52,14 @@ struct AddWhiskeyView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section {
                     TextField("Label", text: $label)
+                        .focused($focusedField, equals: .label)
+
                     TextField("Bottle", text: $bottle)
+                        .focused($focusedField, equals: .bottle)
+
                     Picker("Style", selection: $style) {
                         ForEach(Style.allCases, id: \.self) { style in
                             Text(style.rawValue)
@@ -53,19 +68,33 @@ struct AddWhiskeyView: View {
                     DatePicker("Purchased Date", selection: $purchaseDate, displayedComponents: .date)
                 } header: {
                     Text("Whiskey Details")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
                 }
                 
                 Section {
                     TextField("Proof", text: $proof)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .proof)
                         .onChange(of: proof) { oldValue, newValue in
                             handleProofInput(newValue: newValue)
                         }
-                    Picker("Age", selection: $age) {
-                        ForEach(Age.allCases, id: \.self) { age in
-                            Text(age.rawValue)
+
+                    TextField("Age", text: $age)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .age)
+                        .onChange(of: age) { oldValue, newValue in
+                            handleAgeInput(newValue: newValue)
                         }
-                    }
+
                     
+                    TextField("Price", text: $price)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .price)
+                        .onReceive(Just(price)) { newValue in
+                            handlePriceInput(newValue: newValue)
+                        }
+                        .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .aluminum : .white)
                     Picker("Origin", selection: $origin) {
                         ForEach(Origin.allCases, id: \.self) { origin in
                             Text(origin.rawValue)
@@ -73,9 +102,9 @@ struct AddWhiskeyView: View {
                     }
                     
                 } header: {
-                    Text("Addiitonal Info")
+                    Text("Additional Info")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 }
-                
                 
                 Section {
                     if let image = image {
@@ -91,6 +120,8 @@ struct AddWhiskeyView: View {
                 } header: {
                     HStack {
                         Text("Add Image")
+                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+
                         Spacer()
                         Button(action: {
                             isCameraShowing = true
@@ -103,7 +134,6 @@ struct AddWhiskeyView: View {
                         }, label: {
                             Image(systemName: "photo.fill")
                         })
-                        
                     }
                 }
                 .sheet(isPresented: $isCameraShowing) {
@@ -121,17 +151,25 @@ struct AddWhiskeyView: View {
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
             .toolbar{
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer() 
+                    Button("Done") {
+                        focusedField = nil // This clears the focus state
+                    }
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         withAnimation(Animation.easeInOut) {
                             guard let doubleProof = Double(proof) else { return }
-                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, style: style, origin: origin, age: age))
+                            guard let doubleAge = Double(age) else { return }
+                            let submissionPrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) ?? 0.0
+
+                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: submissionPrice))
                             dismiss()
                         }
                     }
                     .disabled(label.isEmpty || bottle.isEmpty || proof.isEmpty)
                     .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
@@ -139,26 +177,59 @@ struct AddWhiskeyView: View {
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
-
                 }
             }
             .navigationTitle("Add Bottle")
         }
-        
     }
     
     func handleProofInput(newValue: String) {
-        // If the newValue is empty (e.g., the user deleted all input), then it's okay.
         if newValue.isEmpty {
             return
         }
 
-        // Check if the newValue is a valid decimal.
         let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
 
-        // If not a valid decimal or exceeds limits, revert to the previous value.
         if !isDecimal {
             proof = String(newValue.dropLast())
+        }
+    }
+    
+    func handleAgeInput(newValue: String) {
+        if newValue.isEmpty {
+            return
+        }
+
+        let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
+        
+        if let ageValue = Double(newValue), isDecimal && (0...100).contains(ageValue) {
+            age = newValue
+        } else {
+            age = String(newValue.dropLast())
+        }
+    }
+    
+    func handlePriceInput(newValue: String) {
+        if newValue.isEmpty {
+            price = ""
+        } else if newValue.first == "$" {
+            let numericPart = String(newValue.dropFirst())
+
+            let currencyRegex = "^[0-9]+(\\.\\d{0,2})?$"
+            if let _ = Double(numericPart), numericPart.range(of: currencyRegex, options: .regularExpression) != nil {
+                price = newValue
+            } else {
+                if !numericPart.isEmpty {
+                    price = "$" + numericPart.dropLast()
+                }
+            }
+        } else {
+            let wholeNumberRegex = "^[0-9]+$"
+            if newValue.range(of: wholeNumberRegex, options: .regularExpression) != nil {
+                price = "$" + newValue
+            } else {
+                price = price.isEmpty ? "" : price
+            }
         }
     }
 }

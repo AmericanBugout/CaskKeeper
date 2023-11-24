@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing: Bool = false
-
+    @State private var importCSVView: Bool = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -39,11 +40,12 @@ struct ContentView: View {
                     if whiskeyLibrary.collection.isEmpty {
                         EmptyView()
                     } else {
-                        Text("Whiskey Collection")
+                        Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                     }
                 }
             }
+            .specialNavBar()
             .listStyle(.plain)
             .listRowSpacing(10)
             .navigationTitle("Collection")
@@ -51,6 +53,12 @@ struct ContentView: View {
                 AddWhiskeyView()
             }
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink(destination: SettingsView()) {
+                        Image(systemName: "menucard")
+                    }
+                }
+                
                 ToolbarItem(placement: .bottomBar) {
                     Button {
                         isSheetViewShowing = true
@@ -62,13 +70,29 @@ struct ContentView: View {
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
-                    HStack {
-                        Text("Total:")
-                            .font(.custom("AsapCondensed-Light", size: 20, relativeTo: .body))
-                        Text("\(whiskeyLibrary.collectionCount)")
-                            .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                            .bold()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("Sealed:")
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            Text("\(whiskeyLibrary.sealedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .foregroundStyle(Color.aluminum)
+                                .bold()
+                            Text("Opened:")
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                                .foregroundStyle(Color.systemGreen)
+                            Text("\(whiskeyLibrary.openedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .bold()
+                            Text("Finished:")
+                                .foregroundStyle(Color.accentColor)
+                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            Text("\(whiskeyLibrary.finishedCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                                .bold()
+                        }
                     }
+                   
                 }
             }
         }
@@ -78,3 +102,16 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+struct SpecialNavBar: ViewModifier {
+
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "AsapCondensed-Bold", size: 42)!]
+    }
+
+    func body(content: Content) -> some View {
+        content
+    }
+
+}
+

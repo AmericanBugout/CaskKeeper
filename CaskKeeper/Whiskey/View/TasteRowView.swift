@@ -28,7 +28,7 @@ struct TasteRowView: View {
                         .strokeBorder(Color.accentColor, lineWidth: 4)
                         .background(Circle().fill(Color.lead))
                         .frame(width: 50, height: 50)
-                        .shadow(color: Color.cayanne, radius: 5)
+                        .shadow(color: Color.lead, radius: 5)
                     Text("\(taste.score)")
                         .font(.custom("AsapCondensed-Bold", size: 18))
                         .foregroundColor(.accentColor)
@@ -41,11 +41,11 @@ struct TasteRowView: View {
            
             Text(taste.customNotes ?? "No notes entered.")
                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                .foregroundStyle(.gray)
+                .foregroundStyle(.aluminum)
                 .multilineTextAlignment(.leading)
                     
             LazyVGrid(columns: columns) {
-                ForEach(taste.notes) { note in
+                ForEach(taste.notes, id: \.self) { note in
                     HStack {
                         Text(note.name)
                             .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))

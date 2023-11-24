@@ -12,6 +12,9 @@ import Observation
 class WhiskeyLibrary {
     var dataPersistenceManager: WhiskeyPersisting
     
+    var duplicateWhiskeyCountOnJSONImport: Int?
+    var importedWhiskeyCount: Int?
+    
     var collection: [Whiskey] = [] {
         didSet {
             dataPersistenceManager.save(collection: collection)
@@ -20,24 +23,40 @@ class WhiskeyLibrary {
     
     var collectionCount: Int { return collection.count }
     
+    var sealedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .sealed
+        }.count
+    }
+    
+    var openedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .opened
+        }.count
+    }
+    
+    var finishedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .finished
+        }
+        .count
+    }
+    
     init(dataPersistence: WhiskeyPersisting = DataPersistenceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
         
         if isForTesting {
             collection = [
-                Whiskey(label: "Hammered", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "whiskey1") ?? UIImage(), proof: 110.0, style: .bourbon, origin: .us, age: .eight, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Intense Flavor. I would definately buy again.", notes: [Flavor(name: "Oak"), Flavor(name: "Cherry"), Flavor(name: "Burnt Toast")], score: 56), Whiskey.Taste(date: Date(), customNotes: "Cost a lot of money.  Will Need another taste to determine its worth", notes: [Flavor(name: "Oak"), Flavor(name: "Wood"), Flavor(name: "Burnt Toast")], score: 78)]),
-                Whiskey(label: "Big Tower Whiskey", bottle: "8 Year Reserve", purchasedDate: .now, image: UIImage(named: "whiskey2") ?? UIImage(), proof: 111.2, style: .rye, origin: .us, age: .eight, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Strong Oak. Fruity. Not sure I would buy again at the price point", notes: [Flavor(name: "Oak"), Flavor(name: "Cherry"), Flavor(name: "Fruity")], score: 78)]),
-                Whiskey(label: "Rattle Creek", bottle: "Straight Bourbon", purchasedDate: .now, image: UIImage(named: "whiskey3") ?? UIImage() , proof: 131.2, style: .bourbon, origin: .us, age: .twelve,tastingNotes:  [Whiskey.Taste(date: Date(), customNotes: "Wonder viscosity, Bold Flavor and smell", notes: [Flavor(name: "Honey"), Flavor(name: "Toast"), Flavor(name: "Cherry Coke")], score: 97)]),
-                Whiskey(label: "Small Reserve", bottle: "Single Barrel", purchasedDate: .now, image: UIImage(named: "whiskey4") ?? UIImage(), proof: 111.3, style: .bourbon, origin: .us, age: .six, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Nothing special", notes: [Flavor(name: "Vanilla"), Flavor(name: "Caramel"), Flavor(name: "Wheat")], score: 77)])
+                Whiskey(label: "Hammered", bottle: "Straight Rye", purchasedDate: .now, image: UIImage(named: "whiskey1") ?? UIImage(), proof: 110.0, bottleState: .sealed, style: .bourbon, origin: .us, age: 8, price: nil, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Intense Flavor. I would definately buy again.", notes: [Flavor(name: "Oak"), Flavor(name: "Cherry"), Flavor(name: "Burnt Toast")], score: 56), Whiskey.Taste(date: Date(), customNotes: "Cost a lot of money.  Will Need another taste to determine its worth", notes: [Flavor(name: "Oak"), Flavor(name: "Wood"), Flavor(name: "Burnt Toast")], score: 78)]),
+                Whiskey(label: "Big Tower Whiskey", bottle: "8 Year Reserve", purchasedDate: .now, image: UIImage(named: "whiskey2") ?? UIImage(), proof: 111.2, bottleState: .finished, style: .rye, origin: .us, age: 12.5, price: 68.99, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Strong Oak. Fruity. Not sure I would buy again at the price point", notes: [Flavor(name: "Oak"), Flavor(name: "Cherry"), Flavor(name: "Fruity")], score: 78)]),
+                Whiskey(label: "Rattle Creek", bottle: "Straight Bourbon", purchasedDate: .now, image: UIImage(named: "whiskey3") ?? UIImage() , proof: 131.2, bottleState: .opened, style: .bourbon, origin: .us, age: 6, price: 89.33, tastingNotes:  [Whiskey.Taste(date: Date(), customNotes: "Wonder viscosity, Bold Flavor and smell", notes: [Flavor(name: "Honey"), Flavor(name: "Toast"), Flavor(name: "Cherry Coke")], score: 97)]),
+                Whiskey(label: "Small Reserve", bottle: "Single Barrel", purchasedDate: .now, image: UIImage(named: "whiskey4") ?? UIImage(), proof: 111.3, bottleState: .opened, style: .bourbon, origin: .us, age: 8, price: 33.44, tastingNotes: [Whiskey.Taste(date: Date(), customNotes: "Nothing special", notes: [Flavor(name: "Vanilla"), Flavor(name: "Caramel"), Flavor(name: "Wheat")], score: 77)])
             ]
         } else {
             collection = dataPersistence.load()
         }
-        
     }
     
-    /* CRUD Operations */
-   
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
     }
@@ -90,4 +109,44 @@ class WhiskeyLibrary {
             collection[index].firstOpen = false
         }
     }
+    
+    func exportWhiskeyCollectionAsJSON(completion: @escaping (Result<URL, Error>) -> Void) {
+        dataPersistenceManager.exportCollectionToJson(collection: collection, completion: completion)
+    }
+    
+    func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void ) {
+        dataPersistenceManager.importWhiskeyCollectionFromJSON(fileURL: fileURL, completion: completion)
+    }
+    
+    func processImportedWhiskeys(importedWhiskeys: [Whiskey]) {
+        
+        var newWhiskeys: [Whiskey] = []
+        var duplicateCount = 0
+        
+        for whiskey in importedWhiskeys {
+            if self.collection.contains(where: { $0.id == whiskey.id }) {
+                duplicateCount += 1
+            } else {
+                let updatedWhiskey = whiskey
+                if whiskey.bottleState == .opened {
+                    updatedWhiskey.opened = true
+                    updatedWhiskey.firstOpen = false
+                }
+                newWhiskeys.append(updatedWhiskey)
+            }
+        }
+                
+        DispatchQueue.main.async {
+            self.collection.append(contentsOf: newWhiskeys)
+            self.importedWhiskeyCount = (self.importedWhiskeyCount ?? 0) + newWhiskeys.count
+            self.duplicateWhiskeyCountOnJSONImport = (self.duplicateWhiskeyCountOnJSONImport ?? 0) + duplicateCount
+        }
+    }
+    
+    func setCountsToNil() {
+        self.importedWhiskeyCount = nil
+        self.duplicateWhiskeyCountOnJSONImport = nil
+    }
+    
+    
 }

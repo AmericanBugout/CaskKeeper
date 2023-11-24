@@ -18,7 +18,7 @@ struct WhiskeyTasteDetailView: View {
                     Text("Custom Notes")
                         .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
                         .font(.headline)
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aluminum)
                     Text(taste.customNotes ?? "No Notes Entered")
                         .foregroundStyle(Color.accentColor)
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 100, alignment: .topLeading)
@@ -28,12 +28,12 @@ struct WhiskeyTasteDetailView: View {
                 VStack {
                     Text("Notes")
                         .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aluminum)
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     LazyVStack(alignment: .leading) {
-                        ForEach(taste.notes) { flavor in
+                        ForEach(taste.notes, id: \.self) { flavor in
                             FlavorCell(flavor: flavor, isSelected: true)
                         }
                     }
@@ -43,7 +43,7 @@ struct WhiskeyTasteDetailView: View {
                 VStack {
                     Text("Score")
                         .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
-                        .foregroundStyle(.gray)
+                        .foregroundStyle(.aluminum)
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.top)
@@ -52,7 +52,7 @@ struct WhiskeyTasteDetailView: View {
                             .strokeBorder(Color.accentColor, lineWidth: 4)
                             .background(Circle().fill(Color.lead))
                             .frame(width: 200, height: 200)
-                            .shadow(color: .gray, radius: 10)
+                            .shadow(color: .aluminum, radius: 10)
                         Text("\(taste.score)")
                             .font(.custom("AsapCondensed-Bold", size: 68))
                             .foregroundColor(.accentColor)

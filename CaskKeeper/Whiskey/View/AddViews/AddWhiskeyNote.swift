@@ -37,14 +37,15 @@ struct AddWhiskeyNote: View {
                         .cornerRadius(5) // Optional: if you want rounded corners
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.lead, lineWidth: 1) // Optional: if you want a border around the TextEditor
+                                .stroke(Color.lead, lineWidth: 1) 
+                                .padding(.horizontal, 10)// Optional: if you want a border around the TextEditor
                         )
                     
                 } header: {
                     Text("Custom Notes")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading).padding(.leading)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.aluminum)
                 }
                 
                 Section {
@@ -59,13 +60,12 @@ struct AddWhiskeyNote: View {
                         }
                         .cornerRadius(10)
                     }
-                    
                 } header: {
                     HStack {
                         Text("Selected Flavors")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.aluminum)
                         Spacer()
                         NavigationLink {
                             FlavorSelectionView(searchString: $flavorCatalog.searchString)
@@ -79,13 +79,12 @@ struct AddWhiskeyNote: View {
                 
                 Section {
                     VStack {
-                        
                         ZStack {
                             Circle()
                                 .strokeBorder(Color.accentColor, lineWidth: 4)
                                 .background(Circle().fill(Color.lead))
                                 .frame(width: 125, height: 125)
-                                .shadow(color: .gray, radius: 10)
+                                .shadow(color: .aluminum, radius: 10)
                             Text("\(score)")
                                 .font(.custom("AsapCondensed-Bold", size: 68))
                                 .foregroundColor(.accentColor)
@@ -100,15 +99,12 @@ struct AddWhiskeyNote: View {
                         in: 1...100)
                         .padding(.top, 10)
                     }
-                    .background(content: {
-                        
-                    })
                     .padding(.horizontal)
                 } header: {
                     Text("Taste Rating")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.aluminum)
                         .padding(.horizontal)
                         .padding(flavorCatalog.selectedFlavors.isEmpty ? .top : .bottom)
 
@@ -128,9 +124,7 @@ struct AddWhiskeyNote: View {
                             Image(systemName: isBottleFinished ? "checkmark.circle.fill" : "circle")
                                 .resizable()
                                 .frame(width: 40, height: 40)
-                                .foregroundStyle(isBottleFinished ? Color.green : .gray)
-
-
+                                .foregroundStyle(isBottleFinished ? Color.systemGreen : .aluminum)
                         }
                     }
                 } header: {
@@ -138,7 +132,6 @@ struct AddWhiskeyNote: View {
                 }
                 .padding(.top)
                 .padding(.horizontal)
-
             }
                         
             .toolbar {
@@ -162,9 +155,7 @@ struct AddWhiskeyNote: View {
                         dismiss()
                     }
                     .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
-
                 }
-                
             }
             .navigationTitle("Tasting Note")
         }
