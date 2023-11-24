@@ -37,7 +37,8 @@ struct AddWhiskeyNote: View {
                         .cornerRadius(5) // Optional: if you want rounded corners
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.lead, lineWidth: 1) // Optional: if you want a border around the TextEditor
+                                .stroke(Color.lead, lineWidth: 1) 
+                                .padding(.horizontal, 10)// Optional: if you want a border around the TextEditor
                         )
                     
                 } header: {
