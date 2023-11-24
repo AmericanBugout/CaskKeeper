@@ -18,6 +18,8 @@ struct WhiskeyEditView: View {
     @State private var priceString = ""
     @State private var dateOpened: Date = .now
     @State private var purchasedDate: Date = .now
+    @State private var isAgeDefined = false
+
     
     let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -29,65 +31,83 @@ struct WhiskeyEditView: View {
     var body: some View {
         NavigationStack {
             List {
-                WhiskeyEditTextField(text: $whiskey.label, placeholder: "Label")
-                WhiskeyEditTextField(text: $whiskey.bottle, placeholder: "Bottle")
-                
-                Picker("Style", selection: $whiskey.style) {
-                    ForEach(Style.allCases, id: \.self) { style in
-                        Text(style.rawValue)
-                    }
-                }
-                
-                WhiskeyEditTextField(text: $whiskey.batch, placeholder: "Batch #")
-                WhiskeyEditTextField(text: $whiskey.finish, placeholder: "Finish")
-                WhiskeyEditTextField(text: $whiskeyProofString, placeholder: "Proof")
-                    .onChange(of: whiskeyProofString) { oldValue, newValue in
-                        handleProofInput(newValue: newValue)
-                    }
-                
-                DatePicker("Purchased Date", selection: $purchasedDate, displayedComponents: .date)
-                    .onChange(of: purchasedDate) { old, new in
-                        whiskey.purchasedDate = new
-                    }
-                
-                WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Aged")
-                    .onChange(of: whiskeyAgeString) { oldValue, newValue in
-                        handleAgeInput(newValue: newValue)
-                    }
-                
-                Picker("Origin", selection: $whiskey.origin) {
-                    ForEach(Origin.allCases, id: \.self) { origin in
-                        Text(origin.rawValue)
-                    }
-                }
-                
-                Toggle("Opened", isOn: $whiskey.opened)
-                    .onChange(of: whiskey.opened) { oldValue, newValue in
-                        if oldValue == true {
-                            finishWhiskeyConfirmation.toggle()
-                            whiskey.bottleState = .finished
-                        }
-                        
-                        if oldValue == false && whiskey.firstOpen {
-                            whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
-                            whiskey.bottleState = .opened
+                Section {
+                    WhiskeyEditTextField(text: $whiskey.label, placeholder: "Label")
+                    WhiskeyEditTextField(text: $whiskey.bottle, placeholder: "Bottle")
+                    
+                    Picker("Style", selection: $whiskey.style) {
+                        ForEach(Style.allCases, id: \.self) { style in
+                            Text(style.rawValue)
                         }
                     }
-                if whiskey.bottleState == .opened {
-                    DatePicker("Opened Date", selection: $dateOpened, displayedComponents: .date)
-                        .onChange(of: dateOpened) { old, new in
-                            whiskey.dateOpened = new
+                    WhiskeyEditTextField(text: $whiskey.batch, placeholder: "Batch #")
+                    WhiskeyEditTextField(text: $whiskey.finish, placeholder: "Finish")
+                    WhiskeyEditTextField(text: $whiskeyProofString, placeholder: "Proof")
+                        .onChange(of: whiskeyProofString) { oldValue, newValue in
+                            handleProofInput(newValue: newValue)
                         }
+                    
+                    WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Aged")
+                        .onChange(of: whiskeyAgeString) { oldValue, newValue in
+                            handleAgeInput(newValue: newValue)
+                        }
+                    
+                    Picker("Origin", selection: $whiskey.origin) {
+                        ForEach(Origin.allCases, id: \.self) { origin in
+                            Text(origin.rawValue)
+                        }
+                    }
+                    
+                    
+                } header: {
+                    Text("Bottle Details")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                 }
                 
-                Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)
-                WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
-                
-                WhiskeyEditTextField(text: $priceString, placeholder: "Price")
-                    .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .white)
-                    .onChange(of: priceString) { oldalue, newValue in
-                        handlePriceInput(newValue: newValue)
+                Section {
+                    Toggle("Opened", isOn: $whiskey.opened)
+                        .onChange(of: whiskey.opened) { oldValue, newValue in
+                            if oldValue == true {
+                                finishWhiskeyConfirmation.toggle()
+                                whiskey.bottleState = .finished
+                            }
+                            
+                            if oldValue == false && whiskey.firstOpen {
+                                whiskeyLibrary.updateOpenedDate(whiskey: whiskey)
+                                whiskey.bottleState = .opened
+                            }
+                        }
+                    if whiskey.bottleState == .opened {
+                        DatePicker("Opened Date", selection: $dateOpened, displayedComponents: .date)
+                            .onChange(of: dateOpened) { old, new in
+                                whiskey.dateOpened = new
+                            }
                     }
+                    
+                    Toggle("Buy Again", isOn: $whiskey.wouldBuyAgain)
+                    
+                } header: {
+                    Text("Additional Bottle Details")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                }
+                
+                Section {
+                    WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
+                    
+                    DatePicker("Purchased Date", selection: $purchasedDate, displayedComponents: .date)
+                        .onChange(of: purchasedDate) { old, new in
+                            whiskey.purchasedDate = new
+                        }
+                    
+                    WhiskeyEditTextField(text: $priceString, placeholder: "Price")
+                        .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .white)
+                        .onChange(of: priceString) { oldalue, newValue in
+                            handlePriceInput(newValue: newValue)
+                        }
+                } header: {
+                    Text("Purchase Details")
+                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                }
                 
             }
             .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
@@ -103,6 +123,7 @@ struct WhiskeyEditView: View {
                         Button(role: .destructive) {
                             whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
                             whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
+                            whiskeyLibrary.updatedToGifted(whiskey: whiskey)
                             dismiss()
                         } label: {
                             Text("Finish Whiskey")
@@ -114,7 +135,9 @@ struct WhiskeyEditView: View {
             }
             .onAppear(perform: {
                 whiskeyProofString = String(whiskey.proof)
-                whiskeyAgeString = formatNumberString(whiskey.age)
+                if whiskey.age != 0 {
+                    whiskeyAgeString = formatNumberString(whiskey.age)
+                }
                 setupPriceString()
                 
                 if let dateOpened = whiskey.dateOpened {
@@ -124,6 +147,7 @@ struct WhiskeyEditView: View {
                 if let purchasedDate = whiskey.purchasedDate {
                     self.purchasedDate = purchasedDate
                 }
+                print(whiskey.wasGifted)
             })
        }
     }
