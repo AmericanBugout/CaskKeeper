@@ -221,29 +221,32 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     convenience init?(row: String) {
-        let columns = row.components(separatedBy: ",")
+        var columns = row.components(separatedBy: ",")
+        while columns.count > 12 && columns.last?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+            columns.removeLast()
+        }
         guard columns.count == 12 else { return nil }
         
         let trimmedColumns = columns.map({$0.trimmingCharacters(in: .whitespacesAndNewlines)})
         
         guard !trimmedColumns[0].isEmpty, // Label
               !trimmedColumns[1].isEmpty, // Bottle
-              !trimmedColumns[10].isEmpty, // Location Purchased
               let style = Style(rawValue: trimmedColumns[2]),
               let bottleState = BottleState(rawValue: trimmedColumns[3]),
               let origin = Origin(rawValue: trimmedColumns[4])
         else { return nil }
         
         guard let proof = Double(trimmedColumns[6]) else { return nil }
+        
         let age = Double(trimmedColumns[7])
-        let price = Double(trimmedColumns[11])
-        
         let finish = trimmedColumns[5].isEmpty ? "" : trimmedColumns[5]
-        
-        guard let purchasedDate = Whiskey.dateFormatter.date(from: trimmedColumns[8]) else { return nil }
-        let dateOpened = Whiskey.dateFormatter.date(from: trimmedColumns[9])
+        let purchasedDate = Whiskey.dateFormatter.date(from: trimmedColumns[8]) // This can be nil
+        let dateOpened = Whiskey.dateFormatter.date(from: trimmedColumns[9]) // This can be nil as well
+        let locationPurchased = trimmedColumns[10].isEmpty ? "" : trimmedColumns[10]
+        let priceString = trimmedColumns[11]
+        let price = priceString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : Double(priceString)
 
-        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: trimmedColumns[10], proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, price: price, tastingNotes: [])
+        self.init(label: trimmedColumns[0], bottle: trimmedColumns[1], purchasedDate: purchasedDate, dateOpened: dateOpened, locationPurchased: locationPurchased, proof: proof, bottleState: bottleState, style: style, finish: finish, origin: origin, age: age, price: price, tastingNotes: [])
     }
     
     struct Taste: Hashable, Codable, Equatable {

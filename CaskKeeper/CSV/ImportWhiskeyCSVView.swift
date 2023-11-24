@@ -18,10 +18,11 @@ struct ImportWhiskeyCSVView: View {
         "Column 5": "origin",
         "Column 6": "finish",
         "Column 7": "proof",
-        "Column 8": "purchasedDate",
-        "Column 9": "dateOpened",
-        "Column 10": "locationPurhased",
-        "Column 11": "price"
+        "Column 8": "age",
+        "Column 9": "purchasedDate",
+        "Column 10": "dateOpened",
+        "Column 11": "locationPurchased",
+        "Column 12": "price"
     ]
     
     private let stylestate = "style, bottleState"

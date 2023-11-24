@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 enum DocumentPickerError: Error, LocalizedError {
     case couldNotHandleUrl
     case failedToParseContents
-    case invalidHeader
+    case invalidHeader(description: String)
     case invalidData(description: String)
     case invalidStyle(description: String)
     case invalidBottleState(description: String)
@@ -106,8 +106,11 @@ struct DocumentPicker: UIViewControllerRepresentable {
         
         /* Check for expected headers */
         let headers = rows.first!.components(separatedBy: ",")
-        if !DocumentPicker.isValidHeader(headers: headers) {
-            throw DocumentPickerError.invalidHeader
+        
+        do {
+            try isValidHeader(headers: headers)
+        } catch  {
+            throw DocumentPickerError.invalidHeader(description: error.localizedDescription) // rethrow the error or handle it as needed
         }
         
         let dataRows = rows.dropFirst() // Assuming first row is header
@@ -165,24 +168,43 @@ struct DocumentPicker: UIViewControllerRepresentable {
             
             let priceValue = columns.last!.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanedPriceString = priceValue.replacingOccurrences(of: "\\$|,", with: "", options: .regularExpression)
-            if let price = Double(cleanedPriceString) {
-                columns[columns.count - 1] = "\(price)"
-                let updatedRow = columns.joined(separator: ",")
-                if let whiskey = Whiskey(row: updatedRow) {
-                    whiskeys.append(whiskey)
+            var price: Double? = nil
+
+            if !cleanedPriceString.isEmpty {
+                if let parsedPrice = Double(cleanedPriceString) {
+                    price = parsedPrice
                 } else {
-                    throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow $132.00 or 132. No need for commas")
+                    throw DocumentPickerError.invalidPrice(description: "Invalid price format in row \(index + 2). Please enter a valid price or leave it blank.")
                 }
+            }
+
+            // Now 'price' is either 'nil' (if the price was not provided) or contains the parsed Double value
+            columns[columns.count - 1] = price.map { String($0) } ?? ""
+
+            let updatedRow = columns.joined(separator: ",")
+            if let whiskey = Whiskey(row: updatedRow) {
+                whiskeys.append(whiskey)
             } else {
-                throw DocumentPickerError.invalidPrice(description: "Invalid price format. Please follow $132.00 or 132. No need for commas")
+                throw DocumentPickerError.invalidData(description: "Unable to parse data into Whiskey object in row \(index + 2).")
             }
         }
         return whiskeys
     }
     
-    static func isValidHeader(headers: [String]) -> Bool {
+    static func isValidHeader(headers: [String]) throws {
         let expectedHeaders = ["label", "bottle", "style", "bottleState", "origin", "finish", "proof", "age", "purchasedDate", "dateOpened", "locationPurchased", "price"]
-        return headers == expectedHeaders
+        
+        // Check if the number of headers matches.
+        guard headers.count == expectedHeaders.count else {
+            throw DocumentPickerError.invalidHeader(description: "Header count mismatch. Expected \(expectedHeaders.count) headers, found \(headers.count).")
+        }
+
+        // Check each header.
+        for (index, header) in headers.enumerated() {
+            if header.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() != expectedHeaders[index].lowercased() {
+                throw DocumentPickerError.invalidHeader(description: "Header mismatch at index \(index + 1): Expected '\(expectedHeaders[index])', found '\(header)'.")
+            }
+        }
     }
     
     static func isValidPrice(_ price: String) -> Bool {

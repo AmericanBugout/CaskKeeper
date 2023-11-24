@@ -27,7 +27,7 @@ class DataPersistenceManager: WhiskeyPersisting {
     
     
     static var collectionsFileURL: URL {
-        return documentsDirectoryURL.appendingPathComponent("collections.plist")
+        return documentsDirectoryURL.appendingPathComponent("collection_data.plist")
     }
     
     
@@ -58,20 +58,10 @@ class DataPersistenceManager: WhiskeyPersisting {
     
     func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "M/d/yyyy"
               let encoder = JSONEncoder()
-//            encoder.dateEncodingStrategy = .custom({ date, encoder in
-//                let dateString = dateFormatter.string(from: date)
-//                print("Encoding date: \(dateString)")
-//                var container = encoder.singleValueContainer()
-//                try container.encode(dateString)
-//            })
-//            
             do {
-                
                 let jsonData = try encoder.encode(collection)
-                let fileName = "WhiskeyCollection.json"
+                let fileName = "collection.json"
                 let fileURL = DataPersistenceManager.documentsDirectoryURL.appendingPathComponent(fileName)
                 try jsonData.write(to: fileURL, options: .atomicWrite)
                 DispatchQueue.main.async {

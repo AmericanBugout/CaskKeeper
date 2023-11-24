@@ -219,6 +219,7 @@ struct WhiskeyDetailView: View {
         .listStyle(.plain)
         .listRowSpacing(-10)
         .navigationTitle("Whiskey Details")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 HStack(spacing: 20) {
