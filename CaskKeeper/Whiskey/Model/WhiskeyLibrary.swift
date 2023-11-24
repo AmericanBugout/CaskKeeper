@@ -12,6 +12,9 @@ import Observation
 class WhiskeyLibrary {
     var dataPersistenceManager: WhiskeyPersisting
     
+    var duplicateWhiskeyCountOnJSONImport: Int?
+    var importedWhiskeyCount: Int?
+    
     var collection: [Whiskey] = [] {
         didSet {
             dataPersistenceManager.save(collection: collection)
@@ -53,7 +56,7 @@ class WhiskeyLibrary {
             collection = dataPersistence.load()
         }
     }
-        
+    
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
     }
@@ -115,14 +118,35 @@ class WhiskeyLibrary {
         dataPersistenceManager.importWhiskeyCollectionFromJSON(fileURL: fileURL, completion: completion)
     }
     
-    func importNewWhiskeys(importedWhiskeys: [Whiskey]) -> (newWhiskeys: [Whiskey], duplicateCount: Int) {
-       let newWhiskeys = importedWhiskeys.filter { importedWhiskey in
-            !collection.contains { existingWhiskey in
-                existingWhiskey.id == importedWhiskey.id
+    func processImportedWhiskeys(importedWhiskeys: [Whiskey]) {
+        
+        var newWhiskeys: [Whiskey] = []
+        var duplicateCount = 0
+        
+        for whiskey in importedWhiskeys {
+            if self.collection.contains(where: { $0.id == whiskey.id }) {
+                duplicateCount += 1
+            } else {
+                let updatedWhiskey = whiskey
+                if whiskey.bottleState == .opened {
+                    updatedWhiskey.opened = true
+                    updatedWhiskey.firstOpen = false
+                }
+                newWhiskeys.append(updatedWhiskey)
             }
         }
-        let duplicateCount = importedWhiskeys.count - newWhiskeys.count
-        return (newWhiskeys, duplicateCount)
+                
+        DispatchQueue.main.async {
+            self.collection.append(contentsOf: newWhiskeys)
+            self.importedWhiskeyCount = (self.importedWhiskeyCount ?? 0) + newWhiskeys.count
+            self.duplicateWhiskeyCountOnJSONImport = (self.duplicateWhiskeyCountOnJSONImport ?? 0) + duplicateCount
+        }
     }
+    
+    func setCountsToNil() {
+        self.importedWhiskeyCount = nil
+        self.duplicateWhiskeyCountOnJSONImport = nil
+    }
+    
     
 }

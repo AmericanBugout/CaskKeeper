@@ -123,7 +123,6 @@ struct WhiskeyEditView: View {
                         Button(role: .destructive) {
                             whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)
                             whiskeyLibrary.updateWhiskey(updatedWhiskey: whiskey)
-                            whiskeyLibrary.updatedToGifted(whiskey: whiskey)
                             dismiss()
                         } label: {
                             Text("Finish Whiskey")
@@ -146,8 +145,7 @@ struct WhiskeyEditView: View {
                 
                 if let purchasedDate = whiskey.purchasedDate {
                     self.purchasedDate = purchasedDate
-                }
-                print(whiskey.wasGifted)
+                }                
             })
        }
     }

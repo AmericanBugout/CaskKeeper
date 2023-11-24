@@ -113,7 +113,6 @@ struct ExportWhiskeyCollectionJSONView: View {
                         exportError = error
                         showingingDocumentExporter = false
                         exportWasSuccessful = false
-                        print(error.localizedDescription)
                     }
                 }
             }

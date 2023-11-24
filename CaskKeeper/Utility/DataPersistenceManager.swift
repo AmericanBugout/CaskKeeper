@@ -37,7 +37,7 @@ class DataPersistenceManager: WhiskeyPersisting {
             let data = try encoder.encode(collection)
             try data.write(to: DataPersistenceManager.collectionsFileURL, options: .atomic)
         } catch {
-            print("Error saving data: \(error.localizedDescription)")
+
         }
     }
     
@@ -81,10 +81,6 @@ class DataPersistenceManager: WhiskeyPersisting {
             let decoder = JSONDecoder()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "M/d/yyyy"
-            
-            if let whiskeyData = String(data: jsonWhiskeyData, encoding: .utf8) {
-                print(whiskeyData)
-            }
             let collection = try decoder.decode([Whiskey].self, from: jsonWhiskeyData)
             completion(.success(collection))
         } catch {

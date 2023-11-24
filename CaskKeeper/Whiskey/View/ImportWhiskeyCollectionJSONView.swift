@@ -13,9 +13,7 @@ struct ImportWhiskeyCollectionJSONView: View {
     @State private var isImporting = false
     @State private var isErrorShowing = false
     @State private var errorFromImport: Error?
-    @State private var importWasSuccess = false
-    @State private var importedCollection: [Whiskey] = []
-    @State private var duplicateCount: Int?
+    @State private var importWasSuccess: Bool? = nil
     
     var body: some View {
         List {
@@ -30,11 +28,13 @@ struct ImportWhiskeyCollectionJSONView: View {
             }
             .listRowSeparator(.hidden)
             
-            if !importWasSuccess {
+            if importWasSuccess == nil {
                 VStack {
                     Button {
                         isImporting = true
-                        importWasSuccess = false
+                        importWasSuccess = nil
+                        errorFromImport = nil
+                        isErrorShowing = false
                     } label: {
                         HStack {
                             Text("Import Collection")
@@ -51,6 +51,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                 }
                 .frame(maxWidth: .infinity)
             }
+            
             
             if errorFromImport != nil {
                 VStack {
@@ -72,34 +73,32 @@ struct ImportWhiskeyCollectionJSONView: View {
             VStack {
                 VStack {
                     HStack {
-                        Text("\(importedCollection.count)")
-                            .font(.custom("AsapCondensed-Bold", size: 22, relativeTo: .body))
-                        Text("unique whiskeys found from import")
-                            .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                        if let uniqueCount = whiskeyLibrary.importedWhiskeyCount {
+                            Text("\(uniqueCount)")
+                                .font(.custom("AsapCondensed-Bold", size: 22, relativeTo: .body))
+                            Text("unique whiskeys found from import")
+                                .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                        }
                     }
-                    .foregroundStyle(importWasSuccess ? .green : .aluminum)
-                    .opacity(importWasSuccess ? 1 : 0)
-                    .scaleEffect(importWasSuccess ? 1 : 0.9)
-                    .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
-                    .offset(x: importWasSuccess ? 0 : 800, y: 0)
+                    .foregroundStyle(importWasSuccess ?? false ? .green : .aluminum)
+                    .opacity(importWasSuccess ?? false ? 1 : 0)
+                    .offset(x: importWasSuccess ?? false ? 0 : 800, y: 0)
                     .animation(Animation.easeInOut(duration: 1), value: importWasSuccess)
                     
-                    if let duplicates = duplicateCount {
-                        Text("There were \(duplicates) duplicates in the import.")
+                    if let duplicateCount = whiskeyLibrary.duplicateWhiskeyCountOnJSONImport {
+                        Text("There were \(duplicateCount) duplicates in the import.")
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                             .foregroundStyle(.aluminum)
+                            .padding(.top, 1)
                     }
                 }
-                
-                
-                Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
+                Image(systemName: getSystemImageName())
                     .resizable()
                     .frame(width: 30, height: 30)
-                    .foregroundStyle(importWasSuccess ? .green : .aluminum)
-                    .opacity(importWasSuccess ? 1 : 0)
-                    .scaleEffect(importWasSuccess ? 1 : 0.9)
-                    .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
-                    .animation(Animation.smooth(duration: 2), value: importWasSuccess)
+                    .foregroundColor(getImageColor())
+                    .opacity(importWasSuccess == nil ? 0 : 1)  // Always visible
+                    .scaleEffect(getImageScale())
+                    .animation(.easeInOut(duration: 2), value: importWasSuccess)
                     .padding(.top, 4)
             }
             .frame(maxWidth: .infinity)
@@ -115,28 +114,41 @@ struct ImportWhiskeyCollectionJSONView: View {
                         }
                         whiskeyLibrary.importWhiskeyCollectionFromJSON(fileURL: selectedFile) { result in
                             switch result {
-                            case .success(let importedWhiskeys):
-                                DispatchQueue.main.async {
-                                    self.importedCollection = whiskeyLibrary.importNewWhiskeys(importedWhiskeys: importedWhiskeys).newWhiskeys
-                                    self.duplicateCount = whiskeyLibrary.importNewWhiskeys(importedWhiskeys: importedWhiskeys).duplicateCount
-                                    self.importWasSuccess = true
-                                    whiskeyLibrary.collection.append(contentsOf: importedCollection)
-                                }
+                            case .success(let allImported):
+                                whiskeyLibrary.processImportedWhiskeys(importedWhiskeys: allImported)
+                                self.importWasSuccess = true
                             case .failure(let error):
                                 self.isErrorShowing = true
                                 self.errorFromImport = error
                             }
-                      }
+                        }
                     }
                 } catch {
                     isErrorShowing = true
                     self.errorFromImport = error
-                    print("Error: \(String(describing: errorFromImport?.localizedDescription))")
                 }
             }
         }
+        .onDisappear {
+            whiskeyLibrary.setCountsToNil()
+        }
         .listStyle(.plain)
         .navigationTitle("Import Collection")
+    }
+    
+    private func getSystemImageName() -> String {
+        guard let importWasSuccess = importWasSuccess else { return "" }
+        return importWasSuccess ? (whiskeyLibrary.duplicateWhiskeyCountOnJSONImport ?? 0 > 0 ? "exclamationmark.triangle.fill" : "checkmark.circle.fill") : "x.circle.fill"
+    }
+    
+    private func getImageColor() -> Color {
+        guard let importWasSuccess = importWasSuccess else { return .clear }
+        return importWasSuccess ? (whiskeyLibrary.duplicateWhiskeyCountOnJSONImport ?? 0 > 0 ? .gray : .green) : .red
+    }
+
+    private func getImageScale() -> CGFloat {
+        guard let importWasSuccess = importWasSuccess else { return 1 }  // Return the default scale if the import hasn't been attempted
+        return importWasSuccess && (whiskeyLibrary.duplicateWhiskeyCountOnJSONImport ?? 0 == 0) ? 1 : 0.9
     }
 }
 
