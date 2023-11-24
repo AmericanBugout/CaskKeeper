@@ -75,9 +75,9 @@ struct ImportWhiskeyCSVView: View {
                 }
                 .frame(maxWidth: .infinity)
                 
-                Text("finish, purchasedDate, dateOpened, locationPurchased and price are optional.")
+                Text("finish, purchasedDate, dateOpened, locationPurchased, age, and price are optional.")
                     .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                Text("The header column is necessary. If no value exists for that field, leave the value as a blank")
+                Text("The header column is necessary. If no value exists for that field, leave the value as blank")
                     .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
             } header: {
                 Text("Required Header Row Values")
