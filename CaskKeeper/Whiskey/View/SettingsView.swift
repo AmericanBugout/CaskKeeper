@@ -49,7 +49,8 @@ struct SettingsView: View {
                     
                     Label {
                         Text("Delete Collection")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(Color.primary)
+                        
                     } icon: {
                         Image(systemName: "trash.fill")
                     }
@@ -75,10 +76,10 @@ struct SettingsView: View {
                     whiskeyLibrary.collection.removeAll()
                     isCollectionDeleted = true
                 } label: {
-                    Text("Remove")
+                    Text("Remove".capitalized)
                 }
             } message: {
-                Text("This will remove all whiskeys in your collection. Are you sure?")
+                Text("This will remove all whiskeys in your collection. Are you sure?".capitalized)
             }
             
             Section {
