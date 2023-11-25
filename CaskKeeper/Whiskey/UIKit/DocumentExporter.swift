@@ -13,11 +13,17 @@ struct DocumentExporter: UIViewControllerRepresentable {
     var onExportCompleted: (Result<URL, Error>) -> Void
 
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("WhiskeyCollection.json")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMddyyyy"
+        let currentDate = Date()
+        let dateString = dateFormatter.string(from: currentDate)
+
+        let filename = "collection.\(dateString).json"
+        let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(filename)
         do {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .withoutEscapingSlashes
-            
+            encoder.userInfo[CodingUserInfoKey(rawValue: "exporting")!] = true
             let jsonData = try encoder.encode(collection)
             try jsonData.write(to: tempURL, options: .atomic)
             let picker = UIDocumentPickerViewController(forExporting: [tempURL])

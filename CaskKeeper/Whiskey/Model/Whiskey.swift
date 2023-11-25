@@ -149,6 +149,30 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         case finish
         case bottleState
         case opened
+        case imageData
+        case firstOpen
+        case dateOpened
+        case consumedDate
+        case price
+        case wouldBuyAgain
+        case locationPurchased
+        case bottleFinished
+        case tastingNotes
+    }
+    
+    enum ExportingCodingKeys: String, CodingKey {
+        case id
+        case label
+        case bottle
+        case batch
+        case purchasedDate
+        case proof
+        case style
+        case origin
+        case age
+        case finish
+        case bottleState
+        case opened
         case firstOpen
         case dateOpened
         case consumedDate
@@ -160,6 +184,56 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     func encode(to encoder: Encoder) throws {
+        if encoder.userInfo[CodingUserInfoKey(rawValue: "exporting")!] as? Bool == true {
+            var container = encoder.container(keyedBy: ExportingCodingKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encode(label, forKey: .label)
+            try container.encode(bottle, forKey: .bottle)
+            try container.encode(batch, forKey: .batch)
+            try container.encode(proof, forKey: .proof)
+            try container.encode(style, forKey: .style)
+            try container.encode(origin, forKey: .origin)
+            try container.encode(age, forKey: .age)
+            try container.encode(finish, forKey: .finish)
+            try container.encode(bottleState, forKey: .bottleState)
+            try container.encode(opened, forKey: .opened)
+            try container.encode(firstOpen, forKey: .firstOpen)
+            try encodeDateIfPresent(date: self.dateOpened, to: &container, forKey: .dateOpened)
+            try encodeDateIfPresent(date: self.consumedDate, to: &container, forKey: .consumedDate)
+            try container.encode(price, forKey: .price)
+            try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
+            try container.encode(locationPurchased, forKey: .locationPurchased)
+            try container.encode(bottleFinished, forKey: .bottleFinished)
+            try container.encode(tastingNotes, forKey: .tastingNotes)
+            try container.encode(purchasedDate, forKey: .purchasedDate)
+            try encodeDateIfPresent(date: self.purchasedDate, to: &container, forKey: .purchasedDate)
+        } else {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encode(label, forKey: .label)
+            try container.encode(bottle, forKey: .bottle)
+            try container.encode(batch, forKey: .batch)
+            try container.encode(proof, forKey: .proof)
+            try container.encode(style, forKey: .style)
+            try container.encode(origin, forKey: .origin)
+            try container.encodeIfPresent(imageData, forKey: .imageData)
+            try container.encode(age, forKey: .age)
+            try container.encode(finish, forKey: .finish)
+            try container.encode(bottleState, forKey: .bottleState)
+            try container.encode(opened, forKey: .opened)
+            try container.encode(firstOpen, forKey: .firstOpen)
+            try encodeDateIfPresent(date: self.dateOpened, to: &container, forKey: .dateOpened)
+            try encodeDateIfPresent(date: self.consumedDate, to: &container, forKey: .consumedDate)
+            try container.encode(price, forKey: .price)
+            try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
+            try container.encode(locationPurchased, forKey: .locationPurchased)
+            try container.encode(bottleFinished, forKey: .bottleFinished)
+            try container.encode(tastingNotes, forKey: .tastingNotes)
+            try container.encode(purchasedDate, forKey: .purchasedDate)
+            try encodeDateIfPresent(date: self.purchasedDate, to: &container, forKey: .purchasedDate)
+        }
+        
+        
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
         try container.encode(label, forKey: .label)
@@ -198,6 +272,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
             }
         }
         
+        imageData = try container.decodeIfPresent(Data.self, forKey: .imageData)
         id = try container.decode(UUID.self, forKey: .id)
         label = try container.decode(String.self, forKey: .label)
         bottle = try container.decode(String.self, forKey: .bottle)
@@ -314,7 +389,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         self.imageData = image.jpegData(compressionQuality: 0.3)
     }
     
-    func encodeDateIfPresent(date: Date?, to container: inout KeyedEncodingContainer<Whiskey.CodingKeys>, forKey key: Whiskey.CodingKeys) throws {
+    func encodeDateIfPresent<T: CodingKey>(date: Date?, to container: inout KeyedEncodingContainer<T>, forKey key: T) throws {
         if let date = date {
             let dateString = Whiskey.dateFormatter.string(from: date)
             try container.encode(dateString, forKey: key)
