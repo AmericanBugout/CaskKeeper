@@ -43,9 +43,9 @@ Generic,12 Year CS,Bourbon,Open,United States,6,90,10,11/16/2023,11/17/2023,Doll
 label,bottle,style,bottleState,origin,finish,proof,age,purchasedDate,dateOpened,locationPurchased,price
 Generic,12 Year CS,Bourbon,Open,United States,,90,,11/16/2023,11/17/2023,Dollar,45.99
 
-###### Optional finish, purchasedDate, dateOpened, locationPurchased
+###### Optional finish,age, purchasedDate, dateOpened, locationPurchased, price
 label,bottle,style,bottleState,origin,finish,proof,age,purchasedDate,dateOpened,locationPurchased,price
-Generic1,CS Limited Release,Rye,Sealed,United States,,118.6,6,,,,,
+Generic1,CS Limited Release,Rye,Sealed,United States,,118.6,,,,,,
 
 
 
