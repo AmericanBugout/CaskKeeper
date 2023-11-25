@@ -27,9 +27,9 @@ If you don't have values to enter for these optional fields, simply leave the va
 style - Bourbon Irish Scotch Rye Japanese Tennessee Canadian <br>
 bottleState - Sealed Open Finished <br>
 origin - Scotland United Stated Ireland Canada Japan England <br>
-purchasedData - mm/dd/yyyy OR m/d/yyyy
-dateOpened - mm/dd/yyyy or m/d/yyyy
-proof - Whole number or decimal 2 places
-age - Whole number or decimal 1 place
-price - price format with or without the dollar sign. No commas.
+purchasedData - mm/dd/yyyy OR m/d/yyyy <br>
+dateOpened - mm/dd/yyyy or m/d/yyyy <br>
+proof - Whole number or decimal 2 places <br>
+age - Whole number or decimal 1 place <br>
+price - price format with or without the dollar sign. No commas. <br>
 
