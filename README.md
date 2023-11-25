@@ -16,7 +16,7 @@
 
 | label   | bottle         | style   | bottleState | origin        | finish | proof | age | purchasedDate | dateOpened | locationPurchased | price |
 |---------|----------------|---------|--------------|---------------|--------|-------|-----|---------------|-------------|--------------------|-------|
-| Generic | 12 Year CS     | Bourbon | Open         | United States |        | 90    | 10  | 11/16/2023    | 11/17/2023  | Dollar             | 45.99 |
+| Generic | 12 Year CS     | Bourbon | Open         | United States | Toasted Oak  | 90    | 10  | 11/16/2023    | 11/17/2023  | Dollar             | 45.99 |
 
 
 ##### #Optional Values
@@ -24,7 +24,7 @@
 If you don't have values to enter for these optional fields, simply leave the value as blank.
 
 ##### #Certain headers need exact values.
-_**style**_ - Bourbon Irish Scotch Rye Japanese Tennessee Canadian <br>
+_**style**_ - <small>Bourbon Irish Scotch Rye Japanese Tennessee Canadian</small> <br>
 _**bottleState**_ - Sealed Open Finished <br>
 _**origin**_ - Scotland United Stated Ireland Canada Japan England <br>
 _**purchasedData**_ - mm/dd/yyyy OR m/d/yyyy <br>
@@ -32,4 +32,22 @@ _**dateOpened**_ - mm/dd/yyyy or m/d/yyyy <br>
 _**proof**_ - Whole number or decimal 2 places <br>
 _**age**_ - Whole number or decimal 1 place <br>
 _**price**_ - price format with or without the dollar sign. No commas. <br>
+
+#### Examples
+
+###### Every header filled
+label,bottle,style,bottleState,origin,finish,proof,age,purchasedDate,dateOpened,locationPurchased,price
+Generic,12 Year CS,Bourbon,Open,United States,6,90,10,11/16/2023,11/17/2023,Dollar,45.99
+
+###### Optional age
+label,bottle,style,bottleState,origin,finish,proof,age,purchasedDate,dateOpened,locationPurchased,price
+Generic,12 Year CS,Bourbon,Open,United States,,90,,11/16/2023,11/17/2023,Dollar,45.99
+
+###### Optional finish, purchasedDate, dateOpened, locationPurchased
+label,bottle,style,bottleState,origin,finish,proof,age,purchasedDate,dateOpened,locationPurchased,price
+Generic1,CS Limited Release,Rye,Sealed,United States,,118.6,6,,,,,
+
+
+
+
 
