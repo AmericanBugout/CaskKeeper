@@ -100,7 +100,7 @@ struct WhiskeyEditView: View {
                         }
                     
                     WhiskeyEditTextField(text: $priceString, placeholder: "Price")
-                        .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .white)
+                        .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .primary)
                         .onChange(of: priceString) { oldalue, newValue in
                             handlePriceInput(newValue: newValue)
                         }
@@ -229,43 +229,24 @@ struct WhiskeyEditView: View {
     }
     
     func handlePriceInput(newValue: String) {
-        // If the input is empty or just a dollar sign, set it to an empty string and whiskey.price to nil
-        if newValue.isEmpty || newValue == "$" {
-            priceString = ""
-            whiskey.price = nil
-        } else if newValue.first == "$" {
-            // Drop the dollar sign to check the numeric part
-            let numericPart = String(newValue.dropFirst())
-            
-            // Check if the numeric part is a valid currency format (whole number or up to two decimal places)
-            let currencyRegex = "^[0-9]+(\\.\\d{0,2})?$"
-            if let numericValue = Double(numericPart), numericPart.range(of: currencyRegex, options: .regularExpression) != nil {
-                // If it's a valid currency format, update the price
-                priceString = newValue
-                whiskey.price = numericValue // Assuming whiskey is a class instance that's accessible here and price can be non-nil
-            } else {
-                // If not a valid currency format, revert to the previous valid value
-                // This will prevent invalid characters or formats from being entered
-                if !numericPart.isEmpty {
-                    priceString = "$" + numericPart.dropLast()
-                }
-            }
-        } else {
-            // If the new value does not start with a dollar sign, check if it's a valid number
-            let wholeNumberRegex = "^[0-9]+$"
-            if let numericValue = Double(newValue), newValue.range(of: wholeNumberRegex, options: .regularExpression) != nil {
-                // Directly use the whole number as the price
-                priceString = "$" + newValue
-                whiskey.price = numericValue // Assuming whiskey is a class instance that's accessible here and price can be non-nil
-            } else {
-                // If it's not a valid whole number, reset to the previous valid price or default to an empty string
-                priceString = priceString.isEmpty ? "" : priceString
-            }
-        }
+        // Remove any characters that are not numbers, a period, or a dollar sign at the beginning
+        let filteredString = newValue.filter { "0123456789.".contains($0) }
         
+        // Check if the newValue starts with a dollar sign and remove it for the numeric check
+        let numericString = newValue.first == "$" ? String(newValue.dropFirst()) : filteredString
+        
+        // Regex for valid currency format (optional dollar sign, numbers, optional period, up to two decimal places)
+        let currencyRegex = "^(\\d*)(\\.\\d{0,2})?$"
+        
+        if numericString.range(of: currencyRegex, options: .regularExpression) != nil {
+            // It's a valid currency format, update the priceString and whiskey.price
+            priceString = "$" + numericString
+            whiskey.price = Double(numericString)
+        } else {
+            // If it's not a valid currency format, don't update the priceString or whiskey.price
+            // This will prevent invalid characters or formats from being entered
+        }
     }
-
-
 
 }
 
