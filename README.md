@@ -1,5 +1,9 @@
 # CaskKeeper
 
+#### - Release 2.2.1 -
+- fixed an issue with swipe to delete
+- fixed an issue with lagging when scrolling with images displaying
+
 #### - Release 2.0.1 -
 
 * Ability to import your whiskey collection with a CSV file.
