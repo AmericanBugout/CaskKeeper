@@ -96,11 +96,10 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     }
     
     var image: Image? {
-        if let data = imageData {
-            if let newImageData = UIImage(data: data)?.jpegData(compressionQuality: 0.3) {
-                if let newImage = UIImage(data: newImageData) {
-                    return Image(uiImage: newImage)
-                }
+        if let data = imageData, let uiImage = UIImage(data: data) {
+            // Resize the image to your required size while maintaining aspect ratio
+            if let resizedImage = resizeImage(image: uiImage, targetSize: CGSize(width: 115, height: 115)) {
+                return Image(uiImage: resizedImage)
             }
         }
         return nil
@@ -397,4 +396,24 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
             try container.encodeNil(forKey: key) // Explicitly encode nil if there is no date
         }
     }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let widthRatio = targetSize.width / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        let scaleFactor = min(widthRatio, heightRatio)
+
+        let scaledImageSize = CGSize(
+            width: image.size.width * scaleFactor,
+            height: image.size.height * scaleFactor
+        )
+
+        let renderer = UIGraphicsImageRenderer(size: scaledImageSize)
+        let scaledImage = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: scaledImageSize))
+        }
+
+        return scaledImage
+    }
+
+
 }

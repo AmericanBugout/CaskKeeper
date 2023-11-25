@@ -20,14 +20,14 @@ struct WhiskeyRowView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .clipShape(Circle())
-                            .frame(width: 60, height: 60)
+                            .frame(width: 70, height: 70)
                             .background(Circle().fill(.aluminum))
                     } else {
                         if let image = whiskey.image {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 60, height: 60)
+                                .frame(width: 70, height: 70)
                                 .clipShape(Circle())
                         }
                     }
