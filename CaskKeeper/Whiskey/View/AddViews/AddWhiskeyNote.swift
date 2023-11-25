@@ -124,7 +124,7 @@ struct AddWhiskeyNote: View {
                             Image(systemName: isBottleFinished ? "checkmark.circle.fill" : "circle")
                                 .resizable()
                                 .frame(width: 40, height: 40)
-                                .foregroundStyle(isBottleFinished ? Color.systemGreen : .aluminum)
+                                .foregroundStyle(isBottleFinished ? Color.regularGreen : .aluminum)
                         }
                     }
                 } header: {

@@ -19,7 +19,7 @@ struct ContentView: View {
                     if whiskeyLibrary.collection.isEmpty {
                         EmptyView()
                     } else {
-                        ForEach(whiskeyLibrary.collection.sorted(by: {$0.label < $1.label}), id: \.self) { whiskey in
+                        ForEach(whiskeyLibrary.collection) { whiskey in
                             ZStack {
                                 NavigationLink {
                                     WhiskeyDetailView(whiskey: whiskey)
@@ -44,6 +44,9 @@ struct ContentView: View {
                             .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
                     }
                 }
+            }
+            .onAppear {
+                whiskeyLibrary.sortCollection()
             }
             .specialNavBar()
             .listStyle(.plain)
@@ -80,7 +83,7 @@ struct ContentView: View {
                                 .bold()
                             Text("Opened:")
                                 .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.systemGreen)
+                                .foregroundStyle(Color.regularGreen)
                             Text("\(whiskeyLibrary.openedCount)")
                                 .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
                                 .bold()

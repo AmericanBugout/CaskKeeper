@@ -17,6 +17,7 @@ class WhiskeyLibrary {
     
     var collection: [Whiskey] = [] {
         didSet {
+         //   collection.sort { $0.label < $1.label }
             dataPersistenceManager.save(collection: collection)
         }
     }
@@ -62,7 +63,10 @@ class WhiskeyLibrary {
     }
     
     func deleteAtIndex(index: IndexSet) {
-        collection.remove(atOffsets: index)
+        withAnimation(Animation.smooth) {
+            collection.remove(atOffsets: index)
+            sortCollection()
+        }
     }
     
     func updateWhiskey(updatedWhiskey: Whiskey) {
@@ -86,11 +90,14 @@ class WhiskeyLibrary {
     }
     
     func deleteTasting(whiskey: Whiskey, indexSet: IndexSet) {
-        if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
-            let updateWhiskey = collection[index]
-            updateWhiskey.tastingNotes.remove(atOffsets: indexSet)
-            collection[index] = updateWhiskey
+        DispatchQueue.main.async {
+            if let index = self.collection.firstIndex(where: {$0.id == whiskey.id}) {
+                let updateWhiskey = self.collection[index]
+                updateWhiskey.tastingNotes.remove(atOffsets: indexSet)
+                self.collection[index] = updateWhiskey
+            }
         }
+        
     }
     
     func updateWhiskeyToFinished(whiskey: Whiskey) {
@@ -119,7 +126,6 @@ class WhiskeyLibrary {
     }
     
     func processImportedWhiskeys(importedWhiskeys: [Whiskey]) {
-        
         var newWhiskeys: [Whiskey] = []
         var duplicateCount = 0
         
@@ -138,6 +144,7 @@ class WhiskeyLibrary {
                 
         DispatchQueue.main.async {
             self.collection.append(contentsOf: newWhiskeys)
+            self.sortCollection()
             self.importedWhiskeyCount = (self.importedWhiskeyCount ?? 0) + newWhiskeys.count
             self.duplicateWhiskeyCountOnJSONImport = (self.duplicateWhiskeyCountOnJSONImport ?? 0) + duplicateCount
         }
@@ -148,5 +155,8 @@ class WhiskeyLibrary {
         self.duplicateWhiskeyCountOnJSONImport = nil
     }
     
+    func sortCollection() {
+        collection.sort(by: { $0.label < $1.label })
+    }
     
 }

@@ -60,7 +60,7 @@ struct WhiskeyRowView: View {
                     case .opened:
                         Text("Open".uppercased())
                             .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
-                            .foregroundStyle(Color.systemGreen)
+                            .foregroundStyle(Color.regularGreen)
                     case .finished:
                         Text("Finished".uppercased())
                             .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
