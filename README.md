@@ -1,3 +1,7 @@
 # CaskKeeper
 
-#Release 1.0.0
+#Release 2.0.1
+
+- Support export/import  to/from JSON
+- Supports import from CSV
+- 
