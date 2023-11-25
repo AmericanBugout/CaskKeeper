@@ -19,17 +19,17 @@
 | Generic | 12 Year CS     | Bourbon | Open         | United States |        | 90    | 10  | 11/16/2023    | 11/17/2023  | Dollar             | 45.99 |
 
 
-##### Optional Values
-#### finish, age, purchasedDate, dateOpened, locationPurchased, price
+##### #Optional Values
+#### **_finish, age, purchasedDate, dateOpened, locationPurchased, price_**
 If you don't have values to enter for these optional fields, simply leave the value as blank.
 
-##### Certain headers need exact values.
-style - Bourbon Irish Scotch Rye Japanese Tennessee Canadian <br>
-bottleState - Sealed Open Finished <br>
-origin - Scotland United Stated Ireland Canada Japan England <br>
-purchasedData - mm/dd/yyyy OR m/d/yyyy <br>
-dateOpened - mm/dd/yyyy or m/d/yyyy <br>
-proof - Whole number or decimal 2 places <br>
-age - Whole number or decimal 1 place <br>
-price - price format with or without the dollar sign. No commas. <br>
+##### #Certain headers need exact values.
+_**style**_ - Bourbon Irish Scotch Rye Japanese Tennessee Canadian <br>
+_**bottleState**_ - Sealed Open Finished <br>
+_**origin**_ - Scotland United Stated Ireland Canada Japan England <br>
+_**purchasedData**_ - mm/dd/yyyy OR m/d/yyyy <br>
+_**dateOpened**_ - mm/dd/yyyy or m/d/yyyy <br>
+_**proof**_ - Whole number or decimal 2 places <br>
+_**age**_ - Whole number or decimal 1 place <br>
+_**price**_ - price format with or without the dollar sign. No commas. <br>
 
