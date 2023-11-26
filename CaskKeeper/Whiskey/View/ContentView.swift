@@ -11,7 +11,6 @@ struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing: Bool = false
     @State private var importCSVView: Bool = false
-    @State private var searchString = ""
     
     var body: some View {
         NavigationStack {
@@ -101,8 +100,6 @@ struct ContentView: View {
                 }
             }
         }
-        .searchable(text: $searchString)
-
     }
 }
 
