@@ -188,6 +188,14 @@ struct DocumentPicker: UIViewControllerRepresentable {
                 throw DocumentPickerError.invalidData(description: "Unable to parse data into Whiskey object in row \(index + 2).")
             }
         }
+        
+        for index in whiskeys.indices {
+            if whiskeys[index].bottleState == .opened {
+                whiskeys[index].opened = true
+                whiskeys[index].firstOpen = false
+            }
+        }
+        
         return whiskeys
     }
     

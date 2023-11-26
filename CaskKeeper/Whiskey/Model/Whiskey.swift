@@ -72,7 +72,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         let calendar = Calendar.current
         
         guard let dateOpened = dateOpened else {
-            dateString = "Sealed"
+            dateString = "Opened Date Not Set"
             return dateString
         }
         
