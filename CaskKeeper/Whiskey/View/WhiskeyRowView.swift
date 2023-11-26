@@ -9,27 +9,31 @@ import SwiftUI
 
 struct WhiskeyRowView: View {
     @AppStorage("showImages") var showImages: Bool = true
+    @State private var imageLoader = ImageLoader()
     let whiskey: Whiskey
     
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             Group {
                 if showImages {
-                    if whiskey.image == nil {
-                        Image("noimageuploaded")// Default shape
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipShape(Circle())
-                            .frame(width: 70, height: 70)
-                            .background(Circle().fill(.aluminum))
-                    } else {
-                        if let image = whiskey.image {
+                    Group {
+                        if let image = imageLoader.image {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(width: 70, height: 70)
                                 .clipShape(Circle())
+                                .frame(width: 70, height: 70)
+                        } else {
+                            Image("noimageuploaded") // Placeholder or default image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipShape(Circle())
+                                .frame(width: 70, height: 70)
+                                .background(Circle().fill(Color.aluminum))
                         }
+                    }
+                    .onAppear {
+                        imageLoader.loadImage(from: whiskey.imageData, with: whiskey.id)
                     }
                 }
                 
@@ -43,7 +47,7 @@ struct WhiskeyRowView: View {
                         .font(.headline)
                         .foregroundStyle(Color.aluminum)
                         .frame(width: 125, alignment: .leading)
-
+                    
                     Text(whiskey.bottle)
                         .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
                         .lineLimit(1)
@@ -67,10 +71,10 @@ struct WhiskeyRowView: View {
                             .foregroundStyle(Color.accentColor)
                     }
                 }
-                                
+                
             }
             .padding(showImages ? .init(top: 0, leading: 0, bottom: 0, trailing: 0) : .init(top: 0, leading: 10, bottom: 0, trailing: 0))
-
+            
             
             Spacer()
             
