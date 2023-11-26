@@ -45,6 +45,7 @@ struct ContentView: View {
                     }
                 }
             }
+            
             .onAppear {
                 whiskeyLibrary.sortCollection()
             }
