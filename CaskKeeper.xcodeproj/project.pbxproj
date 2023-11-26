@@ -186,14 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				B32090582AFC9D4F004FED4B /* Info.plist */,
-				B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */,
-				B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */,
+				B3E5C07E2B140A37009949BB /* App */,
+				B3E5C07D2B140A14009949BB /* Collection */,
 				B32090122AFC9B3B004FED4B /* Extensions */,
-				B32090172AFC9BAB004FED4B /* Flavor */,
 				B32090202AFC9BBA004FED4B /* Font */,
-				B3B9B3502B0480DC00EE1A7F /* CSV */,
-				B320902D2AFC9BC7004FED4B /* Utility */,
-				B32090302AFC9BCE004FED4B /* Whiskey */,
 				B3208FEC2AFC9A2C004FED4B /* Preview Content */,
 			);
 			path = CaskKeeper;
@@ -374,6 +370,26 @@
 				B31D71372B05358900CA01E0 /* csvschema.json */,
 			);
 			path = CSV;
+			sourceTree = "<group>";
+		};
+		B3E5C07D2B140A14009949BB /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				B320902D2AFC9BC7004FED4B /* Utility */,
+				B32090302AFC9BCE004FED4B /* Whiskey */,
+				B3B9B3502B0480DC00EE1A7F /* CSV */,
+				B32090172AFC9BAB004FED4B /* Flavor */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		B3E5C07E2B140A37009949BB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */,
+				B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
