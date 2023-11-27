@@ -13,7 +13,7 @@ struct CaskKeeperApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CKTabBarView()
                 .environment(\.whiskeyLibrary, whiskeyLibrary)
         }
     }

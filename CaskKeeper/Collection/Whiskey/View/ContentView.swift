@@ -58,19 +58,14 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: SettingsView()) {
-                        Image(systemName: "menucard")
+                    HStack {
+                        Button {
+                            isSheetViewShowing = true
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
                     }
-                }
-                
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        isSheetViewShowing = true
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    }
+                    
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
