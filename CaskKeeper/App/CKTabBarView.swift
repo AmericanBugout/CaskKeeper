@@ -17,8 +17,8 @@ struct CKTabBarView: View {
             .tabItem { Image(systemName: "list.dash") }
             
             NavigationStack {
-                HuntListView()
-                    .navigationTitle("Whiskey Hunt List")
+                WantedList()
+                    .navigationTitle("Wanted Whiskeys")
             }
             .tabItem { Image(systemName: "scope") }
             

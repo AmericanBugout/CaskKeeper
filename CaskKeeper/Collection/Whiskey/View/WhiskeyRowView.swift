@@ -69,6 +69,7 @@ struct WhiskeyRowView: View {
                     }
                 }
                 .font(.customBold(size: 18))
+                .lineLimit(1)
                 
             }
             .padding(showImages ? .init(top: 0, leading: 0, bottom: 0, trailing: 0) : .init(top: 0, leading: 10, bottom: 0, trailing: 0))
