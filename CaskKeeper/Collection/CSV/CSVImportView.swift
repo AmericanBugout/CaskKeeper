@@ -10,12 +10,12 @@ import SwiftUI
 struct CSVImportView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     
-    @State private var isImportViewShowing: Bool = false
+    @State private var isImportViewShowing = false
     @State private var whiskeysFromCSV: [Whiskey] = []
-    @State private var importWasSuccess: Bool = false
-    @State private var errorShowing: Bool = false
+    @State private var importWasSuccess = false
+    @State private var errorShowing = false
     @State private var error: String?
-    @State private var retryCount: Int = 0
+    @State private var retryCount = 0
     
     var body: some View {
         ZStack {

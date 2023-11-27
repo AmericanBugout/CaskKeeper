@@ -12,10 +12,10 @@ struct AddWhiskeyNote: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var flavorCatalog = FlavorCatalog()
-    @State private var textEditor: String = ""
-    @State private var score: Int = 50
-    @State private var isAlertShowing: Bool = false
-    @State private var isBottleFinished: Bool = false
+    @State private var textEditor = ""
+    @State private var score = 50
+    @State private var isAlertShowing = false
+    @State private var isBottleFinished = false
 
     let whiskey: Whiskey
         

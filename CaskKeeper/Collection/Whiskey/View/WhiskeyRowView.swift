@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhiskeyRowView: View {
-    @AppStorage("showImages") var showImages: Bool = true
+    @AppStorage("showImages") var showImages = true
     @State private var imageLoader = ImageLoader()
     let whiskey: Whiskey
     

@@ -14,16 +14,16 @@ struct AddWhiskeyView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
     
-    @State private var label: String = ""
-    @State private var bottle: String = ""
+    @State private var label = ""
+    @State private var bottle = ""
     @State private var style: Style = .bourbon
     @State private var purchaseDate: Date = .now
-    @State private var proof: String = ""
-    @State private var age: String = ""
-    @State private var price: String = ""
+    @State private var proof = ""
+    @State private var age = ""
+    @State private var price = ""
     @State private var origin: Origin = .us
-    @State private var isCameraShowing: Bool = false
-    @State private var isPhotoLibraryShowing: Bool = false
+    @State private var isCameraShowing = false
+    @State private var isPhotoLibraryShowing = false
     @State private var image: UIImage?
     
     private enum Field {

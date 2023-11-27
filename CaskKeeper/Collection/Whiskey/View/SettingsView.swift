@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
-    @State private var isDeleteWhiskeysAlertShowing: Bool = false
+    @State private var isDeleteWhiskeysAlertShowing = false
     @State private var isCollectionDeleted = false
-    @AppStorage("showImages") var showImages: Bool = true
+    @AppStorage("showImages") var showImages = true
 
     var body: some View {
         Form {

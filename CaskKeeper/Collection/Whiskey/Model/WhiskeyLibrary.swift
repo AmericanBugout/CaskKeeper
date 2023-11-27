@@ -15,9 +15,8 @@ class WhiskeyLibrary {
     var duplicateWhiskeyCountOnJSONImport: Int?
     var importedWhiskeyCount: Int?
     
-    var collection: [Whiskey] = [] {
+    var collection = [Whiskey]() {
         didSet {
-         //   collection.sort { $0.label < $1.label }
             dataPersistenceManager.save(collection: collection)
         }
     }

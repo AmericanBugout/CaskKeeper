@@ -12,7 +12,7 @@ struct WhiskeyEditView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @Environment(\.dismiss) var dismiss
     @Binding var whiskey: Whiskey
-    @State private var finishWhiskeyConfirmation: Bool = false
+    @State private var finishWhiskeyConfirmation = false
     @State private var whiskeyProofString = ""
     @State private var whiskeyAgeString = ""
     @State private var priceString = ""

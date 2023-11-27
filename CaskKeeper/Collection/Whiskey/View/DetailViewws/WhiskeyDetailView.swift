@@ -10,14 +10,14 @@ import UIKit
 
 struct WhiskeyDetailView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
-    @AppStorage("showImages") var showImages: Bool = true
+    @AppStorage("showImages") var showImages = true
     @Environment(\.dismiss) var dismiss
     
-    @State private var isEditing: Bool = false
-    @State private var isPhotoLibraryShowing: Bool = false
-    @State private var isDetailSectionExpanded: Bool = true
-    @State private var isTastingSectionExpanded: Bool = true
-    @State private var isAddTasteViewShowing: Bool = false
+    @State private var isEditing = false
+    @State private var isPhotoLibraryShowing = false
+    @State private var isDetailSectionExpanded = true
+    @State private var isTastingSectionExpanded = true
+    @State private var isAddTasteViewShowing = false
     @State private var showActionSheet = false
     @State private var indexToDelete: Int?
     @State var whiskey: Whiskey
@@ -221,17 +221,26 @@ struct WhiskeyDetailView: View {
         .navigationTitle("Whiskey Details")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                HStack(spacing: 20) {
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    if whiskey.bottleState != .finished {
+                        Button {
+                            isEditing = true
+                        } label: {
+                            VStack {
+                                Image(systemName: "pencil")
+                            }
+                            
+                        }
+                    }
                     if whiskey.bottleState == .opened {
                         Button {
                             isAddTasteViewShowing.toggle()
                         } label: {
                             Image(systemName: "music.quarternote.3")
-                                .resizable()
-                                .frame(width: 30, height: 30)
                         }
                     }
+                    
                 }
                 .sheet(isPresented: $isEditing) {
                     WhiskeyEditView(whiskey: $whiskey)
@@ -239,18 +248,7 @@ struct WhiskeyDetailView: View {
                 .sheet(isPresented: $isAddTasteViewShowing) {
                     AddWhiskeyNote(whiskey: whiskey)
                 }
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                if whiskey.bottleState != .finished {
-                    Button {
-                        isEditing = true
-                    } label: {
-                        VStack {
-                            Image(systemName: "pencil")
-                        }
-                        
-                    }
-                }
+                
             }
         }
     }

@@ -62,6 +62,8 @@
 		B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0802B140B2F009949BB /* CKTabBarView.swift */; };
 		B3E5C0832B142736009949BB /* HuntListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0822B142736009949BB /* HuntListView.swift */; };
 		B3E5C0852B142BED009949BB /* Font+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0842B142BED009949BB /* Font+Ext.swift */; };
+		B3E5C0872B143803009949BB /* TargetWhiskey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0862B143803009949BB /* TargetWhiskey.swift */; };
+		B3E5C0892B143AF8009949BB /* TargetWhiskeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0882B143AF8009949BB /* TargetWhiskeyModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,8 @@
 		B3E5C0802B140B2F009949BB /* CKTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKTabBarView.swift; sourceTree = "<group>"; };
 		B3E5C0822B142736009949BB /* HuntListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntListView.swift; sourceTree = "<group>"; };
 		B3E5C0842B142BED009949BB /* Font+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Ext.swift"; sourceTree = "<group>"; };
+		B3E5C0862B143803009949BB /* TargetWhiskey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetWhiskey.swift; sourceTree = "<group>"; };
+		B3E5C0882B143AF8009949BB /* TargetWhiskeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetWhiskeyModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				B3E5C0822B142736009949BB /* HuntListView.swift */,
+				B3E5C0862B143803009949BB /* TargetWhiskey.swift */,
+				B3E5C0882B143AF8009949BB /* TargetWhiskeyModel.swift */,
 			);
 			path = HuntList;
 			sourceTree = "<group>";
@@ -550,6 +556,7 @@
 				B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */,
 				B3E5C0832B142736009949BB /* HuntListView.swift in Sources */,
 				B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */,
+				B3E5C0872B143803009949BB /* TargetWhiskey.swift in Sources */,
 				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
 				B3D2D9B12B0D32A80041DC7F /* ImportWhiskeyCollectionJSONView.swift in Sources */,
 				B31D71442B054CCC00CA01E0 /* CSVOriginView.swift in Sources */,
@@ -577,6 +584,7 @@
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
 				B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */,
 				B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */,
+				B3E5C0892B143AF8009949BB /* TargetWhiskeyModel.swift in Sources */,
 				B320904A2AFC9BCE004FED4B /* Style.swift in Sources */,
 				B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */,
 				B32090492AFC9BCE004FED4B /* Age.swift in Sources */,

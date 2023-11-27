@@ -11,7 +11,7 @@ import Observation
 @Observable
 class FlavorCatalog {
     
-    var searchString: String = ""
+    var searchString = ""
     var selectedFlavors: Set<Flavor> = Set<Flavor>()
     var flavors: [Flavor] = []
     
