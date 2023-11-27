@@ -44,18 +44,18 @@ struct ImportWhiskeyCSVView: View {
         List {
             Section {
                 Text("CaskKeeper allows you to import a whiskey list from a csv file. Below are the following instructions for successfully loading a collection.")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 Text("This is best used when importing your collection for the first time.  After you start adding notes, using the JSON import may be the best option.")
-                    .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                    .font(.customSemiBold(size: 18))
             } header: {
                 Text("Usage")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             .listRowSeparator(.hidden)
             
             Section {
                 Text("Below are the required header values. They must be in the exact order and match the exact casing. Of course, the data should be comma seperated.")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 
                 LazyVGrid(columns: [GridItem(.flexible())], alignment: .leading, spacing: 2) {
                     ForEach(Array(sortedHeaders), id: \.0) { key, value in
@@ -64,10 +64,10 @@ struct ImportWhiskeyCSVView: View {
                             Text(key)
                                 .foregroundStyle(Color.accentColor)
                                 .frame(maxWidth: 115, alignment: .leading)
-                                .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
+                                .font(.customRegular(size: 16))
                             Text(headers[key] ?? "")
                                 .frame(maxWidth: 120, alignment: .leading)
-                                .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+                                .font(.customLight(size: 16))
                             
                             Spacer()
                         }
@@ -76,12 +76,12 @@ struct ImportWhiskeyCSVView: View {
                 .frame(maxWidth: .infinity)
                 
                 Text("finish, purchasedDate, dateOpened, locationPurchased, age, and price are optional.")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 Text("The header column is necessary. If no value exists for that field, leave the value as blank")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
             } header: {
                 Text("Required Header Row Values")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 
             }
             .listRowSeparator(.hidden)
@@ -91,7 +91,7 @@ struct ImportWhiskeyCSVView: View {
                     
                     Text("In order for CaskKeeper to read your CSV. You will need to use certain values or data formats")
                         .frame(height: 60)
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                     
                     
                     Group {
@@ -102,7 +102,7 @@ struct ImportWhiskeyCSVView: View {
                         + Text(" use the below values")
                     }
                     .padding(.bottom)
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                     
                     CSVStyleView()
                     CSVBottleStateView()
@@ -116,7 +116,7 @@ struct ImportWhiskeyCSVView: View {
                         + Text(" use below format")
                     }
                     .padding(.vertical)
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                     
                     CSVInfoValueRow(header: "purchasedDate", value: "\"mm/dd/yyyy\"")
                         .padding(.vertical, 3)
@@ -125,7 +125,7 @@ struct ImportWhiskeyCSVView: View {
                 }
             } header: {
                 Text("Row Values")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
             }
             .listRowSeparator(.hidden)
             
@@ -139,7 +139,7 @@ struct ImportWhiskeyCSVView: View {
                 
                 HStack {
                     Text("Begin Import")
-                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                        .font(.customRegular(size: 18))
                     
                     Image(systemName: "square.and.arrow.down.fill")
                 }

@@ -13,88 +13,84 @@ struct ContentView: View {
     @State private var importCSVView: Bool = false
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    if whiskeyLibrary.collection.isEmpty {
-                        EmptyView()
-                    } else {
-                        ForEach(whiskeyLibrary.collection) { whiskey in
-                            ZStack {
-                                NavigationLink {
-                                    WhiskeyDetailView(whiskey: whiskey)
-                                } label: {
-                                    EmptyView()
-                                }
-                                .opacity(0)
-                                
-                                WhiskeyRowView(whiskey: whiskey)
+        List {
+            Section {
+                if whiskeyLibrary.collection.isEmpty {
+                    EmptyView()
+                } else {
+                    ForEach(whiskeyLibrary.collection) { whiskey in
+                        ZStack {
+                            NavigationLink {
+                                WhiskeyDetailView(whiskey: whiskey)
+                            } label: {
+                                EmptyView()
                             }
-                            .listRowBackground(Color.clear)
+                            .opacity(0)
+                            
+                            WhiskeyRowView(whiskey: whiskey)
                         }
-                        .onDelete(perform: whiskeyLibrary.deleteAtIndex)
-                        .listRowSeparator(.hidden, edges: .all)
-                        .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 10))
+                        .listRowBackground(Color.clear)
                     }
-                } header: {
-                    if whiskeyLibrary.collection.isEmpty {
-                        EmptyView()
-                    } else {
-                        Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                    }
+                    .onDelete(perform: whiskeyLibrary.deleteAtIndex)
+                    .listRowSeparator(.hidden, edges: .all)
+                    .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 10))
                 }
-            }
-            
-            .onAppear {
-                whiskeyLibrary.sortCollection()
-            }
-            .specialNavBar()
-            .listStyle(.plain)
-            .listRowSpacing(10)
-            .navigationTitle("Collection")
-            .sheet(isPresented: $isSheetViewShowing) {
-                AddWhiskeyView()
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    HStack {
-                        Button {
-                            isSheetViewShowing = true
-                        } label: {
-                            Image(systemName: "plus.circle")
-                        }
-                    }
-                    
-                }
-                
-                ToolbarItem(placement: .cancellationAction) {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Text("Sealed:")
-                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                            Text("\(whiskeyLibrary.sealedCount)")
-                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.aluminum)
-                                .bold()
-                            Text("Opened:")
-                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                                .foregroundStyle(Color.regularGreen)
-                            Text("\(whiskeyLibrary.openedCount)")
-                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
-                                .bold()
-                            Text("Finished:")
-                                .foregroundStyle(Color.accentColor)
-                                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
-                            Text("\(whiskeyLibrary.finishedCount)")
-                                .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
-                                .bold()
-                        }
-                    }
-                   
+            } header: {
+                if whiskeyLibrary.collection.isEmpty {
+                    EmptyView()
+                } else {
+                    Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
+                        .font(.customLight(size: 18))
                 }
             }
         }
+        .onAppear {
+            whiskeyLibrary.sortCollection()
+        }
+        .specialNavBar()
+        .listStyle(.plain)
+        .listRowSpacing(10)
+        .sheet(isPresented: $isSheetViewShowing) {
+            AddWhiskeyView()
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                HStack {
+                    Button {
+                        isSheetViewShowing = true
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
+                }
+                
+            }
+            
+            ToolbarItem(placement: .cancellationAction) {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Text("Sealed:")
+                            .font(.customLight(size: 18))
+                        Text("\(whiskeyLibrary.sealedCount)")
+                            .font(.customBold(size: 18))
+                            .foregroundStyle(Color.aluminum)
+                            .bold()
+                        Text("Opened:")
+                            .font(.customLight(size: 18))
+                            .foregroundStyle(Color.regularGreen)
+                        Text("\(whiskeyLibrary.openedCount)")
+                            .font(.customBold(size: 18))
+                            .bold()
+                        Text("Finished:")
+                            .foregroundStyle(Color.accentColor)
+                            .font(.customLight(size: 18))
+                        Text("\(whiskeyLibrary.finishedCount)")
+                            .font(.customBold(size: 18))
+                            .bold()
+                    }
+                }
+            }
+        }
+        
     }
 }
 
@@ -103,14 +99,14 @@ struct ContentView: View {
 }
 
 struct SpecialNavBar: ViewModifier {
-
+    
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: "AsapCondensed-Bold", size: 42)!]
     }
-
+    
     func body(content: Content) -> some View {
         content
     }
-
+    
 }
 

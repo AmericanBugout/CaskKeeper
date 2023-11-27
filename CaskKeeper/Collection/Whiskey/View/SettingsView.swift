@@ -18,26 +18,26 @@ struct SettingsView: View {
             Section {
                 NavigationLink(destination: ExportWhiskeyCollectionJSONView()) {
                     Label("Export to JSON", systemImage: "square.and.arrow.up.fill")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
             } header: {
                 Text("Export")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             
             Section {
                 NavigationLink(destination: ImportWhiskeyCSVView()) {
                     Label("Import From CSV", systemImage: "square.and.arrow.down.fill")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
 
                 }
                 NavigationLink(destination: ImportWhiskeyCollectionJSONView()) {
                     Label("Import From Exported JSON", systemImage: "square.and.arrow.down.on.square.fill")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
             } header: {
                 Text("Import")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             
             Section {
@@ -55,12 +55,12 @@ struct SettingsView: View {
                         Image(systemName: "trash.fill")
                     }
                 }
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
                 .disabled(whiskeyLibrary.collection.isEmpty ? true : false)
                 .opacity(whiskeyLibrary.collection.isEmpty ? 0.3 : 1)
             } header: {
                 Text("Remove Collection")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             .alert("Your whiskey collection has been deleted.", isPresented: $isCollectionDeleted, actions: {
                 Button {
@@ -86,7 +86,7 @@ struct SettingsView: View {
                 Toggle("Show Images", isOn: $showImages)
             } header: {
                 Text("Display")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
 
 

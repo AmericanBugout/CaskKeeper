@@ -10,10 +10,18 @@ import SwiftUI
 struct CKTabBarView: View {
     var body: some View {
         TabView {
-            ContentView()
-                .tabItem { Image(systemName: "list.dash") }
-            Text("NextView")
-                .tabItem { Image(systemName: "scope") }
+            NavigationStack {
+                ContentView()
+                    .navigationTitle("Collection")
+            }
+            .tabItem { Image(systemName: "list.dash") }
+            
+            NavigationStack {
+                HuntListView()
+                    .navigationTitle("Whiskey Hunt List")
+            }
+            .tabItem { Image(systemName: "scope") }
+            
             NavigationStack {
                 SettingsView()
             }

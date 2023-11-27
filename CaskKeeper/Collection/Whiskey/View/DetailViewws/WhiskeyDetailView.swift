@@ -66,10 +66,10 @@ struct WhiskeyDetailView: View {
                                     .shadow(color: .aluminum, radius: 1)
                                 VStack {
                                     Text(String(format: "%.1f", whiskey.avgScore))
-                                        .font(.custom("AsapCondensed-Bold", size: 26))
+                                        .font(.customBold(size: 26))
                                         .foregroundColor(.accentColor)
                                     Text("Overall")
-                                        .font(.custom("AsapCondensed-Regular", size: 14))
+                                        .font(.customRegular(size: 14))
                                 }
                             }
                             .frame(width: 45, height: 45)
@@ -86,19 +86,19 @@ struct WhiskeyDetailView: View {
                 
                 VStack(alignment: .center) {
                     Text(whiskey.label)
-                        .font(.custom("AsapCondensed-Bold", size: 52, relativeTo: .largeTitle))
+                        .font(.customBold(size: 52))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                         .offset(x: showImages ? 0 : -40)
                     Text(whiskey.bottle)
-                        .font(.custom("AsapCondensed-SemiBold", size: 42, relativeTo: .largeTitle))
+                        .font(.customSemiBold(size: 42))
                         .lineLimit(1)
                         .padding(.bottom, 1)
                         .offset(x: showImages ? 0 : -40)
                     Text(whiskey.bottleState.currentState.uppercased())
                         .padding(.horizontal)
                         .foregroundStyle(whiskey.bottleState.color)
-                        .font(.custom("AsapCondensed-SemiBold", size: 28, relativeTo: .largeTitle))
+                        .font(.customSemiBold(size: 28))
                         .offset(x: showImages ? 0 : -40)
 
 
@@ -157,7 +157,7 @@ struct WhiskeyDetailView: View {
             } header: {
                 HStack(alignment: .bottom) {
                     Text("Whiskey Details")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                     Spacer()
                     Button {
                         withAnimation(Animation.smooth) {
@@ -198,7 +198,7 @@ struct WhiskeyDetailView: View {
                 } header: {
                     HStack(alignment: .bottom) {
                         Text("Whiskey Notes")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.customLight(size: 18))
                         Spacer()
                         Button {
                             withAnimation(Animation.smooth) {

@@ -27,7 +27,7 @@ struct FlavorSelectionView: View {
                     Text("Selected Flavors")
                         .font(.headline)
                         .padding(.leading)
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                     LazyVGrid(columns: columns, spacing: 2) {
                         ForEach(Array(flavorCatalog.selectedFlavors), id: \.self) { flavor in
                             FlavorCell(flavor: flavor, isSelected: true)
@@ -65,7 +65,7 @@ struct FlavorSelectionView: View {
     var addButton: some View {
         Button(action: addFlavors) {
             Text("Add (\(flavorCatalog.selectedFlavors.count))")
-                .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                .font(.customBold(size: 20))
                 .foregroundColor(flavorCatalog.selectedFlavors.isEmpty ? .aluminum : Color.regularGreen)
         }
         .disabled(flavorCatalog.selectedFlavors.isEmpty)
@@ -82,7 +82,7 @@ struct FlavorCell: View {
     
     var body: some View {
         Text(flavor.name)
-            .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+            .font(.customSemiBold(size: 18))
             .lineLimit(1)
             .foregroundStyle(isSelected ? Color.black : Color.accentColor)
             .padding(.vertical, 8)

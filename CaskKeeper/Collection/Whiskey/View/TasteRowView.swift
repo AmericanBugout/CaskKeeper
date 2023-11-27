@@ -21,7 +21,7 @@ struct TasteRowView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(taste.date, style: .date)
-                    .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+                    .font(.customLight(size: 16))
                 Spacer() 
                 ZStack {
                     Circle()
@@ -30,7 +30,7 @@ struct TasteRowView: View {
                         .frame(width: 50, height: 50)
                         .shadow(color: Color.lead, radius: 5)
                     Text("\(taste.score)")
-                        .font(.custom("AsapCondensed-Bold", size: 18))
+                        .font(.customBold(size: 18))
                         .foregroundColor(.accentColor)
                 }
                 .frame(width: 50, height: 50)
@@ -40,7 +40,7 @@ struct TasteRowView: View {
             .padding(.bottom)
            
             Text(taste.customNotes ?? "No notes entered.")
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
                 .foregroundStyle(.aluminum)
                 .multilineTextAlignment(.leading)
                     
@@ -48,7 +48,7 @@ struct TasteRowView: View {
                 ForEach(taste.notes, id: \.self) { note in
                     HStack {
                         Text(note.name)
-                            .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+                            .font(.customLight(size: 16))
                             .lineLimit(1)
                             .foregroundStyle(Color.accentColor)
                             .padding(.vertical, 4)

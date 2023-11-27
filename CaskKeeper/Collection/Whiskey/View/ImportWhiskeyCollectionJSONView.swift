@@ -19,12 +19,12 @@ struct ImportWhiskeyCollectionJSONView: View {
         List {
             Section {
                 Text("You can import a JSON that you exported from CaskKeeper to bring back your whiskey collection.")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 Text("CaskKeeper will append to your existing collection.  It will not import whiskey's with duplicate ids. Your images associated with your whiskey will not be imported.")
-                    .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                    .font(.customSemiBold(size: 18))
             } header: {
                 Text("Usage")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             .listRowSeparator(.hidden)
             
@@ -38,7 +38,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                     } label: {
                         HStack {
                             Text("Import Collection")
-                                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                                .font(.customRegular(size: 18))
                             
                             Image(systemName: "square.and.arrow.down.on.square.fill")
                         }
@@ -56,7 +56,7 @@ struct ImportWhiskeyCollectionJSONView: View {
             if errorFromImport != nil {
                 VStack {
                     Text("Import was not successful")
-                        .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                        .font(.customSemiBold(size: 18))
                         .foregroundStyle(Color.red)
                     Text("Something went wrong.  Check that JSON is valid.")
                     Text(errorFromImport?.localizedDescription ?? "")
@@ -75,9 +75,9 @@ struct ImportWhiskeyCollectionJSONView: View {
                     HStack {
                         if let uniqueCount = whiskeyLibrary.importedWhiskeyCount {
                             Text("\(uniqueCount)")
-                                .font(.custom("AsapCondensed-Bold", size: 22, relativeTo: .body))
+                                .font(.customBold(size: 22))
                             Text("unique whiskeys found from import")
-                                .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                                .font(.customSemiBold(size: 18))
                         }
                     }
                     .foregroundStyle(importWasSuccess ?? false ? .green : .aluminum)
@@ -87,7 +87,7 @@ struct ImportWhiskeyCollectionJSONView: View {
                     
                     if let duplicateCount = whiskeyLibrary.duplicateWhiskeyCountOnJSONImport {
                         Text("There were \(duplicateCount) duplicates in the import.")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.customLight(size: 18))
                             .foregroundStyle(.aluminum)
                             .padding(.top, 1)
                     }

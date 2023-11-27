@@ -61,7 +61,7 @@ struct WhiskeyEditView: View {
                     
                 } header: {
                     Text("Bottle Details")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
                 
                 Section {
@@ -88,7 +88,7 @@ struct WhiskeyEditView: View {
                     
                 } header: {
                     Text("Additional Bottle Details")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
                 
                 Section {
@@ -106,11 +106,11 @@ struct WhiskeyEditView: View {
                         }
                 } header: {
                     Text("Purchase Details")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
                 
             }
-            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+            .font(.customRegular(size: 18))
             .navigationTitle(whiskey.label)
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
@@ -118,7 +118,7 @@ struct WhiskeyEditView: View {
                     Button("Done") {
                         dismiss()
                     }
-                    .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
+                    .font(.customSemiBold(size: 20))
                     .confirmationDialog("Finish Whiskey?", isPresented: $finishWhiskeyConfirmation) {
                         Button(role: .destructive) {
                             whiskeyLibrary.updateWhiskeyToFinished(whiskey: whiskey)

@@ -15,7 +15,7 @@ struct CSVOriginView: View {
         HStack {
             Text("style")
                 .frame(width: 100, alignment: .leading)
-                .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
+                .font(.customRegular(size: 16))
                 .foregroundStyle(Color.accentColor)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -28,7 +28,7 @@ struct CSVOriginView: View {
                 }
             }
         }
-        .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+        .font(.customLight(size: 16))
     }
 }
 

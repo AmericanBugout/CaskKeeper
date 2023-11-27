@@ -68,7 +68,7 @@ struct AddWhiskeyView: View {
                     DatePicker("Purchased Date", selection: $purchaseDate, displayedComponents: .date)
                 } header: {
                     Text("Whiskey Details")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
 
                 }
                 
@@ -103,7 +103,7 @@ struct AddWhiskeyView: View {
                     
                 } header: {
                     Text("Additional Info")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
                 
                 Section {
@@ -120,7 +120,7 @@ struct AddWhiskeyView: View {
                 } header: {
                     HStack {
                         Text("Add Image")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.customLight(size: 18))
 
                         Spacer()
                         Button(action: {
@@ -149,7 +149,7 @@ struct AddWhiskeyView: View {
                     }
                 }
             }
-            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+            .font(.customRegular(size: 18))
             .toolbar{
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer() 
@@ -169,14 +169,14 @@ struct AddWhiskeyView: View {
                         }
                     }
                     .disabled(label.isEmpty || bottle.isEmpty || proof.isEmpty)
-                    .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                    .font(.customBold(size: 20))
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
+                    .font(.customSemiBold(size: 20))
                 }
             }
             .navigationTitle("Add Bottle")

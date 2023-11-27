@@ -16,7 +16,7 @@ struct WhiskeyTasteDetailView: View {
             Section {
                 VStack(alignment: .leading) {
                     Text("Custom Notes")
-                        .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                        .font(.customBold(size: 20))
                         .font(.headline)
                         .foregroundStyle(.aluminum)
                     Text(taste.customNotes ?? "No Notes Entered")
@@ -27,7 +27,7 @@ struct WhiskeyTasteDetailView: View {
                 
                 VStack {
                     Text("Notes")
-                        .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                        .font(.customBold(size: 20))
                         .foregroundStyle(.aluminum)
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -42,7 +42,7 @@ struct WhiskeyTasteDetailView: View {
                 
                 VStack {
                     Text("Score")
-                        .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                        .font(.customBold(size: 20))
                         .foregroundStyle(.aluminum)
                         .font(.headline)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -54,7 +54,7 @@ struct WhiskeyTasteDetailView: View {
                             .frame(width: 200, height: 200)
                             .shadow(color: .aluminum, radius: 10)
                         Text("\(taste.score)")
-                            .font(.custom("AsapCondensed-Bold", size: 68))
+                            .font(.customBold(size: 68))
                             .foregroundColor(.accentColor)
                     }
                     .frame(width: 200, height: 200)
@@ -69,7 +69,7 @@ struct WhiskeyTasteDetailView: View {
             ToolbarItem(placement: .automatic) {
                 Text(taste.date, style: .date)
                     .foregroundStyle(Color.accentColor)
-                    .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                    .font(.customBold(size: 20))
 
             }
         }
@@ -79,5 +79,5 @@ struct WhiskeyTasteDetailView: View {
 }
 
 #Preview {
-    WhiskeyTasteDetailView(taste: Whiskey.Taste(date: Date(), customNotes: "eqwjeqwjhidhiwhdcisbcbdwhbchdbchbdhschsbhjbcjhsbdjhbcjshdbchbsdjhbchjksbadchbsdhjbchbsd", notes: [Flavor(name: "Cherry"), Flavor(name: "Grape")], score: 87))
+    WhiskeyTasteDetailView(taste: Whiskey.Taste(date: Date(), customNotes: "Will never buy again.", notes: [Flavor(name: "Cherry"), Flavor(name: "Grape")], score: 87))
 }

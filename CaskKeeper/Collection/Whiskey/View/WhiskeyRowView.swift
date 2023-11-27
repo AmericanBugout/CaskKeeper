@@ -42,14 +42,14 @@ struct WhiskeyRowView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4){
                     Text(whiskey.label)
-                        .font(.custom("AsapCondensed-Semibold", size: 20, relativeTo: .body))
+                        .font(.customRegular(size: 20))
                         .lineLimit(1)
                         .font(.headline)
                         .foregroundStyle(Color.aluminum)
                         .frame(width: 125, alignment: .leading)
                     
                     Text(whiskey.bottle)
-                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                         .lineLimit(1)
                         .foregroundStyle(Color.accentColor)
                         .frame(width: 125, alignment: .leading)
@@ -59,18 +59,16 @@ struct WhiskeyRowView: View {
                     switch whiskey.bottleState {
                     case .sealed:
                         Text("Sealed".uppercased())
-                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
                             .foregroundStyle(Color.lead)
                     case .opened:
                         Text("Open".uppercased())
-                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
                             .foregroundStyle(Color.regularGreen)
                     case .finished:
                         Text("Finished".uppercased())
-                            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
                             .foregroundStyle(Color.accentColor)
                     }
                 }
+                .font(.customBold(size: 18))
                 
             }
             .padding(showImages ? .init(top: 0, leading: 0, bottom: 0, trailing: 0) : .init(top: 0, leading: 10, bottom: 0, trailing: 0))

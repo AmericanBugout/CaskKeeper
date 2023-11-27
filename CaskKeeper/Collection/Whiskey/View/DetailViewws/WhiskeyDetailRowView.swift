@@ -14,10 +14,10 @@ struct WhiskeyDetailRowView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
             Spacer()
             Text(detail)
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
         }
     }
 }
@@ -29,13 +29,13 @@ struct WhiskeyDetailRowAgeView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
                 .foregroundStyle(detail == 0 ? Color.secondary : Color.primary)
             
             Spacer()
             
             Text(detail == 0 ? "" : "\(formattedAgeString(from: detail)) \(detail == 1 ? "Year" : "Years")")
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
         }
     }
     
@@ -65,13 +65,13 @@ struct WhiskeyDetailPriceView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
                 .foregroundStyle(detail == 0 ? Color.secondary : Color.primary)
             
             Spacer()
             
             Text(formattedPrice)
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
                 .foregroundColor(detail == 0 ? .aluminum : .primary)
         }
     }
@@ -84,10 +84,10 @@ struct WhiskeyDetailRowProofView: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
             Spacer()
             Text(String(format: "%.1f", detail))
-                .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                .font(.customLight(size: 18))
         }
     }
     

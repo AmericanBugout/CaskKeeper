@@ -13,8 +13,7 @@ struct CSVStyleView: View {
     var body: some View {
         HStack {
             Text("style")
-                .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
-
+                .font(.customRegular(size: 16))
                 .frame(width: 100, alignment: .leading)
                 .foregroundStyle(Color.accentColor)
             
@@ -28,7 +27,7 @@ struct CSVStyleView: View {
                 }
             }
         }
-        .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+        .font(.customLight(size: 16))
     }
 }
 

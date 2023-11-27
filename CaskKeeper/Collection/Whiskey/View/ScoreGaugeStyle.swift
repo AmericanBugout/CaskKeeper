@@ -28,13 +28,10 @@ struct ScoreGaugeStyle: GaugeStyle {
             
             VStack {
                 configuration.label
-                    .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))
+                    .font(.customBold(size: 18))
                     .foregroundColor(.aluminum)
                 Text("Avg Score")
-                    .font(.custom("AsapCondensed-Regular", size: 10, relativeTo: .body))
-
-
-                    
+                    .font(.customRegular(size: 10))
             }
         }
         .frame(width: 60, height: 60)

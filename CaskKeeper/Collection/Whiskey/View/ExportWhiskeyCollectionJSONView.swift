@@ -20,21 +20,21 @@ struct ExportWhiskeyCollectionJSONView: View {
         List {
             Section {
                 Text("CaskKeeper allows you to export your whiskey collection as a JSON file.")
-                    .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                    .font(.customLight(size: 18))
                 Text("This should be used when you want to backup your collection.  This is the file that will be used when importing from JSON.")
-                    .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                    .font(.customSemiBold(size: 18))
             } header: {
                 Text("Usage")
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
             }
             .listRowSeparator(.hidden)
             
             VStack(alignment: .center) {
                 HStack(spacing: 20) {
                     Text("Collection Count")
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                     Text("\(whiskeyLibrary.collectionCount)")
-                        .font(.custom("AsapCondensed-Bold", size: 42, relativeTo: .body))
+                        .font(.customBold(size: 42))
                         .foregroundStyle(Color.accentColor)
                 }
             }
@@ -50,7 +50,7 @@ struct ExportWhiskeyCollectionJSONView: View {
                     } label: {
                         HStack {
                             Text("Export to JSON")
-                                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                                .font(.customRegular(size: 18))
                             
                             Image(systemName: "square.and.arrow.up.fill")
                         }
@@ -70,7 +70,7 @@ struct ExportWhiskeyCollectionJSONView: View {
             if exportError != nil {
                 VStack {
                     Text("Error on Export")
-                        .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                        .font(.customSemiBold(size: 18))
                         .foregroundStyle(Color.red)
                     Image(systemName: "x.circle.fill")
                         .resizable()
@@ -83,7 +83,7 @@ struct ExportWhiskeyCollectionJSONView: View {
             
             VStack {
                 Text("Export Successful")
-                    .font(.custom("AsapCondensed-SemiBold", size: 18, relativeTo: .body))
+                    .font(.customSemiBold(size: 18))
                     .foregroundStyle(exportWasSuccessful ? .green : .aluminum)
                     .opacity(exportWasSuccessful ? 1 : 0)
                     .scaleEffect(exportWasSuccessful ? 1 : 0.9)

@@ -15,7 +15,7 @@ struct WhiskeyDetailRowViewToggle: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
             Spacer()
             Group {
                 if isEnabled {
@@ -24,7 +24,7 @@ struct WhiskeyDetailRowViewToggle: View {
                     Text("No")
                 }
             }
-            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+            .font(.customLight(size: 18))
         }
     }
 }

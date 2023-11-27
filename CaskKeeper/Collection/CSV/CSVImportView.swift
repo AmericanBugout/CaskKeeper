@@ -24,7 +24,7 @@ struct CSVImportView: View {
                     VStack {
                         if importWasSuccess {
                             Text("\(whiskeysFromCSV.count)")
-                                .font(.custom("AsapCondensed-Bold", size: 72, relativeTo: .body))
+                                .font(.customBold(size: 72))
                                 .opacity(importWasSuccess ? 1 : 0)
                                 .scaleEffect(importWasSuccess ? 1 : 0.9)
                                 .rotationEffect(importWasSuccess ? Angle(degrees: 0) : Angle(degrees: -10))
@@ -33,7 +33,7 @@ struct CSVImportView: View {
                                 .offset(y: importWasSuccess ? 0 : -500)
                             HStack {
                                 Text("Imported Whiskeys".uppercased())
-                                    .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
+                                    .font(.customSemiBold(size: 24))
                                     .foregroundStyle(.aluminum)
                                     .opacity(importWasSuccess ? 1 : 0)
                                 Image(systemName: importWasSuccess ? "checkmark.circle.fill" : "circle")
@@ -46,7 +46,7 @@ struct CSVImportView: View {
                         } else if error != nil {
                             VStack {
                                 Text("Error")
-                                    .font(.custom("AsapCondensed-SemiBold", size: 32, relativeTo: .body))
+                                    .font(.customSemiBold(size: 32))
                                     .foregroundStyle(Color.red)
                                     
                             }
@@ -55,7 +55,7 @@ struct CSVImportView: View {
                             
                             HStack {
                                 Text("Imported Whiskeys".uppercased())
-                                    .font(.custom("AsapCondensed-SemiBold", size: 24, relativeTo: .body))
+                                    .font(.customSemiBold(size: 24))
                                     .foregroundStyle(Color.aluminum)
                                     
                                 Image(systemName: "x.circle.fill")
@@ -66,7 +66,7 @@ struct CSVImportView: View {
 
                             
                             Text(error ?? "Something went wrong")
-                                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                                .font(.customRegular(size: 18))
                                 .padding(.top, 5)
                         }
                     }
@@ -88,7 +88,7 @@ struct CSVImportView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 40, height: 40)
                     }
-                    .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                    .font(.customRegular(size: 18))
                 }
                 
                 Spacer()

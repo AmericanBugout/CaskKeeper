@@ -15,25 +15,26 @@ struct WhiskeyDetailRowStateToggle: View {
     var body: some View {
         HStack {
             Text(title)
-                .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                .font(.customRegular(size: 18))
             Spacer()
             Group {
                 switch state {
                 case .sealed:
                     Text("Sealed")
                         .foregroundColor(.aluminum)
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 case .opened:
                     Text("Opened")
                         .foregroundColor(.green)
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 case .finished:
                     Text("Finished")
                         .foregroundColor(.accentColor)
-                        .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        .font(.customLight(size: 18))
                 }
             }
-            .font(.custom("AsapCondensed-Bold", size: 18, relativeTo: .body))        }
+            .font(.customBold(size: 18))
+        }
     }
 }
 

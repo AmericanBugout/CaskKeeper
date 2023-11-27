@@ -30,7 +30,7 @@ struct AddWhiskeyNote: View {
             ScrollView {
                 Section {
                     TextEditor(text: $textEditor)
-                        .font(.body)
+                        .font(.customLight(size: 18))
                         .scrollContentBackground(.hidden)
                         .frame(height: 150)
                         .padding(.horizontal)
@@ -43,7 +43,7 @@ struct AddWhiskeyNote: View {
                     
                 } header: {
                     Text("Custom Notes")
-                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                        .font(.customRegular(size: 18))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading).padding(.leading)
                         .foregroundColor(.aluminum)
                 }
@@ -63,7 +63,7 @@ struct AddWhiskeyNote: View {
                 } header: {
                     HStack {
                         Text("Selected Flavors")
-                            .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                            .font(.customRegular(size: 18))
                             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                             .foregroundColor(.aluminum)
                         Spacer()
@@ -86,7 +86,7 @@ struct AddWhiskeyNote: View {
                                 .frame(width: 125, height: 125)
                                 .shadow(color: .aluminum, radius: 10)
                             Text("\(score)")
-                                .font(.custom("AsapCondensed-Bold", size: 68))
+                                .font(.customBold(size: 68))
                                 .foregroundColor(.accentColor)
                         }
                         .frame(width: 125, height: 125)
@@ -102,7 +102,7 @@ struct AddWhiskeyNote: View {
                     .padding(.horizontal)
                 } header: {
                     Text("Taste Rating")
-                        .font(.custom("AsapCondensed-Regular", size: 18, relativeTo: .body))
+                        .font(.customRegular(size: 18))
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                         .foregroundColor(.aluminum)
                         .padding(.horizontal)
@@ -113,7 +113,7 @@ struct AddWhiskeyNote: View {
                 Section {
                     HStack(alignment: .center) {
                         Text("Is Bottle Finished?")
-                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                            .font(.customLight(size: 18))
 
                         Spacer()
                         Button {
@@ -147,14 +147,14 @@ struct AddWhiskeyNote: View {
                             dismiss()
                         }
                     }
-                    .font(.custom("AsapCondensed-Bold", size: 20, relativeTo: .body))
+                    .font(.customBold(size: 20))
                 }
                 
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
                         dismiss()
                     }
-                    .font(.custom("AsapCondensed-SemiBold", size: 20, relativeTo: .body))
+                    .font(.customSemiBold(size: 20))
                 }
             }
             .navigationTitle("Tasting Note")

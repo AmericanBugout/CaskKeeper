@@ -13,13 +13,13 @@ struct CSVBottleStateView: View {
             Text("bottleState")
                 .frame(width: 100, alignment: .leading)
                 .foregroundStyle(Color.accentColor)
-                .font(.custom("AsapCondensed-Regular", size: 16, relativeTo: .body))
+                .font(.customRegular(size: 16))
 
             Text("Sealed,    Open,    Finished")
             
             Spacer()
         }
-        .font(.custom("AsapCondensed-Light", size: 16, relativeTo: .body))
+        .font(.customLight(size: 16))
     }
 }
 
