@@ -47,7 +47,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
     var proof: Double
     var style: Style
     var origin: Origin
-    var age: Double
+    var age: Double?
     var finish: String = ""
     var bottleState: BottleState = .sealed
     var opened: Bool = false
@@ -64,7 +64,7 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         let purchasedDateString = purchasedDate.map { Whiskey.dateFormatter.string(from: $0)} ?? "N/A"
         let priceString = price.map { String($0) } ?? "N/A"
         
-        return "\(label)-\(bottle)-\(batch)-\(purchasedDateString)-\(proof)-\(style)-\(origin)-\(age)-\(priceString)"
+        return "\(label)-\(bottle)-\(batch)-\(purchasedDateString)-\(proof)-\(style)-\(origin)-\(String(describing: age))-\(priceString)"
     }
     
     var openedFor: String {

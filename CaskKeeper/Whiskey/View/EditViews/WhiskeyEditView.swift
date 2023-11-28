@@ -47,7 +47,7 @@ struct WhiskeyEditView: View {
                             handleProofInput(newValue: newValue)
                         }
                     
-                    WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Aged")
+                    WhiskeyEditTextField(text: $whiskeyAgeString, placeholder: "Age")
                         .onChange(of: whiskeyAgeString) { oldValue, newValue in
                             handleAgeInput(newValue: newValue)
                         }
@@ -134,8 +134,11 @@ struct WhiskeyEditView: View {
             }
             .onAppear(perform: {
                 whiskeyProofString = String(whiskey.proof)
-                if whiskey.age != 0 {
-                    whiskeyAgeString = formatNumberString(whiskey.age)
+                
+                if let age = whiskey.age, age != 0 {
+                    whiskeyAgeString = formatNumberString(age)
+                } else {
+                    whiskeyAgeString = "" 
                 }
                 setupPriceString()
                 
