@@ -77,22 +77,43 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
         }
         
         if !bottleFinished {
-            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: .now)
+            let dateDifference = calendar.dateComponents([.year, .month, .day], from: dateOpened, to: .now)
             
-            if let day = dateDifference.day {
-                dateString += "  \(day) \(day == 1 ? "day" : "days")"
-                return dateString
+            var components = [String]()
+            
+            if let year = dateDifference.year, year > 0 {
+                components.append("\(year) \(year == 1 ? "year" : "years")")
             }
+            
+            if let month = dateDifference.month, month > 0 {
+                components.append("\(month) \(month == 1 ? "month" : "months")")
+            }
+            
+            if let day = dateDifference.day, day > 0 {
+                components.append("\(day) \(day == 1 ? "day" : "days")")
+            }
+            
+            return components.joined(separator: "  ")
         } else {
             guard let consumedDate = consumedDate else { return "Sealed" }
-            let dateDifference = calendar.dateComponents([.day], from: dateOpened, to: consumedDate)
+            let dateDifference = calendar.dateComponents([.year, .month, .day], from: dateOpened, to: consumedDate)
             
-            if let day = dateDifference.day {
-                dateString += "  \(day) \(day == 1 ? "day" : "days")"
-                return dateString
+            var components = [String]()
+            
+            if let year = dateDifference.year, year > 0 {
+                components.append("\(year) \(year == 1 ? "year" : "years")")
             }
+            
+            if let month = dateDifference.month, month > 0 {
+                components.append("\(month) \(month == 1 ? "month" : "months")")
+            }
+            
+            if let day = dateDifference.day, day > 0 {
+                components.append("\(day) \(day == 1 ? "day" : "days")")
+            }
+            
+            return components.joined(separator: "  ")
         }
-        return "Sealed"
     }
     
     var image: Image? {
