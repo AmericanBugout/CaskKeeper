@@ -419,15 +419,31 @@
 		B3E5C07F2B140AF8009949BB /* WantedList */ = {
 			isa = PBXGroup;
 			children = (
-				B3E5C0822B142736009949BB /* WantedListView.swift */,
-				B320DF142B1561BB00D13064 /* AddWantedListView.swift */,
-				B3E5C0862B143803009949BB /* WantedList.swift */,
-				B3E5C0882B143AF8009949BB /* WantedListLibrary.swift */,
-				B3FEB0242B16798700F6DD56 /* WantedListDetailView.swift */,
-				B39485A62B1536F100930ED7 /* UserCreatedList.swift */,
-				B39485A82B153AF900930ED7 /* WhiskeyItem.swift */,
+				B3FEB0272B167C4200F6DD56 /* View */,
+				B3FEB0262B167C2800F6DD56 /* Model */,
 			);
 			path = WantedList;
+			sourceTree = "<group>";
+		};
+		B3FEB0262B167C2800F6DD56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3E5C0862B143803009949BB /* WantedList.swift */,
+				B3E5C0882B143AF8009949BB /* WantedListLibrary.swift */,
+				B39485A82B153AF900930ED7 /* WhiskeyItem.swift */,
+				B39485A62B1536F100930ED7 /* UserCreatedList.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B3FEB0272B167C4200F6DD56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B320DF142B1561BB00D13064 /* AddWantedListView.swift */,
+				B3FEB0242B16798700F6DD56 /* WantedListDetailView.swift */,
+				B3E5C0822B142736009949BB /* WantedListView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

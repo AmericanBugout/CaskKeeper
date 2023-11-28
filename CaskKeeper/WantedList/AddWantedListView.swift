@@ -10,6 +10,7 @@ import Observation
 
 struct AddWantedListView: View {
     @Environment(\.wantedListLibrary) private var wantedListLibrary
+    @Environment(\.dismiss) var dismiss
     
     @State private var itemsToAdd = [WhiskeyItem]()
     @State private var userCreatedList = UserCreatedList()
@@ -85,25 +86,33 @@ struct AddWantedListView: View {
                         .font(.customLight(size: 18))
                 }
             }
-            .font(.customRegular(size: 18))
-            .navigationTitle("Create Wanted List")
+            .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        
+                        dismiss()
                     }
                     .font(.customSemiBold(size: 20))
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        
+                    Button {
+                        addList()
+                        dismiss()
+                    } label: {
+                        Text("Save")
+                            .font(.customSemiBold(size: 20))
                     }
-                    .font(.customSemiBold(size: 20))
-                    
                 }
             }
+            .font(.customRegular(size: 18))
+            .navigationTitle("Create Wanted List")
+            
         }
-        
+    }
+    
+    private func addList() {
+        let userCreatedList = WantedList(userCreatedList: WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: itemsToAdd))
+        wantedListLibrary.addWantedList(userCreatedList: userCreatedList)
     }
 }
 
