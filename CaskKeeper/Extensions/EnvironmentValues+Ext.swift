@@ -18,7 +18,10 @@ extension EnvironmentValues {
         set { self[FlavorCatalogKey.self] = newValue }
     }
     
-   // var listCatallog: Library
+    var wantedListLibrary: WantedListLibrary {
+        get { self[WantedListKey.self] }
+        set { self[WantedListKey.self] = newValue }
+    }
 }
 
 private struct WhiskeyLibraryKey: EnvironmentKey {
@@ -27,6 +30,10 @@ private struct WhiskeyLibraryKey: EnvironmentKey {
 
 private struct FlavorCatalogKey: EnvironmentKey {
     static var defaultValue: FlavorCatalog = FlavorCatalog()
+}
+
+private struct WantedListKey: EnvironmentKey {
+    static var defaultValue: WantedListLibrary = WantedListLibrary()
 }
 
 struct EmptyButtonStyle: ButtonStyle {
