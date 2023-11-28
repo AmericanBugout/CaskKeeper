@@ -14,7 +14,7 @@ struct DocumentExporter: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMddyyyy"
+        dateFormatter.dateFormat = "yyyyMMdd"
         let currentDate = Date()
         let dateString = dateFormatter.string(from: currentDate)
 
