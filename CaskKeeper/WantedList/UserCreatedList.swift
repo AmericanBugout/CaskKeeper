@@ -13,4 +13,5 @@ class UserCreatedList {
     var name = ""
     var style: Style = .bourbon
     var description = ""
+    var whiskeys: [WhiskeyItem] = []
 }

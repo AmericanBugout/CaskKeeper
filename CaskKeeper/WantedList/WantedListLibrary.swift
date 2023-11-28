@@ -17,6 +17,7 @@ class WantedListLibrary {
             dataPersistence.save(wantedList: wantedLists)
         }
     }
+    var userCreatedList = UserCreatedList()
     
     init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
         dataPersistence = persistence

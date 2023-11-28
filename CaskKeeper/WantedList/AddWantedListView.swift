@@ -12,13 +12,12 @@ struct AddWantedListView: View {
     @Environment(\.wantedListLibrary) private var wantedListLibrary
     @Environment(\.dismiss) var dismiss
     
-    @State private var itemsToAdd = [WhiskeyItem]()
-    @State private var userCreatedList = UserCreatedList()
-    @State private var whiskeyToAdd = WhiskeyItem()
+    @Bindable var userCreatedList: UserCreatedList
+    @State private var name = ""
     
     var body: some View {
         NavigationStack {
-            Form {
+            List {
                 Section {
                     WhiskeyEditTextField(text: $userCreatedList.name, placeholder: "Name")
                     Picker("Style", selection: $userCreatedList.style) {
@@ -34,59 +33,64 @@ struct AddWantedListView: View {
                     Text("List Info")
                         .font(.customLight(size: 18))
                 }
+                .listRowSeparator(.hidden)
+
                 
                 Section {
                     TextEditor(text: $userCreatedList.description)
-                        .frame(height: 60)
+                        .frame(height: 70)
+                        .cornerRadius(5) // Optional: if you want rounded corners
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color.lead, lineWidth: 1)
+                                //.padding(.horizontal, 10)// Optional: if you want a border around the TextEditor
+                        )
                 } header: {
                     Text("Add a Description (Optional)")
                         .font(.customLight(size: 18))
+
                     
-                } footer: {
-                    Text("Add a description about this list.")
-                        .font(.customLight(size: 18))
                 }
+                .listRowSeparator(.hidden)
+
                 
                 Section {
                     HStack {
-                        WhiskeyEditTextField(text: $whiskeyToAdd.name, placeholder: "Add Whiskey")
+                        WhiskeyEditTextField(text: $name, placeholder: "Add Whiskey")
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                             .listRowBackground(Color.clear)
                             .onSubmit(of: .text) {
-                                wantedListLibrary.addWhiskey()
+                                addWhiskeyToUserCreatedWantedWhiskeys()
                             }
                         Spacer()
                         Button {
-                            wantedListLibrary.addWhiskey()
+                            addWhiskeyToUserCreatedWantedWhiskeys()
                         } label: {
                             Image(systemName: "plus")
                                 .foregroundStyle(Color.regularGreen)
                         }
                     }
-                    if !itemsToAdd.isEmpty {
-                        LazyVGrid(columns: [GridItem(), GridItem()]) {
-                            ForEach(itemsToAdd) { whiskey in
-                                HStack {
-                                    Text(whiskey.name)
-                                        .font(.customLight(size: 18))
-                                    Spacer()
-                                    Button {
+                    .listRowSeparator(.hidden)
 
-                                    } label: {
-                                        Image(systemName: "minus.circle")
-                                            .imageScale(.small)
-                                            .foregroundStyle(Color.red)
-                                    }
-                                }
+                    if !userCreatedList.whiskeys.isEmpty {
+                        ForEach(userCreatedList.whiskeys) { whiskey in
+                            HStack {
+                                Text(whiskey.name)
+                                    .font(.customLight(size: 18))
                             }
+                            .listRowBackground(Color.clear)
                         }
+                        .onDelete(perform: { indexSet in
+                            userCreatedList.whiskeys.remove(atOffsets: indexSet)
+                        })
                     }
                 } header: {
                     Text("Whiskey")
                         .font(.customLight(size: 18))
+                        .listRowSeparator(.hidden)
                 }
             }
-            .toolbarTitleDisplayMode(.inline)
+            .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
@@ -96,7 +100,7 @@ struct AddWantedListView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        addList()
+                        // addList()
                         dismiss()
                     } label: {
                         Text("Save")
@@ -106,16 +110,32 @@ struct AddWantedListView: View {
             }
             .font(.customRegular(size: 18))
             .navigationTitle("Create Wanted List")
-            
         }
     }
     
-    private func addList() {
-        let userCreatedList = WantedList(userCreatedList: WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: itemsToAdd))
-        wantedListLibrary.addWantedList(userCreatedList: userCreatedList)
+    private func addWhiskeyToUserCreatedWantedWhiskeys() {
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty else { return }
+        let whiskey = WhiskeyItem(name: trimmedName)
+        userCreatedList.whiskeys.append(whiskey)
+        name = ""
+    }
+    
+    private func deleteWhiskeysFromUserCreatedWantedWhiskeys(id: UUID) {
+        if let index = userCreatedList.whiskeys.firstIndex(where: {$0.id == id}) {
+            userCreatedList.whiskeys.remove(at: index)
+        }
     }
 }
 
+
+
+//    private func addList() {
+//        let userCreatedList = WantedList(userCreatedList: WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: itemsToAdd))
+//        wantedListLibrary.addWantedList(userCreatedList: userCreatedList)
+//    }
+
+
 #Preview {
-    AddWantedListView()
+    AddWantedListView(userCreatedList: UserCreatedList())
 }

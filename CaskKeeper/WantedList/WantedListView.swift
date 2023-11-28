@@ -52,7 +52,7 @@ struct WantedListView: View {
             .disabled(addWantedViewIsShowing)
             .blur(radius: addWantedViewIsShowing ? 20 : 0)
             .sheet(isPresented: $addWantedViewIsShowing) {
-                AddWantedListView()
+                AddWantedListView(userCreatedList: wantedListLibrary.userCreatedList)
                     .environment(\.wantedListLibrary, wantedListLibrary)
             }
         }
