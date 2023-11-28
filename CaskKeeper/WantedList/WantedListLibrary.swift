@@ -39,17 +39,13 @@ class WantedListLibrary {
 //        }
     }
     
-    func addWantedList(userCreatedList: WantedList) {
-        wantedLists.append(userCreatedList)
+    func addWantedList() {
+        let wantedList = WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: userCreatedList.whiskeys)
+        wantedLists.append(wantedList)
     }
     
     func addWhiskey() {
-//        let trimmedName = whiskeyItem.name.trimmingCharacters(in: .whitespacesAndNewlines)
-//        guard !trimmedName.isEmpty else { return }
-//        let whiskeyToAdd = WhiskeyItem(id: UUID(), name: trimmedName)
-//        print(whiskeyToAdd.id)
-//        whiskeyItemsToAdd.append(whiskeyToAdd)
-//        whiskeyItem.name = ""
+
     }
     
     func save(wantedList: [WantedList]) {

@@ -37,13 +37,4 @@ struct WantedList: Identifiable, Hashable, Codable {
         self.description = description
         self.whiskeys = whiskeys ?? []
     }
-    
-    init(userCreatedList: WantedList) {
-        self.id = userCreatedList.id
-        self.name = userCreatedList.name
-        self.style = userCreatedList.style
-        self.description = userCreatedList.description
-        self.dateCreated = userCreatedList.dateCreated
-        self.whiskeys = userCreatedList.whiskeys
-    }
 }

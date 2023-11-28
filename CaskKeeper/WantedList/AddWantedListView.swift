@@ -23,18 +23,17 @@ struct AddWantedListView: View {
                     Picker("Style", selection: $userCreatedList.style) {
                         ForEach(Style.allCases, id: \.self) { style in
                             Text(style.rawValue)
+                                .font(.customRegular(size: 18))
                         }
                     }
                     .pickerStyle(.menu)
-                    .font(.customLight(size: 18))
-                    
-                    
+                    .font(.customRegular(size: 18))
+                    .foregroundStyle(.black)
                 } header: {
                     Text("List Info")
                         .font(.customLight(size: 18))
                 }
                 .listRowSeparator(.hidden)
-
                 
                 Section {
                     TextEditor(text: $userCreatedList.description)
@@ -42,17 +41,13 @@ struct AddWantedListView: View {
                         .cornerRadius(5) // Optional: if you want rounded corners
                         .background(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color.lead, lineWidth: 1)
-                                //.padding(.horizontal, 10)// Optional: if you want a border around the TextEditor
+                                .stroke(Color.accentColor, lineWidth: 3).opacity(0.3)
                         )
                 } header: {
                     Text("Add a Description (Optional)")
                         .font(.customLight(size: 18))
-
-                    
                 }
                 .listRowSeparator(.hidden)
-
                 
                 Section {
                     HStack {
@@ -74,20 +69,31 @@ struct AddWantedListView: View {
 
                     if !userCreatedList.whiskeys.isEmpty {
                         ForEach(userCreatedList.whiskeys) { whiskey in
-                            HStack {
-                                Text(whiskey.name)
-                                    .font(.customLight(size: 18))
-                            }
-                            .listRowBackground(Color.clear)
+                            Text(whiskey.name)
+                                .frame(maxWidth: .infinity)
+                                .font(.customLight(size: 18))
                         }
                         .onDelete(perform: { indexSet in
                             userCreatedList.whiskeys.remove(atOffsets: indexSet)
                         })
+                        .listRowSeparator(.hidden)
                     }
                 } header: {
-                    Text("Whiskey")
-                        .font(.customLight(size: 18))
-                        .listRowSeparator(.hidden)
+                    VStack(alignment: .leading) {
+                        Text("Whiskey")
+                            .font(.customLight(size: 18))
+                            .listRowSeparator(.hidden)
+                        if !userCreatedList.whiskeys.isEmpty {
+                            Text("The items in at the top of the list are the most sought after whiskeys.")
+                                .listRowSeparator(.hidden)
+                                .font(.customLight(size: 14))
+                                .padding(.top, 2)
+                            
+                        }
+                    }
+                    
+                } footer: {
+                    
                 }
             }
             .listStyle(.plain)
@@ -100,7 +106,7 @@ struct AddWantedListView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        // addList()
+                        wantedListLibrary.addWantedList()
                         dismiss()
                     } label: {
                         Text("Save")
@@ -117,24 +123,12 @@ struct AddWantedListView: View {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else { return }
         let whiskey = WhiskeyItem(name: trimmedName)
-        userCreatedList.whiskeys.append(whiskey)
-        name = ""
-    }
-    
-    private func deleteWhiskeysFromUserCreatedWantedWhiskeys(id: UUID) {
-        if let index = userCreatedList.whiskeys.firstIndex(where: {$0.id == id}) {
-            userCreatedList.whiskeys.remove(at: index)
+        withAnimation(Animation.smooth) {
+            userCreatedList.whiskeys.append(whiskey)
+            name = ""
         }
     }
 }
-
-
-
-//    private func addList() {
-//        let userCreatedList = WantedList(userCreatedList: WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: itemsToAdd))
-//        wantedListLibrary.addWantedList(userCreatedList: userCreatedList)
-//    }
-
 
 #Preview {
     AddWantedListView(userCreatedList: UserCreatedList())
