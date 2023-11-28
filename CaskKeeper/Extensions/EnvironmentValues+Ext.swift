@@ -17,6 +17,8 @@ extension EnvironmentValues {
         get { self[FlavorCatalogKey.self] }
         set { self[FlavorCatalogKey.self] = newValue }
     }
+    
+   // var listCatallog: Library
 }
 
 private struct WhiskeyLibraryKey: EnvironmentKey {

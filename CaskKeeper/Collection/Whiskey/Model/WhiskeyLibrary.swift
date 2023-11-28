@@ -42,7 +42,7 @@ class WhiskeyLibrary {
         .count
     }
     
-    init(dataPersistence: WhiskeyPersisting = DataPersistenceManager.shared, isForTesting: Bool = false) {
+    init(dataPersistence: WhiskeyPersisting = WhiskeyDataPersistanceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
         
         if isForTesting {

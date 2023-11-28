@@ -14,9 +14,9 @@ protocol WhiskeyPersisting {
     func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void )
 }
 
-class DataPersistenceManager: WhiskeyPersisting {
+class WhiskeyDataPersistanceManager: WhiskeyPersisting {
     
-    static let shared = DataPersistenceManager()
+    static let shared = WhiskeyDataPersistanceManager()
     
     private init() {}
     
@@ -35,7 +35,7 @@ class DataPersistenceManager: WhiskeyPersisting {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(collection)
-            try data.write(to: DataPersistenceManager.collectionsFileURL, options: .atomic)
+            try data.write(to: WhiskeyDataPersistanceManager.collectionsFileURL, options: .atomic)
         } catch {
 
         }
@@ -44,7 +44,7 @@ class DataPersistenceManager: WhiskeyPersisting {
     func load() -> [Whiskey] {
         let decoder = PropertyListDecoder()
         do {
-            let data = try Data(contentsOf: DataPersistenceManager.collectionsFileURL)
+            let data = try Data(contentsOf: WhiskeyDataPersistanceManager.collectionsFileURL)
             print(String(data: data, encoding: .utf8) ?? "")
             let collection = try decoder.decode([Whiskey].self, from: data)
             save(collection: collection)
@@ -62,7 +62,7 @@ class DataPersistenceManager: WhiskeyPersisting {
             do {
                 let jsonData = try encoder.encode(collection)
                 let fileName = "collection.json"
-                let fileURL = DataPersistenceManager.documentsDirectoryURL.appendingPathComponent(fileName)
+                let fileURL = WhiskeyDataPersistanceManager.documentsDirectoryURL.appendingPathComponent(fileName)
                 try jsonData.write(to: fileURL, options: .atomicWrite)
                 DispatchQueue.main.async {
                     completion(.success(fileURL))
