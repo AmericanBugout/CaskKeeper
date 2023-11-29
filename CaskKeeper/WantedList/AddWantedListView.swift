@@ -38,7 +38,7 @@ struct AddWantedListView: View {
                 Section {
                     TextEditor(text: $userCreatedList.description)
                         .frame(height: 70)
-                        .cornerRadius(5) // Optional: if you want rounded corners
+                        .cornerRadius(5)
                         .background(
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color.accentColor, lineWidth: 3).opacity(0.3)

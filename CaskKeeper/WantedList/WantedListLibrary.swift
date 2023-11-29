@@ -44,6 +44,10 @@ class WantedListLibrary {
         wantedLists.append(wantedList)
     }
     
+    func modfiedWhiskeySearchList(wantedWhiskeys: [WhiskeyItem], foundWhiskeys: [WhiskeyItem]) {
+        
+    }
+    
     func addWhiskey() {
 
     }

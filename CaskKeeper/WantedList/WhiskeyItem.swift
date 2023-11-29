@@ -42,15 +42,6 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
         self.id = id
         self.name = name
     }
-    
-    func toggleState() {
-        switch state {
-        case .looking:
-            self.state = .found
-        case .found:
-            self.state = .looking
-        }
-    }
 }
 
 extension WhiskeyItem {

@@ -22,11 +22,12 @@ struct WantedListView: View {
                     Section(header: Text(style).font(.customRegular(size: 18))) {
                         ForEach(groupedLists[style] ?? [], id: \.self) { list in
                             NavigationLink {
-                                WantedListDetailView(wantedList: list)
+                                WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? [])
+                                    .environment(\.wantedListLibrary, wantedListLibrary)
+                                    .navigationTitle("Wanted Whiskeys")
                             } label: {
                                 Text(list.name)
                             }
-
                         }
                     }
                     .listRowSeparator(.hidden)
