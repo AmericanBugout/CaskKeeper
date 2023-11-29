@@ -13,14 +13,13 @@ struct WhiskeySectionView: View {
     var action: ((WhiskeyItem) -> Void)
     
     var body: some View {
-        Grid(verticalSpacing: 0) {
+        VStack {
             Text(title)
-                .padding()
+                .padding(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.customSemiBold(size: 18))
-                        
             ScrollView {
-                LazyVStack(spacing: 10) {
+                LazyVStack(spacing: 0) {
                     ForEach(items.indices, id: \.self) { index in
                         VStack {
                             HStack {
@@ -42,7 +41,7 @@ struct WhiskeySectionView: View {
                                     }
                                 } label: {
                                     Image(systemName: items[index].state == .looking ? "circle" : "checkmark.circle.fill")
-                                            .imageScale(.large)
+                                            .imageScale(.medium)
                                             .foregroundStyle(items[index].state == .looking ? Color.aluminum : Color.regularGreen)
                                 }
                             }
@@ -59,20 +58,14 @@ struct WhiskeySectionView: View {
                                 .font(.customLight(size: 12))
                                 .foregroundStyle(Color.accentColor)
                                 .opacity(0.7)
-
-
-
-                                
                             }
                         }
-                        
+                        .padding(.top, 5)
                     }
                 }
             }
-            .frame(height: 150)
-
+            .frame(height: 200)
         }
-        .padding(.bottom, 8)
     }
 }
 

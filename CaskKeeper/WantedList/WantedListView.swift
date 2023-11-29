@@ -11,26 +11,44 @@ struct WantedListView: View {
     @State private var wantedListLibrary = WantedListLibrary(isForTesting: true)
     @State private var addWantedViewIsShowing = false
     
-    var groupedLists: [String: [WantedList]] {
-        Dictionary(grouping: wantedListLibrary.wantedLists, by: { $0.style })
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter
     }
     
     var body: some View {
         ZStack {
             List {
-                ForEach(groupedLists.keys.sorted(), id: \.self) { style in
-                    Section(header: Text(style).font(.customRegular(size: 18))) {
-                        ForEach(groupedLists[style] ?? [], id: \.self) { list in
-                            NavigationLink {
-                                WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? [])
+                if let lists = wantedListLibrary.groupedLists {
+                    ForEach(lists.keys.sorted(), id: \.self) { style in
+                        Section(header: Text(style).font(.customRegular(size: 18))) {
+                            ForEach(lists[style] ?? [], id: \.self) { list in
+                                NavigationLink {
+                                    WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
+                                       wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
+                                    }
+                                    .toolbar {
+                                        ToolbarItem(placement: .confirmationAction) {
+                                            HStack(alignment: .top, spacing: 0) {
+                                                Text("Created on ")
+                                                    .font(.customLight(size: 12))
+                                                let formatted = dateFormatter.string(from: list.dateCreated)
+                                                Text(formatted)
+                                                    .font(.customRegular(size: 12))
+                                            }
+                                        }
+                                    }
                                     .environment(\.wantedListLibrary, wantedListLibrary)
                                     .navigationTitle("Wanted Whiskeys")
-                            } label: {
-                                Text(list.name)
+                                } label: {
+                                    Text(list.name)
+                                        .font(.customRegular(size: 18))
+                                }
                             }
                         }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
                 }
             }
             .listStyle(.plain)
