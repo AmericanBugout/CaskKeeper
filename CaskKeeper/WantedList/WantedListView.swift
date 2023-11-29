@@ -21,23 +21,17 @@ struct WantedListView: View {
                 ForEach(groupedLists.keys.sorted(), id: \.self) { style in
                     Section(header: Text(style).font(.customRegular(size: 18))) {
                         ForEach(groupedLists[style] ?? [], id: \.self) { list in
-                            NavigationLink(value: list) {
-                                VStack(alignment: .leading) {
-                                    Text(list.description ?? "")
-                                        .font(.customLight(size: 18))
-                                }
+                            NavigationLink {
+                                WantedListDetailView(wantedList: list)
+                            } label: {
+                                Text(list.name)
                             }
+
                         }
                     }
                     .listRowSeparator(.hidden)
                 }
             }
-            .navigationDestination(for: WantedList.self, destination: { list in
-                Text(list.name)
-            })
-            .navigationDestination(for: WantedList.self, destination: { list in
-                Text(list.name)
-            })
             .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .navigation) {

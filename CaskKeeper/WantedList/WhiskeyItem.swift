@@ -8,9 +8,18 @@
 import SwiftUI
 import Observation
 
-enum SearchState: Codable {
-    case looking
-    case found
+enum SearchState: String, Codable {
+    case looking = "Looking"
+    case found = "Found"
+    
+    var currentState: String {
+        switch self {
+        case .looking:
+            return "Looking"
+        case .found:
+            return "Found"
+        }
+    }
 }
 
 @Observable
@@ -32,6 +41,15 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
     init(id: UUID = UUID(), name: String = "") {
         self.id = id
         self.name = name
+    }
+    
+    func toggleState() {
+        switch state {
+        case .looking:
+            self.state = .found
+        case .found:
+            self.state = .looking
+        }
     }
 }
 
