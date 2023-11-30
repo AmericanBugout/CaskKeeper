@@ -14,7 +14,6 @@ enum HuntState {
 
 struct WantedListDetailView: View {
     @Environment(\.wantedListLibrary) private var wantedWhiskeyLibrary
-    
     @State private var internalWantedWhiskeys: [WhiskeyItem]
     @State private var internalFoundWhiskeys: [WhiskeyItem]
     @State private var searching: HuntState = .searching
@@ -28,35 +27,31 @@ struct WantedListDetailView: View {
     
     var body: some View {
         ZStack {
-            List {
-                WhiskeySectionView(title: "Wanted", items: $internalWantedWhiskeys) { whiskey in
-                    whiskey.state = .found
-                    whiskey.endSearchDate = Date()
-                    internalFoundWhiskeys.append(whiskey)
-                    internalWantedWhiskeys.removeAll { $0.id == whiskey.id }
-                    withAnimation(Animation.easeOut(duration: 1)) {
-                        onChange(whiskey)
-                    }
+            WhiskeySectionView(title: "Wanted", items: $internalWantedWhiskeys) { whiskey in
+                whiskey.state = .found
+                whiskey.endSearchDate = Date()
+                internalFoundWhiskeys.append(whiskey)
+                internalWantedWhiskeys.removeAll { $0.id == whiskey.id }
+                withAnimation(Animation.easeOut(duration: 0.25)) {
+                    onChange(whiskey)
                 }
-                .listRowSeparator(.hidden)
             }
+            .listRowSeparator(.hidden)
             .opacity(searching == .searching ? 1 : 0)
             .offset(x: searching == .found ? 800 : 0, y: 0)
-            .animation(Animation.easeOut(duration: 1), value: searching)
+            .animation(Animation.easeOut(duration: 0.5), value: searching)
             .listStyle(.plain)
             
-            List {
-                WhiskeySectionView(title: "Found", items: $internalFoundWhiskeys) { whiskey in
-                    whiskey.state = .looking
-                    whiskey.endSearchDate = nil
-                    internalWantedWhiskeys.append(whiskey)
-                    internalFoundWhiskeys.removeAll {$0.id == whiskey.id}
-                    withAnimation(Animation.easeOut(duration: 2)) {
-                        onChange(whiskey)
-                    }
+            WhiskeySectionView(title: "Found", items: $internalFoundWhiskeys) { whiskey in
+                whiskey.state = .looking
+                whiskey.endSearchDate = nil
+                internalWantedWhiskeys.append(whiskey)
+                internalFoundWhiskeys.removeAll {$0.id == whiskey.id}
+                withAnimation(Animation.easeOut(duration: 0.5)) {
+                    onChange(whiskey)
                 }
-                .listRowSeparator(.hidden)
             }
+            .listRowSeparator(.hidden)
             .opacity(searching == .found ? 1 : 0)
             .offset(x: searching == .searching ? -800 : 0, y: 0)
             .animation(Animation.spring, value: searching)
@@ -76,8 +71,7 @@ struct WantedListDetailView: View {
                 } label: {
                     Image(systemName: "switch.2")
                 }
-                .animation(Animation.smooth(duration: 1), value: searching)
-
+                .animation(Animation.smooth(duration: 0.5), value: searching)
             }
         }
     }
