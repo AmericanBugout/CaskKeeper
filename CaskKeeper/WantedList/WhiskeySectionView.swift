@@ -18,12 +18,14 @@ struct WhiskeySectionView: View {
                 LazyVStack(spacing: 10) {
                     ForEach(items.indices, id: \.self) { index in
                         VStack {
-                            HStack {
+                            HStack(alignment: .top) {
                                 if title == "Wanted" {
                                     Text("\(index + 1). ")
                                         .font(.customSemiBold(size: 18))
                                 }
                                 Text(items[index].name)
+                                    .multilineTextAlignment(.leading)
+                                    .lineLimit(2)
                                 Spacer()
                                 Button {
                                     withAnimation(.easeIn(duration: 1)) {

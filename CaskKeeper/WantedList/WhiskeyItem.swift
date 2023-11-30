@@ -32,9 +32,6 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
     /* searching state */
     var state: SearchState = .looking
     
-    /* start search date */
-    var startSearchDate: Date?
-    
     /* end search date */
     var endSearchDate: Date?
         
@@ -47,7 +44,6 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
 extension WhiskeyItem {
     
     /* Conform to Hashable */
-    
     static func == (lhs: WhiskeyItem, rhs: WhiskeyItem) -> Bool {
         lhs.name == rhs.name
     }

@@ -21,9 +21,9 @@ struct WantedListView: View {
         ZStack {
             List {
                 if let lists = wantedListLibrary.groupedLists {
-                    ForEach(lists.keys.sorted(), id: \.self) { style in
-                        Section(header: Text(style).font(.customRegular(size: 18))) {
-                            ForEach(lists[style] ?? [], id: \.self) { list in
+                    ForEach(lists, id: \.key) { group in
+                        Section(header: Text(group.key).font(.customRegular(size: 18))) {
+                            ForEach(group.list, id: \.id) { list in
                                 NavigationLink {
                                     WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
                                        wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
