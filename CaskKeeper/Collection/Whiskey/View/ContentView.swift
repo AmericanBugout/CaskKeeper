@@ -59,7 +59,10 @@ struct ContentView: View {
                     Button {
                         isSheetViewShowing = true
                     } label: {
-                        Image(systemName: "plus.circle")
+                        VStack {
+                            Text("New")
+                        }
+                        .font(.customRegular(size: 16))
                     }
                 }
                 

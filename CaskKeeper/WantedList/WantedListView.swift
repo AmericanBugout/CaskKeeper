@@ -10,7 +10,7 @@ import SwiftUI
 struct WantedListView: View {
     @State private var addWantedViewIsShowing = false
     @State private var wantedListLibrary = WantedListLibrary(isForTesting: false)
-
+    
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -20,14 +20,25 @@ struct WantedListView: View {
     
     var body: some View {
         ZStack {
+            
             List {
                 if let lists = wantedListLibrary.groupedLists {
+                    if lists.isEmpty {
+                        ZStack {
+                            Text("No lists created.")
+                                .font(.customBold(size: 26))
+                                .foregroundStyle(.aluminum)
+                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                        }
+                        .frame(height: 500)
+                        .listRowSeparator(.hidden)
+                    }
                     ForEach(lists, id: \.key) { group in
                         Section(header: Text(group.key).font(.customRegular(size: 18))) {
                             ForEach(group.list, id: \.id) { list in
                                 NavigationLink {
                                     WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
-                                       wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
+                                        wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
                                     }
                                     .toolbar {
                                         ToolbarItem(placement: .principal) {
@@ -54,11 +65,12 @@ struct WantedListView: View {
             }
             .listStyle(.plain)
             .toolbar {
-                ToolbarItem(placement: .navigation) {
+                ToolbarItem(placement: .confirmationAction) {
                     Button {
                         addWantedViewIsShowing = true
                     } label: {
-                        Text("Add")
+                        Text("New List")
+                            .font(.customRegular(size: 16))
                     }
                     
                 }

@@ -40,7 +40,7 @@ struct WantedListDetailView: View {
             }
             .opacity(searching == .searching ? 1 : 0)
             .offset(x: searching == .found ? 800 : 0, y: 0)
-            .animation(Animation.easeInOut(duration: 1), value: searching)
+            .animation(Animation.easeOut(duration: 1), value: searching)
             .listStyle(.plain)
             
             List {
@@ -55,7 +55,7 @@ struct WantedListDetailView: View {
             }
             .opacity(searching == .found ? 1 : 0)
             .offset(x: searching == .searching ? -800 : 0, y: 0)
-            .animation(Animation.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1), value: searching)
+            .animation(Animation.spring, value: searching)
             .listStyle(.plain)
         }
         .navigationTitle(searching == .found ? "Found" : "Wanted")

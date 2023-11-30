@@ -19,6 +19,7 @@ struct CKTabBarView: View {
             NavigationStack {
                 WantedListView()
                     .navigationTitle("Wanted Whiskeys")
+                    .specialNavBar()
             }
             .tabItem { Image(systemName: "scope") }
             
