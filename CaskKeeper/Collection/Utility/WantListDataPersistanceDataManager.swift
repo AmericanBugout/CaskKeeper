@@ -8,8 +8,8 @@
 import Foundation
 
 protocol WantListPersisting {
-    func save(groupedList: [String: [WantedList]])
-    func load() -> [String: [WantedList]]
+    func save(groupedList: [WantedListGroup])
+    func load() -> [WantedListGroup]
 }
 
 class WantListDataPersistanceDataManager: WantListPersisting {
@@ -28,36 +28,29 @@ class WantListDataPersistanceDataManager: WantListPersisting {
         return documentsDirectoryURL.appendingPathComponent("wantList_data.plist")
     }
     
-    func save(groupedList: [String: [WantedList]]) {
+    func save(groupedList: [WantedListGroup]) {
         let encoder = PropertyListEncoder()
-        let dataList = groupedList.map { WantedListGroup(key: $0.key, list: $0.value) }
+        let dataList = groupedList.map { WantedListGroup(key: $0.key, list: $0.list) }
         
         do {
             let data = try encoder.encode(dataList)
             try data.write(to: WantListDataPersistanceDataManager.wantedListFileURL, options: .atomic)
+            print("Saved Wanted List.")
         } catch {
-            // Handle the error here
             print("Error saving data: \(error)")
         }
     }
         
-    func load() -> [String: [WantedList]] {
+    func load() -> [WantedListGroup] {
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: WantListDataPersistanceDataManager.wantedListFileURL)
             let dataList = try decoder.decode([WantedListGroup].self, from: data)
-            
-            // Convert the array of WantedListGroup back to a dictionary
-            var groupedList = [String: [WantedList]]()
-            for group in dataList {
-                groupedList[group.key] = group.list
-            }
-            
-            return groupedList
-            
+            print("Loaded Wanted List.")
+            return dataList
         } catch {
             print("Error loading data: \(error.localizedDescription)")
-            return [:]
+            return []
         }
     }
 }

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct WantedListView: View {
-    @State private var wantedListLibrary = WantedListLibrary(isForTesting: true)
     @State private var addWantedViewIsShowing = false
+    @State private var wantedListLibrary = WantedListLibrary(isForTesting: false)
+
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()

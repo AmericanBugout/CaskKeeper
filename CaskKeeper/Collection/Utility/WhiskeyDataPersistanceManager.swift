@@ -37,7 +37,7 @@ class WhiskeyDataPersistanceManager: WhiskeyPersisting {
             let data = try encoder.encode(collection)
             try data.write(to: WhiskeyDataPersistanceManager.collectionsFileURL, options: .atomic)
         } catch {
-
+            print("Error Saving data: \(error.localizedDescription)")
         }
     }
     

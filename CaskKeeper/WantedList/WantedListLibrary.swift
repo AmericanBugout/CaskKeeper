@@ -21,7 +21,7 @@ class WantedListLibrary {
     
     var groupedLists: [WantedListGroup]?
     
-    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = true) {
+    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
         dataPersistence = persistence
         
         if isForTesting {
@@ -50,7 +50,7 @@ class WantedListLibrary {
             groupedLists = [WantedListGroup(key: "Rye", list: ryes), WantedListGroup(key: "Bourbon", list: bourbons)]
             
         } else {
-            groupedLists = nil
+            groupedLists = dataPersistence.load()
         }
     }
     
@@ -65,8 +65,7 @@ class WantedListLibrary {
                     list.whiskeys?[whiskeyIndex] = whiskey
                     groupedLists[i].list[listIndex] = list
 
-                    // If you're persisting data, uncomment the following line
-                    // dataPersistence.save(groupedLists: groupedLists)
+                    dataPersistence.save(groupedList: groupedLists)
                     break
                 }
             }
@@ -84,19 +83,11 @@ class WantedListLibrary {
         
         if let index = groupedLists?.firstIndex(where: {$0.key == styleKey }) {
             groupedLists?[index].list.append(wantedList)
+            dataPersistence.save(groupedList: groupedLists ?? [])
         } else {
             let newGroupList = WantedListGroup(key: styleKey, list: [wantedList])
             groupedLists?.append(newGroupList)
+            dataPersistence.save(groupedList: groupedLists ?? [])
         }
-        
-        //dataPersistence.save(groupedLists: groupedLists)
-    }
-    
-    func save() {
-        
-    }
-    
-    func modfiedWhiskeySearchList(wantedWhiskeys: [WhiskeyItem], foundWhiskeys: [WhiskeyItem]) {
-        
     }
 }
