@@ -19,9 +19,13 @@ class WantedListLibrary {
 
     var userCreatedList = UserCreatedList()
     
-    var groupedLists: [WantedListGroup]?
+    var groupedLists: [WantedListGroup]? {
+        didSet {
+            dataPersistence.save(groupedList: groupedLists ?? [])
+        }
+    }
     
-    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = true) {
+    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
         dataPersistence = persistence
         
         if isForTesting {
@@ -61,15 +65,26 @@ class WantedListLibrary {
             if let listIndex = groupedLists[i].list.firstIndex(where: { $0.id == listId }) {
                 var list = groupedLists[i].list[listIndex]
 
-                if let whiskeyIndex = list.whiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
-                    list.whiskeys?[whiskeyIndex] = whiskey
-                    groupedLists[i].list[listIndex] = list
+                switch whiskey.state {
+                case .found:
+                    if let whiskeyIndex = list.whiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
+                        list.foundWhiskeys = list.foundWhiskeys ?? []
+                        list.foundWhiskeys?.append(whiskey)
+                        list.whiskeys?.remove(at: whiskeyIndex)
+                    }
 
-                    dataPersistence.save(groupedList: groupedLists)
-                    break
+                case .looking:
+                    // Move from 'foundWhiskeys' to 'whiskeys'
+                    if let whiskeyIndex = list.foundWhiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
+                        list.whiskeys = list.whiskeys ?? []
+                        list.whiskeys?.append(whiskey)
+                        list.foundWhiskeys?.remove(at: whiskeyIndex)
+                    }
                 }
+                groupedLists[i].list[listIndex] = list
             }
         }
+
         self.groupedLists = groupedLists
     }
 

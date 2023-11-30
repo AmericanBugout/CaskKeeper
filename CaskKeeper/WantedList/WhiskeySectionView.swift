@@ -29,6 +29,7 @@ struct WhiskeySectionView: View {
                                 Spacer()
                                 Button {
                                     withAnimation(.easeIn(duration: 1)) {
+                                        
                                         switch items[index].state {
                                         case .looking:
                                             items[index].state = .found
@@ -39,8 +40,8 @@ struct WhiskeySectionView: View {
                                     }
                                 } label: {
                                     Image(systemName: items[index].state == .looking ? "circle" : "checkmark.circle.fill")
-                                            .imageScale(.medium)
-                                            .foregroundStyle(items[index].state == .looking ? Color.aluminum : Color.regularGreen)
+                                        .imageScale(.medium)
+                                        .foregroundStyle(items[index].state == .looking ? Color.aluminum : Color.regularGreen)
                                 }
                             }
                             .padding(.horizontal)
@@ -77,7 +78,7 @@ struct WhiskeySectionView: View {
         WhiskeyItem(name: "Mid Night's Winter Dram"),
         WhiskeyItem(name: "Mid Night's Winter Dram"),
         WhiskeyItem(name: "Mid Night's Winter Dram")])) { item in
-        
-    }
+            
+        }
 }
 

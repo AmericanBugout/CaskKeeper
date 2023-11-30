@@ -27,6 +27,7 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
     var id: UUID
     var name: String
     var state: SearchState
+    var location: String?
     var endSearchDate: Date?
     
     init(id: UUID = UUID(), name: String, state: SearchState = .looking) {
@@ -40,6 +41,7 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
         id = try container.decode(UUID.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
         state = try container.decode(SearchState.self, forKey: .state)
+        location = try container.decodeIfPresent(String.self, forKey: .location)
         endSearchDate = try container.decodeIfPresent(Date.self, forKey: .endSearchDate) ?? nil
     }
     
@@ -48,13 +50,14 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
         try container.encode(id, forKey: .id)
         try container.encode(name, forKey: .name)
         try container.encode(state, forKey: .state)
+        try container.encodeIfPresent(location, forKey: .location)
         try container.encodeIfPresent(endSearchDate, forKey: .endSearchDate)
     }
     
     
     // Ensure CodingKeys match your property names
     enum CodingKeys: String, CodingKey {
-        case id, name, state, endSearchDate
+        case id, name, state, endSearchDate, location
     }
     
     static func == (lhs: WhiskeyItem, rhs: WhiskeyItem) -> Bool {

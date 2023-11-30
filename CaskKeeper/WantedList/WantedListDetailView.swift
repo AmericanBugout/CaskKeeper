@@ -34,7 +34,9 @@ struct WantedListDetailView: View {
                     whiskey.endSearchDate = Date()
                     internalFoundWhiskeys.append(whiskey)
                     internalWantedWhiskeys.removeAll { $0.id == whiskey.id }
-                    onChange(whiskey)
+                    withAnimation(Animation.easeOut(duration: 1)) {
+                        onChange(whiskey)
+                    }
                 }
                 .listRowSeparator(.hidden)
             }
@@ -49,7 +51,9 @@ struct WantedListDetailView: View {
                     whiskey.endSearchDate = nil
                     internalWantedWhiskeys.append(whiskey)
                     internalFoundWhiskeys.removeAll {$0.id == whiskey.id}
-                    onChange(whiskey)
+                    withAnimation(Animation.easeOut(duration: 2)) {
+                        onChange(whiskey)
+                    }
                 }
                 .listRowSeparator(.hidden)
             }
@@ -58,6 +62,8 @@ struct WantedListDetailView: View {
             .animation(Animation.spring, value: searching)
             .listStyle(.plain)
         }
+        .navigationTitle(searching == .searching ? "Wanted" : "Found")
+
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {

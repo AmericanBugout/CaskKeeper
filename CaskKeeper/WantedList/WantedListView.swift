@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WantedListView: View {
     @State private var addWantedViewIsShowing = false
-    @State private var wantedListLibrary = WantedListLibrary(isForTesting: false)
+    @State private var wantedListLibrary = WantedListLibrary(isForTesting: true)
     
     
     var dateFormatter: DateFormatter {
