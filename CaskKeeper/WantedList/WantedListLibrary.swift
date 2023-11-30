@@ -21,7 +21,7 @@ class WantedListLibrary {
     
     var groupedLists: [WantedListGroup]?
     
-    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
+    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = true) {
         dataPersistence = persistence
         
         if isForTesting {

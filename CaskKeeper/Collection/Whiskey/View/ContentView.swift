@@ -16,7 +16,14 @@ struct ContentView: View {
         List {
             Section {
                 if whiskeyLibrary.collection.isEmpty {
-                    EmptyView()
+                    ZStack {
+                        Text("No whiskeys in your collection.")
+                            .font(.customLight(size: 22))
+                            .foregroundStyle(.aluminum)
+                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                    }
+                    .frame(height: 500)
+                    .listRowSeparator(.hidden)
                 } else {
                     ForEach(whiskeyLibrary.collection) { whiskey in
                         ZStack {

@@ -58,8 +58,6 @@ struct WantedListDetailView: View {
             .animation(Animation.spring, value: searching)
             .listStyle(.plain)
         }
-        .navigationTitle(searching == .found ? "Found" : "Wanted")
-        
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
@@ -77,6 +75,7 @@ struct WantedListDetailView: View {
             }
         }
     }
+    
     
 }
 

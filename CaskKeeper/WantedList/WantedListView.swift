@@ -26,7 +26,7 @@ struct WantedListView: View {
                     if lists.isEmpty {
                         ZStack {
                             Text("No lists created.")
-                                .font(.customBold(size: 26))
+                                .font(.customLight(size: 22))
                                 .foregroundStyle(.aluminum)
                                 .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         }
@@ -52,7 +52,6 @@ struct WantedListView: View {
                                         }
                                     }
                                     .environment(\.wantedListLibrary, wantedListLibrary)
-                                    .navigationTitle("Wanted Whiskeys")
                                 } label: {
                                     Text(list.name)
                                         .font(.customRegular(size: 18))

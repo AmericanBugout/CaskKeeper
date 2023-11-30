@@ -20,15 +20,13 @@ struct AddWantedListView: View {
             List {
                 Section {
                     WhiskeyEditTextField(text: $userCreatedList.name, placeholder: "Name")
-                    Picker("Style", selection: $userCreatedList.style) {
+                    Picker("style", selection: $userCreatedList.style) {
                         ForEach(Style.allCases, id: \.self) { style in
                             Text(style.rawValue)
                                 .font(.customRegular(size: 18))
                         }
                     }
-                    .pickerStyle(.menu)
                     .font(.customRegular(size: 18))
-                    .foregroundStyle(.black)
                 } header: {
                     Text("List Info")
                         .font(.customLight(size: 18))

@@ -25,30 +25,43 @@ enum SearchState: String, Codable {
 @Observable
 class WhiskeyItem: Codable, Hashable, Identifiable {
     var id: UUID
-    
-    /* label of the bottle */
-    var name: String = ""
-    
-    /* searching state */
-    var state: SearchState = .looking
-    
-    /* end search date */
+    var name: String
+    var state: SearchState
     var endSearchDate: Date?
-        
-    init(id: UUID = UUID(), name: String = "") {
+    
+    init(id: UUID = UUID(), name: String, state: SearchState = .looking) {
         self.id = id
         self.name = name
+        self.state = state
     }
-}
-
-extension WhiskeyItem {
     
-    /* Conform to Hashable */
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        state = try container.decode(SearchState.self, forKey: .state)
+        endSearchDate = try container.decodeIfPresent(Date.self, forKey: .endSearchDate) ?? nil
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(state, forKey: .state)
+        try container.encodeIfPresent(endSearchDate, forKey: .endSearchDate)
+    }
+    
+    
+    // Ensure CodingKeys match your property names
+    enum CodingKeys: String, CodingKey {
+        case id, name, state, endSearchDate
+    }
+    
     static func == (lhs: WhiskeyItem, rhs: WhiskeyItem) -> Bool {
-        lhs.name == rhs.name
+        lhs.id == rhs.id // Comparing by ID might be more appropriate
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
+        hasher.combine(id)
     }
 }
