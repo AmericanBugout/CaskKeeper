@@ -37,7 +37,7 @@ class WhiskeyItem: Codable, Hashable, Identifiable {
     
     /* end search date */
     var endSearchDate: Date?
-    
+        
     init(id: UUID = UUID(), name: String = "") {
         self.id = id
         self.name = name

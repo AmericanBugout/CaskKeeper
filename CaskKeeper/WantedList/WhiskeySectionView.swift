@@ -14,12 +14,8 @@ struct WhiskeySectionView: View {
     
     var body: some View {
         VStack {
-            Text(title)
-                .padding(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.customSemiBold(size: 18))
             ScrollView {
-                LazyVStack(spacing: 0) {
+                LazyVStack(spacing: 10) {
                     ForEach(items.indices, id: \.self) { index in
                         VStack {
                             HStack {
@@ -30,7 +26,7 @@ struct WhiskeySectionView: View {
                                 Text(items[index].name)
                                 Spacer()
                                 Button {
-                                    withAnimation(Animation.smooth(duration: 1)) {
+                                    withAnimation(.easeIn(duration: 1)) {
                                         switch items[index].state {
                                         case .looking:
                                             items[index].state = .found
@@ -64,7 +60,6 @@ struct WhiskeySectionView: View {
                     }
                 }
             }
-            .frame(height: 200)
         }
     }
 }

@@ -7,11 +7,17 @@
 
 import SwiftUI
 
+enum HuntState {
+    case searching
+    case found
+}
+
 struct WantedListDetailView: View {
     @Environment(\.wantedListLibrary) private var wantedWhiskeyLibrary
     
     @State private var internalWantedWhiskeys: [WhiskeyItem]
     @State private var internalFoundWhiskeys: [WhiskeyItem]
+    @State private var searching: HuntState = .searching
     var onChange: (WhiskeyItem) -> Void
     
     init(wantedWhiskeys: [WhiskeyItem], foundWhiskeys: [WhiskeyItem], onChange: @escaping (WhiskeyItem) -> Void) {
@@ -21,24 +27,54 @@ struct WantedListDetailView: View {
     }
     
     var body: some View {
-        VStack {
-            WhiskeySectionView(title: "Wanted", items: $internalWantedWhiskeys) { whiskey in
-                whiskey.state = .found
-                whiskey.endSearchDate = Date()
-                internalFoundWhiskeys.append(whiskey)
-                internalWantedWhiskeys.removeAll { $0.id == whiskey.id }
-                onChange(whiskey)
+        ZStack {
+            List {
+                WhiskeySectionView(title: "Wanted", items: $internalWantedWhiskeys) { whiskey in
+                    whiskey.state = .found
+                    whiskey.endSearchDate = Date()
+                    internalFoundWhiskeys.append(whiskey)
+                    internalWantedWhiskeys.removeAll { $0.id == whiskey.id }
+                    onChange(whiskey)
+                }
+                .listRowSeparator(.hidden)
             }
-            Spacer(minLength: 100)
-            WhiskeySectionView(title: "Found", items: $internalFoundWhiskeys) { whiskey in
-                whiskey.state = .looking
-                whiskey.endSearchDate = nil
-                internalWantedWhiskeys.append(whiskey)
-                internalFoundWhiskeys.removeAll {$0.id == whiskey.id}
-                onChange(whiskey)
-            }
+            .opacity(searching == .searching ? 1 : 0)
+            .offset(x: searching == .found ? 800 : 0, y: 0)
+            .animation(Animation.easeInOut(duration: 1), value: searching)
+            .listStyle(.plain)
             
-            Spacer()
+            List {
+                WhiskeySectionView(title: "Found", items: $internalFoundWhiskeys) { whiskey in
+                    whiskey.state = .looking
+                    whiskey.endSearchDate = nil
+                    internalWantedWhiskeys.append(whiskey)
+                    internalFoundWhiskeys.removeAll {$0.id == whiskey.id}
+                    onChange(whiskey)
+                }
+                .listRowSeparator(.hidden)
+            }
+            .opacity(searching == .found ? 1 : 0)
+            .offset(x: searching == .searching ? -800 : 0, y: 0)
+            .animation(Animation.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 1), value: searching)
+            .listStyle(.plain)
+        }
+        .navigationTitle(searching == .found ? "Found" : "Wanted")
+        
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    switch searching {
+                    case .searching:
+                        searching = .found
+                    case .found:
+                        searching = .searching
+                    }
+                } label: {
+                    Image(systemName: "switch.2")
+                }
+                .animation(Animation.smooth(duration: 1), value: searching)
+
+            }
         }
     }
     
@@ -47,7 +83,7 @@ struct WantedListDetailView: View {
 
 #Preview {
     NavigationStack {
-        WantedListDetailView(wantedWhiskeys: [WhiskeyItem(name: "Mid Winter Nights Dram")], foundWhiskeys: [WhiskeyItem(name: "Four Roses OBSF")]) { _ in 
+        WantedListDetailView(wantedWhiskeys: [WhiskeyItem(name: "Mid Winter Nights Dram")], foundWhiskeys: [WhiskeyItem(name: "Four Roses OBSF")]) { _ in
             
         }
     }

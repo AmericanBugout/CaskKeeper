@@ -29,7 +29,7 @@ struct WantedListView: View {
                                        wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
                                     }
                                     .toolbar {
-                                        ToolbarItem(placement: .confirmationAction) {
+                                        ToolbarItem(placement: .principal) {
                                             HStack(alignment: .top, spacing: 0) {
                                                 Text("Created on ")
                                                     .font(.customLight(size: 12))
