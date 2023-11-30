@@ -86,12 +86,8 @@ struct AddWantedListView: View {
                                 .listRowSeparator(.hidden)
                                 .font(.customLight(size: 14))
                                 .padding(.top, 2)
-                            
                         }
                     }
-                    
-                } footer: {
-                    
                 }
             }
             .listStyle(.plain)

@@ -20,6 +20,7 @@ struct CKTabBarView: View {
                 WantedListView()
                     .navigationTitle("Wanted Whiskeys")
                     .specialNavBar()
+                
             }
             .tabItem { Image(systemName: "scope") }
             
@@ -27,7 +28,6 @@ struct CKTabBarView: View {
                 SettingsView()
             }
             .tabItem { Image(systemName: "gear") }
-            
         }
     }
 }

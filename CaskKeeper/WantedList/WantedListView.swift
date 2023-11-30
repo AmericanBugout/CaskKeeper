@@ -19,67 +19,64 @@ struct WantedListView: View {
     }
     
     var body: some View {
-        ZStack {
-            
-            List {
-                if let lists = wantedListLibrary.groupedLists {
-                    if lists.isEmpty {
-                        ZStack {
-                            Text("No lists created.")
-                                .font(.customLight(size: 22))
-                                .foregroundStyle(.aluminum)
-                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                        }
-                        .frame(height: 500)
-                        .listRowSeparator(.hidden)
-                    }
-                    ForEach(lists, id: \.key) { group in
-                        Section(header: Text(group.key).font(.customRegular(size: 18))) {
-                            ForEach(group.list, id: \.id) { list in
-                                NavigationLink {
-                                    WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
-                                        wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
-                                    }
-                                    .toolbar {
-                                        ToolbarItem(placement: .principal) {
-                                            HStack(alignment: .top, spacing: 0) {
-                                                Text("Created on ")
-                                                    .font(.customLight(size: 12))
-                                                let formatted = dateFormatter.string(from: list.dateCreated)
-                                                Text(formatted)
-                                                    .font(.customRegular(size: 12))
-                                            }
+        List {
+            if let lists = wantedListLibrary.groupedLists, !lists.isEmpty {
+                ForEach(lists.indices, id: \.self) { groupIndex in
+                    let group = lists[groupIndex]
+                    Section(header: Text(group.key).font(.customRegular(size: 18))) {
+                        ForEach(group.list, id: \.id) { list in
+                            NavigationLink {
+                                WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
+                                    wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
+                                }
+                                .toolbar {
+                                    ToolbarItem(placement: .principal) {
+                                        HStack(alignment: .top, spacing: 0) {
+                                            Text("Created on ")
+                                                .font(.customLight(size: 12))
+                                            let formatted = dateFormatter.string(from: list.dateCreated)
+                                            Text(formatted)
+                                                .font(.customRegular(size: 12))
                                         }
                                     }
-                                    .environment(\.wantedListLibrary, wantedListLibrary)
-                                } label: {
-                                    Text(list.name)
-                                        .font(.customRegular(size: 18))
                                 }
+                                .environment(\.wantedListLibrary, wantedListLibrary)
+                            } label: {
+                                Text(list.name)
+                                    .font(.customRegular(size: 18))
                             }
+                            .listRowSeparator(.hidden)
                         }
-                        .listRowSeparator(.hidden)
+                        .onDelete { indexSet in
+                            wantedListLibrary.deleteItem(groupIndex: groupIndex, itemIndexSet: indexSet)
+                        }
                     }
                 }
+            } else {
+                ZStack {
+                    Text("No lists created.")
+                        .font(.customLight(size: 22))
+                        .foregroundStyle(.aluminum)
+                        .frame(maxWidth: .infinity)
+                }
+                .frame(height: 500)
+                .listRowSeparator(.hidden)
             }
-            .listStyle(.plain)
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button {
-                        addWantedViewIsShowing = true
-                    } label: {
-                        Text("New List")
-                            .font(.customRegular(size: 16))
-                    }
-                    
+        }
+        .listStyle(.plain)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button {
+                    addWantedViewIsShowing = true
+                } label: {
+                    Text("New List")
+                        .font(.customRegular(size: 16))
                 }
             }
-            .disabled(addWantedViewIsShowing)
-            .blur(radius: addWantedViewIsShowing ? 20 : 0)
-            .sheet(isPresented: $addWantedViewIsShowing) {
-                AddWantedListView(userCreatedList: wantedListLibrary.userCreatedList)
-                    .environment(\.wantedListLibrary, wantedListLibrary)
-            }
+        }
+        .sheet(isPresented: $addWantedViewIsShowing) {
+            AddWantedListView(userCreatedList: wantedListLibrary.userCreatedList)
+                .environment(\.wantedListLibrary, wantedListLibrary)
         }
     }
 }

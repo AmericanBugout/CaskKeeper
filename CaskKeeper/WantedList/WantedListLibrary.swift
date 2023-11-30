@@ -16,7 +16,7 @@ struct WantedListGroup: Codable {
 @Observable
 class WantedListLibrary {
     var dataPersistence: WantListPersisting
-
+    
     var userCreatedList = UserCreatedList()
     
     var groupedLists: [WantedListGroup]? {
@@ -41,7 +41,7 @@ class WantedListLibrary {
                              WhiskeyItem(name: "Hirsch Selection 25 Year Old Kentucky Straight Rye Whiskey"),
                              WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
                              WhiskeyItem(name: "Redemption Barrel Proof Straight Rye Whiskey")])
-                ]
+            ]
             
             let bourbons = [WantedList(name: "Somewhat rare", style: "Bourbon", description: "Not so hard to come by", whiskeys: [
                 WhiskeyItem(name: "Wild Turkey Generations"),
@@ -49,7 +49,7 @@ class WantedListLibrary {
                 WhiskeyItem(name: "Blanton's"),
                 WhiskeyItem(name: "E.H. Taylor Single Barrel"),
                 WhiskeyItem(name: "Stagg"),
-            
+                
             ])]
             groupedLists = [WantedListGroup(key: "Rye", list: ryes), WantedListGroup(key: "Bourbon", list: bourbons)]
             
@@ -60,11 +60,11 @@ class WantedListLibrary {
     
     func updateWhiskey(whiskey: WhiskeyItem, inList listId: UUID) {
         guard var groupedLists = self.groupedLists else { return }
-
+        
         for i in 0..<groupedLists.count {
             if let listIndex = groupedLists[i].list.firstIndex(where: { $0.id == listId }) {
                 var list = groupedLists[i].list[listIndex]
-
+                
                 switch whiskey.state {
                 case .found:
                     if let whiskeyIndex = list.whiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
@@ -72,7 +72,7 @@ class WantedListLibrary {
                         list.foundWhiskeys?.append(whiskey)
                         list.whiskeys?.remove(at: whiskeyIndex)
                     }
-
+                    
                 case .looking:
                     // Move from 'foundWhiskeys' to 'whiskeys'
                     if let whiskeyIndex = list.foundWhiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
@@ -84,10 +84,10 @@ class WantedListLibrary {
                 groupedLists[i].list[listIndex] = list
             }
         }
-
+        
         self.groupedLists = groupedLists
     }
-
+    
     func addWantedList() {
         let wantedList = WantedList(name: userCreatedList.name, style: userCreatedList.style.rawValue, description: userCreatedList.description, whiskeys: userCreatedList.whiskeys)
         let styleKey = wantedList.style
@@ -103,6 +103,17 @@ class WantedListLibrary {
             let newGroupList = WantedListGroup(key: styleKey, list: [wantedList])
             groupedLists?.append(newGroupList)
             dataPersistence.save(groupedList: groupedLists ?? [])
+        }
+    }
+
+    func deleteItem(groupIndex: Int, itemIndexSet: IndexSet) {
+        guard var groups = groupedLists else { return }
+        withAnimation(Animation.smooth(duration: 0.5)) {
+            groups[groupIndex].list.remove(atOffsets: itemIndexSet)
+            if groups[groupIndex].list.isEmpty {
+                groups.remove(at: groupIndex)
+            }
+            groupedLists = groups
         }
     }
 }

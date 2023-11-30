@@ -27,7 +27,6 @@ struct WhiskeySectionView: View {
                         Spacer()
                         Button {
                             withAnimation(.easeIn(duration: 1)) {
-                                
                                 switch items[index].state {
                                 case .looking:
                                     items[index].state = .found
@@ -44,6 +43,7 @@ struct WhiskeySectionView: View {
                     }
                     .padding(.horizontal)
                     .font(.customRegular(size: 18))
+                    .listRowSeparator(.hidden)
                     
                     if let endDate = items[index].endSearchDate {
                         VStack {
@@ -60,6 +60,7 @@ struct WhiskeySectionView: View {
                 .padding(.top, 5)
             }
             .onMove(perform: move)
+            .listRowSeparator(.hidden)
         }
     }
     

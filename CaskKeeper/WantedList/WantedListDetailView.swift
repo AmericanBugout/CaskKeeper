@@ -58,7 +58,6 @@ struct WantedListDetailView: View {
             .listStyle(.plain)
         }
         .navigationTitle(searching == .searching ? "Wanted" : "Found")
-
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
