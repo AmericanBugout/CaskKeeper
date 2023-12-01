@@ -26,9 +26,7 @@ struct WantedListView: View {
                     Section(header: Text(group.key).font(.customRegular(size: 18))) {
                         ForEach(group.list, id: \.id) { list in
                             NavigationLink {
-                                WantedListDetailView(wantedWhiskeys: list.whiskeys ?? [], foundWhiskeys: list.foundWhiskeys ?? []) { whiskey in
-                                    wantedListLibrary.updateWhiskey(whiskey: whiskey, inList: list.id)
-                                }
+                                ListDetailView(list: list)
                                 .toolbar {
                                     ToolbarItem(placement: .principal) {
                                         HStack(alignment: .top, spacing: 0) {
