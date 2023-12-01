@@ -41,7 +41,7 @@ struct WantedListView: View {
                                 .environment(\.wantedListLibrary, wantedListLibrary)
                             } label: {
                                 Text(list.name)
-                                    .font(.customRegular(size: 18))
+                                    .font(.customRegular(size: 20))
                             }
                             .listRowSeparator(.hidden)
                         }

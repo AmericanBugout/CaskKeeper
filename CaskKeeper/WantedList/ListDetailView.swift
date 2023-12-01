@@ -74,7 +74,7 @@ struct ListDetailView: View {
             HStack(alignment: .top) {
                 if showingLookingList {
                     Text("\(index + 1). ")
-                        .font(.customSemiBold(size: 18))
+                        .font(.customRegular(size: 18))
                 }
                 Text(whiskey.name)
                     .multilineTextAlignment(.leading)
@@ -82,7 +82,7 @@ struct ListDetailView: View {
                 Spacer()
                 handleStateButton(whiskey: whiskey)
             }
-            .font(.customRegular(size: 18))
+            .font(.customRegular(size: 20))
             .listRowSeparator(.hidden)
             
             if let endDate = whiskey.endSearchDate {
