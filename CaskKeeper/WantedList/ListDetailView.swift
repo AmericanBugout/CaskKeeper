@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ListDetailView: View {
+    @Environment(\.wantedListLibrary) var wantedListLibrary
+    
     let list: WantedList
     let groupIndex: Int
     
@@ -135,7 +137,8 @@ struct ListDetailView: View {
                 whiskeyRow(whiskey: whiskeys[index], index: index)
             }
             .onDelete { indexSet in
-                onDelete(indexSet)
+                internalWhiskeys.remove(atOffsets: indexSet)
+                wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
             }
             .onMove(perform: move)
             .listRowSeparator(.hidden)

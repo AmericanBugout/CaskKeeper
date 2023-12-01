@@ -95,4 +95,13 @@ class WantedListLibrary {
 
         }
     }
+    
+    func updateWhiskeysInList(groupIndex: Int, list: WantedList, whiskeysToSave: [WhiskeyItem]) {
+        guard var groupedLists = groupedLists else { return }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
+            groupedLists[groupIndex].list[listIndex].whiskeys = whiskeysToSave
+            self.groupedLists = groupedLists
+            dataPersistence.save(groupedList: groupedLists)
+        }
+    }
 }
