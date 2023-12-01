@@ -26,7 +26,9 @@ struct WantedListView: View {
                     Section(header: Text(group.key).font(.customRegular(size: 18))) {
                         ForEach(group.list, id: \.id) { list in
                             NavigationLink {
-                                ListDetailView(list: list)
+                                ListDetailView(groupIndex: groupIndex, list: list) { indexSet in
+                                    wantedListLibrary.removeWhiskeyFromList(indexSet: indexSet, groupIndex: groupIndex, list: list)
+                                }
                                 .toolbar {
                                     ToolbarItem(placement: .principal) {
                                         HStack(alignment: .top, spacing: 0) {

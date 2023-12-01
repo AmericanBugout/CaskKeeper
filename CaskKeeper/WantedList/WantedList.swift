@@ -28,16 +28,13 @@ struct WantedList: Identifiable, Hashable, Codable {
     var dateCreated: Date = Date()
     
     /* whiskeys */
-    var whiskeys: [WhiskeyItem]?
+    var whiskeys: [WhiskeyItem] = []
     
-    /* found whiskeys */
-    var foundWhiskeys: [WhiskeyItem]?
-    
-    init(id: UUID = UUID(), name: String, style: String, description: String?, whiskeys: [WhiskeyItem]?) {
+    init(id: UUID = UUID(), name: String, style: String, description: String?, whiskeys: [WhiskeyItem] = []) {
         self.id = id
         self.name = name
         self.style = style
         self.description = description
-        self.whiskeys = whiskeys ?? []
+        self.whiskeys = whiskeys
     }
 }

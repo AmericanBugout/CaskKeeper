@@ -19,11 +19,7 @@ class WantedListLibrary {
     
     var userCreatedList = UserCreatedList()
     
-    var groupedLists: [WantedListGroup]? {
-        didSet {
-            dataPersistence.save(groupedList: groupedLists ?? [])
-        }
-    }
+    var groupedLists: [WantedListGroup]?
     
     init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
         dataPersistence = persistence
@@ -58,34 +54,14 @@ class WantedListLibrary {
         }
     }
     
-    func updateWhiskey(whiskey: WhiskeyItem, inList listId: UUID) {
+    func removeWhiskeyFromList(indexSet: IndexSet, groupIndex: Int, list: WantedList) {
         guard var groupedLists = self.groupedLists else { return }
-        
-        for i in 0..<groupedLists.count {
-            if let listIndex = groupedLists[i].list.firstIndex(where: { $0.id == listId }) {
-                var list = groupedLists[i].list[listIndex]
-                
-                switch whiskey.state {
-                case .found:
-                    if let whiskeyIndex = list.whiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
-                        list.foundWhiskeys = list.foundWhiskeys ?? []
-                        list.foundWhiskeys?.append(whiskey)
-                        list.whiskeys?.remove(at: whiskeyIndex)
-                    }
-                    
-                case .looking:
-                    // Move from 'foundWhiskeys' to 'whiskeys'
-                    if let whiskeyIndex = list.foundWhiskeys?.firstIndex(where: { $0.id == whiskey.id }) {
-                        list.whiskeys = list.whiskeys ?? []
-                        list.whiskeys?.append(whiskey)
-                        list.foundWhiskeys?.remove(at: whiskeyIndex)
-                    }
-                }
-                groupedLists[i].list[listIndex] = list
-            }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id}) {
+            groupedLists[groupIndex].list[listIndex].whiskeys.remove(atOffsets: indexSet)
         }
         
         self.groupedLists = groupedLists
+        dataPersistence.save(groupedList: groupedLists)
     }
     
     func addWantedList() {
@@ -98,22 +74,25 @@ class WantedListLibrary {
         
         if let index = groupedLists?.firstIndex(where: {$0.key == styleKey }) {
             groupedLists?[index].list.append(wantedList)
-            dataPersistence.save(groupedList: groupedLists ?? [])
         } else {
             let newGroupList = WantedListGroup(key: styleKey, list: [wantedList])
             groupedLists?.append(newGroupList)
-            dataPersistence.save(groupedList: groupedLists ?? [])
         }
+        
+        dataPersistence.save(groupedList: groupedLists ?? [])
     }
 
     func deleteItem(groupIndex: Int, itemIndexSet: IndexSet) {
-        guard var groups = groupedLists else { return }
+        guard var groupedLists = groupedLists else { return }
         withAnimation(Animation.smooth(duration: 0.5)) {
-            groups[groupIndex].list.remove(atOffsets: itemIndexSet)
-            if groups[groupIndex].list.isEmpty {
-                groups.remove(at: groupIndex)
+            groupedLists[groupIndex].list.remove(atOffsets: itemIndexSet)
+            if groupedLists[groupIndex].list.isEmpty {
+                groupedLists.remove(at: groupIndex)
             }
-            groupedLists = groups
+            self.groupedLists = groupedLists
+            
+            dataPersistence.save(groupedList: groupedLists)
+
         }
     }
 }

@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ListDetailView: View {
     let list: WantedList
+    let groupIndex: Int
     
     @State private var internalWhiskeys: [WhiskeyItem]
     @State private var showingLookingList = true
+    
+    var onDelete: (IndexSet) -> Void
     
     let transitionAnimation: Animation = .interactiveSpring(response: 0.6, dampingFraction: 0.8, blendDuration: 0.5)
     
@@ -23,9 +26,11 @@ struct ListDetailView: View {
         internalWhiskeys.filter { $0.state == .found }
     }
     
-    init(list: WantedList) {
-        self._internalWhiskeys = State(initialValue: list.whiskeys ?? [])
+    init(groupIndex: Int, list: WantedList, onDelete: @escaping (IndexSet) -> Void) {
+        self._internalWhiskeys = State(initialValue: list.whiskeys)
+        self.groupIndex = groupIndex
         self.list = list
+        self.onDelete = onDelete
     }
     
     var body: some View {
@@ -49,8 +54,9 @@ struct ListDetailView: View {
                 }
             }
         }
-        
     }
+    
+    
     
     private func move(from source: IndexSet, to destination: Int) {
         internalWhiskeys.move(fromOffsets: source, toOffset: destination)
@@ -128,6 +134,9 @@ struct ListDetailView: View {
             ForEach(whiskeys.indices, id: \.self) { index in
                 whiskeyRow(whiskey: whiskeys[index], index: index)
             }
+            .onDelete { indexSet in
+                onDelete(indexSet)
+            }
             .onMove(perform: move)
             .listRowSeparator(.hidden)
         }
@@ -137,5 +146,7 @@ struct ListDetailView: View {
 }
 
 #Preview {
-    ListDetailView(list: WantedList(name: "Best ryes in the world", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West"), WhiskeyItem(name: "Wild Turkey")]))
+    ListDetailView(groupIndex: 1, list: WantedList(name: "Best ryes in the world", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West"), WhiskeyItem(name: "Wild Turkey")]), onDelete: { index in
+        
+    })
 }
