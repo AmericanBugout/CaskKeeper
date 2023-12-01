@@ -14,6 +14,7 @@ struct AddWantedListView: View {
     
     @Bindable var userCreatedList: UserCreatedList
     @State private var name = ""
+    @State private var isEmptyNameAlertShowing = false
     
     var body: some View {
         NavigationStack {
@@ -55,6 +56,11 @@ struct AddWantedListView: View {
                             .onSubmit(of: .text) {
                                 addWhiskeyToUserCreatedWantedWhiskeys()
                             }
+                            .alert("Name cannot be empty", isPresented: $isEmptyNameAlertShowing) {
+                                Button("Ok") {
+                                    isEmptyNameAlertShowing = false
+                                }
+                            }
                         Spacer()
                         Button {
                             addWhiskeyToUserCreatedWantedWhiskeys()
@@ -64,6 +70,17 @@ struct AddWantedListView: View {
                         }
                     }
                     .listRowSeparator(.hidden)
+                    .alert("Empty Field", isPresented: $isEmptyNameAlertShowing) {
+                        Button {
+                            isEmptyNameAlertShowing = false
+                        } label: {
+                            Text("Ok")
+                        }
+
+                    } message: {
+                        Text("Your list name cannot be empty.")
+                    }
+
 
                     if !userCreatedList.whiskeys.isEmpty {
                         ForEach(userCreatedList.whiskeys) { whiskey in
@@ -100,8 +117,12 @@ struct AddWantedListView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
-                        wantedListLibrary.addWantedList()
-                        dismiss()
+                        if !userCreatedList.name.isEmpty {
+                            wantedListLibrary.addWantedList()
+                            dismiss()
+                        } else {
+                            isEmptyNameAlertShowing = true
+                        }
                     } label: {
                         Text("Save")
                             .font(.customSemiBold(size: 20))
