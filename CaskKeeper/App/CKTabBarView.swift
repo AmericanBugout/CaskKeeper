@@ -18,7 +18,7 @@ struct CKTabBarView: View {
             
             NavigationStack {
                 WantedListView()
-                    .navigationTitle("Wanted Whiskeys")
+                    .navigationTitle("Wanted Lists")
                     .specialNavBar()
                 
             }
