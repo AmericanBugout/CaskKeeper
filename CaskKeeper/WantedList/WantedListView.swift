@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WantedListView: View {
     @State private var addWantedViewIsShowing = false
-    @State private var wantedListLibrary = WantedListLibrary(isForTesting: false)
+    @State private var wantedListLibrary = WantedListLibrary(isForTesting: true)
     
     
     var dateFormatter: DateFormatter {
@@ -26,9 +26,7 @@ struct WantedListView: View {
                     Section(header: Text(group.key).font(.customRegular(size: 18))) {
                         ForEach(group.list, id: \.id) { list in
                             NavigationLink {
-                                ListDetailView(groupIndex: groupIndex, list: list) { indexSet in
-                                    wantedListLibrary.removeWhiskeyFromList(indexSet: indexSet, groupIndex: groupIndex, list: list)
-                                }
+                                ListDetailView(groupIndex: groupIndex, list: list)
                                 .toolbar {
                                     ToolbarItem(placement: .principal) {
                                         HStack(alignment: .top, spacing: 0) {

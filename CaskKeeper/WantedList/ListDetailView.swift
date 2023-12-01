@@ -9,15 +9,14 @@ import SwiftUI
 
 struct ListDetailView: View {
     @Environment(\.wantedListLibrary) var wantedListLibrary
+    @State private var refreshFlag = false
     
     let list: WantedList
     let groupIndex: Int
     
     @State private var internalWhiskeys: [WhiskeyItem]
     @State private var showingLookingList = true
-    
-    var onDelete: (IndexSet) -> Void
-    
+        
     let transitionAnimation: Animation = .interactiveSpring(response: 0.6, dampingFraction: 0.8, blendDuration: 0.5)
     
     private var lookingWhiskeys: [WhiskeyItem] {
@@ -28,15 +27,16 @@ struct ListDetailView: View {
         internalWhiskeys.filter { $0.state == .found }
     }
     
-    init(groupIndex: Int, list: WantedList, onDelete: @escaping (IndexSet) -> Void) {
+    init(groupIndex: Int, list: WantedList) {
         self._internalWhiskeys = State(initialValue: list.whiskeys)
         self.groupIndex = groupIndex
         self.list = list
-        self.onDelete = onDelete
     }
     
     var body: some View {
         ZStack {
+            
+            
             if showingLookingList {
                 listView(whiskeys: lookingWhiskeys)
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
@@ -138,6 +138,7 @@ struct ListDetailView: View {
             }
             .onDelete { indexSet in
                 internalWhiskeys.remove(atOffsets: indexSet)
+                refreshFlag.toggle()
                 wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
             }
             .onMove(perform: move)
@@ -145,11 +146,8 @@ struct ListDetailView: View {
         }
         .listStyle(.plain)
     }
-
 }
 
 #Preview {
-    ListDetailView(groupIndex: 1, list: WantedList(name: "Best ryes in the world", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West"), WhiskeyItem(name: "Wild Turkey")]), onDelete: { index in
-        
-    })
+    ListDetailView(groupIndex: 1, list: WantedList(name: "Best ryes in the world", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West"), WhiskeyItem(name: "Wild Turkey")]))
 }
