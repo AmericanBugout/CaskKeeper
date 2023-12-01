@@ -36,6 +36,17 @@ class WantedListLibrary {
                              WhiskeyItem(name: "WhistlePig 'The Boss Hog VII Magellan's Atlantic' Straight Rye Whiskey"),
                              WhiskeyItem(name: "Hirsch Selection 25 Year Old Kentucky Straight Rye Whiskey"),
                              WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
+                             WhiskeyItem(name: "Willet Vintage 23 Old Rye Whiskey"),
                              WhiskeyItem(name: "Redemption Barrel Proof Straight Rye Whiskey")])
             ]
             

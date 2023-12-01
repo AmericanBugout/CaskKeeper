@@ -15,6 +15,14 @@ struct WantedList: Identifiable, Hashable, Codable {
     
     var id: UUID
     
+    var wantedCount: Int {
+        whiskeys.filter({$0.state == .looking}).count
+    }
+    
+    var foundCount: Int {
+        whiskeys.filter({$0.state == .found}).count
+    }
+    
     /* name of the list*/
     var name: String
     

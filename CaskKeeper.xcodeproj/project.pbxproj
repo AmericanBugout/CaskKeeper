@@ -56,6 +56,8 @@
 		B39485A52B152A5B00930ED7 /* WantListDataPersistanceDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39485A42B152A5B00930ED7 /* WantListDataPersistanceDataManager.swift */; };
 		B39485A72B1536F100930ED7 /* UserCreatedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39485A62B1536F100930ED7 /* UserCreatedList.swift */; };
 		B39485A92B153AF900930ED7 /* WhiskeyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39485A82B153AF900930ED7 /* WhiskeyItem.swift */; };
+		B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397311B2B1A93B600B5E147 /* EditListView.swift */; };
+		B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397311D2B1A9F0A00B5E147 /* ListRowView.swift */; };
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
 		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */; };
@@ -142,6 +144,8 @@
 		B39485A42B152A5B00930ED7 /* WantListDataPersistanceDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantListDataPersistanceDataManager.swift; sourceTree = "<group>"; };
 		B39485A62B1536F100930ED7 /* UserCreatedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreatedList.swift; sourceTree = "<group>"; };
 		B39485A82B153AF900930ED7 /* WhiskeyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyItem.swift; sourceTree = "<group>"; };
+		B397311B2B1A93B600B5E147 /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
+		B397311D2B1A9F0A00B5E147 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
 		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreGaugeStyle.swift; sourceTree = "<group>"; };
@@ -441,7 +445,9 @@
 			children = (
 				B320DF142B1561BB00D13064 /* AddWantedListView.swift */,
 				B3E5C0822B142736009949BB /* WantedListView.swift */,
+				B397311B2B1A93B600B5E147 /* EditListView.swift */,
 				B3CE924C2B1980BD00662E24 /* ListDetailView.swift */,
+				B397311D2B1A9F0A00B5E147 /* ListRowView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -616,8 +622,10 @@
 				B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */,
 				B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */,
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
+				B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */,
 				B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */,
 				B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */,
+				B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */,
 				B3E5C0892B143AF8009949BB /* WantedListLibrary.swift in Sources */,
 				B320904A2AFC9BCE004FED4B /* Style.swift in Sources */,
 				B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */,

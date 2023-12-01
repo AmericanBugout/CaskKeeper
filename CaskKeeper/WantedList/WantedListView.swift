@@ -10,8 +10,7 @@ import SwiftUI
 struct WantedListView: View {
     @State private var addWantedViewIsShowing = false
     @State private var wantedListLibrary = WantedListLibrary(isForTesting: true)
-    
-    
+        
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
@@ -40,8 +39,7 @@ struct WantedListView: View {
                                 }
                                 .environment(\.wantedListLibrary, wantedListLibrary)
                             } label: {
-                                Text(list.name)
-                                    .font(.customRegular(size: 20))
+                                ListRowView(name: list.name, total: list.whiskeys.count, found: list.foundCount, wanted: list.wantedCount)
                             }
                             .listRowSeparator(.hidden)
                         }

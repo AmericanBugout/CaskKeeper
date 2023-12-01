@@ -10,10 +10,11 @@ import SwiftUI
 struct ListDetailView: View {
     @Environment(\.wantedListLibrary) var wantedListLibrary
     @State private var refreshFlag = false
+    @State private var editListViewShowing = false
     
-    let list: WantedList
     let groupIndex: Int
     
+    @State private var list: WantedList
     @State private var internalWhiskeys: [WhiskeyItem]
     @State private var showingLookingList = true
         
@@ -29,6 +30,7 @@ struct ListDetailView: View {
     
     init(groupIndex: Int, list: WantedList) {
         self._internalWhiskeys = State(initialValue: list.whiskeys)
+        self._list = State(initialValue: list)
         self.groupIndex = groupIndex
         self.list = list
     }
@@ -49,10 +51,15 @@ struct ListDetailView: View {
         .navigationTitle(showingLookingList ? "Wanted" : "Found")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
-                Button {
-                    showingLookingList.toggle()
-                } label: {
-                    Image(systemName: "switch.2")
+                HStack {
+                    NavigationLink(destination: EditListView(wantedList: $list)) {
+                        Text("Edit List")
+                    }
+                    Button {
+                        showingLookingList.toggle()
+                    } label: {
+                        Image(systemName: "switch.2")
+                    }
                 }
             }
         }
@@ -108,10 +115,8 @@ struct ListDetailView: View {
                         Text(location)
                             .font(.customRegular(size: 16))
                     }
-                    
                     Spacer()
                 }
-                
             }
         }
         .padding(.top, 5)
