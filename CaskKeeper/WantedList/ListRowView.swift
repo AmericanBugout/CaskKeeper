@@ -19,8 +19,10 @@ struct ListRowView: View {
                 VStack {
                     Text("\(wanted)")
                         .font(.customBold(size: 30))
+                        .minimumScaleFactor(0.5) // Adjusts text size to fit
+                        .frame(width: 35, height: 35) // Fixed frame size
                         .foregroundStyle(Color.accentColor)
-                        .padding(10)
+                        .padding(5)
                         .background(.ultraThickMaterial)
                         .clipShape(Circle())
                         .overlay(
@@ -35,17 +37,17 @@ struct ListRowView: View {
                     HStack {
                         Group {
                             Text("Total")
-                                .font(.customRegular(size: 18))
+                                .font(.customRegular(size: 20))
                             Text("\(total)")
-                                .font(.customSemiBold(size: 18))
+                                .font(.customSemiBold(size: 20))
                         }
                         .foregroundStyle(Color.green)
                         
                         Group {
                             Text("Found")
-                                .font(.customRegular(size: 18))
+                                .font(.customRegular(size: 20))
                             Text("\(found)")
-                                .font(.customSemiBold(size: 18))
+                                .font(.customSemiBold(size: 20))
                         }
                         .foregroundStyle(Color.aluminum)
                         Spacer()
