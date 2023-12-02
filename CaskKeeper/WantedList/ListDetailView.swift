@@ -37,8 +37,6 @@ struct ListDetailView: View {
     
     var body: some View {
         ZStack {
-            
-            
             if showingLookingList {
                 listView(whiskeys: lookingWhiskeys)
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
@@ -53,7 +51,7 @@ struct ListDetailView: View {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
                     NavigationLink(destination: EditListView(wantedList: $list)) {
-                        Text("Edit List")
+                        Text("Edit")
                     }
                     Button {
                         showingLookingList.toggle()

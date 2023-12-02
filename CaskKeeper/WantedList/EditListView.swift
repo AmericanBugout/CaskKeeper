@@ -15,16 +15,17 @@ struct EditListView: View {
             Section {
                 WhiskeyEditTextField(text: $wantedList.name, placeholder: "Name")
                     .listRowSeparator(.hidden)
+                    .font(.customRegular(size: 20))
                 Picker("style", selection: $wantedList.style) {
                     ForEach(Style.allCases, id: \.self) { style in
                         Text(style.rawValue)
-                            .font(.customRegular(size: 18))
+                            .font(.customRegular(size: 20))
                     }
                 }
-                .font(.customRegular(size: 18))
+                .font(.customRegular(size: 20))
                 .listRowSeparator(.hidden)
             }header: {
-                Text("Edit List Details")
+                Text("List Name")
                     .font(.customLight(size: 18))
             }
             
@@ -35,12 +36,7 @@ struct EditListView: View {
                     
                 ))
                 .frame(height: 70)
-                .cornerRadius(5)
-                .background(
-                    RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.accentColor, lineWidth: 3).opacity(0.3)
-                )
-                .font(.customRegular(size: 18))
+                .font(.customRegular(size: 20))
                 .listRowSeparator(.hidden)
                 
                 
@@ -55,50 +51,19 @@ struct EditListView: View {
                 .listRowSeparator(.hidden)
             
             Section {
-                LazyVGrid(columns: [GridItem()]) {
-                    ForEach($wantedList.whiskeys) { whiskey in
-                        VStack(alignment: .leading, spacing: 2) {
-                            HStack {
-                                WhiskeyEditTextField(text: whiskey.name, placeholder: "Name")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                                Button {
-                                    withAnimation(Animation.smooth) {
-                                        switch whiskey.state.wrappedValue {
-                                        case .looking:
-                                            whiskey.state.wrappedValue = .found
-                                        case .found:
-                                            whiskey.state.wrappedValue = .looking
-                                        }
-                                    }
-                                } label: {
-                                    Image(systemName: whiskey.state.wrappedValue == .looking ? "circle" : "checkmark.circle.fill")
-                                        .imageScale(.medium)
-                                        .foregroundStyle(whiskey.state.wrappedValue == .looking ? Color.aluminum : Color.regularGreen)
-                                }
+                ForEach($wantedList.whiskeys, id: \.self) { $whiskey in
+                    NavigationLink(destination: Text(whiskey.name)) {
+                        Text(whiskey.name)
+                            .font(.customRegular(size: 20))
 
-                            }
-                            
-                            DatePicker("Found Date:", selection: Binding<Date>(
-                                get: { whiskey.endSearchDate.wrappedValue ?? Date() },
-                                set: { whiskey.endSearchDate.wrappedValue = $0 }
-                            ), displayedComponents: .date)
-                            .datePickerStyle(DefaultDatePickerStyle())
-                            .scaleEffect(1)
-                            WhiskeyEditTextField(text: Binding<String>(
-                                get: { whiskey.location.wrappedValue ?? ""},
-                                set: { whiskey.location.wrappedValue = $0 }
-                            ), placeholder: "Location")
-                        }
                     }
+                    .listRowSeparator(.hidden)
+
                 }
             } header: {
-                Text("Edit Whiskeys")
+                Text("Whiskeys")
+                    .font(.customLight(size: 18))
             }
-
-            
-            
-            
         }
         .navigationTitle("Edit Wanted List")
         .listStyle(.plain)
@@ -110,3 +75,41 @@ struct EditListView: View {
 #Preview {
     EditListView(wantedList: .constant(WantedList(name: "Hard to come by Ryes", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West")])))
 }
+
+
+//                        NavigationLink(whiskey.name.wrappedValue) {
+//                            Text(whiskey.name.wrappedValue)
+//                        }
+//                        VStack(alignment: .leading, spacing: 2) {
+//                            HStack {
+//                                WhiskeyEditTextField(text: whiskey.name, placeholder: "Name")
+//                                    .frame(maxWidth: .infinity, alignment: .leading)
+//
+//                                Button {
+//                                    withAnimation(Animation.smooth) {
+//                                        switch whiskey.state.wrappedValue {
+//                                        case .looking:
+//                                            whiskey.state.wrappedValue = .found
+//                                        case .found:
+//                                            whiskey.state.wrappedValue = .looking
+//                                        }
+//                                    }
+//                                } label: {
+//                                    Image(systemName: whiskey.state.wrappedValue == .looking ? "circle" : "checkmark.circle.fill")
+//                                        .imageScale(.medium)
+//                                        .foregroundStyle(whiskey.state.wrappedValue == .looking ? Color.aluminum : Color.regularGreen)
+//                                }
+//
+//                            }
+//
+//                            DatePicker("Found Date:", selection: Binding<Date>(
+//                                get: { whiskey.endSearchDate.wrappedValue ?? Date() },
+//                                set: { whiskey.endSearchDate.wrappedValue = $0 }
+//                            ), displayedComponents: .date)
+//                            .datePickerStyle(DefaultDatePickerStyle())
+//                            .scaleEffect(1)
+//                            WhiskeyEditTextField(text: Binding<String>(
+//                                get: { whiskey.location.wrappedValue ?? ""},
+//                                set: { whiskey.location.wrappedValue = $0 }
+//                            ), placeholder: "Location")
+//                        }
