@@ -45,6 +45,11 @@ struct ListDetailView: View {
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
             }
         }
+        .onAppear {
+            if let loadedList = wantedListLibrary.fetchList(groupIndex: groupIndex, list: list) {
+                self.list = loadedList
+            }
+        }
         .animation(transitionAnimation, value: showingLookingList)
         .navigationTitle(showingLookingList ? "Wanted" : "Found")
         .toolbar {
@@ -68,6 +73,7 @@ struct ListDetailView: View {
     
     private func move(from source: IndexSet, to destination: Int) {
         internalWhiskeys.move(fromOffsets: source, toOffset: destination)
+        wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
     }
 
     private func toggleWhiskeyState(at index: Int) {
@@ -76,10 +82,12 @@ struct ListDetailView: View {
             case .looking:
                 internalWhiskeys[index].state = .found
                 internalWhiskeys[index].endSearchDate = Date()
+                wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
             case .found:
                 internalWhiskeys[index].state = .looking
                 internalWhiskeys[index].endSearchDate = nil
                 internalWhiskeys[index].location = nil
+                wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
             }
         }
     }

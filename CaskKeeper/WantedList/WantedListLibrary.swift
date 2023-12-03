@@ -107,6 +107,21 @@ class WantedListLibrary {
         }
     }
     
+    func saveWhiskeyList(list: WantedList) {
+        guard var groupedLists = groupedLists else { return }
+        withAnimation(Animation.smooth(duration: 0.5)) {
+           // groupedLists
+        }
+    }
+    
+    func fetchList(groupIndex: Int, list: WantedList) -> WantedList? {
+        guard let groupedLists = groupedLists else { return nil }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
+            return groupedLists[groupIndex].list[listIndex]
+        }
+        return nil
+    }
+    
     func updateWhiskeysInList(groupIndex: Int, list: WantedList, whiskeysToSave: [WhiskeyItem]) {
         guard var groupedLists = groupedLists else { return }
         if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
