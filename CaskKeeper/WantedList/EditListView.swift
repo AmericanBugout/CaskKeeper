@@ -46,13 +46,13 @@ struct EditListView: View {
                 
             }
             
-            DatePicker("Date Created", selection: $wantedList.dateCreated, displayedComponents: .date)
+            DatePicker("Date Created", selection: $wantedList.dateCreated, in: ...Date(), displayedComponents: .date)
                 .padding(.top)
                 .listRowSeparator(.hidden)
             
             Section {
                 ForEach($wantedList.whiskeys, id: \.self) { $whiskey in
-                    NavigationLink(destination: Text(whiskey.name)) {
+                    NavigationLink(destination: EditWantedWhiskeyView(whiskey: whiskey)) {
                         Text(whiskey.name)
                             .font(.customRegular(size: 20))
 
@@ -75,41 +75,3 @@ struct EditListView: View {
 #Preview {
     EditListView(wantedList: .constant(WantedList(name: "Hard to come by Ryes", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West")])))
 }
-
-
-//                        NavigationLink(whiskey.name.wrappedValue) {
-//                            Text(whiskey.name.wrappedValue)
-//                        }
-//                        VStack(alignment: .leading, spacing: 2) {
-//                            HStack {
-//                                WhiskeyEditTextField(text: whiskey.name, placeholder: "Name")
-//                                    .frame(maxWidth: .infinity, alignment: .leading)
-//
-//                                Button {
-//                                    withAnimation(Animation.smooth) {
-//                                        switch whiskey.state.wrappedValue {
-//                                        case .looking:
-//                                            whiskey.state.wrappedValue = .found
-//                                        case .found:
-//                                            whiskey.state.wrappedValue = .looking
-//                                        }
-//                                    }
-//                                } label: {
-//                                    Image(systemName: whiskey.state.wrappedValue == .looking ? "circle" : "checkmark.circle.fill")
-//                                        .imageScale(.medium)
-//                                        .foregroundStyle(whiskey.state.wrappedValue == .looking ? Color.aluminum : Color.regularGreen)
-//                                }
-//
-//                            }
-//
-//                            DatePicker("Found Date:", selection: Binding<Date>(
-//                                get: { whiskey.endSearchDate.wrappedValue ?? Date() },
-//                                set: { whiskey.endSearchDate.wrappedValue = $0 }
-//                            ), displayedComponents: .date)
-//                            .datePickerStyle(DefaultDatePickerStyle())
-//                            .scaleEffect(1)
-//                            WhiskeyEditTextField(text: Binding<String>(
-//                                get: { whiskey.location.wrappedValue ?? ""},
-//                                set: { whiskey.location.wrappedValue = $0 }
-//                            ), placeholder: "Location")
-//                        }

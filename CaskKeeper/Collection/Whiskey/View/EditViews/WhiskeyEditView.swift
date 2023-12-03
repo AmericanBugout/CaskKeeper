@@ -78,9 +78,11 @@ struct WhiskeyEditView: View {
                             }
                         }
                     if whiskey.bottleState == .opened {
-                        DatePicker("Opened Date", selection: $dateOpened, displayedComponents: .date)
+                        DatePicker("Opened Date", selection: $dateOpened, in: ...Date(), displayedComponents: .date)
                             .onChange(of: dateOpened) { old, new in
-                                whiskey.dateOpened = new
+                                withAnimation(Animation.smooth(duration: 1)) {
+                                    whiskey.dateOpened = new
+                                }
                             }
                     }
                     
@@ -94,15 +96,19 @@ struct WhiskeyEditView: View {
                 Section {
                     WhiskeyEditTextField(text: $whiskey.locationPurchased, placeholder: "Location Purchased")
                     
-                    DatePicker("Purchased Date", selection: $purchasedDate, displayedComponents: .date)
+                    DatePicker("Purchased Date", selection: $purchasedDate, in: ...Date(), displayedComponents: .date)
                         .onChange(of: purchasedDate) { old, new in
-                            whiskey.purchasedDate = new
+                            withAnimation(Animation.smooth(duration: 1)) {
+                                whiskey.purchasedDate = new
+                            }
                         }
                     
                     WhiskeyEditTextField(text: $priceString, placeholder: "Price")
                         .foregroundColor((priceString.isEmpty || priceString == "$" || priceString == "$0" || priceString == "0.0") ? .aluminum : .primary)
                         .onChange(of: priceString) { oldalue, newValue in
-                            handlePriceInput(newValue: newValue)
+                            withAnimation(Animation.smooth(duration: 1)) {
+                                handlePriceInput(newValue: newValue)
+                            }
                         }
                 } header: {
                     Text("Purchase Details")

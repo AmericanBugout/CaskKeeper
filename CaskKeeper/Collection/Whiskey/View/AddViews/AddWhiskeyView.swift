@@ -65,7 +65,7 @@ struct AddWhiskeyView: View {
                             Text(style.rawValue)
                         }
                     }
-                    DatePicker("Purchased Date", selection: $purchaseDate, displayedComponents: .date)
+                    DatePicker("Purchased Date", selection: $purchaseDate, in: ...Date(), displayedComponents: .date)
                 } header: {
                     Text("Whiskey Details")
                         .font(.customLight(size: 18))

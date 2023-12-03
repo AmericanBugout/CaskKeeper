@@ -14,7 +14,7 @@ struct WhiskeyEditTextField: View {
     
     var body: some View {
         TextField(placeholder, text: $text, prompt: Text(placeholder))
-            .font(.customRegular(size: 18))
+            .font(.customRegular(size: 20))
     }
 }
 

@@ -98,6 +98,12 @@ struct ListDetailView: View {
             .font(.customRegular(size: 20))
             .listRowSeparator(.hidden)
             
+            if let location = whiskey.location {
+                Text(location)
+                    .font(.customRegular(size: 20))
+
+            }
+            
             if let endDate = whiskey.endSearchDate {
                 HStack {
                     VStack {
