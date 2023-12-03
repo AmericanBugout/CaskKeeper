@@ -63,8 +63,6 @@ struct ListDetailView: View {
         }
     }
     
-    
-    
     private func move(from source: IndexSet, to destination: Int) {
         internalWhiskeys.move(fromOffsets: source, toOffset: destination)
     }
@@ -78,6 +76,7 @@ struct ListDetailView: View {
             case .found:
                 internalWhiskeys[index].state = .looking
                 internalWhiskeys[index].endSearchDate = nil
+                internalWhiskeys[index].location = nil
             }
         }
     }
@@ -97,12 +96,7 @@ struct ListDetailView: View {
             }
             .font(.customRegular(size: 20))
             .listRowSeparator(.hidden)
-            
-            if let location = whiskey.location {
-                Text(location)
-                    .font(.customRegular(size: 20))
 
-            }
             
             if let endDate = whiskey.endSearchDate {
                 HStack {
@@ -140,7 +134,8 @@ struct ListDetailView: View {
         }
     }
     
-    @ViewBuilder func listView(whiskeys: [WhiskeyItem]) -> some View {
+    @ViewBuilder 
+    func listView(whiskeys: [WhiskeyItem]) -> some View {
         List {
             ForEach(whiskeys.indices, id: \.self) { index in
                 whiskeyRow(whiskey: whiskeys[index], index: index)
