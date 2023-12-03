@@ -60,6 +60,9 @@ struct ListDetailView: View {
                     }
                 }
             }
+            ToolbarItem(placement: .principal) {
+                Text(list.name)
+            }
         }
     }
     
@@ -95,7 +98,6 @@ struct ListDetailView: View {
                 handleStateButton(whiskey: whiskey)
             }
             .font(.customRegular(size: 20))
-            .listRowSeparator(.hidden)
 
             
             if let endDate = whiskey.endSearchDate {
@@ -146,9 +148,7 @@ struct ListDetailView: View {
                 wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
             }
             .onMove(perform: move)
-            .listRowSeparator(.hidden)
         }
-        .listStyle(.plain)
     }
 }
 

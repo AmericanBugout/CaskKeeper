@@ -27,7 +27,7 @@ struct WantedListView: View {
                             NavigationLink {
                                 ListDetailView(groupIndex: groupIndex, list: list)
                                 .toolbar {
-                                    ToolbarItem(placement: .principal) {
+                                    ToolbarItem(placement: .bottomBar) {
                                         HStack(alignment: .top, spacing: 0) {
                                             Text("Created on ")
                                                 .font(.customLight(size: 12))
