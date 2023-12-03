@@ -37,17 +37,12 @@ struct EditListView: View {
                 ))
                 .frame(height: 70)
                 .font(.customRegular(size: 20))
-                .listRowSeparator(.hidden)
-                
-                
             } header: {
                 Text("Description")
                     .font(.customLight(size: 18))
-                
             }
             
             DatePicker("Date Created", selection: $wantedList.dateCreated, in: ...Date(), displayedComponents: .date)
-                .padding(.top)
                 .listRowSeparator(.hidden)
             
             Section {
@@ -58,7 +53,7 @@ struct EditListView: View {
 
                     }
                     .listRowSeparator(.hidden)
-
+                    .listRowBackground(Color.clear)
                 }
             } header: {
                 Text("Whiskeys")
@@ -66,7 +61,6 @@ struct EditListView: View {
             }
         }
         .navigationTitle("Edit Wanted List")
-        .listStyle(.plain)
         .font(.customRegular(size: 18))
         
     }

@@ -21,12 +21,12 @@ struct ListRowView: View {
                         .font(.customBold(size: 30))
                         .minimumScaleFactor(0.5) // Adjusts text size to fit
                         .frame(width: 35, height: 35) // Fixed frame size
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.regularGreen)
                         .padding(5)
-                        .background(.ultraThickMaterial)
+                        .background(.regularMaterial)
                         .clipShape(Circle())
                         .overlay(
-                            Circle().stroke(Color.aluminum, lineWidth: 2)
+                            Circle().stroke(Color.lead, lineWidth: 2)
                         )
                 }
                 
@@ -41,7 +41,7 @@ struct ListRowView: View {
                             Text("\(total)")
                                 .font(.customSemiBold(size: 20))
                         }
-                        .foregroundStyle(Color.green)
+                        .foregroundStyle(Color.accentColor)
                         
                         Group {
                             Text("Found")
