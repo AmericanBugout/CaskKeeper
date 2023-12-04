@@ -18,7 +18,7 @@ class WantedList: Identifiable, Hashable, Codable {
         hasher.combine(id)
     }
     
-    var id: UUID = UUID()
+    var id: UUID
     var name: String
     var style: String
     var description: String?
@@ -35,7 +35,8 @@ class WantedList: Identifiable, Hashable, Codable {
     }
     
     // Initializer
-    init(name: String, style: String, description: String?, whiskeys: [WhiskeyItem] = [], dateCreated: Date = Date()) {
+    init(id: UUID = UUID(), name: String, style: String, description: String?, whiskeys: [WhiskeyItem] = [], dateCreated: Date = Date()) {
+        self.id = id
         self.name = name
         self.style = style
         self.description = description

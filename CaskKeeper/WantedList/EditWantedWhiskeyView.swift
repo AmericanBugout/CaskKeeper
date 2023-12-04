@@ -55,7 +55,7 @@ struct EditWantedWhiskeyView: View {
                 Text("Whiskey Details")
             }
         }
-        .onChange(of: whiskey, { _, newWhiskey in
+        .onDisappear(perform: {
             wantedListLibrary.updatewhiskeyFromEditList(groupIndex: groupIndex, list: list, whiskey: whiskey)
         })
         .listStyle(.plain)

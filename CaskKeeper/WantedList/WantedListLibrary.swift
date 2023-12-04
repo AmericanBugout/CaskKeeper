@@ -120,6 +120,7 @@ class WantedListLibrary {
             groupedLists[groupIndex].list[listIndex].whiskeys = whiskeysToSave
             self.groupedLists = groupedLists
             dataPersistence.save(groupedList: groupedLists)
+            print("Whiskeys have been updated in DetailView")
         }
     }
     
@@ -130,6 +131,7 @@ class WantedListLibrary {
                 groupedLists[groupIndex].list[listIndex].whiskeys[whiskeyIndex] = whiskey
                 self.groupedLists = groupedLists
                 dataPersistence.save(groupedList: groupedLists)
+                print("Whiskey has been saved from the WhiskeyEditView")
             }
         }
     }

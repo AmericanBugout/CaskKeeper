@@ -69,14 +69,6 @@ struct EditListView: View {
         .onDisappear {
             wantedListLibrary.saveWhiskeyList(groupIndex: groupIndex, list: wantedList)
         }
-//        .toolbar(content: {
-//            ToolbarItem(placement: .confirmationAction) {
-//                Button("Save") {
-//                    wantedListLibrary.saveWhiskeyList(groupIndex: groupIndex, list: wantedList)
-//                }
-//                .font(.customBold(size: 20))
-//            }
-//        })
         .navigationTitle("Edit Wanted List")
         .font(.customRegular(size: 18))
         
