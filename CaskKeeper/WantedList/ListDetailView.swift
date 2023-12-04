@@ -29,10 +29,9 @@ struct ListDetailView: View {
     }
     
     init(groupIndex: Int, list: WantedList) {
-        self._internalWhiskeys = State(initialValue: list.whiskeys)
         self._list = State(initialValue: list)
+        self._internalWhiskeys = State(initialValue: list.whiskeys)
         self.groupIndex = groupIndex
-        self.list = list
     }
     
     var body: some View {
@@ -45,19 +44,17 @@ struct ListDetailView: View {
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
             }
         }
-        .onAppear {
-            if let loadedList = wantedListLibrary.fetchList(groupIndex: groupIndex, list: list) {
-                self.list = loadedList
-            }
-        }
         .animation(transitionAnimation, value: showingLookingList)
         .navigationTitle(showingLookingList ? "Wanted" : "Found")
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
-                    NavigationLink(destination: EditListView(wantedList: $list)) {
-                        Text("Edit")
-                    }
+                    NavigationLink {
+                        EditListView(groupIndex: groupIndex, wantedList: $list)
+                            .environment(\.wantedListLibrary, wantedListLibrary)
+                        } label: {
+                            Text("Edit")
+                        }
                     Button {
                         showingLookingList.toggle()
                     } label: {

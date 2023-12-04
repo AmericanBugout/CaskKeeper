@@ -21,7 +21,7 @@ class WantedListLibrary {
     
     var groupedLists: [WantedListGroup]?
     
-    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = false) {
+    init(persistence: WantListPersisting = WantListDataPersistanceDataManager.shared, isForTesting: Bool = true) {
         dataPersistence = persistence
         
         if isForTesting {
@@ -61,12 +61,12 @@ class WantedListLibrary {
             groupedLists = [WantedListGroup(key: "Rye", list: ryes), WantedListGroup(key: "Bourbon", list: bourbons)]
             
         } else {
-            groupedLists = dataPersistence.load()
+            self.groupedLists = dataPersistence.load()
         }
     }
     
     func removeWhiskeyFromList(indexSet: IndexSet, groupIndex: Int, list: WantedList) {
-        guard var groupedLists = self.groupedLists else { return }
+        guard let groupedLists = self.groupedLists else { return }
         if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id}) {
             groupedLists[groupIndex].list[listIndex].whiskeys.remove(atOffsets: indexSet)
         }
@@ -94,8 +94,7 @@ class WantedListLibrary {
     }
 
     func deleteItem(groupIndex: Int, itemIndexSet: IndexSet) {
-        guard var groupedLists = groupedLists else { return }
-        withAnimation(Animation.smooth(duration: 0.5)) {
+        guard var groupedLists = self.groupedLists else { return }
             groupedLists[groupIndex].list.remove(atOffsets: itemIndexSet)
             if groupedLists[groupIndex].list.isEmpty {
                 groupedLists.remove(at: groupIndex)
@@ -103,31 +102,39 @@ class WantedListLibrary {
             self.groupedLists = groupedLists
             
             dataPersistence.save(groupedList: groupedLists)
+    }
+    
+    func saveWhiskeyList(groupIndex: Int, list: WantedList) {
+        guard var groupedLists = self.groupedLists else { return }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == $0.id}) {
+            groupedLists[groupIndex].list[listIndex] = list
+            self.groupedLists = groupedLists
+            dataPersistence.save(groupedList: groupedLists)
+        }
+    }
 
-        }
-    }
-    
-    func saveWhiskeyList(list: WantedList) {
-        guard var groupedLists = groupedLists else { return }
-        withAnimation(Animation.smooth(duration: 0.5)) {
-           // groupedLists
-        }
-    }
-    
-    func fetchList(groupIndex: Int, list: WantedList) -> WantedList? {
-        guard let groupedLists = groupedLists else { return nil }
-        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
-            return groupedLists[groupIndex].list[listIndex]
-        }
-        return nil
-    }
-    
+   
     func updateWhiskeysInList(groupIndex: Int, list: WantedList, whiskeysToSave: [WhiskeyItem]) {
-        guard var groupedLists = groupedLists else { return }
+        guard let groupedLists = self.groupedLists else { return }
         if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
             groupedLists[groupIndex].list[listIndex].whiskeys = whiskeysToSave
             self.groupedLists = groupedLists
             dataPersistence.save(groupedList: groupedLists)
         }
+    }
+    
+    func updatewhiskeyFromEditList(groupIndex: Int, list: WantedList, whiskey: WhiskeyItem) {
+        guard let groupedLists = self.groupedLists else { return }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
+            if let whiskeyIndex = groupedLists[groupIndex].list[listIndex].whiskeys.firstIndex(where: {$0.id == whiskey.id }) {
+                groupedLists[groupIndex].list[listIndex].whiskeys[whiskeyIndex] = whiskey
+                self.groupedLists = groupedLists
+                dataPersistence.save(groupedList: groupedLists)
+            }
+        }
+    }
+    
+    func loadList() {
+        self.groupedLists = dataPersistence.load()
     }
 }

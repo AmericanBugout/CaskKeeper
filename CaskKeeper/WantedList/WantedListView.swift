@@ -26,18 +26,10 @@ struct WantedListView: View {
                         ForEach(group.list, id: \.id) { list in
                             NavigationLink {
                                 ListDetailView(groupIndex: groupIndex, list: list)
-                                .toolbar {
-                                    ToolbarItem(placement: .bottomBar) {
-                                        HStack(alignment: .top, spacing: 0) {
-                                            Text("Created on ")
-                                                .font(.customLight(size: 12))
-                                            let formatted = dateFormatter.string(from: list.dateCreated)
-                                            Text(formatted)
-                                                .font(.customRegular(size: 12))
-                                        }
-                                    }
-                                }
-                                .environment(\.wantedListLibrary, wantedListLibrary)
+                                    .onAppear(perform: {
+                                        print(list.id)
+                                    })
+                                    .environment(\.wantedListLibrary, wantedListLibrary)
                             } label: {
                                 ListRowView(name: list.name, total: list.whiskeys.count, found: list.foundCount, wanted: list.wantedCount)
                             }

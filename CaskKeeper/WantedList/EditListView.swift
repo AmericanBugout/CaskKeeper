@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct EditListView: View {
+    @Environment(\.wantedListLibrary) var wantedListLibrary
+
+    let groupIndex: Int
     @Binding var wantedList: WantedList
     
     var body: some View {
@@ -19,6 +22,7 @@ struct EditListView: View {
                 Picker("style", selection: $wantedList.style) {
                     ForEach(Style.allCases, id: \.self) { style in
                         Text(style.rawValue)
+                            .tag(style.rawValue)
                             .font(.customRegular(size: 20))
                     }
                 }
@@ -47,10 +51,12 @@ struct EditListView: View {
             
             Section {
                 ForEach($wantedList.whiskeys, id: \.self) { $whiskey in
-                    NavigationLink(destination: EditWantedWhiskeyView(whiskey: whiskey)) {
+                    NavigationLink {
+                        EditWantedWhiskeyView(list: wantedList, groupIndex: groupIndex, whiskey: whiskey)
+                            .environment(\.wantedListLibrary, wantedListLibrary)
+                    } label: {
                         Text(whiskey.name)
                             .font(.customRegular(size: 20))
-
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
@@ -60,6 +66,17 @@ struct EditListView: View {
                     .font(.customLight(size: 18))
             }
         }
+        .onDisappear {
+            wantedListLibrary.saveWhiskeyList(groupIndex: groupIndex, list: wantedList)
+        }
+//        .toolbar(content: {
+//            ToolbarItem(placement: .confirmationAction) {
+//                Button("Save") {
+//                    wantedListLibrary.saveWhiskeyList(groupIndex: groupIndex, list: wantedList)
+//                }
+//                .font(.customBold(size: 20))
+//            }
+//        })
         .navigationTitle("Edit Wanted List")
         .font(.customRegular(size: 18))
         
@@ -67,5 +84,5 @@ struct EditListView: View {
 }
 
 #Preview {
-    EditListView(wantedList: .constant(WantedList(name: "Hard to come by Ryes", style: "Rye", description: nil, whiskeys: [WhiskeyItem(name: "High West")])))
+    EditListView(groupIndex: 2, wantedList: .constant(WantedList(name: "Hard to gets", style: "Bourbon", description: "No description", whiskeys: [WhiskeyItem(name: "High WestMNWD")])))
 }

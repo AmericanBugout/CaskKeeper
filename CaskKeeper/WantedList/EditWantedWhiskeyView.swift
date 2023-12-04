@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct EditWantedWhiskeyView: View {
+    @Environment(\.wantedListLibrary) var wantedListLibrary
+        
+    let list: WantedList
+    let groupIndex: Int
     @Bindable var whiskey: WhiskeyItem
-    
+       
     @State private var isNeedToSetStateToFound = false
     
     var body: some View {
@@ -51,6 +55,9 @@ struct EditWantedWhiskeyView: View {
                 Text("Whiskey Details")
             }
         }
+        .onChange(of: whiskey, { _, newWhiskey in
+            wantedListLibrary.updatewhiskeyFromEditList(groupIndex: groupIndex, list: list, whiskey: whiskey)
+        })
         .listStyle(.plain)
         .navigationTitle("Edit")
     }
@@ -92,5 +99,5 @@ struct EditWantedWhiskeyView: View {
 }
 
 #Preview {
-    EditWantedWhiskeyView(whiskey: (WhiskeyItem(name: "WNDM")))
+    EditWantedWhiskeyView(list: WantedList(name: "Hard to come by ryes", style: "Rye", description: nil), groupIndex: 2, whiskey: WhiskeyItem(name: "WNDM"))
 }
