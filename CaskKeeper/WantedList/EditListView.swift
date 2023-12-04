@@ -50,16 +50,40 @@ struct EditListView: View {
                 .listRowSeparator(.hidden)
             
             Section {
-                ForEach($wantedList.whiskeys, id: \.self) { $whiskey in
+                if wantedList.whiskeys.isEmpty {
                     NavigationLink {
-                        EditWantedWhiskeyView(list: wantedList, groupIndex: groupIndex, whiskey: whiskey)
-                            .environment(\.wantedListLibrary, wantedListLibrary)
+                        
                     } label: {
-                        Text(whiskey.name)
-                            .font(.customRegular(size: 20))
+                        Button {
+                            
+                        } label: {
+                            VStack {
+                                Text("No whiskeys in your list.")
+                                    .font(.customLight(size: 22))
+                                    .foregroundStyle(.aluminum)
+                                    .frame(maxWidth: .infinity)
+                                Text("Click to add.")
+                                    .font(.customLight(size: 16))
+                                    .foregroundStyle(.aluminum)
+                            }
+                            
+                        }
                     }
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
+
+                } else {
+                    ForEach($wantedList.whiskeys, id: \.self) { $whiskey in
+                        NavigationLink {
+                            EditWantedWhiskeyView(list: wantedList, groupIndex: groupIndex, whiskey: whiskey)
+                                .environment(\.wantedListLibrary, wantedListLibrary)
+                        } label: {
+                            Text(whiskey.name)
+                                .font(.customRegular(size: 20))
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
+                    }
                 }
             } header: {
                 Text("Whiskeys")

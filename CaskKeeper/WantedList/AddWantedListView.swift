@@ -15,6 +15,8 @@ struct AddWantedListView: View {
     @Bindable var userCreatedList: UserCreatedList
     @State private var name = ""
     @State private var isEmptyNameAlertShowing = false
+    @State private var emptyWhiskeyListAlertIsShowing = false
+
     
     var body: some View {
         NavigationStack {
@@ -80,6 +82,16 @@ struct AddWantedListView: View {
                     } message: {
                         Text("Your list name cannot be empty.")
                     }
+                    .alert("Empty Field", isPresented: $emptyWhiskeyListAlertIsShowing) {
+                        Button {
+                            emptyWhiskeyListAlertIsShowing = false
+                        } label: {
+                            Text("Ok")
+                        }
+
+                    } message: {
+                        Text("You must have at least 1 whiskey in your list.")
+                    }
 
 
                     if !userCreatedList.whiskeys.isEmpty {
@@ -117,6 +129,10 @@ struct AddWantedListView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
+                        guard !userCreatedList.whiskeys.isEmpty else {
+                            emptyWhiskeyListAlertIsShowing = true
+                            return
+                        }
                         if !userCreatedList.name.isEmpty {
                             wantedListLibrary.addWantedList()
                             dismiss()
