@@ -45,12 +45,12 @@
 		B32090512AFC9BCE004FED4B /* WhiskeyRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */; };
 		B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090402AFC9BCE004FED4B /* TasteRowView.swift */; };
 		B32090532AFC9BCE004FED4B /* AddWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090412AFC9BCE004FED4B /* AddWhiskeyView.swift */; };
-		B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090422AFC9BCE004FED4B /* ContentView.swift */; };
 		B32090552AFC9BCE004FED4B /* WhiskeyDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090432AFC9BCE004FED4B /* WhiskeyDetailRowView.swift */; };
 		B32090562AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090442AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift */; };
 		B32090572AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090452AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift */; };
 		B320DF152B1561BB00D13064 /* AddWantedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320DF142B1561BB00D13064 /* AddWantedListView.swift */; };
 		B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331B6352B02AF7B008DE573 /* DocumentPicker.swift */; };
+		B3408DA02B1EE63C0087F1D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3408D9F2B1EE63C0087F1D6 /* ContentView.swift */; };
 		B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */; };
 		B38F3D1A2B12BF340009DF01 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F3D192B12BF340009DF01 /* ImageLoader.swift */; };
 		B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */; };
@@ -134,13 +134,13 @@
 		B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyRowView.swift; sourceTree = "<group>"; };
 		B32090402AFC9BCE004FED4B /* TasteRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasteRowView.swift; sourceTree = "<group>"; };
 		B32090412AFC9BCE004FED4B /* AddWhiskeyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddWhiskeyView.swift; sourceTree = "<group>"; };
-		B32090422AFC9BCE004FED4B /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B32090432AFC9BCE004FED4B /* WhiskeyDetailRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowView.swift; sourceTree = "<group>"; };
 		B32090442AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyTasteDetailView.swift; sourceTree = "<group>"; };
 		B32090452AFC9BCE004FED4B /* WhiskeyDetailRowViewToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowViewToggle.swift; sourceTree = "<group>"; };
 		B32090582AFC9D4F004FED4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B320DF142B1561BB00D13064 /* AddWantedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWantedListView.swift; sourceTree = "<group>"; };
 		B331B6352B02AF7B008DE573 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
+		B3408D9F2B1EE63C0087F1D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWantedWhiskeyView.swift; sourceTree = "<group>"; };
 		B38F3D192B12BF340009DF01 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowStateToggle.swift; sourceTree = "<group>"; };
@@ -351,7 +351,7 @@
 				B320903F2AFC9BCE004FED4B /* WhiskeyRowView.swift */,
 				B3C5B2B52AFFF16D00A75544 /* ScoreGaugeStyle.swift */,
 				B32090402AFC9BCE004FED4B /* TasteRowView.swift */,
-				B32090422AFC9BCE004FED4B /* ContentView.swift */,
+				B3408D9F2B1EE63C0087F1D6 /* ContentView.swift */,
 				B3B9B3532B04896F00EE1A7F /* SettingsView.swift */,
 				B3D2D9742B0C5A6F0041DC7F /* ExportWhiskeyCollectionJSONView.swift */,
 				B3D2D9B02B0D32A80041DC7F /* ImportWhiskeyCollectionJSONView.swift */,
@@ -599,6 +599,7 @@
 				B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */,
 				B3E5C0832B142736009949BB /* WantedListView.swift in Sources */,
 				B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */,
+				B3408DA02B1EE63C0087F1D6 /* ContentView.swift in Sources */,
 				B39485A52B152A5B00930ED7 /* WantListDataPersistanceDataManager.swift in Sources */,
 				B3E5C0872B143803009949BB /* WantedList.swift in Sources */,
 				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
@@ -630,7 +631,6 @@
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
 				B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */,
 				B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */,
-				B32090542AFC9BCE004FED4B /* ContentView.swift in Sources */,
 				B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */,
 				B3E5C0892B143AF8009949BB /* WantedListLibrary.swift in Sources */,
 				B320904A2AFC9BCE004FED4B /* Style.swift in Sources */,
