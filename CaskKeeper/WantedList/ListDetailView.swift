@@ -18,6 +18,9 @@ struct ListDetailView: View {
     @State private var internalWhiskeys: [WhiskeyItem]
     @State private var showingLookingList = true
     
+    @State private var selectedSegment = 0
+    let segmentOptions = ["Wanted", "Found"]
+    
     let transitionAnimation: Animation = .interactiveSpring(response: 0.6, dampingFraction: 0.8, blendDuration: 0.5)
     
     private var lookingWhiskeys: [WhiskeyItem] {
@@ -36,7 +39,7 @@ struct ListDetailView: View {
     
     var body: some View {
         ZStack {
-            if showingLookingList {
+            if selectedSegment == 0 {
                 listView(whiskeys: lookingWhiskeys)
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
             } else {
@@ -60,11 +63,6 @@ struct ListDetailView: View {
                     } label: {
                         Text("Edit")
                     }
-                    Button {
-                        showingLookingList.toggle()
-                    } label: {
-                        Image(systemName: "switch.2")
-                    }
                     NavigationLink {
                         AddWhiskeysToListView { whiskeys in
                             internalWhiskeys.append(contentsOf: whiskeys)
@@ -74,11 +72,18 @@ struct ListDetailView: View {
                     } label: {
                         Image(systemName: "plus")
                     }
-                    
                 }
             }
             ToolbarItem(placement: .principal) {
                 Text(list.name)
+            }
+            ToolbarItem(placement: .bottomBar ) {
+                Picker("View", selection: $selectedSegment) {
+                    ForEach(0..<segmentOptions.count, id: \.self) { index in
+                        Text(self.segmentOptions[index]).tag(index)
+                    }
+                }
+                .pickerStyle(.segmented)
             }
         }
     }
