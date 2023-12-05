@@ -159,6 +159,14 @@ struct ListDetailView: View {
     @ViewBuilder
     func listView(whiskeys: [WhiskeyItem]) -> some View {
         List {
+            if whiskeys.isEmpty {
+                Text("No current whiskeys.")
+                    .font(.customLight(size: 22))
+                    .foregroundStyle(.aluminum)
+                    .frame(maxWidth: .infinity)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+            }
             ForEach(whiskeys.indices, id: \.self) { index in
                 whiskeyRow(whiskey: whiskeys[index], index: index)
             }
