@@ -136,7 +136,24 @@ class WantedListLibrary {
         }
     }
     
+    func addWhiskeysToExistingList(list: WantedList, groupIndex: Int, savedWhiskeys: [WhiskeyItem]) {
+        guard let groupedLists = self.groupedLists else { return }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
+            groupedLists[groupIndex].list[listIndex].whiskeys.append(contentsOf: savedWhiskeys)
+            self.groupedLists = groupedLists
+            dataPersistence.save(groupedList: groupedLists)
+        }
+    }
+    
     func loadList() {
         self.groupedLists = dataPersistence.load()
+    }
+    
+    func fetchList(groupIndex: Int, list: WantedList) -> WantedList? {
+        guard let groupedLists = self.groupedLists else { return nil }
+        if let listIndex = groupedLists[groupIndex].list.firstIndex(where: {$0.id == list.id }) {
+            return groupedLists[groupIndex].list[listIndex]
+        }
+        return nil
     }
 }

@@ -110,12 +110,12 @@ struct AddWantedListView: View {
                         Text("Whiskey")
                             .font(.customLight(size: 18))
                             .listRowSeparator(.hidden)
-                        if !userCreatedList.whiskeys.isEmpty {
-                            Text("The items in at the top of the list are the most sought after whiskeys.")
-                                .listRowSeparator(.hidden)
-                                .font(.customLight(size: 14))
-                                .padding(.top, 2)
-                        }
+                    
+                        Text("The items in at the top of the list are the most sought after whiskeys.")
+                            .listRowSeparator(.hidden)
+                            .font(.customLight(size: 14))
+                            .padding(.top, 2)
+                        
                     }
                 }
             }

@@ -17,7 +17,7 @@ struct ListDetailView: View {
     @State private var list: WantedList
     @State private var internalWhiskeys: [WhiskeyItem]
     @State private var showingLookingList = true
-        
+    
     let transitionAnimation: Animation = .interactiveSpring(response: 0.6, dampingFraction: 0.8, blendDuration: 0.5)
     
     private var lookingWhiskeys: [WhiskeyItem] {
@@ -44,6 +44,11 @@ struct ListDetailView: View {
                     .transition((.asymmetric(insertion: .opacity.combined(with: .scale), removal: .slide)))
             }
         }
+        .onAppear {
+            if let loadList = wantedListLibrary.fetchList(groupIndex: groupIndex, list: list) {
+                self.list = loadList
+            }
+        }
         .animation(transitionAnimation, value: showingLookingList)
         .navigationTitle(showingLookingList ? "Wanted" : "Found")
         .toolbar {
@@ -52,14 +57,24 @@ struct ListDetailView: View {
                     NavigationLink {
                         EditListView(groupIndex: groupIndex, wantedList: $list)
                             .environment(\.wantedListLibrary, wantedListLibrary)
-                        } label: {
-                            Text("Edit")
-                        }
+                    } label: {
+                        Text("Edit")
+                    }
                     Button {
                         showingLookingList.toggle()
                     } label: {
                         Image(systemName: "switch.2")
                     }
+                    NavigationLink {
+                        AddWhiskeysToListView { whiskeys in
+                            internalWhiskeys.append(contentsOf: whiskeys)
+                            wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
+                        }
+                        .environment(\.wantedListLibrary, wantedListLibrary)
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    
                 }
             }
             ToolbarItem(placement: .principal) {
@@ -72,7 +87,7 @@ struct ListDetailView: View {
         internalWhiskeys.move(fromOffsets: source, toOffset: destination)
         wantedListLibrary.updateWhiskeysInList(groupIndex: groupIndex, list: list, whiskeysToSave: internalWhiskeys)
     }
-
+    
     private func toggleWhiskeyState(at index: Int) {
         withAnimation(Animation.smooth) {
             switch internalWhiskeys[index].state {
@@ -103,7 +118,7 @@ struct ListDetailView: View {
                 handleStateButton(whiskey: whiskey)
             }
             .font(.customRegular(size: 20))
-
+            
             
             if let endDate = whiskey.endSearchDate {
                 HStack {
@@ -141,7 +156,7 @@ struct ListDetailView: View {
         }
     }
     
-    @ViewBuilder 
+    @ViewBuilder
     func listView(whiskeys: [WhiskeyItem]) -> some View {
         List {
             ForEach(whiskeys.indices, id: \.self) { index in
