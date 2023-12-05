@@ -33,9 +33,9 @@ struct AddWhiskeyView: View {
         case age
         case price
     }
-
+    
     @FocusState private var focusedField: Field?
-        
+    
     var nonOptionalImageBinding: Binding<UIImage> {
         Binding<UIImage>(
             get: { self.image ?? UIImage() },
@@ -49,17 +49,17 @@ struct AddWhiskeyView: View {
         formatter.maximumFractionDigits = 1
         return formatter
     }()
-
+    
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     TextField("Label", text: $label)
                         .focused($focusedField, equals: .label)
-
+                    
                     TextField("Bottle", text: $bottle)
                         .focused($focusedField, equals: .bottle)
-
+                    
                     Picker("Style", selection: $style) {
                         ForEach(Style.allCases, id: \.self) { style in
                             Text(style.rawValue)
@@ -69,9 +69,6 @@ struct AddWhiskeyView: View {
                 } header: {
                     Text("Whiskey Details")
                         .font(.customLight(size: 18))
-
-                }
-                
                 Section {
                     TextField("Proof", text: $proof)
                         .keyboardType(.decimalPad)
@@ -79,14 +76,14 @@ struct AddWhiskeyView: View {
                         .onChange(of: proof) { oldValue, newValue in
                             handleProofInput(newValue: newValue)
                         }
-
+                    
                     TextField("Age", text: $age)
                         .keyboardType(.decimalPad)
                         .focused($focusedField, equals: .age)
                         .onChange(of: age) { oldValue, newValue in
                             handleAgeInput(newValue: newValue)
                         }
-
+                    
                     
                     TextField("Price", text: $price)
                         .keyboardType(.decimalPad)
@@ -120,8 +117,13 @@ struct AddWhiskeyView: View {
                 } header: {
                     HStack {
                         Text("Add Image")
+<<<<<<< HEAD:CaskKeeper/Collection/Whiskey/View/AddViews/AddWhiskeyView.swift
                             .font(.customLight(size: 18))
 
+=======
+                            .font(.custom("AsapCondensed-Light", size: 18, relativeTo: .body))
+                        
+>>>>>>> main:CaskKeeper/Whiskey/View/AddViews/AddWhiskeyView.swift
                         Spacer()
                         Button(action: {
                             isCameraShowing = true
@@ -152,7 +154,7 @@ struct AddWhiskeyView: View {
             .font(.customRegular(size: 18))
             .toolbar{
                 ToolbarItemGroup(placement: .keyboard) {
-                    Spacer() 
+                    Spacer()
                     Button("Done") {
                         focusedField = nil // This clears the focus state
                     }
@@ -161,9 +163,9 @@ struct AddWhiskeyView: View {
                     Button("Save") {
                         withAnimation(Animation.easeInOut) {
                             guard let doubleProof = Double(proof) else { return }
-                            guard let doubleAge = Double(age) else { return }
+                            let doubleAge = age.isEmpty ? nil : Double(age)
                             let submissionPrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) ?? 0.0
-
+                            
                             whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: submissionPrice))
                             dismiss()
                         }
@@ -181,15 +183,19 @@ struct AddWhiskeyView: View {
             }
             .navigationTitle("Add Bottle")
         }
+        .onDisappear {
+            whiskeyLibrary.sortCollection()
+        }
+        
     }
     
     func handleProofInput(newValue: String) {
         if newValue.isEmpty {
             return
         }
-
+        
         let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
-
+        
         if !isDecimal {
             proof = String(newValue.dropLast())
         }
@@ -197,9 +203,10 @@ struct AddWhiskeyView: View {
     
     func handleAgeInput(newValue: String) {
         if newValue.isEmpty {
+            age = ""
             return
         }
-
+        
         let isDecimal = newValue.range(of: "^[0-9]{0,3}(\\.\\d{0,1})?$", options: .regularExpression) != nil
         
         if let ageValue = Double(newValue), isDecimal && (0...100).contains(ageValue) {
@@ -214,7 +221,7 @@ struct AddWhiskeyView: View {
             price = ""
         } else if newValue.first == "$" {
             let numericPart = String(newValue.dropFirst())
-
+            
             let currencyRegex = "^[0-9]+(\\.\\d{0,2})?$"
             if let _ = Double(numericPart), numericPart.range(of: currencyRegex, options: .regularExpression) != nil {
                 price = newValue
@@ -233,6 +240,8 @@ struct AddWhiskeyView: View {
         }
     }
 }
+
+
 
 #Preview {
     AddWhiskeyView()
