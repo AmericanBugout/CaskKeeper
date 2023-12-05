@@ -53,7 +53,7 @@ struct ListDetailView: View {
             }
         }
         .animation(transitionAnimation, value: showingLookingList)
-        .navigationTitle(showingLookingList ? "Wanted" : "Found")
+        .navigationTitle(list.name)
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 HStack {
@@ -73,9 +73,6 @@ struct ListDetailView: View {
                         Image(systemName: "plus")
                     }
                 }
-            }
-            ToolbarItem(placement: .principal) {
-                Text(list.name)
             }
             ToolbarItem(placement: .bottomBar ) {
                 Picker("View", selection: $selectedSegment) {
