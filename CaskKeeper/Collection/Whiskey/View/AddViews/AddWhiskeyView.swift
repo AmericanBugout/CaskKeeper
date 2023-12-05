@@ -146,36 +146,36 @@ struct AddWhiskeyView: View {
                     }
                 }
                 .font(.customRegular(size: 18))
-                .toolbar{
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Done") {
-                            focusedField = nil // This clears the focus state
-                        }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            withAnimation(Animation.easeInOut) {
-                                guard let doubleProof = Double(proof) else { return }
-                                let doubleAge = age.isEmpty ? nil : Double(age)
-                                let submissionPrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) ?? 0.0
-                                
-                                whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: submissionPrice))
-                                dismiss()
-                            }
-                        }
-                        .disabled(label.isEmpty || bottle.isEmpty || proof.isEmpty)
-                        .font(.customBold(size: 20))
-                    }
-                    
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            dismiss()
-                        }
-                        .font(.customSemiBold(size: 20))
+                .navigationTitle("Add Bottle")
+            }
+            .toolbar{
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done") {
+                        focusedField = nil // This clears the focus state
                     }
                 }
-                .navigationTitle("Add Bottle")
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        withAnimation(Animation.easeInOut) {
+                            guard let doubleProof = Double(proof) else { return }
+                            let doubleAge = age.isEmpty ? nil : Double(age)
+                            let submissionPrice = Double(price.trimmingCharacters(in: CharacterSet(charactersIn: "$"))) ?? 0.0
+                            
+                            whiskeyLibrary.addWhiskey(whiskey: Whiskey(label: label, bottle: bottle, purchasedDate: purchaseDate, image: image, proof: doubleProof, bottleState: .sealed, style: style, origin: origin, age: doubleAge, price: submissionPrice))
+                            dismiss()
+                        }
+                    }
+                    .disabled(label.isEmpty || bottle.isEmpty || proof.isEmpty)
+                    .font(.customBold(size: 20))
+                }
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .font(.customSemiBold(size: 20))
+                }
             }
             .onDisappear {
                 whiskeyLibrary.sortCollection()
