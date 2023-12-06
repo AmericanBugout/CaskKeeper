@@ -69,85 +69,86 @@ struct AddWhiskeyView: View {
                 } header: {
                     Text("Whiskey Details")
                         .font(.customLight(size: 18))
-                    Section {
-                        TextField("Proof", text: $proof)
-                            .keyboardType(.decimalPad)
-                            .focused($focusedField, equals: .proof)
-                            .onChange(of: proof) { oldValue, newValue in
-                                handleProofInput(newValue: newValue)
-                            }
-                        
-                        TextField("Age", text: $age)
-                            .keyboardType(.decimalPad)
-                            .focused($focusedField, equals: .age)
-                            .onChange(of: age) { oldValue, newValue in
-                                handleAgeInput(newValue: newValue)
-                            }
-                        
-                        
-                        TextField("Price", text: $price)
-                            .keyboardType(.decimalPad)
-                            .focused($focusedField, equals: .price)
-                            .onReceive(Just(price)) { newValue in
-                                handlePriceInput(newValue: newValue)
-                            }
-                            .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .aluminum : .primary)
-                        Picker("Origin", selection: $origin) {
-                            ForEach(Origin.allCases, id: \.self) { origin in
-                                Text(origin.rawValue)
-                            }
+                }
+                
+                Section {
+                    TextField("Proof", text: $proof)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .proof)
+                        .onChange(of: proof) { oldValue, newValue in
+                            handleProofInput(newValue: newValue)
                         }
-                        
-                    } header: {
-                        Text("Additional Info")
-                            .font(.customLight(size: 18))
+                    
+                    TextField("Age", text: $age)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .age)
+                        .onChange(of: age) { oldValue, newValue in
+                            handleAgeInput(newValue: newValue)
+                        }
+                    
+                    
+                    TextField("Price", text: $price)
+                        .keyboardType(.decimalPad)
+                        .focused($focusedField, equals: .price)
+                        .onReceive(Just(price)) { newValue in
+                            handlePriceInput(newValue: newValue)
+                        }
+                        .foregroundColor((price.isEmpty || price == "$" || price == "$0") ? .aluminum : .primary)
+                    Picker("Origin", selection: $origin) {
+                        ForEach(Origin.allCases, id: \.self) { origin in
+                            Text(origin.rawValue)
+                        }
                     }
                     
-                    Section {
-                        if let image = image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                                .clipShape(RoundedRectangle(cornerRadius: 5))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 300)
-                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                .listRowBackground(Color.clear)
-                        }
-                    } header: {
-                        HStack {
-                            Text("Add Image")
-                                .font(.customLight(size: 18))
-                            Spacer()
-                            Button(action: {
-                                isCameraShowing = true
-                            }, label: {
-                                Image(systemName: "camera")
-                            })
-                            
-                            Button(action: {
-                                isPhotoLibraryShowing = true
-                            }, label: {
-                                Image(systemName: "photo.fill")
-                            })
-                        }
+                } header: {
+                    Text("Additional Info")
+                        .font(.customLight(size: 18))
+                }
+                
+                Section {
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 300)
+                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            .listRowBackground(Color.clear)
                     }
-                    .sheet(isPresented: $isCameraShowing) {
-                        ZStack {
-                            ImagePickerRepresentable(selectedImage: nonOptionalImageBinding)
-                                .ignoresSafeArea()
-                        }
-                    }
-                    .sheet(isPresented: $isPhotoLibraryShowing) {
-                        ZStack {
-                            PHPickerRepresentable(selectedImage: nonOptionalImageBinding)
-                                .ignoresSafeArea()
-                        }
+                } header: {
+                    HStack {
+                        Text("Add Image")
+                            .font(.customLight(size: 18))
+                        Spacer()
+                        Button(action: {
+                            isCameraShowing = true
+                        }, label: {
+                            Image(systemName: "camera")
+                        })
+                        
+                        Button(action: {
+                            isPhotoLibraryShowing = true
+                        }, label: {
+                            Image(systemName: "photo.fill")
+                        })
                     }
                 }
-                .font(.customRegular(size: 18))
-                .navigationTitle("Add Bottle")
+                .sheet(isPresented: $isCameraShowing) {
+                    ZStack {
+                        ImagePickerRepresentable(selectedImage: nonOptionalImageBinding)
+                            .ignoresSafeArea()
+                    }
+                }
+                .sheet(isPresented: $isPhotoLibraryShowing) {
+                    ZStack {
+                        PHPickerRepresentable(selectedImage: nonOptionalImageBinding)
+                            .ignoresSafeArea()
+                    }
+                }
             }
+            .font(.customRegular(size: 18))
+            .navigationTitle("Add Bottle")
             .toolbar{
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
@@ -181,7 +182,6 @@ struct AddWhiskeyView: View {
                 whiskeyLibrary.sortCollection()
             }
         }
-        
     }
     
     func handleProofInput(newValue: String) {
@@ -235,7 +235,6 @@ struct AddWhiskeyView: View {
         }
     }
 }
-
 
 
 #Preview {
