@@ -17,7 +17,6 @@
 		B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */; };
 		B3208FEB2AFC9A2C004FED4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */; };
 		B3208FEE2AFC9A2C004FED4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3208FED2AFC9A2C004FED4B /* Preview Assets.xcassets */; };
-		B3208FF82AFC9A2C004FED4B /* CaskKeeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3208FF72AFC9A2C004FED4B /* CaskKeeperTests.swift */; };
 		B32090022AFC9A2C004FED4B /* CaskKeeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090012AFC9A2C004FED4B /* CaskKeeperUITests.swift */; };
 		B32090042AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090032AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift */; };
 		B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32090132AFC9B66004FED4B /* EnvironmentValues+Ext.swift */; };
@@ -60,6 +59,7 @@
 		B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397311B2B1A93B600B5E147 /* EditListView.swift */; };
 		B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B397311D2B1A9F0A00B5E147 /* ListRowView.swift */; };
 		B3A877412B20335F0084016C /* WhiskeyLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */; };
+		B3A877462B203D020084016C /* Resource.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A877452B203D020084016C /* Resource.xcassets */; };
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
 		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C562832B1E958300ABCA77 /* AddWhiskeysToListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */; };
@@ -106,7 +106,6 @@
 		B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3208FED2AFC9A2C004FED4B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B3208FF32AFC9A2C004FED4B /* CaskKeeperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaskKeeperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3208FF72AFC9A2C004FED4B /* CaskKeeperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperTests.swift; sourceTree = "<group>"; };
 		B3208FFD2AFC9A2C004FED4B /* CaskKeeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaskKeeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B32090012AFC9A2C004FED4B /* CaskKeeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperUITests.swift; sourceTree = "<group>"; };
 		B32090032AFC9A2C004FED4B /* CaskKeeperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaskKeeperUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -151,7 +150,8 @@
 		B397311B2B1A93B600B5E147 /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
 		B397311D2B1A9F0A00B5E147 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyLibraryTests.swift; sourceTree = "<group>"; };
-		B3A877422B2034AE0084016C /* CaskKeeper.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CaskKeeper.xctestplan; sourceTree = "<group>"; };
+		B3A877442B203A570084016C /* CaskKeeperTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaskKeeperTests.xctestplan; sourceTree = SOURCE_ROOT; };
+		B3A877452B203D020084016C /* Resource.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resource.xcassets; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
 		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWhiskeysToListView.swift; sourceTree = "<group>"; };
@@ -216,7 +216,6 @@
 		B3208FE52AFC9A2A004FED4B /* CaskKeeper */ = {
 			isa = PBXGroup;
 			children = (
-				B3A877422B2034AE0084016C /* CaskKeeper.xctestplan */,
 				B32090582AFC9D4F004FED4B /* Info.plist */,
 				B3E5C07E2B140A37009949BB /* App */,
 				B3E5C07F2B140AF8009949BB /* WantedList */,
@@ -239,8 +238,9 @@
 		B3208FF62AFC9A2C004FED4B /* CaskKeeperTests */ = {
 			isa = PBXGroup;
 			children = (
-				B3208FF72AFC9A2C004FED4B /* CaskKeeperTests.swift */,
 				B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */,
+				B3A877442B203A570084016C /* CaskKeeperTests.xctestplan */,
+				B3A877452B203D020084016C /* Resource.xcassets */,
 			);
 			path = CaskKeeperTests;
 			sourceTree = "<group>";
@@ -584,6 +584,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A877462B203D020084016C /* Resource.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,7 +663,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3A877412B20335F0084016C /* WhiskeyLibraryTests.swift in Sources */,
-				B3208FF82AFC9A2C004FED4B /* CaskKeeperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

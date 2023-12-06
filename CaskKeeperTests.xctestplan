@@ -1,19 +1,15 @@
 {
   "configurations" : [
     {
-      "id" : "AD28C7F3-DF6E-4A5C-80BE-98A8C1E56EF8",
-      "name" : "Test Scheme Action",
+      "id" : "FE58D868-8E3A-4E65-8F50-4E83B4E9C443",
+      "name" : "Configuration 1",
       "options" : {
 
       }
     }
   ],
   "defaultOptions" : {
-    "targetForVariableExpansion" : {
-      "containerPath" : "container:CaskKeeper.xcodeproj",
-      "identifier" : "B3208FE22AFC9A2A004FED4B",
-      "name" : "CaskKeeper"
-    }
+
   },
   "testTargets" : [
     {
