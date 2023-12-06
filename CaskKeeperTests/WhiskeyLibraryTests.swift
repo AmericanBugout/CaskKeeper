@@ -25,9 +25,15 @@ final class WhiskeyLibraryTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func testWhiskeyInitializationForProduction() {
+    func testWhiskeyLibraryInitializationForProduction() {
         XCTAssertTrue(dataPersistenceManager.loadIsCalled)
-        
+    }
+    
+    func testWhiskeyLibraryUsedForTesting() {
+        let dataPersistenceManager = MockWhiskeyDataPersistanceManager()
+        whiskeyLibrary = WhiskeyLibrary(dataPersistence: dataPersistenceManager, isForTesting: true)
+        XCTAssertFalse(dataPersistenceManager.loadIsCalled)
+        XCTAssertNotNil(whiskeyLibrary.collection)
     }
 
     func testWhiskeysAreNotNil() {
@@ -63,4 +69,22 @@ final class WhiskeyLibraryTests: XCTestCase {
         whiskeyLibrary?.updateImage(for: firstWhiskey, with: data)
         XCTAssertEqual(firstWhiskey.imageData, data, "Data does not match")
     }
+    
+    func testAddWhiskeyTasting() {
+        let tasting = Whiskey.Taste(date: Date(), customNotes: "Test Note")
+        whiskeyLibrary.addWhiskeyTasting(for: whiskeyLibrary.collection.first!, tasting: tasting)
+        XCTAssertEqual(whiskeyLibrary.collection.first!.tastingNotes.count, 3, "Note was not added.")
+    }
+    
+    func testDeleteWhiskeyTasting() {
+        let firstWhiskey = whiskeyLibrary.collection.first!
+        let tastingCountOriginal = firstWhiskey.tastingNotes.count
+        let indexSet = IndexSet(integer: firstWhiskey.tastingNotes.indices.last!)
+        whiskeyLibrary.deleteTasting(whiskey: firstWhiskey, indexSet: indexSet)
+        XCTAssertEqual(firstWhiskey.tastingNotes.count, tastingCountOriginal - 1, "Tasting note count should decrease by one")
+        XCTAssertEqual(firstWhiskey.tastingNotes.last!.customNotes, "Intense Flavor. I would definately buy again.", "The wrong note was removed.")
+    }
+    
+    
+
 }

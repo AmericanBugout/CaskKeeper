@@ -89,12 +89,10 @@ class WhiskeyLibrary {
     }
     
     func deleteTasting(whiskey: Whiskey, indexSet: IndexSet) {
-        DispatchQueue.main.async {
-            if let index = self.collection.firstIndex(where: {$0.id == whiskey.id}) {
-                let updateWhiskey = self.collection[index]
-                updateWhiskey.tastingNotes.remove(atOffsets: indexSet)
-                self.collection[index] = updateWhiskey
-            }
+        if let index = self.collection.firstIndex(where: {$0.id == whiskey.id}) {
+            let updateWhiskey = self.collection[index]
+            updateWhiskey.tastingNotes.remove(atOffsets: indexSet)
+            self.collection[index] = updateWhiskey
         }
         
     }
@@ -140,7 +138,7 @@ class WhiskeyLibrary {
                 newWhiskeys.append(updatedWhiskey)
             }
         }
-                
+        
         DispatchQueue.main.async {
             self.collection.append(contentsOf: newWhiskeys)
             self.sortCollection()
