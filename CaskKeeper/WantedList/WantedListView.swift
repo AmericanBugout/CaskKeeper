@@ -26,9 +26,6 @@ struct WantedListView: View {
                         ForEach(group.list, id: \.id) { list in
                             NavigationLink {
                                 ListDetailView(groupIndex: groupIndex, list: list)
-                                    .onAppear(perform: {
-                                        print(list.id)
-                                    })
                                     .environment(\.wantedListLibrary, wantedListLibrary)
                             } label: {
                                 ListRowView(name: list.name, total: list.whiskeys.count, found: list.foundCount, wanted: list.wantedCount)

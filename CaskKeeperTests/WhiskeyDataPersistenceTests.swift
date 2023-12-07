@@ -10,6 +10,7 @@ import XCTest
 
 final class WhiskeyDataPersistenceTests: XCTestCase {
     var dataPersistenceManager: MockWhiskeyDataPersistenceManager!
+    
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -19,4 +20,10 @@ final class WhiskeyDataPersistenceTests: XCTestCase {
     override func tearDownWithError() throws {
         dataPersistenceManager = nil
     }
+    
+    func testExportFailed() {
+        dataPersistenceManager.shouldExportSuccessfully = false
+        
+    }
+    
 }

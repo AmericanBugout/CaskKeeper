@@ -55,7 +55,7 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
             return []
         }
     }
-    
+
     func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) {
         DispatchQueue.global(qos: .background).async {
               let encoder = JSONEncoder()
@@ -87,4 +87,6 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
             completion(.failure(error))
         }
     }
+    
+
 }

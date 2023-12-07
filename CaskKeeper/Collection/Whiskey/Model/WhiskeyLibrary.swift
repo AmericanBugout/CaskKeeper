@@ -140,10 +140,7 @@ class WhiskeyLibrary {
         }
         
         DispatchQueue.main.async {
-            print(self.collection.count)
-            print(newWhiskeys.count)
             self.collection.append(contentsOf: newWhiskeys)
-            print(self.collection.count)
             self.sortCollection()
             self.importedWhiskeyCount = (self.importedWhiskeyCount ?? 0) + newWhiskeys.count
             self.duplicateWhiskeyCountOnJSONImport = (self.duplicateWhiskeyCountOnJSONImport ?? 0) + duplicateCount

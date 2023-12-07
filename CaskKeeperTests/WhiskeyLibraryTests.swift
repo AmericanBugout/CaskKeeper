@@ -113,7 +113,7 @@ final class WhiskeyLibraryTests: XCTestCase {
         
     }
     
-    func testExportWhiskeyAsJSON() {
+    func testExportWhiskeyAsJSONisSuccessful() {
         let expectation = self.expectation(description: #function)
         whiskeyLibrary.exportWhiskeyCollectionAsJSON { result in
             if case .success(let url) = result {
@@ -125,6 +125,21 @@ final class WhiskeyLibraryTests: XCTestCase {
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
+    
+    func testExportWhiskeyAsJSONisFailure() {
+        let expectation = self.expectation(description: #function)
+        dataPersistenceManager.shouldExportSuccessfully = false
+        
+        whiskeyLibrary.exportWhiskeyCollectionAsJSON { result in
+            if case .failure(let error) = result {
+                XCTAssertNotNil(error, "Error should not be nil on failure")
+            }
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1, handler: nil)
+    }
+    
+    
     
     func testImportWhiskeysAsJSON() {
         let expectation = self.expectation(description: #function)
@@ -171,6 +186,18 @@ final class WhiskeyLibraryTests: XCTestCase {
         
         XCTAssertNil(whiskeyLibrary.importedWhiskeyCount)
         XCTAssertNil(whiskeyLibrary.duplicateWhiskeyCountOnJSONImport)
+    }
+    
+    /* Data persitence tests */
+    func testDataPersistenceFailedTest() {
+        dataPersistenceManager.setupLoadForFailure()
+        let loadedWhiskeys = dataPersistenceManager.load()
+        
+        XCTAssertTrue(loadedWhiskeys.isEmpty, "Loaded whiskeys should be empty error occurred.")
+    }
+    
+    func testDataPersistenceSave() {
+        
     }
     
 }
