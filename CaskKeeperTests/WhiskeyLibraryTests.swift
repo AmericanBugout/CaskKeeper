@@ -11,11 +11,11 @@ import XCTest
 
 final class WhiskeyLibraryTests: XCTestCase {
     var whiskeyLibrary: WhiskeyLibrary!
-    var dataPersistenceManager: MockWhiskeyDataPersistanceManager!
+    var dataPersistenceManager: MockWhiskeyDataPersistenceManager!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        dataPersistenceManager = MockWhiskeyDataPersistanceManager()
+        dataPersistenceManager = MockWhiskeyDataPersistenceManager()
         whiskeyLibrary = WhiskeyLibrary(dataPersistence: dataPersistenceManager, isForTesting: false)
     }
 
@@ -26,7 +26,7 @@ final class WhiskeyLibraryTests: XCTestCase {
     }
     
     func testInitializationWithTestingData() {
-        let mockPersistence = MockWhiskeyDataPersistanceManager()
+        let mockPersistence = MockWhiskeyDataPersistenceManager()
         let whiskeyLibrary = WhiskeyLibrary(dataPersistence: mockPersistence, isForTesting: true)
 
         let collection = whiskeyLibrary.collection

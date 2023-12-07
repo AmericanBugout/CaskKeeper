@@ -1,5 +1,5 @@
 //
-//  MockWhiskeyDataPersistanceManager.swift
+//  MockWhiskeyDataPersistenceManager.swift
 //  CaskKeeperTests
 //
 //  Created by Jon Oryhan on 12/6/23.
@@ -7,7 +7,7 @@
 import SwiftUI
 @testable import CaskKeeper
 
-class MockWhiskeyDataPersistanceManager: WhiskeyPersisting {
+class MockWhiskeyDataPersistenceManager: WhiskeyPersisting {
     var loadIsCalled = false
     var saveIsCalled = false
     var shouldExportSuccessfully = true

@@ -1,5 +1,5 @@
 //
-//  WantListDataPersistanceDataManager.swift
+//  WantListDataPersistenceDataManager.swift
 //  CaskKeeper
 //
 //  Created by Jon Oryhan on 11/27/23.
@@ -12,9 +12,9 @@ protocol WantListPersisting {
     func load() -> [WantedListGroup]
 }
 
-class WantListDataPersistanceDataManager: WantListPersisting {
+class WantListDataPersistenceDataManager: WantListPersisting {
     
-    static let shared = WantListDataPersistanceDataManager()
+    static let shared = WantListDataPersistenceDataManager()
     
     private init() {}
     
@@ -34,7 +34,7 @@ class WantListDataPersistanceDataManager: WantListPersisting {
         
         do {
             let data = try encoder.encode(dataList)
-            try data.write(to: WantListDataPersistanceDataManager.wantedListFileURL, options: .atomic)
+            try data.write(to: WantListDataPersistenceDataManager.wantedListFileURL, options: .atomic)
             print("Saved Wanted List.")
         } catch {
             print("Error saving data: \(error)")
@@ -44,7 +44,7 @@ class WantListDataPersistanceDataManager: WantListPersisting {
     func load() -> [WantedListGroup] {
         let decoder = PropertyListDecoder()
         do {
-            let data = try Data(contentsOf: WantListDataPersistanceDataManager.wantedListFileURL)
+            let data = try Data(contentsOf: WantListDataPersistenceDataManager.wantedListFileURL)
             let dataList = try decoder.decode([WantedListGroup].self, from: data)
             print("Loaded Wanted List.")
             return dataList

@@ -14,9 +14,9 @@ protocol WhiskeyPersisting {
     func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void )
 }
 
-class WhiskeyDataPersistanceManager: WhiskeyPersisting {
+class WhiskeyDataPersistenceManager: WhiskeyPersisting {
     
-    static let shared = WhiskeyDataPersistanceManager()
+    static let shared = WhiskeyDataPersistenceManager()
     
     private init() {}
     
@@ -35,7 +35,7 @@ class WhiskeyDataPersistanceManager: WhiskeyPersisting {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(collection)
-            try data.write(to: WhiskeyDataPersistanceManager.collectionsFileURL, options: .atomic)
+            try data.write(to: WhiskeyDataPersistenceManager.collectionsFileURL, options: .atomic)
         } catch {
             print("Error Saving data: \(error.localizedDescription)")
         }
@@ -44,7 +44,7 @@ class WhiskeyDataPersistanceManager: WhiskeyPersisting {
     func load() -> [Whiskey] {
         let decoder = PropertyListDecoder()
         do {
-            let data = try Data(contentsOf: WhiskeyDataPersistanceManager.collectionsFileURL)
+            let data = try Data(contentsOf: WhiskeyDataPersistenceManager.collectionsFileURL)
             print(String(data: data, encoding: .utf8) ?? "")
             let collection = try decoder.decode([Whiskey].self, from: data)
             save(collection: collection)
@@ -62,7 +62,7 @@ class WhiskeyDataPersistanceManager: WhiskeyPersisting {
             do {
                 let jsonData = try encoder.encode(collection)
                 let fileName = "collection.json"
-                let fileURL = WhiskeyDataPersistanceManager.documentsDirectoryURL.appendingPathComponent(fileName)
+                let fileURL = WhiskeyDataPersistenceManager.documentsDirectoryURL.appendingPathComponent(fileName)
                 try jsonData.write(to: fileURL, options: .atomicWrite)
                 DispatchQueue.main.async {
                     completion(.success(fileURL))
