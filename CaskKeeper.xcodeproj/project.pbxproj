@@ -51,6 +51,7 @@
 		B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B331B6352B02AF7B008DE573 /* DocumentPicker.swift */; };
 		B33ED04B2B1EE921005851A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33ED04A2B1EE921005851A2 /* ContentView.swift */; };
 		B3433F842B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */; };
+		B3433F8E2B22BFE2001F8E1E /* MockWhiskeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */; };
 		B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */; };
 		B38F3D1A2B12BF340009DF01 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F3D192B12BF340009DF01 /* ImageLoader.swift */; };
 		B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */; };
@@ -144,6 +145,7 @@
 		B331B6352B02AF7B008DE573 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		B33ED04A2B1EE921005851A2 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDataPersistenceTests.swift; sourceTree = "<group>"; };
+		B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyData.swift; sourceTree = "<group>"; };
 		B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWantedWhiskeyView.swift; sourceTree = "<group>"; };
 		B38F3D192B12BF340009DF01 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowStateToggle.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				B3A877472B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift */,
+				B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3433F8E2B22BFE2001F8E1E /* MockWhiskeyData.swift in Sources */,
 				B3A877482B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift in Sources */,
 				B3A877412B20335F0084016C /* WhiskeyLibraryTests.swift in Sources */,
 				B3433F842B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift in Sources */,

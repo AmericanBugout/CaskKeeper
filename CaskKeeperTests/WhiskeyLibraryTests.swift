@@ -38,12 +38,11 @@ final class WhiskeyLibraryTests: XCTestCase {
     }
     
     func testInitializationWithLoadedData() {
-
         let collection = whiskeyLibrary.collection
         XCTAssertTrue(dataPersistenceManager.loadIsCalled, "load() method should be called on the dataPersistenceManager.")
         XCTAssertEqual(collection.count, 2, "Collection should have 2 whiskeys loaded from dataPersistenceManager.")
-        XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.whiskey1ID }), "Collection should contain whiskey with whiskey1ID.")
-        XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.whiskey2ID }), "Collection should contain whiskey with whiskey2ID.")
+        XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.id1 }), "Collection should contain whiskey with id1.")
+        XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.id2 }), "Collection should contain whiskey with id2.")
     }
 
     func testWhiskeysAreNotNil() {
@@ -92,7 +91,7 @@ final class WhiskeyLibraryTests: XCTestCase {
         let indexSet = IndexSet(integer: whiskey.tastingNotes.indices.last!)
         whiskeyLibrary.deleteTasting(whiskey: whiskey, indexSet: indexSet)
         XCTAssertEqual(whiskey.tastingNotes.count, tastingCountOriginal - 1, "Tasting note count should decrease by one")
-        XCTAssertEqual(whiskey.tastingNotes.last!.customNotes, "Intense Flavor. I would definately buy again.", "The wrong note was removed.")
+        XCTAssertEqual(whiskey.tastingNotes.first!.customNotes, "Intense Flavor. I would definately buy again.", "The wrong note was removed.")
     }
     
     func testUpdateWhiskeyToFinished() {
@@ -192,7 +191,6 @@ final class WhiskeyLibraryTests: XCTestCase {
     func testDataPersistenceFailedTest() {
         dataPersistenceManager.setupLoadForFailure()
         let loadedWhiskeys = dataPersistenceManager.load()
-        
         XCTAssertTrue(loadedWhiskeys.isEmpty, "Loaded whiskeys should be empty error occurred.")
     }
     
