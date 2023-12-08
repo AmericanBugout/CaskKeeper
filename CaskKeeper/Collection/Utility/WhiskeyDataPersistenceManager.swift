@@ -9,11 +9,14 @@ import Foundation
 
 enum DataManagerError: Error, LocalizedError {
     case encodingFailed
+    case exportFailed
     
     var errorDescription: String? {
         switch self {
         case .encodingFailed:
             return NSLocalizedString("Encoding Failed:", comment: "")
+        case.exportFailed:
+            return NSLocalizedString("Export Failed", comment: "")
         }
     }
 }
@@ -21,7 +24,7 @@ enum DataManagerError: Error, LocalizedError {
 protocol WhiskeyPersisting {
     func save(collection: [Whiskey]) throws
     func load() -> [Whiskey]
-    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void)
+    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) throws
     func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void )
 }
 
@@ -35,7 +38,6 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
     }()
-    
     
     static var collectionsFileURL: URL {
         return documentsDirectoryURL.appendingPathComponent("collection_data.plist")
@@ -65,7 +67,7 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
         }
     }
 
-    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) {
+    func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void) throws {
         DispatchQueue.global(qos: .background).async {
               let encoder = JSONEncoder()
             do {
@@ -78,7 +80,7 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion(.failure(error))
+                    completion(.failure(DataManagerError.exportFailed))
                 }
             }
         }

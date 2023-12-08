@@ -25,24 +25,14 @@ final class WhiskeyDataPersistenceTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func testExportFailed() {
-        dataPersistenceManager.shouldExportSuccessfully = false
+    func testSave() {
+        dataPersistenceManager.ahouldSaveBeSuccessful = true
+        XCTAssertTrue(dataPersistenceManager.saveIsCalled)
         
-    }
-    
-    /* Data persitence tests */
-    func testDataPersistenceFailedTest() {
-        dataPersistenceManager.setupLoadForFailure()
-        let loadedWhiskeys = dataPersistenceManager.load()
-        XCTAssertTrue(loadedWhiskeys.isEmpty, "Loaded whiskeys should be empty error occurred.")
-    }
-    
-    func testSaveWithEncodingFailure() {
-        let mockEncoder = MockFailingEncoder()
-        dataPersistenceManager = MockWhiskeyDataPersistenceManager(encoder: mockEncoder)
-        let whiskeyCollection: [Whiskey] = MockWhiskeyData.whiskeys
+        dataPersistenceManager = MockWhiskeyDataPersistenceManager(encoder: MockFailingEncoder())
+        dataPersistenceManager.ahouldSaveBeSuccessful = false
         
-        XCTAssertThrowsError(try dataPersistenceManager.save(collection: whiskeyCollection)) { error in
+        XCTAssertThrowsError(try dataPersistenceManager.save(collection: MockWhiskeyData.whiskeys)) { error in
             guard let dataManagerError = error as? DataManagerError else {
                 return XCTFail("Expected DataManagerError, but received different error type")
             }
@@ -50,20 +40,38 @@ final class WhiskeyDataPersistenceTests: XCTestCase {
         }
     }
     
-    func testExportCollectionToJsonSuccess() {
-        let expectation = self.expectation(description: #function)
-        whiskeyLibrary.exportWhiskeyCollectionAsJSON { result in
-            
+    func testLoad() {
+       XCTAssertEqual(dataPersistenceManager.load().count, 2, "Count should be 2")
+        
+       dataPersistenceManager.whiskeys.removeAll()
+       dataPersistenceManager.setupLoadForFailure()
+       XCTAssertTrue(dataPersistenceManager.load().isEmpty, "Loaded whiskeys should be empty error occurred.")
+    }
+    
+    
+    func testExportCollectionToJson() {
+        let mockWhiskeyCollection: [Whiskey] = MockWhiskeyData.whiskeys
+
+        dataPersistenceManager.shouldExportSuccessfully = true
+        dataPersistenceManager.exportCollectionToJson(collection: mockWhiskeyCollection) { result in
             switch result {
-            case .success(let fileURL):
-                XCTAssertEqual("/path/to/mock/file.json", fileURL.path)
-                // Additional checks can be performed here, like comparing file contents
-            case .failure:
-                XCTFail("Expected success but received failure")
+            case .success(let url):
+                XCTAssert(url.path.contains("path/to/mock/file.json"))
+                // Add more assertions as needed
+            case .failure(let error):
+                XCTFail("Export failed with error: \(error)")
             }
-            expectation.fulfill()
         }
-        waitForExpectations(timeout: 5)
+
+        dataPersistenceManager.shouldExportSuccessfully = false
+        dataPersistenceManager.exportCollectionToJson(collection: mockWhiskeyCollection) { result in
+            switch result {
+            case .success:
+                XCTFail("Export should have failed")
+            case .failure(let error):
+                XCTAssert(error is DataManagerError)
+            }
+        }
     }
 }
 
