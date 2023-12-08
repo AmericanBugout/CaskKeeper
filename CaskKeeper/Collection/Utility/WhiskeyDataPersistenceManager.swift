@@ -52,15 +52,13 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
         }
     }
     
-    func load() -> [Whiskey] {
+    func load() -> [Whiskey]  {
         let decoder = PropertyListDecoder()
         do {
             let data = try Data(contentsOf: WhiskeyDataPersistenceManager.collectionsFileURL)
-            print(String(data: data, encoding: .utf8) ?? "")
             let collection = try decoder.decode([Whiskey].self, from: data)
             try save(collection: collection)
             return collection
-    
         } catch {
             print("Error loading data: \(error.localizedDescription)")
             return []

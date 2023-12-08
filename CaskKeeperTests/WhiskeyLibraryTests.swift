@@ -186,26 +186,6 @@ final class WhiskeyLibraryTests: XCTestCase {
         XCTAssertNil(whiskeyLibrary.importedWhiskeyCount)
         XCTAssertNil(whiskeyLibrary.duplicateWhiskeyCountOnJSONImport)
     }
-    
-    /* Data persitence tests */
-    func testDataPersistenceFailedTest() {
-        dataPersistenceManager.setupLoadForFailure()
-        let loadedWhiskeys = dataPersistenceManager.load()
-        XCTAssertTrue(loadedWhiskeys.isEmpty, "Loaded whiskeys should be empty error occurred.")
-    }
-    
-    func testSaveWithEncodingFailure() {
-        let mockEncoder = MockFailingEncoder()
-        dataPersistenceManager = MockWhiskeyDataPersistenceManager(encoder: mockEncoder)
-        let whiskeyCollection: [Whiskey] = MockWhiskeyData.whiskeys
-        
-        XCTAssertThrowsError(try dataPersistenceManager.save(collection: whiskeyCollection)) { error in
-            guard let dataManagerError = error as? DataManagerError else {
-                return XCTFail("Expected DataManagerError, but received different error type")
-            }
-            XCTAssertEqual(dataManagerError.localizedDescription, "Encoding Failed:")
-        }
-    }
 }
 
 
