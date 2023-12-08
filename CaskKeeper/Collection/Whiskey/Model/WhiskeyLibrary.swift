@@ -17,7 +17,11 @@ class WhiskeyLibrary {
     
     var collection = [Whiskey]() {
         didSet {
-            dataPersistenceManager.save(collection: collection)
+            do {
+              try dataPersistenceManager.save(collection: collection)
+            } catch {
+                print("Error Saving: \(error.localizedDescription)")
+            }
         }
     }
     
@@ -77,14 +81,22 @@ class WhiskeyLibrary {
     func updateImage(for whiskey: Whiskey, with imageData: Data?) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].imageData = imageData
-            dataPersistenceManager.save(collection: collection)
+            do {
+              try dataPersistenceManager.save(collection: collection)
+            } catch {
+                print("Error Saving: \(error.localizedDescription)")
+            }
         }
     }
     
     func addWhiskeyTasting(for whiskey: Whiskey, tasting: Whiskey.Taste) {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].tastingNotes.append(tasting)
-            dataPersistenceManager.save(collection: collection)
+            do {
+              try dataPersistenceManager.save(collection: collection)
+            } catch {
+                print("Error Saving: \(error.localizedDescription)")
+            }
         }
     }
     

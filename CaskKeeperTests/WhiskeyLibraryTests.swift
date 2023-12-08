@@ -18,7 +18,7 @@ final class WhiskeyLibraryTests: XCTestCase {
         dataPersistenceManager = MockWhiskeyDataPersistenceManager()
         whiskeyLibrary = WhiskeyLibrary(dataPersistence: dataPersistenceManager, isForTesting: false)
     }
-
+    
     override func tearDownWithError() throws {
         whiskeyLibrary = nil
         dataPersistenceManager = nil
@@ -28,7 +28,7 @@ final class WhiskeyLibraryTests: XCTestCase {
     func testInitializationWithTestingData() {
         let mockPersistence = MockWhiskeyDataPersistenceManager()
         let whiskeyLibrary = WhiskeyLibrary(dataPersistence: mockPersistence, isForTesting: true)
-
+        
         let collection = whiskeyLibrary.collection
         XCTAssertTrue(collection.contains(where: { $0.label == "Hammered" }), "Collection should contain 'Hammered' whiskey.")
         XCTAssertTrue(collection.contains(where: { $0.label == "Big Tower Whiskey" }), "Collection should contain 'Big Tower Whiskey'.")
@@ -44,7 +44,7 @@ final class WhiskeyLibraryTests: XCTestCase {
         XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.id1 }), "Collection should contain whiskey with id1.")
         XCTAssertTrue(collection.contains(where: { $0.id == dataPersistenceManager.id2 }), "Collection should contain whiskey with id2.")
     }
-
+    
     func testWhiskeysAreNotNil() {
         XCTAssertNotNil(whiskeyLibrary?.collection)
     }
@@ -157,7 +157,7 @@ final class WhiskeyLibraryTests: XCTestCase {
     func testProcessImportedWhiskeys() {
         let whiskey1ID = UUID(uuidString: "1ea050f2-1ab1-5e22-bc76-cb86520f4678")!
         let initialCount = 2
-
+        
         let whiskeys = [
             Whiskey(id: whiskey1ID, label: "testLabel", bottle: "testBottle", purchasedDate: nil, dateOpened: nil, locationPurchased: nil, image: nil, proof: 100, bottleState: .opened, style: .bourbon, finish: nil, origin: .us, age: nil, price: nil, tastingNotes: []),
             Whiskey(id: UUID(), label: "testLabel2", bottle: "testBottle2", purchasedDate: nil, dateOpened: nil, locationPurchased: nil, image: nil, proof: 110, bottleState: .opened, style: .bourbon, finish: nil, origin: .us, age: nil, price: nil, tastingNotes: [])
@@ -172,12 +172,12 @@ final class WhiskeyLibraryTests: XCTestCase {
             
             XCTAssertEqual(self.whiskeyLibrary.importedWhiskeyCount, 1, "Should have imported one new whiskey.")
             XCTAssertEqual(self.whiskeyLibrary.duplicateWhiskeyCountOnJSONImport, 1, "Should have found one duplicate whiskey.")
-
+            
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1, handler: nil)
     }
-
+    
     func testSetCountsToNil() {
         whiskeyLibrary.importedWhiskeyCount = 5
         whiskeyLibrary.duplicateWhiskeyCountOnJSONImport = 3
@@ -194,10 +194,18 @@ final class WhiskeyLibraryTests: XCTestCase {
         XCTAssertTrue(loadedWhiskeys.isEmpty, "Loaded whiskeys should be empty error occurred.")
     }
     
-    func testDataPersistenceSave() {
+    func testSaveWithEncodingFailure() {
+        let mockEncoder = MockFailingEncoder()
+        dataPersistenceManager = MockWhiskeyDataPersistenceManager(encoder: mockEncoder)
+        let whiskeyCollection: [Whiskey] = MockWhiskeyData.whiskeys
         
+        XCTAssertThrowsError(try dataPersistenceManager.save(collection: whiskeyCollection)) { error in
+            guard let dataManagerError = error as? DataManagerError else {
+                return XCTFail("Expected DataManagerError, but received different error type")
+            }
+            XCTAssertEqual(dataManagerError.localizedDescription, "Encoding Failed:")
+        }
     }
-    
 }
 
 

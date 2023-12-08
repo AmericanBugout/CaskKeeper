@@ -18,13 +18,17 @@ class MockWhiskeyDataPersistenceManager: WhiskeyPersisting {
     let id1 = UUID(uuidString: "1ea050f2-1ab1-5e22-bc76-cb86520f4678")!
     let id2 = UUID(uuidString: "2ea050f2-1ab1-5e22-bc76-cb86520f4678")!
     
-    var expectedResults: [Whiskey]?
+    let encoder: WhiskeyEncoding
     
-    
-    func save(collection: [CaskKeeper.Whiskey]) {
-       saveIsCalled = true
+    init(encoder: WhiskeyEncoding = PropertyListEncoderWrapper()) {
+        self.encoder = encoder
     }
     
+    
+    func save(collection: [CaskKeeper.Whiskey]) throws {
+       saveIsCalled = true
+        _ = try encoder.encode(collection)
+    }
     
     // Is called when isForTesting is false.
     func load() -> [CaskKeeper.Whiskey] {

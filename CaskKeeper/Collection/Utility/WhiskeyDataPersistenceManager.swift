@@ -7,8 +7,19 @@
 
 import Foundation
 
+enum DataManagerError: Error, LocalizedError {
+    case encodingFailed
+    
+    var errorDescription: String? {
+        switch self {
+        case .encodingFailed:
+            return NSLocalizedString("Encoding Failed:", comment: "")
+        }
+    }
+}
+
 protocol WhiskeyPersisting {
-    func save(collection: [Whiskey])
+    func save(collection: [Whiskey]) throws
     func load() -> [Whiskey]
     func exportCollectionToJson(collection: [Whiskey], completion: @escaping (Result<URL, Error>) -> Void)
     func importWhiskeyCollectionFromJSON(fileURL: URL, completion: @escaping (Result<[Whiskey], Error>) -> Void )
@@ -31,13 +42,13 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
     }
     
     
-    func save(collection: [Whiskey]) {
+    func save(collection: [Whiskey]) throws {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(collection)
             try data.write(to: WhiskeyDataPersistenceManager.collectionsFileURL, options: .atomic)
         } catch {
-            print("Error Saving data: \(error.localizedDescription)")
+            throw DataManagerError.encodingFailed
         }
     }
     
@@ -47,7 +58,7 @@ class WhiskeyDataPersistenceManager: WhiskeyPersisting {
             let data = try Data(contentsOf: WhiskeyDataPersistenceManager.collectionsFileURL)
             print(String(data: data, encoding: .utf8) ?? "")
             let collection = try decoder.decode([Whiskey].self, from: data)
-            save(collection: collection)
+            try save(collection: collection)
             return collection
     
         } catch {

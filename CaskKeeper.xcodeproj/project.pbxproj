@@ -52,6 +52,8 @@
 		B33ED04B2B1EE921005851A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33ED04A2B1EE921005851A2 /* ContentView.swift */; };
 		B3433F842B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */; };
 		B3433F8E2B22BFE2001F8E1E /* MockWhiskeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */; };
+		B3433F902B22CA38001F8E1E /* MockEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */; };
+		B3433F922B22CB19001F8E1E /* PropertyListEncoderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F912B22CB19001F8E1E /* PropertyListEncoderWrapper.swift */; };
 		B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */; };
 		B38F3D1A2B12BF340009DF01 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F3D192B12BF340009DF01 /* ImageLoader.swift */; };
 		B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */; };
@@ -144,8 +146,11 @@
 		B320DF142B1561BB00D13064 /* AddWantedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWantedListView.swift; sourceTree = "<group>"; };
 		B331B6352B02AF7B008DE573 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		B33ED04A2B1EE921005851A2 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B33FF1672B22D20D00BBCE25 /* CaskKeeperTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaskKeeperTestPlan.xctestplan; sourceTree = SOURCE_ROOT; };
 		B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDataPersistenceTests.swift; sourceTree = "<group>"; };
 		B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyData.swift; sourceTree = "<group>"; };
+		B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEncoder.swift; sourceTree = "<group>"; };
+		B3433F912B22CB19001F8E1E /* PropertyListEncoderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListEncoderWrapper.swift; sourceTree = "<group>"; };
 		B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWantedWhiskeyView.swift; sourceTree = "<group>"; };
 		B38F3D192B12BF340009DF01 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowStateToggle.swift; sourceTree = "<group>"; };
@@ -155,7 +160,6 @@
 		B397311B2B1A93B600B5E147 /* EditListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditListView.swift; sourceTree = "<group>"; };
 		B397311D2B1A9F0A00B5E147 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 		B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyLibraryTests.swift; sourceTree = "<group>"; };
-		B3A877442B203A570084016C /* CaskKeeperTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CaskKeeperTests.xctestplan; sourceTree = SOURCE_ROOT; };
 		B3A877452B203D020084016C /* Resource.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resource.xcassets; sourceTree = "<group>"; };
 		B3A877472B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyDataPersistanceManager.swift; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
@@ -244,10 +248,10 @@
 		B3208FF62AFC9A2C004FED4B /* CaskKeeperTests */ = {
 			isa = PBXGroup;
 			children = (
+				B33FF1672B22D20D00BBCE25 /* CaskKeeperTestPlan.xctestplan */,
 				B3A877492B20F0950084016C /* Mock */,
 				B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */,
 				B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */,
-				B3A877442B203A570084016C /* CaskKeeperTests.xctestplan */,
 				B3A877452B203D020084016C /* Resource.xcassets */,
 			);
 			path = CaskKeeperTests;
@@ -339,6 +343,7 @@
 				B331B6352B02AF7B008DE573 /* DocumentPicker.swift */,
 				B32090332AFC9BCE004FED4B /* PHPickerRepresentable.swift */,
 				B3D2D9762B0C69510041DC7F /* DocumentExporter.swift */,
+				B3433F912B22CB19001F8E1E /* PropertyListEncoderWrapper.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			children = (
 				B3A877472B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift */,
 				B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */,
+				B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -653,6 +659,7 @@
 				B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */,
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
 				B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */,
+				B3433F922B22CB19001F8E1E /* PropertyListEncoderWrapper.swift in Sources */,
 				B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */,
 				B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */,
 				B3E5C0892B143AF8009949BB /* WantedListLibrary.swift in Sources */,
@@ -680,6 +687,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3433F8E2B22BFE2001F8E1E /* MockWhiskeyData.swift in Sources */,
+				B3433F902B22CA38001F8E1E /* MockEncoder.swift in Sources */,
 				B3A877482B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift in Sources */,
 				B3A877412B20335F0084016C /* WhiskeyLibraryTests.swift in Sources */,
 				B3433F842B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift in Sources */,
