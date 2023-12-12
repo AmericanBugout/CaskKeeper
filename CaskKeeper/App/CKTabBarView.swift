@@ -25,6 +25,13 @@ struct CKTabBarView: View {
             .tabItem { Image(systemName: "scope") }
             
             NavigationStack {
+                StatisticsView()
+                    .navigationTitle("Statistics")
+                    .specialNavBar()
+            }
+            .tabItem { Image(systemName: "chart.pie") }
+            
+            NavigationStack {
                 SettingsView()
             }
             .tabItem { Image(systemName: "gear") }

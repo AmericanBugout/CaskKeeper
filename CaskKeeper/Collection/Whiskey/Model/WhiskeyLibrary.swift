@@ -48,6 +48,27 @@ class WhiskeyLibrary {
         .count
     }
     
+    var avgProof: Double {
+        let totalProof = collection.reduce(0, {$0 + $1.proof})
+        return !collection.isEmpty ? Double(totalProof) / Double(collectionCount) : 0.0
+    }
+    
+    var avgAge: Double {
+        let validItems = collection.filter { $0.age != nil && $0.age ?? 0 > 0 }
+        let totalAge = validItems.reduce(0, { $0 + ($1.age ?? 0) })
+        return !validItems.isEmpty ? Double(totalAge) / Double(validItems.count) : 0.0
+    }
+    
+    var mostExpensiveWhiskey: Whiskey? {
+        return collection.max { ($0.price ?? 0) < ($1.price ?? 0) }
+    }
+    
+    var leastExpensiveWhiskey: Whiskey? {
+        return collection
+            .filter { ($0.price ?? 0) > 0 }
+            .min { ($0.price ?? 0) < ($1.price ?? 0) }
+    }
+    
     init(dataPersistence: WhiskeyPersisting = WhiskeyDataPersistenceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
         

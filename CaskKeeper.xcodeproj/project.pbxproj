@@ -65,6 +65,11 @@
 		B3A877412B20335F0084016C /* WhiskeyLibraryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */; };
 		B3A877462B203D020084016C /* Resource.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A877452B203D020084016C /* Resource.xcassets */; };
 		B3A877482B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A877472B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift */; };
+		B3A9ADE42B28DF0F00C389B8 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADE32B28DF0F00C389B8 /* StatisticsView.swift */; };
+		B3A9ADE82B28EA7800C389B8 /* AverageProofRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADE72B28EA7800C389B8 /* AverageProofRowView.swift */; };
+		B3A9ADEA2B29038B00C389B8 /* AverageAgeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */; };
+		B3A9ADEC2B2909EA00C389B8 /* MostExpensiveRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */; };
+		B3A9ADEE2B290ED300C389B8 /* LeastExpensiveRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */; };
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
 		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C562832B1E958300ABCA77 /* AddWhiskeysToListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */; };
@@ -163,6 +168,11 @@
 		B3A877402B20335F0084016C /* WhiskeyLibraryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyLibraryTests.swift; sourceTree = "<group>"; };
 		B3A877452B203D020084016C /* Resource.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Resource.xcassets; sourceTree = "<group>"; };
 		B3A877472B20EE540084016C /* MockWhiskeyDataPersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyDataPersistanceManager.swift; sourceTree = "<group>"; };
+		B3A9ADE32B28DF0F00C389B8 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		B3A9ADE72B28EA7800C389B8 /* AverageProofRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageProofRowView.swift; sourceTree = "<group>"; };
+		B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageAgeRowView.swift; sourceTree = "<group>"; };
+		B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostExpensiveRowView.swift; sourceTree = "<group>"; };
+		B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeastExpensiveRowView.swift; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
 		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWhiskeysToListView.swift; sourceTree = "<group>"; };
@@ -230,6 +240,7 @@
 			children = (
 				B32090582AFC9D4F004FED4B /* Info.plist */,
 				B3E5C07E2B140A37009949BB /* App */,
+				B3A9ADE22B28DEFC00C389B8 /* Stats */,
 				B3E5C07F2B140AF8009949BB /* WantedList */,
 				B3E5C07D2B140A14009949BB /* Collection */,
 				B32090122AFC9B3B004FED4B /* Extensions */,
@@ -388,6 +399,18 @@
 				B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		B3A9ADE22B28DEFC00C389B8 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B3A9ADE32B28DF0F00C389B8 /* StatisticsView.swift */,
+				B3A9ADE72B28EA7800C389B8 /* AverageProofRowView.swift */,
+				B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */,
+				B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */,
+				B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		B3B9B34B2B04358800EE1A7F /* DetailViews */ = {
@@ -635,6 +658,7 @@
 				B39485A52B152A5B00930ED7 /* WantListDataPersistenceDataManager.swift in Sources */,
 				B3E5C0872B143803009949BB /* WantedList.swift in Sources */,
 				B320904F2AFC9BCE004FED4B /* WhiskeyDetailView.swift in Sources */,
+				B3A9ADE42B28DF0F00C389B8 /* StatisticsView.swift in Sources */,
 				B3D2D9B12B0D32A80041DC7F /* ImportWhiskeyCollectionJSONView.swift in Sources */,
 				B31D71442B054CCC00CA01E0 /* CSVOriginView.swift in Sources */,
 				B31D71422B05420900CA01E0 /* CSVStyleView.swift in Sources */,
@@ -661,16 +685,20 @@
 				B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */,
 				B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */,
 				B320901E2AFC9BAB004FED4B /* FlavorCatalog.swift in Sources */,
+				B3A9ADEC2B2909EA00C389B8 /* MostExpensiveRowView.swift in Sources */,
 				B397311E2B1A9F0A00B5E147 /* ListRowView.swift in Sources */,
 				B3433F922B22CB19001F8E1E /* PropertyListEncoderWrapper.swift in Sources */,
+				B3A9ADE82B28EA7800C389B8 /* AverageProofRowView.swift in Sources */,
 				B3E5C0812B140B2F009949BB /* CKTabBarView.swift in Sources */,
 				B397311C2B1A93B600B5E147 /* EditListView.swift in Sources */,
 				B3E5C0892B143AF8009949BB /* WantedListLibrary.swift in Sources */,
 				B320904A2AFC9BCE004FED4B /* Style.swift in Sources */,
+				B3A9ADEE2B290ED300C389B8 /* LeastExpensiveRowView.swift in Sources */,
 				B32090472AFC9BCE004FED4B /* PHPickerRepresentable.swift in Sources */,
 				B3CE924D2B1980BD00662E24 /* ListDetailView.swift in Sources */,
 				B32090492AFC9BCE004FED4B /* Age.swift in Sources */,
 				B320904B2AFC9BCE004FED4B /* Whiskey.swift in Sources */,
+				B3A9ADEA2B29038B00C389B8 /* AverageAgeRowView.swift in Sources */,
 				B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */,
 				B39485A72B1536F100930ED7 /* UserCreatedList.swift in Sources */,
 				B32090562AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift in Sources */,
