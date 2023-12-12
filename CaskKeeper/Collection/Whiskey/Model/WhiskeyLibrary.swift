@@ -26,48 +26,6 @@ class WhiskeyLibrary {
     }
     
     var filteredWhiskeys: [Whiskey] = []
-
-    var collectionCount: Int { return collection.count }
-    
-    var sealedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .sealed
-        }.count
-    }
-    
-    var openedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .opened
-        }.count
-    }
-    
-    var finishedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .finished
-        }
-        .count
-    }
-    
-    var avgProof: Double {
-        let totalProof = collection.reduce(0, {$0 + $1.proof})
-        return !collection.isEmpty ? Double(totalProof) / Double(collectionCount) : 0.0
-    }
-    
-    var avgAge: Double {
-        let validItems = collection.filter { $0.age != nil && $0.age ?? 0 > 0 }
-        let totalAge = validItems.reduce(0, { $0 + ($1.age ?? 0) })
-        return !validItems.isEmpty ? Double(totalAge) / Double(validItems.count) : 0.0
-    }
-    
-    var mostExpensiveWhiskey: Whiskey? {
-        return collection.max { ($0.price ?? 0) < ($1.price ?? 0) }
-    }
-    
-    var leastExpensiveWhiskey: Whiskey? {
-        return collection
-            .filter { ($0.price ?? 0) > 0 }
-            .min { ($0.price ?? 0) < ($1.price ?? 0) }
-    }
     
     init(dataPersistence: WhiskeyPersisting = WhiskeyDataPersistenceManager.shared, isForTesting: Bool = false) {
         dataPersistenceManager = dataPersistence
@@ -81,7 +39,7 @@ class WhiskeyLibrary {
             ]
         } else {
             collection = dataPersistence.load()
-            filterWhiskey(state: .all)
+            sortCollection()
         }
     }
     
@@ -208,4 +166,75 @@ class WhiskeyLibrary {
             filteredWhiskeys = collection.filter({$0.bottleState == .finished})
         }
     }
+}
+
+
+extension WhiskeyLibrary {
+
+    var collectionCount: Int { return collection.count }
+    
+    var sealedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .sealed
+        }.count
+    }
+    
+    var openedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .opened
+        }.count
+    }
+    
+    var finishedCount: Int {
+        collection.filter { whiskey in
+            whiskey.bottleState == .finished
+        }
+        .count
+    }
+    
+    var avgProof: Double {
+        let totalProof = collection.reduce(0, {$0 + $1.proof})
+        return !collection.isEmpty ? Double(totalProof) / Double(collectionCount) : 0.0
+    }
+    
+    var avgAge: Double {
+        let validItems = collection.filter { $0.age != nil && $0.age ?? 0 > 0 }
+        let totalAge = validItems.reduce(0, { $0 + ($1.age ?? 0) })
+        return !validItems.isEmpty ? Double(totalAge) / Double(validItems.count) : 0.0
+    }
+    
+    var mostExpensiveWhiskey: Whiskey? {
+        return collection.max { ($0.price ?? 0) < ($1.price ?? 0) }
+    }
+    
+    var leastExpensiveWhiskey: Whiskey? {
+        return collection
+            .filter { ($0.price ?? 0) > 0 }
+            .min { ($0.price ?? 0) < ($1.price ?? 0) }
+    }
+    
+    var highestRated: Whiskey? {
+        return collection
+            .filter { $0.avgScore > 0 }
+            .max { $0.avgScore < $1.avgScore }
+    }
+    
+    var mostTastes: Whiskey? {
+        return collection
+            .filter { $0.tastingNotes.count > 0 }
+            .max { $0.tastingNotes.count < $1.tastingNotes.count}
+    }
+    
+    var longestOpen: Whiskey? {
+        return collection
+            .filter { $0.dateOpened != nil }
+            .sorted {
+                guard let dateOpened1 = $0.dateOpened, let dateOpened2 = $1.dateOpened else {
+                    return false
+                }
+                return dateOpened1 < dateOpened2
+            }
+            .first
+    }
+    
 }

@@ -22,6 +22,7 @@ struct AverageAgeRowView: View {
             Spacer()
             Text(ageText)
                 .font(.customLight(size: 20))
+                .foregroundStyle(.accent)
         }
     }
 }

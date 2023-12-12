@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var isSheetViewShowing = false
     @State private var importCSVView = false
     @State private var selection = 0
-    @State private var selectedFilter: FilterState = .all
     
     var body: some View {
         VStack {
@@ -50,12 +49,8 @@ struct ContentView: View {
                         .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 10))
                     }
                 } header: {
-                    if whiskeyLibrary.collection.isEmpty {
-                        EmptyView()
-                    } else {
-                        Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
-                            .font(.customLight(size: 18))
-                    }
+                    Text("Whiskey Collection")
+                        .font(.customLight(size: 18))
                 }
             }
             .onAppear {

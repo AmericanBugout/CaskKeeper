@@ -17,6 +17,8 @@ struct AverageProofRowView: View {
             Spacer()
             Text(proof, format: .number.precision(.fractionLength(0...1)))
                 .font(.customLight(size: 20))
+                .foregroundStyle(.accent)
+
         }
     }
 }

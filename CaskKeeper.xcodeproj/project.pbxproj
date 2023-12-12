@@ -70,6 +70,9 @@
 		B3A9ADEA2B29038B00C389B8 /* AverageAgeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */; };
 		B3A9ADEC2B2909EA00C389B8 /* MostExpensiveRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */; };
 		B3A9ADEE2B290ED300C389B8 /* LeastExpensiveRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */; };
+		B3A9ADF02B29129800C389B8 /* HighestRatedRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADEF2B29129800C389B8 /* HighestRatedRowView.swift */; };
+		B3A9ADF22B29163500C389B8 /* MostTastesRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADF12B29163500C389B8 /* MostTastesRowView.swift */; };
+		B3A9ADF42B291A5A00C389B8 /* LongestOpenedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9ADF32B291A5A00C389B8 /* LongestOpenedView.swift */; };
 		B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */; };
 		B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B9B3532B04896F00EE1A7F /* SettingsView.swift */; };
 		B3C562832B1E958300ABCA77 /* AddWhiskeysToListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */; };
@@ -173,6 +176,9 @@
 		B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AverageAgeRowView.swift; sourceTree = "<group>"; };
 		B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostExpensiveRowView.swift; sourceTree = "<group>"; };
 		B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeastExpensiveRowView.swift; sourceTree = "<group>"; };
+		B3A9ADEF2B29129800C389B8 /* HighestRatedRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighestRatedRowView.swift; sourceTree = "<group>"; };
+		B3A9ADF12B29163500C389B8 /* MostTastesRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MostTastesRowView.swift; sourceTree = "<group>"; };
+		B3A9ADF32B291A5A00C389B8 /* LongestOpenedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongestOpenedView.swift; sourceTree = "<group>"; };
 		B3B9B34E2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWhiskeyCSVView.swift; sourceTree = "<group>"; };
 		B3B9B3532B04896F00EE1A7F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		B3C562822B1E958300ABCA77 /* AddWhiskeysToListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWhiskeysToListView.swift; sourceTree = "<group>"; };
@@ -409,6 +415,9 @@
 				B3A9ADEB2B2909EA00C389B8 /* MostExpensiveRowView.swift */,
 				B3A9ADED2B290ED300C389B8 /* LeastExpensiveRowView.swift */,
 				B3A9ADE92B29038B00C389B8 /* AverageAgeRowView.swift */,
+				B3A9ADEF2B29129800C389B8 /* HighestRatedRowView.swift */,
+				B3A9ADF12B29163500C389B8 /* MostTastesRowView.swift */,
+				B3A9ADF32B291A5A00C389B8 /* LongestOpenedView.swift */,
 			);
 			path = Stats;
 			sourceTree = "<group>";
@@ -651,6 +660,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A9ADF22B29163500C389B8 /* MostTastesRowView.swift in Sources */,
 				B32090502AFC9BCE004FED4B /* WhiskeyEditTextField.swift in Sources */,
 				B3E5C0832B142736009949BB /* WantedListView.swift in Sources */,
 				B32090142AFC9B66004FED4B /* EnvironmentValues+Ext.swift in Sources */,
@@ -676,11 +686,13 @@
 				B32090552AFC9BCE004FED4B /* WhiskeyDetailRowView.swift in Sources */,
 				B320904D2AFC9BCE004FED4B /* WhiskeyEditView.swift in Sources */,
 				B320DF152B1561BB00D13064 /* AddWantedListView.swift in Sources */,
+				B3A9ADF42B291A5A00C389B8 /* LongestOpenedView.swift in Sources */,
 				B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */,
 				B32090522AFC9BCE004FED4B /* TasteRowView.swift in Sources */,
 				B39485A92B153AF900930ED7 /* WhiskeyItem.swift in Sources */,
 				B31D71482B0560D300CA01E0 /* CSVImportView.swift in Sources */,
 				B3208FE72AFC9A2A004FED4B /* CaskKeeperApp.swift in Sources */,
+				B3A9ADF02B29129800C389B8 /* HighestRatedRowView.swift in Sources */,
 				B331B6362B02AF7B008DE573 /* DocumentPicker.swift in Sources */,
 				B3B9B3542B04896F00EE1A7F /* SettingsView.swift in Sources */,
 				B3C5B2B62AFFF16D00A75544 /* ScoreGaugeStyle.swift in Sources */,

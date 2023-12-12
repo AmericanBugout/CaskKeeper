@@ -1,5 +1,5 @@
 //
-//  LeastExpensiveRowView.swift
+//  LongestOpenedVIew.swift
 //  CaskKeeper
 //
 //  Created by Jon Oryhan on 12/12/23.
@@ -7,20 +7,26 @@
 
 import SwiftUI
 
-struct LeastExpensiveRowView: View {
+struct LongestOpenedView: View {
     let label: String
     let bottle: String
-    let price: Double
+    let date: Date
+    
+    private var formattedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yy" // Example of a shorter date format
+        return formatter.string(from: date)
+    }
     
     var body: some View {
         HStack {
-            Text("Least Expensive")
+            Text("Longest Open")
                 .font(.customRegular(size: 20))
             Spacer()
             VStack(alignment: .trailing, spacing: 2) {
                 Text(label)
                 Text(bottle)
-                Text("$\(price, format: .number.precision(.fractionLength(0...2)))")
+                Text("Opened - \(formattedDate)")
                     .foregroundStyle(.accent)
             }
             .font(.customLight(size: 20))
@@ -29,5 +35,5 @@ struct LeastExpensiveRowView: View {
 }
 
 #Preview {
-    LeastExpensiveRowView(label: "Rittenhouse", bottle: "Straight Rye", price: 29.99)
+    LongestOpenedView(label: "Russels", bottle: "SlappStick", date: Date())
 }
