@@ -79,6 +79,7 @@
 		B3E5C0852B142BED009949BB /* Font+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0842B142BED009949BB /* Font+Ext.swift */; };
 		B3E5C0872B143803009949BB /* WantedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0862B143803009949BB /* WantedList.swift */; };
 		B3E5C0892B143AF8009949BB /* WantedListLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E5C0882B143AF8009949BB /* WantedListLibrary.swift */; };
+		B3FAF3622B28261E0016FFB9 /* FitlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAF3612B28261E0016FFB9 /* FitlerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,7 +147,7 @@
 		B320DF142B1561BB00D13064 /* AddWantedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWantedListView.swift; sourceTree = "<group>"; };
 		B331B6352B02AF7B008DE573 /* DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPicker.swift; sourceTree = "<group>"; };
 		B33ED04A2B1EE921005851A2 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B33FF1672B22D20D00BBCE25 /* CaskKeeperTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = CaskKeeperTestPlan.xctestplan; sourceTree = SOURCE_ROOT; };
+		B33FF1672B22D20D00BBCE25 /* CaskKeeperTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CaskKeeperTestPlan.xctestplan; sourceTree = SOURCE_ROOT; };
 		B3433F832B216BA9001F8E1E /* WhiskeyDataPersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDataPersistenceTests.swift; sourceTree = "<group>"; };
 		B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyData.swift; sourceTree = "<group>"; };
 		B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEncoder.swift; sourceTree = "<group>"; };
@@ -176,6 +177,7 @@
 		B3E5C0842B142BED009949BB /* Font+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Ext.swift"; sourceTree = "<group>"; };
 		B3E5C0862B143803009949BB /* WantedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantedList.swift; sourceTree = "<group>"; };
 		B3E5C0882B143AF8009949BB /* WantedListLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WantedListLibrary.swift; sourceTree = "<group>"; };
+		B3FAF3612B28261E0016FFB9 /* FitlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitlerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +375,7 @@
 				B3B9B3532B04896F00EE1A7F /* SettingsView.swift */,
 				B3D2D9742B0C5A6F0041DC7F /* ExportWhiskeyCollectionJSONView.swift */,
 				B3D2D9B02B0D32A80041DC7F /* ImportWhiskeyCollectionJSONView.swift */,
+				B3FAF3612B28261E0016FFB9 /* FitlerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */,
 				B39485A72B1536F100930ED7 /* UserCreatedList.swift in Sources */,
 				B32090562AFC9BCE004FED4B /* WhiskeyTasteDetailView.swift in Sources */,
+				B3FAF3622B28261E0016FFB9 /* FitlerView.swift in Sources */,
 				B3C562832B1E958300ABCA77 /* AddWhiskeysToListView.swift in Sources */,
 				B32090462AFC9BCE004FED4B /* ImagePickerRepresentable.swift in Sources */,
 				B32090512AFC9BCE004FED4B /* WhiskeyRowView.swift in Sources */,

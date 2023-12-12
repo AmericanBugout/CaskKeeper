@@ -11,52 +11,60 @@ struct ContentView: View {
     @Environment(\.whiskeyLibrary) private var whiskeyLibrary
     @State private var isSheetViewShowing = false
     @State private var importCSVView = false
+    @State private var selection = 0
+    @State private var selectedFilter: FilterState = .all
     
     var body: some View {
-        List {
-            Section {
-                if whiskeyLibrary.collection.isEmpty {
-                    ZStack {
-                        Text("No whiskeys in your collection.")
-                            .font(.customLight(size: 22))
-                            .foregroundStyle(.aluminum)
-                            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-                    }
-                    .frame(height: 500)
-                    .listRowSeparator(.hidden)
-                } else {
-                    ForEach(whiskeyLibrary.collection) { whiskey in
+        VStack {
+            List {
+                FilterView(selection: $selection, onSelection: { state in
+                    whiskeyLibrary.filterWhiskey(state: state)
+                })
+                .listRowSeparator(.hidden)
+                Section {
+                    if whiskeyLibrary.collection.isEmpty {
                         ZStack {
-                            NavigationLink {
-                                WhiskeyDetailView(whiskey: whiskey)
-                            } label: {
-                                EmptyView()
-                            }
-                            .opacity(0)
-                            
-                            WhiskeyRowView(whiskey: whiskey)
+                            Text("No whiskeys in your collection.")
+                                .font(.customLight(size: 22))
+                                .foregroundStyle(.aluminum)
+                                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         }
-                        .listRowBackground(Color.clear)
+                        .frame(height: 500)
+                        .listRowSeparator(.hidden)
+                    } else {
+                        ForEach(whiskeyLibrary.filteredWhiskeys) { whiskey in
+                            ZStack {
+                                NavigationLink {
+                                    WhiskeyDetailView(whiskey: whiskey)
+                                } label: {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                                
+                                WhiskeyRowView(whiskey: whiskey)
+                            }
+                            .listRowBackground(Color.clear)
+                        }
+                        .onDelete(perform: whiskeyLibrary.deleteAtIndex)
+                        .listRowSeparator(.hidden, edges: .all)
+                        .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 10))
                     }
-                    .onDelete(perform: whiskeyLibrary.deleteAtIndex)
-                    .listRowSeparator(.hidden, edges: .all)
-                    .listRowInsets(.init(top: 5, leading: 5, bottom: 5, trailing: 10))
-                }
-            } header: {
-                if whiskeyLibrary.collection.isEmpty {
-                    EmptyView()
-                } else {
-                    Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
-                        .font(.customLight(size: 18))
+                } header: {
+                    if whiskeyLibrary.collection.isEmpty {
+                        EmptyView()
+                    } else {
+                        Text("Whiskey Collection (\(whiskeyLibrary.collectionCount))")
+                            .font(.customLight(size: 18))
+                    }
                 }
             }
+            .onAppear {
+                whiskeyLibrary.sortCollection()
+            }
+            .specialNavBar()
+            .listStyle(.plain)
+            .listRowSpacing(10)
         }
-        .onAppear {
-            whiskeyLibrary.sortCollection()
-        }
-        .specialNavBar()
-        .listStyle(.plain)
-        .listRowSpacing(10)
         .sheet(isPresented: $isSheetViewShowing) {
             AddWhiskeyView()
         }
@@ -72,32 +80,6 @@ struct ContentView: View {
                         .font(.customRegular(size: 16))
                     }
                 }
-                
-            }
-            
-            ToolbarItem(placement: .cancellationAction) {
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Sealed:")
-                            .font(.customLight(size: 18))
-                        Text("\(whiskeyLibrary.sealedCount)")
-                            .font(.customBold(size: 18))
-                            .foregroundStyle(Color.aluminum)
-                            .bold()
-                        Text("Opened:")
-                            .font(.customLight(size: 18))
-                            .foregroundStyle(Color.regularGreen)
-                        Text("\(whiskeyLibrary.openedCount)")
-                            .font(.customBold(size: 18))
-                            .bold()
-                        Text("Finished:")
-                            .foregroundStyle(Color.accentColor)
-                            .font(.customLight(size: 18))
-                        Text("\(whiskeyLibrary.finishedCount)")
-                            .font(.customBold(size: 18))
-                            .bold()
-                    }
-                }
             }
         }
         
@@ -105,7 +87,11 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+            .specialNavBar()
+            .navigationTitle("Collection")
+    }
 }
 
 struct SpecialNavBar: ViewModifier {

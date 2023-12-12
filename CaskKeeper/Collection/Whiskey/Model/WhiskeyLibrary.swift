@@ -18,13 +18,15 @@ class WhiskeyLibrary {
     var collection = [Whiskey]() {
         didSet {
             do {
-              try dataPersistenceManager.save(collection: collection)
+                try dataPersistenceManager.save(collection: collection)
             } catch {
                 print("Error Saving: \(error.localizedDescription)")
             }
         }
     }
     
+    var filteredWhiskeys: [Whiskey] = []
+
     var collectionCount: Int { return collection.count }
     
     var sealedCount: Int {
@@ -82,7 +84,7 @@ class WhiskeyLibrary {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].imageData = imageData
             do {
-              try dataPersistenceManager.save(collection: collection)
+                try dataPersistenceManager.save(collection: collection)
             } catch {
                 print("Error Saving: \(error.localizedDescription)")
             }
@@ -93,7 +95,7 @@ class WhiskeyLibrary {
         if let index = collection.firstIndex(where: {$0.id == whiskey.id}) {
             collection[index].tastingNotes.append(tasting)
             do {
-              try dataPersistenceManager.save(collection: collection)
+                try dataPersistenceManager.save(collection: collection)
             } catch {
                 print("Error Saving: \(error.localizedDescription)")
             }
@@ -172,4 +174,16 @@ class WhiskeyLibrary {
         collection.sort(by: { $0.label < $1.label })
     }
     
+    func filterWhiskey(state: FilterState) {
+        switch state {
+        case .all:
+            filteredWhiskeys = collection.sorted(by: {$0.label < $1.label })
+        case .opened:
+            filteredWhiskeys = collection.filter({$0.bottleState == .opened})
+        case .sealed:
+            filteredWhiskeys = collection.filter({$0.bottleState == .sealed})
+        case .finished:
+            filteredWhiskeys = collection.filter({$0.bottleState == .finished})
+        }
+    }
 }
