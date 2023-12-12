@@ -60,6 +60,7 @@ class WhiskeyLibrary {
             ]
         } else {
             collection = dataPersistence.load()
+            filterWhiskey(state: .all)
         }
     }
     
