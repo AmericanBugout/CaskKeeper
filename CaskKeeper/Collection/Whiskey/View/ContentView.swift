@@ -17,7 +17,7 @@ struct ContentView: View {
         VStack {
             List {
                 FilterView(selection: $selection, onSelection: { state in
-                    whiskeyLibrary.filterWhiskey(state: state)
+                    whiskeyLibrary.currentFilter = state
                 })
                 .listRowSeparator(.hidden)
                 Section {
