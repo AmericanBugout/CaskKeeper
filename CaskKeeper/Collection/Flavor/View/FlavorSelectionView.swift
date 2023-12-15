@@ -13,7 +13,9 @@ struct FlavorSelectionView: View {
     @Environment(\.flavorCatalog) private var flavorCatalog
     
     @Binding var searchString: String
-        
+    
+    @State private var isSearching: Bool = false
+    
     private let columns: [GridItem] = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -74,6 +76,11 @@ struct FlavorSelectionView: View {
     private func addFlavors() {
         dismiss()
     }
+    
+    private func dismissKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        isSearching = false
+    }
 }
 
 struct FlavorCell: View {
@@ -91,7 +98,3 @@ struct FlavorCell: View {
             .cornerRadius(8)
     }
 }
-
-//#Preview {
-//    FlavorSelectionView()
-//}
