@@ -36,6 +36,7 @@ struct FlavorSelectionView: View {
                                 .onTapGesture {
                                     withAnimation(Animation.smooth(duration: 0.5)) {
                                         flavorCatalog.toggleFlavor(flavor)
+                                        dismissKeyboard()
                                     }
                                 }
                         }
