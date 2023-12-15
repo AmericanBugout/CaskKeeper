@@ -13,7 +13,7 @@ struct CSVOriginView: View {
 
     var body: some View {
         HStack {
-            Text("style")
+            Text("origin")
                 .frame(width: 100, alignment: .leading)
                 .font(.customRegular(size: 16))
                 .foregroundStyle(Color.accentColor)

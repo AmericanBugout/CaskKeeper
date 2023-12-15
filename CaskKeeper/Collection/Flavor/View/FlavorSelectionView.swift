@@ -57,7 +57,7 @@ struct FlavorSelectionView: View {
             }
             .padding()
         }
-        .searchable(text: $searchString, placement: .navigationBarDrawer(displayMode: .always), prompt: Text("Search Flavor"))
+        .searchable(text: $searchString, prompt: Text("Search Flavor"))
         .navigationTitle("Add Flavor Notes")
         .toolbar {
             addButton
