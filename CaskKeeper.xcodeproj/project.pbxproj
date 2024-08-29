@@ -54,6 +54,7 @@
 		B3433F8E2B22BFE2001F8E1E /* MockWhiskeyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */; };
 		B3433F902B22CA38001F8E1E /* MockEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */; };
 		B3433F922B22CB19001F8E1E /* PropertyListEncoderWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3433F912B22CB19001F8E1E /* PropertyListEncoderWrapper.swift */; };
+		B3649EEA2C81400200D4C143 /* RandomPourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649EE92C81400200D4C143 /* RandomPourView.swift */; };
 		B387E41A2B1BEC7700795599 /* EditWantedWhiskeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */; };
 		B38F3D1A2B12BF340009DF01 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38F3D192B12BF340009DF01 /* ImageLoader.swift */; };
 		B39193C22B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */; };
@@ -160,6 +161,7 @@
 		B3433F8D2B22BFE2001F8E1E /* MockWhiskeyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWhiskeyData.swift; sourceTree = "<group>"; };
 		B3433F8F2B22CA38001F8E1E /* MockEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEncoder.swift; sourceTree = "<group>"; };
 		B3433F912B22CB19001F8E1E /* PropertyListEncoderWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListEncoderWrapper.swift; sourceTree = "<group>"; };
+		B3649EE92C81400200D4C143 /* RandomPourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPourView.swift; sourceTree = "<group>"; };
 		B387E4192B1BEC7700795599 /* EditWantedWhiskeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditWantedWhiskeyView.swift; sourceTree = "<group>"; };
 		B38F3D192B12BF340009DF01 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		B39193C12B01D07100B53767 /* WhiskeyDetailRowStateToggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiskeyDetailRowStateToggle.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 				B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */,
 				B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */,
 				B3E5C0802B140B2F009949BB /* CKTabBarView.swift */,
+				B3649EE92C81400200D4C143 /* RandomPourView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				B3D2D9772B0C69510041DC7F /* DocumentExporter.swift in Sources */,
 				B31D71402B053FED00CA01E0 /* CSVInfoValueRow.swift in Sources */,
 				B3B9B34F2B0435F800EE1A7F /* ImportWhiskeyCSVView.swift in Sources */,
+				B3649EEA2C81400200D4C143 /* RandomPourView.swift in Sources */,
 				B320901D2AFC9BAB004FED4B /* Flavor.swift in Sources */,
 				B320904E2AFC9BCE004FED4B /* AddWhiskeyNote.swift in Sources */,
 				B32090482AFC9BCE004FED4B /* WhiskeyLibrary.swift in Sources */,

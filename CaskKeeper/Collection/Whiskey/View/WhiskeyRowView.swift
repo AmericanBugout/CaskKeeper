@@ -42,14 +42,14 @@ struct WhiskeyRowView: View {
             HStack {
                 VStack(alignment: .leading, spacing: 4){
                     Text(whiskey.label)
-                        .font(.customRegular(size: 20))
+                        .font(.customRegular(size: 16))
                         .lineLimit(1)
                         .font(.headline)
                         .foregroundStyle(Color.aluminum)
                         .frame(width: 125, alignment: .leading)
                     
                     Text(whiskey.bottle)
-                        .font(.customLight(size: 18))
+                        .font(.customLight(size: 14))
                         .lineLimit(1)
                         .foregroundStyle(Color.accentColor)
                         .frame(width: 125, alignment: .leading)

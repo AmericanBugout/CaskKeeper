@@ -13,12 +13,21 @@ struct CKTabBarView: View {
             NavigationStack {
                 ContentView()
                     .navigationTitle("Collection")
+                    .navigationBarTitleDisplayMode(.inline)
+
             }
             .tabItem { Image(systemName: "list.dash") }
             
             NavigationStack {
+                    RandomPourView()
+                    .navigationBarTitleDisplayMode(.inline)
+            }
+            .tabItem { Image(systemName: "questionmark.circle") }
+            
+            NavigationStack {
                 WantedListView()
                     .navigationTitle("Wanted Lists")
+                    .navigationBarTitleDisplayMode(.inline)
                     .specialNavBar()
                 
             }
@@ -27,15 +36,18 @@ struct CKTabBarView: View {
             NavigationStack {
                 StatisticsView()
                     .navigationTitle("Statistics")
+                    .navigationBarTitleDisplayMode(.inline)
                     .specialNavBar()
             }
             .tabItem { Image(systemName: "chart.pie") }
             
             NavigationStack {
                 SettingsView()
+                    .navigationBarTitleDisplayMode(.inline)
             }
             .tabItem { Image(systemName: "gear") }
         }
+
     }
 }
 
