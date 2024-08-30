@@ -178,6 +178,30 @@ class WhiskeyLibrary {
             filteredWhiskeys = collection.filter({$0.bottleState == .finished})
         }
     }
+    
+    func getRandomWhiskey(state: FilterState) -> (label: String, bottle: String)? {
+        let filteredWhiskeys: [Whiskey]
+        
+        switch state {
+        case .all:
+            filteredWhiskeys = collection.sorted(by: { $0.label < $1.label })
+        case .opened:
+            filteredWhiskeys = collection.filter { $0.bottleState == .opened }
+        case .sealed:
+            filteredWhiskeys = collection.filter { $0.bottleState == .sealed }
+        case .finished:
+            filteredWhiskeys = collection.filter { $0.bottleState == .finished }
+        }
+        
+        // If there are whiskeys in the filtered list, return a random one's label and bottle state
+        if !filteredWhiskeys.isEmpty {
+            let randomIndex = Int.random(in: 0..<filteredWhiskeys.count)
+            return (filteredWhiskeys[randomIndex].label, filteredWhiskeys[randomIndex].bottle)
+        }
+        
+        // If no whiskeys match the filter, return nil
+        return nil
+    }
 }
 
 
