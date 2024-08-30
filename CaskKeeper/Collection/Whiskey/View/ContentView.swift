@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var isSheetViewShowing = false
     @State private var importCSVView = false
     @State private var selection = 0
+    @State private var styleSelecttion = 0
     
     var body: some View {
         VStack {
@@ -20,6 +21,11 @@ struct ContentView: View {
                     whiskeyLibrary.currentFilter = state
                 })
                 .listRowSeparator(.hidden)
+                StyleFilterView(selection: $styleSelecttion) { style in
+                    whiskeyLibrary.styleFilter = style
+                }
+                .listRowSeparator(.hidden)
+
                 Section {
                     if whiskeyLibrary.collection.isEmpty {
                         ZStack {

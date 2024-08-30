@@ -8,6 +8,7 @@
 import Foundation
 
 enum Style: String, CaseIterable, Codable {
+    case all = "All"
     case bourbon = "Bourbon"
     case irish = "Irish"
     case scotch = "Scotch"

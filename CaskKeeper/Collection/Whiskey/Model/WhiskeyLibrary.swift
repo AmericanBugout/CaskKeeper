@@ -30,8 +30,18 @@ class WhiskeyLibrary {
     
     var currentFilter: FilterState = .all {
         didSet {
-            filterWhiskey(state: currentFilter)
+            applyFilter()
         }
+    }
+    
+    var styleFilter: Style = .all {
+        didSet {
+            applyFilter()
+        }
+    }
+    
+    func applyFilter() {
+        filterWhiskey(state: currentFilter, style: styleFilter)
     }
     
     init(dataPersistence: WhiskeyPersisting = WhiskeyDataPersistenceManager.shared, isForTesting: Bool = false) {
@@ -46,22 +56,23 @@ class WhiskeyLibrary {
             ]
         } else {
             collection = dataPersistence.load()
-            filterWhiskey(state: currentFilter)
+            filterWhiskey(state: currentFilter, style: styleFilter)
             sortCollection()
         }
     }
     
     func addWhiskey(whiskey: Whiskey) {
         collection.append(whiskey)
-        filterWhiskey(state: currentFilter)
+        filterWhiskey(state: currentFilter, style: styleFilter)
         sortCollection()
     }
     
     func deleteAtIndex(index: IndexSet) {
         withAnimation(Animation.smooth) {
             collection.remove(atOffsets: index)
+            filterWhiskey(state: currentFilter, style: styleFilter)
             sortCollection()
-            filterWhiskey(state: currentFilter)
+
         }
     }
     
@@ -163,10 +174,12 @@ class WhiskeyLibrary {
     
     func sortCollection() {
         collection.sort(by: { $0.label < $1.label })
-        filterWhiskey(state: currentFilter)
+        filterWhiskey(state: currentFilter, style: styleFilter)
     }
     
-    func filterWhiskey(state: FilterState) {
+    func filterWhiskey(state: FilterState, style: Style) {
+        var filteredWhiskeys = collection
+        
         switch state {
         case .all:
             filteredWhiskeys = collection.sorted(by: {$0.label < $1.label})
@@ -177,6 +190,13 @@ class WhiskeyLibrary {
         case .finished:
             filteredWhiskeys = collection.filter({$0.bottleState == .finished})
         }
+        
+        if style != .all { // Assuming .all is an option for no style filtering
+            filteredWhiskeys = filteredWhiskeys.filter { $0.style == style }
+        }
+        
+        self.filteredWhiskeys = filteredWhiskeys
+        
     }
     
     func getRandomWhiskey(state: FilterState) -> (label: String, bottle: String)? {
