@@ -252,6 +252,7 @@
 				B3E5C07E2B140A37009949BB /* App */,
 				B3A9ADE22B28DEFC00C389B8 /* Stats */,
 				B3E5C07F2B140AF8009949BB /* WantedList */,
+				B3A653922C8243FE008B79DE /* RandomWhiskey */,
 				B3E5C07D2B140A14009949BB /* Collection */,
 				B32090122AFC9B3B004FED4B /* Extensions */,
 				B32090202AFC9BBA004FED4B /* Font */,
@@ -402,6 +403,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		B3A653922C8243FE008B79DE /* RandomWhiskey */ = {
+			isa = PBXGroup;
+			children = (
+				B3649EE92C81400200D4C143 /* RandomPourView.swift */,
+			);
+			path = RandomWhiskey;
+			sourceTree = "<group>";
+		};
 		B3A877492B20F0950084016C /* Mock */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,7 +497,6 @@
 				B3208FEA2AFC9A2C004FED4B /* Assets.xcassets */,
 				B3208FE62AFC9A2A004FED4B /* CaskKeeperApp.swift */,
 				B3E5C0802B140B2F009949BB /* CKTabBarView.swift */,
-				B3649EE92C81400200D4C143 /* RandomPourView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";

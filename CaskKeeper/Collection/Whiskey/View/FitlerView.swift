@@ -48,6 +48,7 @@ struct FilterView: View {
     @Binding var selection: Int
     
     @State private var styleSelecttion = 0
+    @State private var selectedStyle: Style = .all
     
     var onSelection: (FilterState) -> Void
     
@@ -61,7 +62,7 @@ struct FilterView: View {
                             .opacity(selection == index ? 1 : 0.3)
                             .padding(.horizontal, 2)
                             .frame(width: 65)
-                        returnCollectionCount(state: options[index])
+                        returnCollectionCount(state: options[index], style: selectedStyle)
                     }
                     .foregroundStyle(options[index].colorCode)
                     .padding(.horizontal, 5)
@@ -82,25 +83,27 @@ struct FilterView: View {
             .frame(maxWidth: .infinity)
             StyleFilterView(selection: $styleSelecttion) { style in
                 whiskeyLibrary.styleFilter = style
+                self.selectedStyle = style
             }
             .padding(.top, 5)
         }
         
     }
     
-    private func returnCollectionCount(state: FilterState) -> some View {
+    private func returnCollectionCount(state: FilterState, style: Style) -> some View {
+        
         switch state {
         case .all:
-            return Text("\(whiskeyLibrary.collectionCount)")
+            return Text("\(whiskeyLibrary.collectionCountWithStyleFilter(style: style))")
                 .font(.customRegular(size: 18))
         case .sealed:
-            return Text("\(whiskeyLibrary.sealedCount)")
+            return Text("\(whiskeyLibrary.sealedCount(style: style))")
                 .font(.customRegular(size: 18))
         case .opened:
-            return Text("\(whiskeyLibrary.openedCount)")
+            return Text("\(whiskeyLibrary.openedCount(style: style))")
                 .font(.customRegular(size: 18))
         case .finished:
-            return Text("\(whiskeyLibrary.finishedCount)")    
+            return Text("\(whiskeyLibrary.finishedCount(style: style))")    
                 .font(.customRegular(size: 18))
         }
     }

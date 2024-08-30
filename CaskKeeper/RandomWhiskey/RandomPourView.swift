@@ -57,6 +57,8 @@ struct RandomPourView: View {
                 Text("What are you drinking?")
                     .font(.customBold(size: 26))
                     .padding()
+                    .padding(.top, 30)
+                
 
                 Text("Tapping below will randomly select a whiskey from your open bottles.")
                     .multilineTextAlignment(.center)
@@ -75,7 +77,7 @@ struct RandomPourView: View {
                     )
                     .frame(height: 20)
                     .transition(.opacity)
-                    .padding(.top, 50)
+                    .padding(.top, 100)
                 } else if showMessage {
                     Text(randomWhiskeyLabel)
                         .font(.customBold(size: 18))
@@ -100,7 +102,7 @@ struct RandomPourView: View {
                             .background(.regularMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
-                    .padding(.top, 25)
+                    .padding(.top, 50)
                 }
 
                 Spacer()

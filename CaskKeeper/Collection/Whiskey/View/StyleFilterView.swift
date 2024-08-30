@@ -21,9 +21,10 @@ struct StyleFilterView: View {
                 ForEach(options.indices, id: \.self) { index in
                     VStack {
                         Text(options[index].rawValue)
-                            .font(.customLight(size: 14))
+                            .font(.customLight(size: 16))
                             .opacity(selection == index ? 1 : 0.3)
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 11)
+                            .foregroundStyle(selection == index ? .accent : .primary)
                     }
                     .onTapGesture {
                         withAnimation(Animation.snappy(duration: 1)) {

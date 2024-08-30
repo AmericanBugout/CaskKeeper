@@ -228,26 +228,23 @@ class WhiskeyLibrary {
 extension WhiskeyLibrary {
     
     var collectionCount: Int { return collection.count }
-    
-    var sealedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .sealed
-        }.count
+        
+    func collectionCountWithStyleFilter(style: Style) -> Int {
+        return collection.filter { $0.style == style || style == .all }.count
     }
     
-    var openedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .opened
-        }.count
+    func sealedCount(style: Style) -> Int {
+        return collection.filter { $0.bottleState == .sealed && ($0.style == style || style == .all) }.count
     }
     
-    var finishedCount: Int {
-        collection.filter { whiskey in
-            whiskey.bottleState == .finished
-        }
-        .count
+    func openedCount(style: Style) -> Int {
+        return collection.filter { $0.bottleState == .opened && ($0.style == style || style == .all) }.count
     }
     
+    func finishedCount(style: Style) -> Int {
+        return collection.filter { $0.bottleState == .finished && ($0.style == style || style == .all) }.count
+    }
+
     var avgProof: Double {
         let totalProof = collection.reduce(0, {$0 + $1.proof})
         return !collection.isEmpty ? Double(totalProof) / Double(collectionCount) : 0.0
