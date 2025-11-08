@@ -252,30 +252,6 @@ class Whiskey: Hashable, Codable, Identifiable, Equatable {
             try container.encode(purchasedDate, forKey: .purchasedDate)
             try encodeDateIfPresent(date: self.purchasedDate, to: &container, forKey: .purchasedDate)
         }
-        
-        
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(label, forKey: .label)
-        try container.encode(bottle, forKey: .bottle)
-        try container.encode(batch, forKey: .batch)
-        try container.encode(proof, forKey: .proof)
-        try container.encode(style, forKey: .style)
-        try container.encode(origin, forKey: .origin)
-        try container.encode(age, forKey: .age)
-        try container.encode(finish, forKey: .finish)
-        try container.encode(bottleState, forKey: .bottleState)
-        try container.encode(opened, forKey: .opened)
-        try container.encode(firstOpen, forKey: .firstOpen)
-        try encodeDateIfPresent(date: self.dateOpened, to: &container, forKey: .dateOpened)
-        try encodeDateIfPresent(date: self.consumedDate, to: &container, forKey: .consumedDate)
-        try container.encode(price, forKey: .price)
-        try container.encode(wouldBuyAgain, forKey: .wouldBuyAgain)
-        try container.encode(locationPurchased, forKey: .locationPurchased)
-        try container.encode(bottleFinished, forKey: .bottleFinished)
-        try container.encode(tastingNotes, forKey: .tastingNotes)
-        try container.encode(purchasedDate, forKey: .purchasedDate)
-        try encodeDateIfPresent(date: self.purchasedDate, to: &container, forKey: .purchasedDate)
     }
     
     required init(from decoder: Decoder) throws {
